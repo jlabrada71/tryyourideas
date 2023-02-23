@@ -7,4 +7,10 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  components: {
+    "dirs": [
+      "~/components",
+      "~/components/selectors"
+    ]
+  },
 })

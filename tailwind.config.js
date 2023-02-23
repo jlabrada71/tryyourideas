@@ -7,6 +7,7 @@ module.exports = {
     "./plugins/**/*.{js,ts}",
   //  "./nuxt.config.{js,ts}",
     "./node_modules/flowbite.{js,ts}",
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {},
@@ -16,4 +17,9 @@ module.exports = {
     require('@tailwindcss/aspect-ratio'),
     require('flowbite'),
   ],
+  variants: {
+    extend: {
+        display: ["group-hover"],
+    },
+},
 }

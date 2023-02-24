@@ -1,5 +1,6 @@
 <template>
   <div @click.stop="emit('selected', item)" :class="item.renderedClass">
+    {{item.text}}
     <TreeItemView 
       v-if="item.children.length > 0" 
       v-for="child in item.children" 

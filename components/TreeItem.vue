@@ -2,7 +2,7 @@
   <div>
     <ul class="flex flex-col pl-3">
       <div class="flex hover:bg-slate-300 w-full group focus:bg-slate-300" @click="emit('selected', item)">
-        <span class="justify-self-start w-full">{{item.name}}</span>
+        <span class="justify-self-start w-full">{{item.type}}</span>
         <div class="hidden group-hover:block group-focus:block">
           <div class="flex flex-row justify-self-end gap-1">            
             <button type="button" class="text-white bg-red-600 w-5 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"  @click="emit('update:remove', item )">-</button>

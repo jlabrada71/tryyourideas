@@ -5,8 +5,8 @@
         <span class="justify-self-start w-full">{{item.type}}</span>
         <div class="hidden group-hover:block group-focus:block">
           <div class="flex flex-row justify-self-end gap-1">            
-            <button type="button" class="text-white bg-red-600 w-5 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"  @click="emit('update:remove', item )">-</button>
-            <button type="button" class="text-white bg-blue-700 w-5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" @click="emit('update:add-child', item )">+</button>
+            <button type="button" class="text-white bg-red-600 w-5 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"  @click.stop="emit('update:remove', item )">-</button>
+            <button type="button" class="text-white bg-blue-700 w-5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" @click.stop="emit('update:add-child', item )">+</button>
           </div>
         </div>
       </div>

@@ -1,18 +1,14 @@
 <template>
-  <label for="steps-range" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{}}</label>
-  <input id="steps-range"
-          v-model="selected"
-          type="range" 
-          min="0" :max="len" 
-          step="1"
-         class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
-
-   <!-- <p>Option: {{option}}</p>
-  <p>{{options[0]}}=={{option}}:{{options[0]==option}}</p>
-  <p>{{len}}</p>
-  <p>{{selected}}</p>
-  <p>{{selectedText}}</p> -->
-  
+  <div class="m-0">
+    <label for="steps-range" class="block text-sm font-medium text-gray-900 dark:text-white">{{}}
+      <input id="steps-range"
+            v-model="selected"
+            type="range" 
+            min="0" :max="len" 
+            step="1"
+          class="w-full h-1 bg-gray-200 rounded-md appearance-none cursor-pointer dark:bg-gray-700">
+      </label>
+  </div>
 </template>
 <script setup>
   import { computed } from 'vue'

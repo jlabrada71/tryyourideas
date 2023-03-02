@@ -1,5 +1,5 @@
 <template>
-  <div @click.stop="emit('selected', item)" :class="item.renderedClass">
+  <div @click.stop="emit('selected', item)" :class="item.editorClass">
     {{item.text}}
     <TreeItemView 
       v-if="item.children.length > 0" 

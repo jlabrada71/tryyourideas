@@ -4,7 +4,8 @@ import {
   modifierComposer, 
   getClassString,
   getEditorClass,
-  getComponentEditorClass } from '../lib/ClassGeneration'
+  getComponentEditorClass,
+  getComponentRenderedClass } from '../lib/ClassGeneration'
 
 describe('modifierAdder function', () => {
   describe('common case: add "hover" to "bg-white"', () => {
@@ -43,6 +44,13 @@ describe('modifierComposer function', () => {
       expect(modeClass).toBe('')
     })
   })
+
+  describe('composing modifiers "dark", "md", "hover" with "style" style', () => {
+    const modeClass = modifierComposer('dark:', 'md:', 'hover:')( 'style' )
+    it('returns dark:md:hover:style', () => {
+      expect(modeClass).toBe('dark:md:hover:style')
+    })
+  })
 })
 
 describe('getClassString function', () => {
@@ -53,8 +61,8 @@ describe('getClassString function', () => {
     }
     const modeClass = getClassString(itemClass, modifierAdder('hover:') )
     it('returns empty string', () => {
-      expect(modeClass).toContain('hover:test-blue')
-      expect(modeClass).toContain('hover:test-shadow')
+      expect(modeClass).toContain(' hover:test-blue')
+      expect(modeClass).toContain(' hover:test-shadow')
     })
   })
 
@@ -80,8 +88,8 @@ describe('getEditorClass function', () => {
     }
     const modeClass = getEditorClass(itemClass)
     it('returns empty string', () => {
-      expect(modeClass).toContain('active:test-blue')
-      expect(modeClass).toContain('active:test-shadow')
+      expect(modeClass).toContain(' active:test-blue')
+      expect(modeClass).toContain(' active:test-shadow')
     })
   })
 })
@@ -130,16 +138,16 @@ describe('getComponentEditorClass function', () => {
     
     const componentClass = getComponentEditorClass(component, 'md:', 'dark:')
     it('returns empty string', () => {
-      expect(componentClass).toContain('active:bg-md-dark-active')
-      expect(componentClass).toContain('active:sh-md-dark-active')
-      expect(componentClass).toContain('hover:bg-md-dark-hover')
-      expect(componentClass).toContain('hover:sh-md-dark-hover')
-      expect(componentClass).not.toContain('bg-md-hover')
-      expect(componentClass).not.toContain('sh-md-hover')
-      expect(componentClass).not.toContain('bg-hover')
-      expect(componentClass).not.toContain('sh-hover')
-      expect(componentClass).not.toContain('bg-none')
-      expect(componentClass).not.toContain('sh-none')
+      expect(componentClass).toContain(' active:bg-md-dark-active')
+      expect(componentClass).toContain(' active:sh-md-dark-active')
+      expect(componentClass).toContain(' hover:bg-md-dark-hover')
+      expect(componentClass).toContain(' hover:sh-md-dark-hover')
+      expect(componentClass).not.toContain(' bg-md-hover')
+      expect(componentClass).not.toContain(' sh-md-hover')
+      expect(componentClass).not.toContain(' bg-hover')
+      expect(componentClass).not.toContain(' sh-hover')
+      expect(componentClass).not.toContain(' bg-none')
+      expect(componentClass).not.toContain(' sh-none')
     })
   })
 
@@ -147,12 +155,104 @@ describe('getComponentEditorClass function', () => {
     
     const componentClass = getComponentEditorClass(component, 'md:', '')
     it('returns empty string', () => {
+      expect(componentClass).not.toContain(' active:bg-md-dark-active')
+      expect(componentClass).not.toContain(' active:sh-md-dark-active')
+      expect(componentClass).not.toContain(' hover:bg-md-dark-hover')
+      expect(componentClass).not.toContain(' hover:sh-md-dark-hover')
+      expect(componentClass).toContain(' bg-md-hover')
+      expect(componentClass).toContain(' sh-md-hover')
+      expect(componentClass).not.toContain(' bg-hover')
+      expect(componentClass).not.toContain(' sh-hover')
+      expect(componentClass).not.toContain(' bg-none')
+      expect(componentClass).not.toContain(' sh-none')
+    })
+  })
+
+  describe('generalCase no mode any device', () => {
+    
+    const componentClass = getComponentEditorClass(component, '', '')
+    it('returns empty string', () => {
+      expect(componentClass).not.toContain(' active:bg-md-dark-active')
+      expect(componentClass).not.toContain(' active:sh-md-dark-active')
+      expect(componentClass).not.toContain(' hover:bg-md-dark-hover')
+      expect(componentClass).not.toContain(' hover:sh-md-dark-hover')
+      expect(componentClass).not.toContain(' bg-md-hover')
+      expect(componentClass).not.toContain(' sh-md-hover')
+      expect(componentClass).toContain(' bg-hover')
+      expect(componentClass).toContain(' sh-hover')
+      expect(componentClass).toContain(' bg-none')
+      expect(componentClass).toContain(' sh-none')
+    })
+  })
+})
+
+describe('getComponentRenderedClass function', () => {
+  const component = {
+    classes: [
+      {
+        device: 'md:',
+        mode: 'dark:',
+        modifier: 'active:',
+        backgroundColor: 'bg-md-dark-active',
+        shadow: 'sh-md-dark-active'
+      }, 
+      {
+        device: 'md:',
+        mode: 'dark:',
+        modifier: 'hover:',
+        backgroundColor: 'bg-md-dark-hover',
+        shadow: 'sh-md-dark-hover'
+      },
+      {
+        device: 'md:',
+        mode: '',
+        modifier: 'hover:',
+        backgroundColor: 'bg-md-hover',
+        shadow: 'sh-md-hover'
+      },
+      {
+        device: '',
+        mode: '',
+        modifier: 'hover:',
+        backgroundColor: 'bg-hover',
+        shadow: 'sh-hover'
+      },
+      {
+        device: '',
+        mode: '',
+        modifier: '',
+        backgroundColor: 'bg-none',
+        shadow: 'sh-none'
+      }
+    ]
+  } 
+  describe('generalCase dark mode', () => {
+    
+    const componentClass = getComponentRenderedClass(component, 'md:', 'dark:')
+    it('returns empty string', () => {
+      expect(componentClass).toContain(' dark:md:active:bg-md-dark-active')
+      expect(componentClass).toContain(' dark:md:active:sh-md-dark-active')
+      expect(componentClass).toContain(' dark:md:hover:bg-md-dark-hover')
+      expect(componentClass).toContain(' dark:md:hover:sh-md-dark-hover')
+      expect(componentClass).not.toContain(' bg-md-hover')
+      expect(componentClass).not.toContain(' sh-md-hover')
+      expect(componentClass).not.toContain(' bg-hover')
+      expect(componentClass).not.toContain(' sh-hover')
+      expect(componentClass).not.toContain(' bg-none')
+      expect(componentClass).not.toContain(' sh-none')
+    })
+  })
+
+  describe('generalCase light mode', () => {
+    
+    const componentClass = getComponentRenderedClass(component, 'md:', '')
+    it('returns empty string', () => {
       expect(componentClass).not.toContain('active:bg-md-dark-active')
       expect(componentClass).not.toContain('active:sh-md-dark-active')
       expect(componentClass).not.toContain('hover:bg-md-dark-hover')
       expect(componentClass).not.toContain('hover:sh-md-dark-hover')
-      expect(componentClass).toContain('bg-md-hover')
-      expect(componentClass).toContain('sh-md-hover')
+      expect(componentClass).toContain('md:hover:bg-md-hover')
+      expect(componentClass).toContain('md:hover:sh-md-hover')
       expect(componentClass).not.toContain('bg-hover')
       expect(componentClass).not.toContain('sh-hover')
       expect(componentClass).not.toContain('bg-none')
@@ -162,7 +262,7 @@ describe('getComponentEditorClass function', () => {
 
   describe('generalCase no mode any device', () => {
     
-    const componentClass = getComponentEditorClass(component, '', '')
+    const componentClass = getComponentRenderedClass(component, '', '')
     it('returns empty string', () => {
       expect(componentClass).not.toContain('active:bg-md-dark-active')
       expect(componentClass).not.toContain('active:sh-md-dark-active')
@@ -177,5 +277,6 @@ describe('getComponentEditorClass function', () => {
     })
   })
 })
+
 
 

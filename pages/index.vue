@@ -13,11 +13,6 @@
       <div>
         {{selectedItem.renderedClass}}
       </div>
-      <div class="bg-slate-600 text-white w-full mt-10">Rendered class</div>
-      
-      <div>
-        {{currentItemClass}}
-      </div>
     </div>
     
     <div class="w-8/12">
@@ -26,8 +21,8 @@
 
         <!-- Component view -->
 
-        <div class="bg-white flex align-middle justify-center h-screen">             
-          <TreeItemView :item="tree" @selected="selectItem"></TreeItemView>
+        <div :class="treeViewClass">             
+          <TreeItemView :item="tree" :device="selectedDevice" :mode="selectedMode" @selected="selectItem"></TreeItemView>
         </div>
          <!-- Component view -->
       </div>
@@ -80,8 +75,8 @@ const defaultItem = {
     type: 'div',
     children: [],
     text: '',
-    editorClass: 'flex flex-wrap bg-blue-500 w-10 h-10 border-slate-100 border-solid border-2',
-    renderedClass: 'flex flex-wrap bg-blue-500 w-10 h-10 border-slate-100 border-solid border-2',
+    editorClass: '',
+    renderedClass: '',
     classes: [],
     class: {
       device: '',
@@ -91,25 +86,25 @@ const defaultItem = {
       backgroundColor: 'bg-blue-500',
       width: 'w-10',
       height: 'h-10',
-      padding: 'p-0',
-      margin: 'm-0',
-      spacing: 'space-x-0',
-
-      borderColor: 'border-slate-100',
-      borderStyle: 'border-solid',
-      borderWidth: 'border-2',
-      borderRadius: 'rounded-none',
+      padding: 'default',
+      margin: 'default',
+      spacing: 'default',
 
       textColor: 'text-white',
-      fontSize: 'text-base',
-      fontFamily: 'font-sans',
-      fontWeight: 'font-normal',
-      letterSpacing: 'tracking-normal',
-      lineHeight: 'leading-none',
-      textAlign: 'text-left',
-      textVerticalAlign: 'align-baseline',
+      fontSize: 'default',
+      fontFamily: 'default',
+      fontWeight:'default',
+      letterSpacing: 'default',
+      lineHeight: 'default',
+      textAlign: 'default',
+      textVerticalAlign: 'default',
 
-      shadow: 'shadow-none',
+      borderColor: 'border-slate-100',
+      borderStyle: 'default',
+      borderWidth: 'default',
+      borderRadius: 'default',
+
+      shadow: 'default',
       shadowColor: 'shadow-slate-100',
 
       divideColor: 'divide-blue-50',
@@ -124,8 +119,8 @@ const tree = ref({
   type: 'template',
   children: [],
   text: '',
-  editorClass: 'flex flex-wrap bg-blue-500 w-10 h-10 border-slate-100 border-solid border-2',
-  renderedClass: 'flex flex-wrap bg-blue-500 w-10 h-10 border-slate-100 border-solid border-2',
+  editorClass: '',
+  renderedClass: '',
   classes: [],
   class: {
     device: '',
@@ -133,27 +128,28 @@ const tree = ref({
     modifier: '',
 
     backgroundColor: 'bg-blue-500',
-    width: 'w-10',
-    height: 'h-10',
-    padding: 'p-0',
-    margin: 'm-0',
-    spacing: 'space-x-0',
+    width: 'w-40',
+    height: 'h-40',
+    padding: 'default',
+    margin: 'default',
+    spacing: 'default',
 
-    borderColor: 'border-slate-100',
-    borderStyle: 'border-solid',
-    borderWidth: 'border-2',
-    borderRadius: 'rounded-none',
 
     textColor: 'text-white',
-    fontSize: 'text-base',
-    fontFamily: 'font-sans',
-    fontWeight: 'font-normal',
-    letterSpacing: 'tracking-normal',
-    lineHeight: 'leading-none',
-    textAlign: 'text-left',
-    textVerticalAlign: 'align-baseline',
+    fontSize: 'default',
+    fontFamily: 'default',
+    fontWeight: 'default',
+    letterSpacing: 'default',
+    lineHeight: 'default',
+    textAlign: 'default',
+    textVerticalAlign: 'default',
 
-    shadow: 'shadow-none',
+    borderColor: 'border-slate-100',
+    borderStyle: 'default',
+    borderWidth: 'default',
+    borderRadius: 'default',
+
+    shadow: 'default',
     shadowColor: 'shadow-slate-100',
 
     divideColor: 'divide-blue-50',
@@ -162,6 +158,18 @@ const tree = ref({
   }
 })
 
+const selectedDevice = ref('any')
+const selectedMode = ref('')
+const selectedDeviceWidth = {
+  any: 'w-full',
+  sm: 'w-[640px]',
+  md: 'w-[768px]',
+  lg: 'w-[1024px]',
+  xl: 'w-[1280px]',
+  '2xl': '[1536px]'
+}
+const treeViewClass = computed(() => `bg-white ${selectedDeviceWidth[selectedDevice.value]} flex align-middle shadow-lg justify-center h-screen`)
+
 
 onMounted(() => {
   defaultItem.classes.push(defaultItem.class)
@@ -169,9 +177,6 @@ onMounted(() => {
 })
 
 const selectedItem = ref(tree.value)
-
-const currentItemClass = ref(selectedItem.value.renderedClass)
-
 
 const exported = computed(() => toHtml(tree.value))
 
@@ -197,7 +202,6 @@ function updateItem(newValue) {
   selectedItem.value.renderedClass = newValue.renderedClass
   selectedItem.value.editorClass = newValue.editorClass
   selectedItem.value.classes = newValue.classes
-  currentItemClass.value = newValue.renderedClass
 }
 
 function removeItem(node) {
@@ -240,6 +244,7 @@ function findOrCreateClassBy(device, mode, modifier) {
 
 function changeDevice(device) {
   console.log('selecting device: ' + device)
+  selectedDevice.value = device
   const newDevice = device === 'any' ? '' : device + ':'
   selectedItem.value.class  = findOrCreateClassBy(newDevice, selectedItem.value.class.mode, selectedItem.value.class.modifier)
 }

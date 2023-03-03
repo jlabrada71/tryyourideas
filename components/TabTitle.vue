@@ -25,7 +25,6 @@
       return props.active ? activeClass: defaultClass
     },
     set(value) {
-      console.log(value)
       emit('update:active', value)
     }
   })

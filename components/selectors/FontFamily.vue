@@ -10,5 +10,5 @@
   const props = defineProps(['family'])
   const emit = defineEmits(['update:family'])
 
-  const families = ['font-sans', 'font-serif', 'font-mono']
+  const families = ['default', 'font-sans', 'font-serif', 'font-mono']
 </script>

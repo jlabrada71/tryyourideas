@@ -10,7 +10,7 @@
   const props = defineProps(['align'])
   const emit = defineEmits(['update:align'])
 
-  const aligns = ['align-baseline', 'align-top', 'align-middle', 'align-bottom', 'align-text-top', 'align-text-bottom', 'align-sub', 'align-super']
+  const aligns = ['default', 'align-baseline', 'align-top', 'align-middle', 'align-bottom', 'align-text-top', 'align-text-bottom', 'align-sub', 'align-super']
 </script>
 
 

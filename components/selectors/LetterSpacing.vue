@@ -10,6 +10,6 @@
   const props = defineProps(['spacing'])
   const emit = defineEmits(['update:spacing'])
 
-  const spacings = ['tracking-tighter', 'tracking-tight', 'tracking-normal', 'tracking-wide', 'tracking-wider', 'tracking-widest']
+  const spacings = ['default', 'tracking-tighter', 'tracking-tight', 'tracking-normal', 'tracking-wide', 'tracking-wider', 'tracking-widest']
 </script>
 

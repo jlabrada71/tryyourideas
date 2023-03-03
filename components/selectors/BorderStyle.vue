@@ -11,6 +11,6 @@
   const emit = defineEmits(['update:style'])
 
   const borderStyles = [
-   "border-solid", "border-dashed", "border-dotted", "border-double", "border-hidden", "border-none" ]
+  "default", "border-solid", "border-dashed", "border-dotted", "border-double", "border-hidden", "border-none" ]
   
 </script>

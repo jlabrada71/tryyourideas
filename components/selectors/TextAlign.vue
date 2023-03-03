@@ -10,7 +10,7 @@
   const props = defineProps(['align'])
   const emit = defineEmits(['update:align'])
 
-  const aligns = ['text-left', 'text-center', 'text-right', 'text-justify', 'text-start', 'text-end']
+  const aligns = ['default', 'text-left', 'text-center', 'text-right', 'text-justify', 'text-start', 'text-end']
 </script>
 
 

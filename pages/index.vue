@@ -17,12 +17,12 @@
     
     <div class="w-8/12">
       <div class="bg-slate-100 p-10 ">
-        <SelectorsDevice @update:device="changeDevice"></SelectorsDevice>
+        <SelectorsDevice :device="selectedDevice" @update:device="selectDevice"></SelectorsDevice>
 
         <!-- Component view -->
 
-        <div :class="treeViewClass">             
-          <TreeItemView :item="tree" :device="selectedDevice" :mode="selectedMode" @selected="selectItem"></TreeItemView>
+        <div :class="treeViewContainerClass">             
+          <TreeItemView :item="tree" :device="selectedDevice" :mode="selectedMode" :refresh="refreshTreeView" @selected="selectItem"></TreeItemView>
         </div>
          <!-- Component view -->
       </div>
@@ -35,6 +35,7 @@
 </template>
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
+import { getComponentRenderedClass } from '../lib/ClassGeneration'
 import { 
     initAccordions, 
     initCarousels, 
@@ -115,6 +116,7 @@ const defaultItem = {
 
 const tree = ref({
   id: '1',
+  count: 0,  // updating this forces the tree view refresh
   name: 'root',
   type: 'template',
   children: [],
@@ -158,6 +160,8 @@ const tree = ref({
   }
 })
 
+const refreshTreeView = ref(false)
+
 const selectedDevice = ref('any')
 const selectedMode = ref('')
 const selectedDeviceWidth = {
@@ -168,12 +172,12 @@ const selectedDeviceWidth = {
   xl: 'w-[1280px]',
   '2xl': '[1536px]'
 }
-const treeViewClass = computed(() => `bg-white ${selectedDeviceWidth[selectedDevice.value]} flex align-middle shadow-lg justify-center h-screen`)
-
+const treeViewContainerClass = computed(() => `bg-white ${selectedDeviceWidth[selectedDevice.value]} flex align-middle shadow-lg justify-center h-screen`)
 
 onMounted(() => {
   defaultItem.classes.push(defaultItem.class)
   tree.value.classes.push(tree.value.class)
+  selectDevice('any')
 })
 
 const selectedItem = ref(tree.value)
@@ -193,15 +197,18 @@ function removeItemFrom(parent, node) {
 }
 
 function updateItem(newValue) {
-  // console.log('******** Updating item: ')
-  // console.log(newValue.id)
-  // console.log(newValue.class.backgroundColor)
-  // console.log(newValue.renderedClass)
   selectedItem.value.id = newValue.id
   selectedItem.value.class = newValue.class
-  selectedItem.value.renderedClass = newValue.renderedClass
+  selectedItem.value.renderedClass = getComponentRenderedClass(newValue)
   selectedItem.value.editorClass = newValue.editorClass
   selectedItem.value.classes = newValue.classes
+
+  refreshTreeView.value = ! refreshTreeView.value  // this forces the tree view refresh
+  console.log('******** Updating item: ')
+  console.log(selectedItem.value.id )
+  // console.log(selectedItem.value.renderedClass)
+  console.log(tree.value.count)
+  console.log('1111111111111111111111')
 }
 
 function removeItem(node) {
@@ -242,7 +249,7 @@ function findOrCreateClassBy(device, mode, modifier) {
   return resultClass
 }
 
-function changeDevice(device) {
+function selectDevice(device) {
   console.log('selecting device: ' + device)
   selectedDevice.value = device
   const newDevice = device === 'any' ? '' : device + ':'

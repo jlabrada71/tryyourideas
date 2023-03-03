@@ -68,6 +68,7 @@
 </template>
 <script setup>
   import { ref, computed, onMounted, watch } from 'vue'
+
   import { 
     initAccordions, 
     initCarousels, 
@@ -108,62 +109,9 @@ const emit = defineEmits(['update:item', 'update:modifier', 'add:modifier'])
 function updateClass(className, value) {
   const newItem = {...props.item }
   newItem.class[className] = value
-  emit('update:item', newItem)
-}
-
-function e(modifier) {
-  return style => {
-    if (style === 'default') return ''
-    return `${modifier}${style}`
-  }
-}
-
-function r(modifier, mode, device) {
-  return  (style) => {    
-    const editorStyle = e(modifier)(style)
-    if ( editorStyle === '' ) return '';
-
-    return `${mode}${device}${editorStyle}`
-  }
-}
-
-const modifiedClass = (( itemClass, f ) => `${f(itemClass.backgroundColor)} ${f(itemClass.width)} ${f(itemClass.height)} ${f(itemClass.padding)} ${f(itemClass.margin)}  ${f(itemClass.spacing)}
-          ${f(itemClass.shadow)} ${f(itemClass.shadowColor)} 
-          ${f(itemClass.borderRadius)} ${f(itemClass.borderWidth)} ${f(itemClass.borderStyle)} ${f(itemClass.borderColor)}
-          ${f(itemClass.textColor)} ${f(itemClass.fontSize)}  ${f(itemClass.fontWeight)} ${f(itemClass.fontFamily)} ${f(itemClass.letterSpacing)} ${f(itemClass.lineHeight)}  ${f(itemClass.textAlign)} ${f(itemClass.textVerticalAlign)}
-          ${f(itemClass.outlineColor)} 
-          ${f(itemClass.ringColor)} 
-          ${f(itemClass.divideColor)} 
-          flex flex-wrap
-          ` )
-
-const getEditorClass = itemClass => modifiedClass(itemClass, e(itemClass.modifier))
-const getRenderedClass = itemClass => modifiedClass(itemClass, r(itemClass.modifier, itemClass.mode, itemClass.device ))
-
-const editorClass = computed(() => getEditorClass(props.item.class))
-const renderedClass = computed(() => getRenderedClass(props.item.class))
-
-function compoundRenderedClass(component) {
-  return component.classes.map(cls => getRenderedClass(cls)).join(' ')
-}
-
-function compoundEditorClass(component) {
-  return component.classes.map(cls =>  getEditorClass(cls)).join(' ')
-}
-
-watch(renderedClass, (newClass, oldClass) => {
-  const newItem = {...props.item }
-  newItem.class.editorClass = editorClass.value
-  newItem.class.renderedClass = renderedClass
-
-  const compoundRendered = compoundRenderedClass(newItem)
-  console.log(compoundRendered)
-  newItem.renderedClass = compoundRendered
-  newItem.editorClass = compoundEditorClass(newItem)
-
-  console.log('compound rendered class')
-  console.log(newItem.renderedClass)
 
   emit('update:item', newItem)
-})
+}
+
+
 </script>

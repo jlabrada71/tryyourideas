@@ -5,7 +5,7 @@
       <template #body>
         <div class="flex flex-col gap-2">
           <span>Id: {{item.id}} - device:{{item.class.device}}</span>
-          <SelectorsModifier  @update:modifier="value => emit('add:modifier', value)">Add Modifier</SelectorsModifier>
+          <!-- <SelectorsModifier  @update:modifier="value => emit('add:modifier', value)">Add Modifier</SelectorsModifier> -->
           <SelectorsModifier :modifier="props.item.modifier" @update:modifier="value => emit('update:modifier', value)">Select Modifier</SelectorsModifier>
           <SelectorsHtmlTag :type="props.item.type" @update:color="value => updateClass('backgroundColor', value)"></SelectorsHtmlTag>
           <div class="flex gap-2"> 

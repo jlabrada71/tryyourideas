@@ -21,7 +21,7 @@
 
   const currentModifier = computed({
     get() {
-      return props.modifier
+      return props.modifier || 'default'
     },
     set(value) {
       emit('update:modifier', value)

@@ -9,28 +9,28 @@ import {
 
 describe('modifierAdder function', () => {
   describe('common case: add "hover" to "bg-white"', () => {
-    const modifiedClass = modifierAdder('hover:')('bg-white')
+    const modifiedClass = modifierAdder('hover')('bg-white')
     it('adds hover', () => {
       expect(modifiedClass).toBe('hover:bg-white')
     })
   })
 
   describe('no style case: add "hover" to ""', () => {
-    const modifiedClass = modifierAdder('hover:')('')
+    const modifiedClass = modifierAdder('hover')('')
     it('returns empty string', () => {
       expect(modifiedClass).toBe('')
     })
   })
 
   describe('"default" style case: add "hover" to "default"', () => {
-    const modifiedClass = modifierAdder('hover:')('default')
+    const modifiedClass = modifierAdder('hover')('default')
     it('returns empty string', () => {
       expect(modifiedClass).toBe('')
     })
   })
   
   describe('composing modifiers "dark", "md", "hover" with "test" style', () => {
-    const modeClass = modifierComposer('dark:', 'md:', 'hover:')( 'test' )
+    const modeClass = modifierComposer('dark', 'md', 'hover')( 'test' )
     it('returns "dark:md:hover:test"', () => {
       expect(modeClass).toBe('dark:md:hover:test')
     })
@@ -39,14 +39,14 @@ describe('modifierAdder function', () => {
 
 describe('modifierComposer function', () => {
   describe('composing modifiers "dark", "md", "hover" with "default" style', () => {
-    const modeClass = modifierComposer('dark:', 'md:', 'hover:')( 'default' )
+    const modeClass = modifierComposer('dark', 'md', 'hover')( 'default' )
     it('returns empty string', () => {
       expect(modeClass).toBe('')
     })
   })
 
   describe('composing modifiers "dark", "md", "hover" with "style" style', () => {
-    const modeClass = modifierComposer('dark:', 'md:', 'hover:')( 'style' )
+    const modeClass = modifierComposer('dark', 'md', 'hover')( 'style' )
     it('returns dark:md:hover:style', () => {
       expect(modeClass).toBe('dark:md:hover:style')
     })
@@ -190,32 +190,46 @@ describe('getComponentRenderedClass function', () => {
   const component = {
     classes: [
       {
-        device: 'md:',
-        mode: 'dark:',
-        modifier: 'active:',
+        device: 'md',
+        mode: 'dark',
+        modifier: 'active',
         backgroundColor: 'bg-md-dark-active',
         shadow: 'sh-md-dark-active'
       }, 
       {
-        device: 'md:',
-        mode: 'dark:',
-        modifier: 'hover:',
-        backgroundColor: 'bg-md-dark-hover',
-        shadow: 'sh-md-dark-hover'
+        device: 'md',
+        mode: 'dark',
+        modifier: '',
+        backgroundColor: 'bg-md-dark',
+        shadow: 'sh-md-dark'
       },
       {
-        device: 'md:',
+        device: 'md',
         mode: '',
-        modifier: 'hover:',
+        modifier: 'hover',
         backgroundColor: 'bg-md-hover',
         shadow: 'sh-md-hover'
       },
       {
+        device: 'md',
+        mode: '',
+        modifier: '',
+        backgroundColor: 'bg-md',
+        shadow: 'sh-md'
+      },
+      {
         device: '',
         mode: '',
-        modifier: 'hover:',
+        modifier: 'hover',
         backgroundColor: 'bg-hover',
         shadow: 'sh-hover'
+      },
+      {
+        device: '',
+        mode: 'dark',
+        modifier: '',
+        backgroundColor: 'bg-dark',
+        shadow: 'sh-dark'
       },
       {
         device: '',
@@ -226,54 +240,20 @@ describe('getComponentRenderedClass function', () => {
       }
     ]
   } 
-  describe('generalCase dark mode', () => {
+  describe('generalCase mode', () => {
     
-    const componentClass = getComponentRenderedClass(component, 'md:', 'dark:')
+    const componentClass = getComponentRenderedClass(component)
     it('returns empty string', () => {
-      expect(componentClass).toContain(' dark:md:active:bg-md-dark-active')
-      expect(componentClass).toContain(' dark:md:active:sh-md-dark-active')
-      expect(componentClass).toContain(' dark:md:hover:bg-md-dark-hover')
-      expect(componentClass).toContain(' dark:md:hover:sh-md-dark-hover')
-      expect(componentClass).not.toContain(' bg-md-hover')
-      expect(componentClass).not.toContain(' sh-md-hover')
-      expect(componentClass).not.toContain(' bg-hover')
-      expect(componentClass).not.toContain(' sh-hover')
-      expect(componentClass).not.toContain(' bg-none')
-      expect(componentClass).not.toContain(' sh-none')
-    })
-  })
-
-  describe('generalCase light mode', () => {
-    
-    const componentClass = getComponentRenderedClass(component, 'md:', '')
-    it('returns empty string', () => {
-      expect(componentClass).not.toContain('active:bg-md-dark-active')
-      expect(componentClass).not.toContain('active:sh-md-dark-active')
-      expect(componentClass).not.toContain('hover:bg-md-dark-hover')
-      expect(componentClass).not.toContain('hover:sh-md-dark-hover')
-      expect(componentClass).toContain('md:hover:bg-md-hover')
-      expect(componentClass).toContain('md:hover:sh-md-hover')
-      expect(componentClass).not.toContain('bg-hover')
-      expect(componentClass).not.toContain('sh-hover')
-      expect(componentClass).not.toContain('bg-none')
-      expect(componentClass).not.toContain('sh-none')
-    })
-  })
-
-  describe('generalCase no mode any device', () => {
-    
-    const componentClass = getComponentRenderedClass(component, '', '')
-    it('returns empty string', () => {
-      expect(componentClass).not.toContain('active:bg-md-dark-active')
-      expect(componentClass).not.toContain('active:sh-md-dark-active')
-      expect(componentClass).not.toContain('hover:bg-md-dark-hover')
-      expect(componentClass).not.toContain('hover:sh-md-dark-hover')
-      expect(componentClass).not.toContain('bg-md-hover')
-      expect(componentClass).not.toContain('sh-md-hover')
-      expect(componentClass).toContain('bg-hover')
-      expect(componentClass).toContain('sh-hover')
-      expect(componentClass).toContain('bg-none')
-      expect(componentClass).toContain('sh-none')
+      expect(componentClass).toContain(' dark:md:active:bg-md-dark-active ')
+      expect(componentClass).toContain(' dark:md:active:sh-md-dark-active ')
+      expect(componentClass).toContain(' dark:md:bg-md-dark ')
+      expect(componentClass).toContain(' dark:md:sh-md-dark ')
+      expect(componentClass).toContain(' md:bg-md ')
+      expect(componentClass).toContain(' md:sh-md ')
+      expect(componentClass).toContain(' dark:bg-dark ')
+      expect(componentClass).toContain(' dark:sh-dark')
+      expect(componentClass).toContain(' bg-none')
+      expect(componentClass).toContain(' sh-none')
     })
   })
 })

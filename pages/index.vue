@@ -29,7 +29,7 @@
       
     </div>
     <div class="w-2/12 bg-slate-50 px-2 h-auto container">
-      <PropertyEditor :item="selectedItem" @update:item="updateItem" @add:modifier="selectModifier"></PropertyEditor>    
+      <PropertyEditor :item="selectedItem" @update:item="updateItem" @select:modifier="selectModifier"></PropertyEditor>    
     </div>
   </div>
 </template>
@@ -65,8 +65,6 @@ onMounted(() => {
     initTabs();
     initTooltips();
 })
-
-
 
 const divideColor = ref('divide')
 const outlineColor = ref('outline')
@@ -116,7 +114,6 @@ const defaultItem = {
 
 const tree = ref({
   id: '1',
-  count: 0,  // updating this forces the tree view refresh
   name: 'root',
   type: 'template',
   children: [],
@@ -196,18 +193,61 @@ function removeItemFrom(parent, node) {
   }) 
 }
 
-function updateItem(newValue) {
-  selectedItem.value.id = newValue.id
-  selectedItem.value.class = newValue.class
-  selectedItem.value.renderedClass = getComponentRenderedClass(newValue)
-  selectedItem.value.editorClass = newValue.editorClass
-  selectedItem.value.classes = newValue.classes
+function printTree(item) {
+  console.log('==================================')
+  console.log(item.id)
+  const printClass = cls => console.log(`${cls.mode}${cls.device}${cls.modifier}${cls.backgroundColor}`)
+  printClass(item.class) 
+  item.classes.forEach(cls => {
+    printClass(cls)
+  })
+  item.children.forEach(child => printTree(child))
+}
+
+function getItemById(node, id) {
+  if (node.id === id) return node
+  const candidate = node.children.find(child => id.startsWith(child.id))
+  return getItemById(candidate, id)
+}
+
+function copy(cls1, cls2) {
+  for(const key in cls1) {
+    cls2[key] = cls1[key]
+  }
+}
+
+function printClassKey({ mode, device, modifier }) {
+  console.log(`key: "${mode}:${device}:${modifier}"`)
+}
+
+function getClassKey(itemClass) {
+  printClassKey(itemClass)
+  return { mode: itemClass.mode, device: itemClass.device, modifier: itemClass.modifier }
+}
+
+function updateItem(modifiedItem) {
+  const item = getItemById(tree.value, modifiedItem.id)
+  console.log('updating item: ', item.id)
+  getClassKey(modifiedItem.class)
+  getClassKey(item.class)
+  console.log(item.classes.length)
+  item.classes.forEach(cls => getClassKey(cls))
+
+  const editedClass = findClassBy(item, getClassKey( modifiedItem.class ) )
+  console.log('editedClass')
+  console.log(editedClass)
+  copy(modifiedItem.class, editedClass)
+  // item.classes = modifiedItem.classes
+  item.renderedClass = getComponentRenderedClass(item)
+
+  selectedItem.value.item
 
   refreshTreeView.value = ! refreshTreeView.value  // this forces the tree view refresh
   console.log('******** Updating item: ')
-  console.log(selectedItem.value.id )
+  console.log(selectedItem.value.id )  
+  console.log(selectedItem.value.class.backgroundColor)
+  printTree(tree.value)
   // console.log(selectedItem.value.renderedClass)
-  console.log(tree.value.count)
   console.log('1111111111111111111111')
 }
 
@@ -235,11 +275,15 @@ function selectItem(item) {
   selectedItem.value.isSelected = true 
 }
 
+function findClassBy(item, { device, mode, modifier }) {
+  return item.classes.find((cls) => cls.device === device && cls.mode === mode && cls.modifier === modifier)
+}
+
 function findOrCreateClassBy(device, mode, modifier) {
-  if (selectedItem.value.classes.lenght === 0 ) {  // if the classes list is empty add current class.
-    selectedItem.value.classes.push(selectedItem.value.class)
-  }
-  const result = selectedItem.value.classes.find((item) => item.device === device && item.mode === mode && item.modifier === modifier)
+  // if (selectedItem.value.classes.lenght === 0 ) {  // if the classes list is empty add current class.
+  //   selectedItem.value.classes.push(selectedItem.value.class)
+  // }
+  const result = findClassBy(selectedItem.value, { device, mode, modifier})
   if (result) return result;
   const resultClass = clone(defaultItem.class)
   resultClass.mode = mode

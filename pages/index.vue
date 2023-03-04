@@ -29,7 +29,7 @@
       
     </div>
     <div class="w-2/12 bg-slate-50 px-2 h-auto container">
-      <PropertyEditor :item="selectedItem" @update:item="updateItem" @select:modifier="selectModifier"></PropertyEditor>    
+      <PropertyEditor :item="selectedItem" @update:item="updateItem" @update:modifier="selectModifier"></PropertyEditor>    
     </div>
   </div>
 </template>
@@ -272,6 +272,7 @@ function selectItem(item) {
   console.log('selected: ' + item.id)
   selectedItem.value.isSelected = false
   selectedItem.value = item
+  selectedItem.value.class = findOrCreateClass(selectedDevice.value, selectedMode.value, item.class.modifier)
   selectedItem.value.isSelected = true 
 }
 
@@ -301,8 +302,8 @@ function selectDevice(device) {
 }
 
 function selectModifier(modifier) {
-  console.log('adding modifier ' + modifier)
   const newModifier = modifier === 'default' ? '' : modifier
+  console.log(`adding modifier ${modifier} "${newModifier}"`)
   selectedItem.value.class  = findOrCreateClassBy(selectedItem.value.class.device, selectedItem.value.class.mode, newModifier)
 }
 

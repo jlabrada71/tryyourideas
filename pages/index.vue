@@ -296,19 +296,19 @@ function findOrCreateClassBy(device, mode, modifier) {
 function selectDevice(device) {
   console.log('selecting device: ' + device)
   selectedDevice.value = device
-  const newDevice = device === 'any' ? '' : device + ':'
+  const newDevice = device === 'any' ? '' : device 
   selectedItem.value.class  = findOrCreateClassBy(newDevice, selectedItem.value.class.mode, selectedItem.value.class.modifier)
 }
 
 function selectModifier(modifier) {
   console.log('adding modifier ' + modifier)
-  const newModifier = modifier === 'default' ? '' : modifier + ':'
+  const newModifier = modifier === 'default' ? '' : modifier
   selectedItem.value.class  = findOrCreateClassBy(selectedItem.value.class.device, selectedItem.value.class.mode, newModifier)
 }
 
 function selectMode(mode) {
   console.log('selecting mode' + mode)
-  const newMode = mode === 'default' ? '' : mode + ':'
+  const newMode = mode === 'default' ? '' : mode 
   selectedItem.value.class  = findOrCreateClassBy(selectedItem.value.class.device, newMode, selectedItem.value.class.modifier)
 }
 

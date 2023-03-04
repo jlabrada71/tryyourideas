@@ -28,7 +28,8 @@
     const device = props.device === 'any' ? '' : props.device
     const mode = props.mode === 'light' ? '' : props.mode
     const cls = getComponentEditorClass(props.item, device, mode)
-    // console.log(`"${cls}"`)
+    console.log(props.item.class)
+    console.log(`"${cls}"`)
     return cls
   })
 

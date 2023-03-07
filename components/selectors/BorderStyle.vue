@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>Border Style: <span>{{style}}</span></h1>
-    <div>
-      <RangeButton :options="borderStyles" :option="style" @update:option="value=>emit('update:style', value)"></RangeButton>
-    </div>
+    <RangeButton :options="borderStyles" :option="style" @update:option="value=>emit('update:style', value)">
+      <h1>Border Style: <span>{{style}}</span></h1>
+    </RangeButton>
   </div>
 </template>
 <script setup>

@@ -1,13 +1,17 @@
 <template>
-  <div class="m-0">
-    <label for="steps-range" class="block text-sm font-medium text-gray-900 dark:text-white">{{}}
-      <input id="steps-range"
-            v-model="selected"
-            type="range" 
-            min="0" :max="len" 
-            step="1"
-          class="w-full h-1 bg-gray-200 rounded-md appearance-none cursor-pointer dark:bg-gray-700">
-      </label>
+  <div class="m-0" 
+    @mouseover="setVisible(true)"
+    @mouseleave="setVisible(false)">
+    <slot></slot>
+    
+    <input id="steps-range"
+          v-if="visible"
+          v-model="selected"
+          type="range" 
+          min="0" :max="len" 
+          step="1"
+        class="w-full h-1 bg-gray-200 rounded-md appearance-none cursor-pointer dark:bg-gray-700">
+     
   </div>
 </template>
 <script setup>
@@ -19,6 +23,13 @@
     options:  { type: Array, required: true },
     option: { type: String }
   })
+
+  const visible = ref(false)
+
+  function setVisible(val) {
+    console.log(val)
+    visible.value = val
+  }
 
   const len = computed(() => props.options.length - 1)
   const selected = computed({

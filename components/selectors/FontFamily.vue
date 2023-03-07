@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>Family: <span>{{family}}</span></h1>
-    <div>
-      <RangeButton :options="families" :option="family" @update:option="value=>emit('update:family', value)"></RangeButton>
-    </div>
+    <RangeButton :options="families" :option="family" @update:option="value=>emit('update:family', value)">
+      <h1>Family: <span>{{family}}</span></h1>
+    </RangeButton>
   </div>
 </template>
 <script setup>

@@ -1,9 +1,8 @@
-<template>
+<template> 
   <div>
-    <h1>Border Radius: <span>{{radius}}</span></h1>
-    <div>
-      <RangeButton :options="borderRadius" :option="radius" @update:option="value=>emit('update:radius', value)"></RangeButton>
-    </div>
+    <RangeButton :options="borderRadius" :option="radius" @update:option="value=>emit('update:radius', value)">
+      <h1>Border Radius: <span>{{radius}}</span></h1>
+    </RangeButton>
   </div>
 </template>
 <script setup>

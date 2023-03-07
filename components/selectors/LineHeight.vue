@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>Line height: <span>{{height}}</span></h1>
-    <div>
-      <RangeButton :options="heights" :option="height" @update:option="value=>emit('update:height', value)"></RangeButton>
-    </div>
+    <RangeButton :options="heights" :option="height" @update:option="value=>emit('update:height', value)">
+      <h1>Line height: <span>{{height}}</span></h1>
+    </RangeButton>
   </div>
 </template>
 <script setup>

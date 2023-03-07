@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>Spacing: <span>{{spacing}}</span></h1>
-    <div>
-      <RangeButton :options="spacings" :option="spacing" @update:option="value=>emit('update:spacing', value)"></RangeButton>
-    </div>
+    <RangeButton :options="spacings" :option="spacing" @update:option="value=>emit('update:spacing', value)">
+      <h1>Spacing: <span>{{spacing}}</span></h1>
+    </RangeButton>
   </div>
 </template>
 <script setup>

@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>Margin: <span>{{margin}}</span></h1>
-    <div>
-      <RangeButton :options="margins" :option="margin" @update:option="value=>emit('update:margin', value)"></RangeButton>
-    </div>
+    <RangeButton :options="margins" :option="margin" @update:option="value=>emit('update:margin', value)">
+      <h1>Margin: <span>{{margin}}</span></h1>
+    </RangeButton>
   </div>
 </template>
 <script setup>

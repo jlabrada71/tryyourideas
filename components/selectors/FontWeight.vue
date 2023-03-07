@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>Weight: <span>{{weight}}</span></h1>
-    <div>
-      <RangeButton :options="weights" :option="weight" @update:option="value=>emit('update:weight', value)"></RangeButton>
-    </div>
+    <RangeButton :options="weights" :option="weight" @update:option="value=>emit('update:weight', value)">
+      <h1>Weight: <span>{{weight}}</span></h1>
+    </RangeButton>
   </div>
 </template>
 <script setup>

@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>Padding: <span>{{padding}}</span></h1>
-    <div>
-      <RangeButton :options="paddings" :option="padding" @update:option="value=>emit('update:padding', value)"></RangeButton>
-    </div>
+    <RangeButton :options="paddings" :option="padding" @update:option="value=>emit('update:padding', value)">
+      <h1>Padding: <span>{{padding}}</span></h1>
+    </RangeButton>
   </div>
 </template>
 <script setup>

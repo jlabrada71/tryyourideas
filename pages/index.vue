@@ -220,6 +220,10 @@ function printClassKey({ mode, device, modifier }) {
   console.log(`key: "${mode}:${device}:${modifier}"`)
 }
 
+function createClassKey( mode, device, modifier ) {
+  return {mode, device, modifier }
+}
+
 function getClassKey(itemClass) {
   printClassKey(itemClass)
   return { mode: itemClass.mode, device: itemClass.device, modifier: itemClass.modifier }
@@ -262,6 +266,10 @@ function clone(item) {
 
 function addChild(parent) {
   const newItem = clone(defaultItem)
+  newItem.class.mode = selectedItem.value.class.mode
+  newItem.class.device = selectedItem.value.class.device
+  newItem.class.modifier = selectedItem.value.class.modifier
+  newItem.classes.push(newItem.class)
   
   newItem.id = `${parent.id}-${parent.children.length + 1}`,
   parent.children.push(newItem)
@@ -272,7 +280,7 @@ function selectItem(item) {
   console.log('selected: ' + item.id)
   selectedItem.value.isSelected = false
   selectedItem.value = item
-  selectedItem.value.class = findOrCreateClass(selectedDevice.value, selectedMode.value, item.class.modifier)
+  selectedItem.value.class = findOrCreateClass(selectedItem.value, selectedDevice.value, selectedMode.value, item.class.modifier)
   selectedItem.value.isSelected = true 
 }
 
@@ -280,17 +288,17 @@ function findClassBy(item, { device, mode, modifier }) {
   return item.classes.find((cls) => cls.device === device && cls.mode === mode && cls.modifier === modifier)
 }
 
-function findOrCreateClassBy(device, mode, modifier) {
+function findOrCreateClassBy(item, device, mode, modifier) {
   // if (selectedItem.value.classes.lenght === 0 ) {  // if the classes list is empty add current class.
   //   selectedItem.value.classes.push(selectedItem.value.class)
   // }
-  const result = findClassBy(selectedItem.value, { device, mode, modifier})
+  const result = findClassBy(item, { device, mode, modifier})
   if (result) return result;
-  const resultClass = clone(defaultItem.class)
+  const resultClass = clone(item.class)
   resultClass.mode = mode
   resultClass.device = device
   resultClass.modifier = modifier
-  selectedItem.value.classes.push(resultClass)
+  item.classes.push(resultClass)
   return resultClass
 }
 
@@ -298,19 +306,19 @@ function selectDevice(device) {
   console.log('selecting device: ' + device)
   selectedDevice.value = device
   const newDevice = device === 'any' ? '' : device 
-  selectedItem.value.class  = findOrCreateClassBy(newDevice, selectedItem.value.class.mode, selectedItem.value.class.modifier)
+  selectedItem.value.class  = findOrCreateClassBy(selectedItem.value, newDevice, selectedItem.value.class.mode, selectedItem.value.class.modifier)
 }
 
 function selectModifier(modifier) {
   const newModifier = modifier === 'default' ? '' : modifier
   console.log(`adding modifier ${modifier} "${newModifier}"`)
-  selectedItem.value.class  = findOrCreateClassBy(selectedItem.value.class.device, selectedItem.value.class.mode, newModifier)
+  selectedItem.value.class  = findOrCreateClassBy(selectedItem.value, selectedItem.value.class.device, selectedItem.value.class.mode, newModifier)
 }
 
 function selectMode(mode) {
   console.log('selecting mode' + mode)
   const newMode = mode === 'default' ? '' : mode 
-  selectedItem.value.class  = findOrCreateClassBy(selectedItem.value.class.device, newMode, selectedItem.value.class.modifier)
+  selectedItem.value.class  = findOrCreateClassBy(selectedItem.value, selectedItem.value.class.device, newMode, selectedItem.value.class.modifier)
 }
 
 </script>

@@ -196,7 +196,7 @@ function removeItemFrom(parent, node) {
 function printTree(item) {
   console.log('==================================')
   console.log(item.id)
-  const printClass = cls => console.log(`${cls.mode}${cls.device}${cls.modifier}${cls.backgroundColor}`)
+  const printClass = cls => console.log(`${cls.mode}:${cls.device}:${cls.modifier}:${cls.backgroundColor}`)
   printClass(item.class) 
   item.classes.forEach(cls => {
     printClass(cls)
@@ -232,10 +232,8 @@ function getClassKey(itemClass) {
 function updateItem(modifiedItem) {
   const item = getItemById(tree.value, modifiedItem.id)
   console.log('updating item: ', item.id)
-  getClassKey(modifiedItem.class)
-  getClassKey(item.class)
-  console.log(item.classes.length)
-  item.classes.forEach(cls => getClassKey(cls))
+
+  item.type = modifiedItem.type
 
   const editedClass = findClassBy(item, getClassKey( modifiedItem.class ) )
   console.log('editedClass')
@@ -250,7 +248,7 @@ function updateItem(modifiedItem) {
   console.log('******** Updating item: ')
   console.log(selectedItem.value.id )  
   console.log(selectedItem.value.class.backgroundColor)
-  printTree(tree.value)
+  // printTree(tree.value)
   // console.log(selectedItem.value.renderedClass)
   console.log('1111111111111111111111')
 }
@@ -280,7 +278,7 @@ function selectItem(item) {
   console.log('selected: ' + item.id)
   selectedItem.value.isSelected = false
   selectedItem.value = item
-  selectedItem.value.class = findOrCreateClass(selectedItem.value, selectedDevice.value, selectedMode.value, item.class.modifier)
+  selectedItem.value.class = findOrCreateClassBy(selectedItem.value, selectedDevice.value, selectedMode.value, item.class.modifier)
   selectedItem.value.isSelected = true 
 }
 

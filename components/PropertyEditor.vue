@@ -7,7 +7,7 @@
           <span>Id: {{item.id}} - device:{{item.class.device}}</span>
           <!-- <SelectorsModifier  @update:modifier="value => emit('add:modifier', value)">Add Modifier</SelectorsModifier> -->
           <SelectorsModifier :modifier="props.item.modifier" @update:modifier="value => emit('update:modifier', value)">Select Modifier</SelectorsModifier>
-          <SelectorsHtmlTag :type="props.item.type" @update:color="value => updateClass('backgroundColor', value)"></SelectorsHtmlTag>
+          <SelectorsHtmlTag :type="props.item.type" @update:type="value => updateType(value)"></SelectorsHtmlTag>
           <div class="flex gap-2"> 
             <label for="text-edit">Text</label>
             <input id="text-edit" class="bg-slate-100 rounded" type="text" v-model="props.item.text">
@@ -105,6 +105,13 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:item', 'update:modifier', 'add:modifier'])
+
+function updateType(newType) {
+  const newItem = {...props.item }
+  newItem.type = newType
+
+  emit('update:item', newItem)
+}
 
 function updateClass(className, value) {
   const newItem = {...props.item }

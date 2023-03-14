@@ -161,7 +161,7 @@ describe('getComponentEditorClass function', () => {
 
   describe('generalCase light mode', () => {
     
-    const componentClass = getComponentEditorClass(component, 'md', '')
+    const componentClass = getComponentEditorClass(component, 'md', 'light')
     it('returns empty string', () => {
       expect(componentClass).not.toContain(' active:bg-md-dark-active')
       expect(componentClass).not.toContain(' active:sh-md-dark-active')
@@ -178,7 +178,7 @@ describe('getComponentEditorClass function', () => {
 
   describe('generalCase no mode any device', () => {
     
-    const componentClass = getComponentEditorClass(component, '', '')
+    const componentClass = getComponentEditorClass(component, 'any', 'light')
     it('returns empty string', () => {
       expect(componentClass).not.toContain(' active:bg-md-dark-active')
       expect(componentClass).not.toContain(' active:sh-md-dark-active')

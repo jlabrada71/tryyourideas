@@ -5,18 +5,18 @@ import {
   getClassString,
   getEditorClass,
   getComponentEditorClass,
-  getComponentRenderedClass } from '../lib/ClassGeneration'
+  getComponentRenderedClass } from '../lib/ClassGeneration.js'
 
 describe('modifierAdder function', () => {
   describe('common case: add "hover" to "bg-white"', () => {
-    const modifiedClass = modifierAdder('hover')('bg-white')
+    const modifiedClass = modifierAdder('hover', 'default')('bg-white')
     it('adds hover', () => {
       expect(modifiedClass).toBe('hover:bg-white')
     })
   })
 
   describe('no style case: add "hover" to ""', () => {
-    const modifiedClass = modifierAdder('hover')('')
+    const modifiedClass = modifierAdder('hover', 'default')('')
     it('returns empty string', () => {
       expect(modifiedClass).toBe('')
     })
@@ -35,6 +35,14 @@ describe('modifierAdder function', () => {
       expect(modeClass).toBe('dark:md:hover:test')
     })
   })
+
+  describe('composing default modifiers "light", "any", "default" with "test" style should return "test"', () => {
+    const modeClass = modifierComposer('light', 'any', 'default')( 'test' )
+    it('returns "dark:md:hover:test"', () => {
+      expect(modeClass).toBe('test')
+    })
+  })
+
 })
 
 describe('modifierComposer function', () => {
@@ -59,7 +67,7 @@ describe('getClassString function', () => {
       backgroundColor: 'test-blue',
       shadow: 'test-shadow'
     }
-    const modeClass = getClassString(itemClass, modifierAdder('hover:') )
+    const modeClass = getClassString(itemClass, modifierAdder('hover', 'default') )
     it('returns empty string', () => {
       expect(modeClass).toContain(' hover:test-blue')
       expect(modeClass).toContain(' hover:test-shadow')
@@ -82,7 +90,7 @@ describe('getClassString function', () => {
 describe('getEditorClass function', () => {
   describe('generalCase', () => {
     const itemClass = {
-      modifier: 'active:',
+      modifier: 'active',
       backgroundColor: 'test-blue',
       shadow: 'test-shadow'
     }
@@ -98,45 +106,45 @@ describe('getComponentEditorClass function', () => {
   const component = {
     classes: [
       {
-        device: 'md:',
-        mode: 'dark:',
-        modifier: 'active:',
+        device: 'md',
+        mode: 'dark',
+        modifier: 'active',
         backgroundColor: 'bg-md-dark-active',
         shadow: 'sh-md-dark-active'
       }, 
       {
-        device: 'md:',
-        mode: 'dark:',
-        modifier: 'hover:',
+        device: 'md',
+        mode: 'dark',
+        modifier: 'hover',
         backgroundColor: 'bg-md-dark-hover',
         shadow: 'sh-md-dark-hover'
       },
       {
-        device: 'md:',
-        mode: '',
-        modifier: 'hover:',
+        device: 'md',
+        mode: 'light',
+        modifier: 'hover',
         backgroundColor: 'bg-md-hover',
         shadow: 'sh-md-hover'
       },
       {
-        device: '',
-        mode: '',
-        modifier: 'hover:',
+        device: 'any',
+        mode: 'light',
+        modifier: 'hover',
         backgroundColor: 'bg-hover',
         shadow: 'sh-hover'
       },
       {
-        device: '',
-        mode: '',
-        modifier: '',
+        device: 'any',
+        mode: 'light',
+        modifier: 'default',
         backgroundColor: 'bg-none',
         shadow: 'sh-none'
       }
     ]
   } 
   describe('generalCase dark mode', () => {
-    
-    const componentClass = getComponentEditorClass(component, 'md:', 'dark:')
+    debugger;
+    const componentClass = getComponentEditorClass(component, 'md', 'dark')
     it('returns empty string', () => {
       expect(componentClass).toContain(' active:bg-md-dark-active')
       expect(componentClass).toContain(' active:sh-md-dark-active')
@@ -153,7 +161,7 @@ describe('getComponentEditorClass function', () => {
 
   describe('generalCase light mode', () => {
     
-    const componentClass = getComponentEditorClass(component, 'md:', '')
+    const componentClass = getComponentEditorClass(component, 'md', '')
     it('returns empty string', () => {
       expect(componentClass).not.toContain(' active:bg-md-dark-active')
       expect(componentClass).not.toContain(' active:sh-md-dark-active')
@@ -199,42 +207,42 @@ describe('getComponentRenderedClass function', () => {
       {
         device: 'md',
         mode: 'dark',
-        modifier: '',
+        modifier: 'default',
         backgroundColor: 'bg-md-dark',
         shadow: 'sh-md-dark'
       },
       {
         device: 'md',
-        mode: '',
+        mode: 'light',
         modifier: 'hover',
         backgroundColor: 'bg-md-hover',
         shadow: 'sh-md-hover'
       },
       {
         device: 'md',
-        mode: '',
-        modifier: '',
+        mode: 'light',
+        modifier: 'default',
         backgroundColor: 'bg-md',
         shadow: 'sh-md'
       },
       {
-        device: '',
-        mode: '',
+        device: 'any',
+        mode: 'light',
         modifier: 'hover',
         backgroundColor: 'bg-hover',
         shadow: 'sh-hover'
       },
       {
-        device: '',
+        device: 'any',
         mode: 'dark',
-        modifier: '',
+        modifier: 'default',
         backgroundColor: 'bg-dark',
         shadow: 'sh-dark'
       },
       {
-        device: '',
-        mode: '',
-        modifier: '',
+        device: 'any',
+        mode: 'light',
+        modifier: 'default',
         backgroundColor: 'bg-none',
         shadow: 'sh-none'
       }

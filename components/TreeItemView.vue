@@ -25,8 +25,8 @@
     // console.log(props.item.classes)
     const forceRefresh = props.refresh // use the refresh prop to for the treeView to refresh
     refreshChildren.value = forceRefresh
-    const device = props.device === 'any' ? '' : props.device
-    const mode = props.mode === 'light' ? '' : props.mode
+    const device = props.device
+    const mode = props.mode
     const cls = getComponentEditorClass(props.item, device, mode)
     return cls
   })

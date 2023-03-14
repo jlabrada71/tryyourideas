@@ -78,9 +78,9 @@ const defaultItem = {
     renderedClass: '',
     classes: [],
     class: {
-      device: '',
-      mode: '',
-      modifier: '',
+      device: 'any',
+      mode: 'light',
+      modifier: 'default',
 
       backgroundColor: 'bg-blue-500',
       width: 'w-10',
@@ -122,9 +122,9 @@ const tree = ref({
   renderedClass: '',
   classes: [],
   class: {
-    device: '',
-    mode: '',
-    modifier: '',
+    device: 'any',
+    mode: 'light',
+    modifier: 'default',
 
     backgroundColor: 'bg-blue-500',
     width: 'w-40',
@@ -160,7 +160,7 @@ const tree = ref({
 const refreshTreeView = ref(false)
 
 const selectedDevice = ref('any')
-const selectedMode = ref('')
+const selectedMode = ref('light')
 const selectedDeviceWidth = {
   any: 'w-full',
   sm: 'w-[640px]',
@@ -283,6 +283,8 @@ function selectItem(item) {
 }
 
 function findClassBy(item, { device, mode, modifier }) {
+  console.log('looking for')
+  item.classes.forEach(cls => console.log(`${cls.device} ${device}`))
   return item.classes.find((cls) => cls.device === device && cls.mode === mode && cls.modifier === modifier)
 }
 
@@ -303,19 +305,19 @@ function findOrCreateClassBy(item, device, mode, modifier) {
 function selectDevice(device) {
   console.log('selecting device: ' + device)
   selectedDevice.value = device
-  const newDevice = device === 'any' ? '' : device 
+  const newDevice = device
   selectedItem.value.class  = findOrCreateClassBy(selectedItem.value, newDevice, selectedItem.value.class.mode, selectedItem.value.class.modifier)
 }
 
 function selectModifier(modifier) {
-  const newModifier = modifier === 'default' ? '' : modifier
+  const newModifier = modifier
   console.log(`adding modifier ${modifier} "${newModifier}"`)
   selectedItem.value.class  = findOrCreateClassBy(selectedItem.value, selectedItem.value.class.device, selectedItem.value.class.mode, newModifier)
 }
 
 function selectMode(mode) {
   console.log('selecting mode' + mode)
-  const newMode = mode === 'default' ? '' : mode 
+  const newMode = mode 
   selectedItem.value.class  = findOrCreateClassBy(selectedItem.value, selectedItem.value.class.device, newMode, selectedItem.value.class.modifier)
 }
 

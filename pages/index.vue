@@ -3,7 +3,7 @@
   <div class="flex">
     <div class="w-2/12 h-screen bg-slate-50 z-40">
       <div class="bg-slate-600 text-white w-full">Components</div>
-      <TreeItem :item="tree" 
+      <TreeItem :item="selectedComponent" 
         @update:add-child="addChild" 
         @update:remove="removeItem" 
         @selected="selectItem"/>
@@ -26,7 +26,7 @@
         <!-- Component view -->
 
         <div :class="treeViewContainerClass">             
-          <TreeItemView :item="tree" :device="selectedDevice" :mode="selectedMode" :refresh="refreshTreeView" @selected="selectItem"></TreeItemView>
+          <TreeItemView :item="selectedComponent" :device="selectedDevice" :mode="selectedMode" :refresh="refreshTreeView" @selected="selectItem"></TreeItemView>
         </div>
          <!-- Component view -->
       </div>
@@ -116,7 +116,7 @@ const defaultItem = {
     }
   }
 
-const tree = ref({
+const selectedComponent = ref({
   id: '1',
   editorId: '1',
   name: 'root',
@@ -174,18 +174,21 @@ const selectedDeviceWidth = {
   xl: 'w-[1280px]',
   '2xl': '[1536px]'
 }
+
+const selectedItem = ref(selectedComponent.value)
+
 const treeViewBackground = computed(() => selectedMode.value==='light' ? 'bg-white': 'bg-black' )
 const treeViewContainerClass = computed(() => `${selectedMode.value==='light' ? 'bg-white': 'bg-black'} ${selectedDeviceWidth[selectedDevice.value]} flex align-middle shadow-lg justify-center h-screen`)
 
 onMounted(() => {
   defaultItem.classes.push(defaultItem.class)
-  tree.value.classes.push(tree.value.class)
+  selectedComponent.value.classes.push(selectedComponent.value.class)
   selectDevice('any')
 })
 
-const selectedItem = ref(tree.value)
 
-const exported = computed(() => toHtml(tree.value))
+
+const exported = computed(() => toHtml(selectedComponent.value))
 
 function removeItemFrom(parent, node) {
   parent.children.forEach((parentNode, i) => {
@@ -236,7 +239,7 @@ function getClassKey(itemClass) {
 }
 
 function updateItem(modifiedItem) {
-  const item = getItemById(tree.value, modifiedItem.id)
+  const item = getItemById(selectedComponent.value, modifiedItem.id)
   console.log('updating item: ', item.id)
 
   item.type = modifiedItem.type
@@ -250,18 +253,18 @@ function updateItem(modifiedItem) {
 
   selectedItem.value.item
 
-  refreshTreeView.value = ! refreshTreeView.value  // this forces the tree view refresh
+  refreshTreeView.value = ! refreshTreeView.value  // this forces the selectedComponent view refresh
   // console.log('******** Updating item: ')
   // console.log(selectedItem.value.id )  
   // console.log(selectedItem.value.class.backgroundColor)
-  // printTree(tree.value)
+  // printTree(selectedComponent.value)
   // console.log(selectedItem.value.renderedClass)
   // console.log('1111111111111111111111')
 }
 
 function removeItem(node) {
   if (node.id === '1') return; // root can not be removed
-  removeItemFrom(tree.value, node)
+  removeItemFrom(selectedComponent.value, node)
 }
 
 function clone(item) {

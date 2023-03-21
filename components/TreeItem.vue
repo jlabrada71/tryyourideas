@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="flex flex-col pl-3">
-      <div class="flex hover:bg-slate-300 w-full group focus:bg-slate-300" @click="emit('selected', item)">
+      <div :class="itemClass" @click="emit('selected', item)">
         <span class="justify-self-start w-full">{{item.type}}</span>
         <div class="hidden group-hover:block group-focus:block">
           <div class="flex flex-row justify-self-end gap-1">            
@@ -28,4 +28,7 @@
       type: Object
     }
   })
+
+  const selected = computed(() => props.item.isSelected ? 'bg-slate-400 text-white' : 'bg-slate-100 text-black' )
+  const itemClass = computed(() => `flex ${selected.value} hover:bg-slate-300 w-full group focus:bg-slate-300`)
 </script>

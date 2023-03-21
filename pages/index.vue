@@ -17,7 +17,11 @@
     
     <div class="w-8/12">
       <div class="bg-slate-100 p-10 ">
-        <SelectorsDevice :device="selectedDevice" @update:device="selectDevice"></SelectorsDevice>
+        <div class="flex justify-between">
+          <SelectorsDevice :device="selectedDevice" @update:device="selectDevice"></SelectorsDevice>
+          <SelectorsMode :mode="selectedMode" @update:mode="selectMode"></SelectorsMode>
+        </div>
+        
 
         <!-- Component view -->
 
@@ -114,6 +118,7 @@ const defaultItem = {
 
 const tree = ref({
   id: '1',
+  editorId: '1',
   name: 'root',
   type: 'template',
   children: [],
@@ -169,7 +174,8 @@ const selectedDeviceWidth = {
   xl: 'w-[1280px]',
   '2xl': '[1536px]'
 }
-const treeViewContainerClass = computed(() => `bg-white ${selectedDeviceWidth[selectedDevice.value]} flex align-middle shadow-lg justify-center h-screen`)
+const treeViewBackground = computed(() => selectedMode.value==='light' ? 'bg-white': 'bg-black' )
+const treeViewContainerClass = computed(() => `${selectedMode.value==='light' ? 'bg-white': 'bg-black'} ${selectedDeviceWidth[selectedDevice.value]} flex align-middle shadow-lg justify-center h-screen`)
 
 onMounted(() => {
   defaultItem.classes.push(defaultItem.class)
@@ -245,12 +251,12 @@ function updateItem(modifiedItem) {
   selectedItem.value.item
 
   refreshTreeView.value = ! refreshTreeView.value  // this forces the tree view refresh
-  console.log('******** Updating item: ')
-  console.log(selectedItem.value.id )  
-  console.log(selectedItem.value.class.backgroundColor)
+  // console.log('******** Updating item: ')
+  // console.log(selectedItem.value.id )  
+  // console.log(selectedItem.value.class.backgroundColor)
   // printTree(tree.value)
   // console.log(selectedItem.value.renderedClass)
-  console.log('1111111111111111111111')
+  // console.log('1111111111111111111111')
 }
 
 function removeItem(node) {
@@ -316,7 +322,8 @@ function selectModifier(modifier) {
 }
 
 function selectMode(mode) {
-  console.log('selecting mode' + mode)
+  console.log('selecting mode ' + mode)
+  selectedMode.value = mode
   const newMode = mode 
   selectedItem.value.class  = findOrCreateClassBy(selectedItem.value, selectedItem.value.class.device, newMode, selectedItem.value.class.modifier)
 }

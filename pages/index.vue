@@ -3,10 +3,13 @@
   <div class="flex">
     <div class="w-2/12 h-screen bg-slate-50 z-40">
       <div class="bg-slate-600 text-white w-full">Components</div>
-      <TreeItem :item="selectedComponent" 
-        @update:add-child="addChild" 
-        @update:remove="removeItem" 
-        @selected="selectItem"/>
+      <div v-for="component in componentList">
+        <div>{{component.name}}</div>
+        <TreeItem :item="selectedComponent" 
+          @update:add-child="addChild" 
+          @update:remove="removeItem" 
+          @selected="selectItem"/>
+      </div>
       <div class="bg-slate-600 text-white w-full mt-10">Export</div>
       <div class="bg-slate-200 m-5 p-5 h-auto">{{exported}}</div>
       <div class="bg-slate-600 text-white w-full mt-10">Rendered class</div>
@@ -21,7 +24,6 @@
           <SelectorsDevice :device="selectedDevice" @update:device="selectDevice"></SelectorsDevice>
           <SelectorsMode :mode="selectedMode" @update:mode="selectMode"></SelectorsMode>
         </div>
-        
 
         <!-- Component view -->
 
@@ -40,6 +42,9 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { getComponentRenderedClass } from '../lib/ClassGeneration'
+import { getItemById, findClassBy, findOrCreateClassBy, clone, copy, removeItemFrom } from '../lib/EditorUtils'
+import { printTree } from '../lib/DebugUtils'
+import { toHtml } from '../lib/HtmlExporter.js'
 import { 
     initAccordions, 
     initCarousels, 
@@ -53,7 +58,7 @@ import {
     initTabs, 
     initTooltips } from 'flowbite'
 
-import toHtml from '@/components/HtmlExporter.js'
+
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -73,15 +78,14 @@ onMounted(() => {
 const divideColor = ref('divide')
 const outlineColor = ref('outline')
 const ringColor = ref('ring')
-const defaultItem = {
+const itemTemplate = {
     name: 'div',
     type: 'div',
     children: [],
     text: '',
     editorClass: '',
     renderedClass: '',
-    classes: [],
-    class: {
+    classes: [{
       device: 'any',
       mode: 'light',
       modifier: 'default',
@@ -113,54 +117,17 @@ const defaultItem = {
       divideColor: 'divide-blue-50',
       outlineColor: 'outline-blue-50',
       ringColor: 'ring-blue-50',
-    }
+    }],
   }
 
-const selectedComponent = ref({
-  id: '1',
-  editorId: '1',
-  name: 'root',
-  type: 'template',
-  children: [],
-  text: '',
-  editorClass: '',
-  renderedClass: '',
-  classes: [],
-  class: {
-    device: 'any',
-    mode: 'light',
-    modifier: 'default',
+const componentList = ref([])
 
-    backgroundColor: 'bg-blue-500',
-    width: 'w-40',
-    height: 'h-40',
-    padding: 'default',
-    margin: 'default',
-    spacing: 'default',
+const selectedComponent = ref(clone(itemTemplate))
 
-
-    textColor: 'text-white',
-    fontSize: 'default',
-    fontFamily: 'default',
-    fontWeight: 'default',
-    letterSpacing: 'default',
-    lineHeight: 'default',
-    textAlign: 'default',
-    textVerticalAlign: 'default',
-
-    borderColor: 'border-slate-100',
-    borderStyle: 'default',
-    borderWidth: 'default',
-    borderRadius: 'default',
-
-    shadow: 'default',
-    shadowColor: 'shadow-slate-100',
-
-    divideColor: 'divide-blue-50',
-    outlineColor: 'outline-blue-50',
-    ringColor: 'ring-blue-50',
-  }
-})
+selectedComponent.value.id = '1'
+selectedComponent.value.editorId = '1'
+selectedComponent.value.name = 'root'
+selectedComponent.value.type ='template'
 
 const refreshTreeView = ref(false)
 
@@ -181,49 +148,14 @@ const treeViewBackground = computed(() => selectedMode.value==='light' ? 'bg-whi
 const treeViewContainerClass = computed(() => `${selectedMode.value==='light' ? 'bg-white': 'bg-black'} ${selectedDeviceWidth[selectedDevice.value]} flex align-middle shadow-lg justify-center h-screen`)
 
 onMounted(() => {
-  defaultItem.classes.push(defaultItem.class)
-  selectedComponent.value.classes.push(selectedComponent.value.class)
+  // selectedComponent.value = clone(itemTemplate)
+  selectedComponent.value.currentClass = selectedComponent.value.classes[0]
+  componentList.value.push(selectedComponent.value)
   selectDevice('any')
+  selectMode('light')
 })
 
-
-
 const exported = computed(() => toHtml(selectedComponent.value))
-
-function removeItemFrom(parent, node) {
-  parent.children.forEach((parentNode, i) => {
-    if (parentNode.id === node.id) {
-      parent.children.splice(i, 1)
-      return
-    }
-    if (node.id.startsWith(parentNode.id)) {
-      removeItemFrom(parentNode, node)
-    }
-  }) 
-}
-
-function printTree(item) {
-  console.log('==================================')
-  console.log(item.id)
-  const printClass = cls => console.log(`${cls.mode}:${cls.device}:${cls.modifier}:${cls.backgroundColor}`)
-  printClass(item.class) 
-  item.classes.forEach(cls => {
-    printClass(cls)
-  })
-  item.children.forEach(child => printTree(child))
-}
-
-function getItemById(node, id) {
-  if (node.id === id) return node
-  const candidate = node.children.find(child => id.startsWith(child.id))
-  return getItemById(candidate, id)
-}
-
-function copy(cls1, cls2) {
-  for(const key in cls1) {
-    cls2[key] = cls1[key]
-  }
-}
 
 function printClassKey({ mode, device, modifier }) {
   console.log(`key: "${mode}:${device}:${modifier}"`)
@@ -244,10 +176,10 @@ function updateItem(modifiedItem) {
 
   item.type = modifiedItem.type
 
-  const editedClass = findClassBy(item, getClassKey( modifiedItem.class ) )
+  const editedClass = findClassBy(item, getClassKey( modifiedItem.currentClass ) )
   console.log('editedClass')
   console.log(editedClass)
-  copy(modifiedItem.class, editedClass)
+  copy(modifiedItem.currentClass, editedClass)
   // item.classes = modifiedItem.classes
   item.renderedClass = getComponentRenderedClass(item)
 
@@ -256,7 +188,7 @@ function updateItem(modifiedItem) {
   refreshTreeView.value = ! refreshTreeView.value  // this forces the selectedComponent view refresh
   // console.log('******** Updating item: ')
   // console.log(selectedItem.value.id )  
-  // console.log(selectedItem.value.class.backgroundColor)
+  // console.log(selectedItem.value.currentClass.backgroundColor)
   // printTree(selectedComponent.value)
   // console.log(selectedItem.value.renderedClass)
   // console.log('1111111111111111111111')
@@ -267,18 +199,16 @@ function removeItem(node) {
   removeItemFrom(selectedComponent.value, node)
 }
 
-function clone(item) {
-  return JSON.parse(JSON.stringify(item))
-}
-
 function addChild(parent) {
-  const newItem = clone(defaultItem)
-  newItem.class.mode = selectedItem.value.class.mode
-  newItem.class.device = selectedItem.value.class.device
-  newItem.class.modifier = selectedItem.value.class.modifier
-  newItem.classes.push(newItem.class)
+  const newItem = clone(itemTemplate)
+  newItem.currentClass = newItem.classes[0]
+  newItem.currentClass.mode = selectedItem.value.currentClass.mode
+  newItem.currentClass.device = selectedItem.value.currentClass.device
+  newItem.currentClass.modifier = 'default' // selectedItem.value.currentClass.modifier
+  newItem.classes.push(newItem.currentClass)
   
   newItem.id = `${parent.id}-${parent.children.length + 1}`,
+  newItem.editorId = newItem.id
   parent.children.push(newItem)
   selectItem(newItem)
 }
@@ -287,48 +217,28 @@ function selectItem(item) {
   console.log('selected: ' + item.id)
   selectedItem.value.isSelected = false
   selectedItem.value = item
-  selectedItem.value.class = findOrCreateClassBy(selectedItem.value, selectedDevice.value, selectedMode.value, item.class.modifier)
+  selectedItem.value.currentClass = findOrCreateClassBy(selectedItem.value, selectedDevice.value, selectedMode.value, item.currentClass.modifier)
   selectedItem.value.isSelected = true 
-}
-
-function findClassBy(item, { device, mode, modifier }) {
-  console.log('looking for')
-  item.classes.forEach(cls => console.log(`${cls.device} ${device}`))
-  return item.classes.find((cls) => cls.device === device && cls.mode === mode && cls.modifier === modifier)
-}
-
-function findOrCreateClassBy(item, device, mode, modifier) {
-  // if (selectedItem.value.classes.lenght === 0 ) {  // if the classes list is empty add current class.
-  //   selectedItem.value.classes.push(selectedItem.value.class)
-  // }
-  const result = findClassBy(item, { device, mode, modifier})
-  if (result) return result;
-  const resultClass = clone(item.class)
-  resultClass.mode = mode
-  resultClass.device = device
-  resultClass.modifier = modifier
-  item.classes.push(resultClass)
-  return resultClass
 }
 
 function selectDevice(device) {
   console.log('selecting device: ' + device)
   selectedDevice.value = device
   const newDevice = device
-  selectedItem.value.class  = findOrCreateClassBy(selectedItem.value, newDevice, selectedItem.value.class.mode, selectedItem.value.class.modifier)
+  selectedItem.value.currentClass  = findOrCreateClassBy(selectedItem.value, newDevice, selectedItem.value.currentClass.mode, selectedItem.value.currentClass.modifier)
 }
 
 function selectModifier(modifier) {
   const newModifier = modifier
   console.log(`adding modifier ${modifier} "${newModifier}"`)
-  selectedItem.value.class  = findOrCreateClassBy(selectedItem.value, selectedItem.value.class.device, selectedItem.value.class.mode, newModifier)
+  selectedItem.value.currentClass  = findOrCreateClassBy(selectedItem.value, selectedItem.value.currentClass.device, selectedItem.value.currentClass.mode, newModifier)
 }
 
 function selectMode(mode) {
   console.log('selecting mode ' + mode)
   selectedMode.value = mode
   const newMode = mode 
-  selectedItem.value.class  = findOrCreateClassBy(selectedItem.value, selectedItem.value.class.device, newMode, selectedItem.value.class.modifier)
+  selectedItem.value.currentClass  = findOrCreateClassBy(selectedItem.value, selectedItem.value.currentClass.device, newMode, selectedItem.value.currentClass.modifier)
 }
 
 </script>

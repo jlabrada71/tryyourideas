@@ -202,10 +202,7 @@ function removeItem(node) {
 function addChild(parent) {
   const newItem = clone(itemTemplate)
   newItem.currentClass = newItem.classes[0]
-  newItem.currentClass.mode = selectedItem.value.currentClass.mode
-  newItem.currentClass.device = selectedItem.value.currentClass.device
   newItem.currentClass.modifier = 'default' // selectedItem.value.currentClass.modifier
-  newItem.classes.push(newItem.currentClass)
   
   newItem.id = `${parent.id}-${parent.children.length + 1}`,
   newItem.editorId = newItem.id
@@ -217,7 +214,7 @@ function selectItem(item) {
   console.log('selected: ' + item.id)
   selectedItem.value.isSelected = false
   selectedItem.value = item
-  selectedItem.value.currentClass = findOrCreateClassBy(selectedItem.value, selectedDevice.value, selectedMode.value, item.currentClass.modifier)
+  selectedItem.value.currentClass = findOrCreateClassBy(item, selectedDevice.value, selectedMode.value, 'default' /*item.currentClass.modifier */)
   selectedItem.value.isSelected = true 
 }
 

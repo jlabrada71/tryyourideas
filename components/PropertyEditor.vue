@@ -5,9 +5,10 @@
       <template #body>
         <div class="flex flex-col gap-2">
           <span>Id: {{item.id}}</span>
-          <!-- <SelectorsModifier  @update:modifier="value => emit('add:modifier', value)">Add Modifier</SelectorsModifier> -->
-          <SelectorsModifier :modifier="props.item.modifier" @update:modifier="value => emit('update:modifier', value)">Select Modifier</SelectorsModifier>
           <SelectorsHtmlTag :type="props.item.type" @update:type="value => updateType(value)"></SelectorsHtmlTag>
+          <!-- <SelectorsModifier  @update:modifier="value => emit('add:modifier', value)">Add Modifier</SelectorsModifier> -->
+          <SelectorsModifier :modifier="currentClass.modifier" @update:modifier="value => emit('update:modifier', value)">Select Modifier</SelectorsModifier>
+          
           <div class="flex gap-2"> 
             <label for="text-edit">Text</label>
             <input id="text-edit" class="bg-slate-100 rounded" type="text" v-model="props.item.text">
@@ -121,6 +122,4 @@ function updateClass(className, value) {
 
   emit('update:item', newItem)
 }
-
-
 </script>

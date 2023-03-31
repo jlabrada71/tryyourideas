@@ -8,7 +8,7 @@
       </div>
       <div v-for="component in componentList">
         <div>
-          <div class="flex flex-row  bg-red-600 text-white group">
+          <div class="flex flex-row  bg-red-600 text-white group" @click="selectComponent(component)">
             <div class=" w-10/12">{{component.name}}</div>
             <div class="flex justify-self-end group-hover:block group-focus:block">            
               <button type="button" class="text-white bg-red-200 w-5 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"  @click.stop="emit('update:remove', item )">-</button>
@@ -155,6 +155,7 @@ const itemTemplate = {
 const componentList = ref([])
 
 const selectedComponent = ref(clone(itemTemplate))
+const selectedItem = ref(selectedComponent.value)
 
 function CreateNewComponent() {
   const newComponent = clone(itemTemplate)
@@ -167,7 +168,10 @@ function CreateNewComponent() {
   selectedComponent.value = newComponent
 }
 
-
+function selectComponent(component) {
+  selectedComponent.value = component
+  selectItem(selectedComponent.value)
+}
 
 selectedComponent.value.id = '1'
 selectedComponent.value.editorId = '1'
@@ -187,7 +191,7 @@ const selectedDeviceWidth = {
   '2xl': '[1536px]'
 }
 
-const selectedItem = ref(selectedComponent.value)
+
 
 const treeViewBackground = computed(() => selectedMode.value==='light' ? 'bg-white': 'bg-black' )
 const treeViewContainerClass = computed(() => `${selectedMode.value==='light' ? 'bg-white': 'bg-black'} ${selectedDeviceWidth[selectedDevice.value]} flex align-middle shadow-lg justify-center h-screen`)

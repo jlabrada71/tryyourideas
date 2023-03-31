@@ -4,14 +4,14 @@
     <div class="w-2/12 h-screen bg-slate-50 z-40">
       <div class="flex bg-slate-600 text-white">
         <div class=" w-10/12">Components</div>
-        <button type="button" class="text-white bg-blue-400 w-5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" @click.stop="CreateNewComponent">+</button>
+        <button type="button" class="text-white bg-blue-400 w-5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" @click.stop="createNewComponent">+</button>
       </div>
       <div v-for="component in componentList">
         <div>
           <div class="flex flex-row  bg-red-600 text-white group" @click="selectComponent(component)">
             <div class=" w-10/12">{{component.name}}</div>
             <div class="flex justify-self-end group-hover:block group-focus:block">            
-              <button type="button" class="text-white bg-red-200 w-5 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"  @click.stop="emit('update:remove', item )">-</button>
+              <button type="button" class="text-white bg-red-200 w-5 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"  @click.stop="removeComponent(component)">-</button>
             </div>
           </div>
           
@@ -157,7 +157,7 @@ const componentList = ref([])
 const selectedComponent = ref(clone(itemTemplate))
 const selectedItem = ref(selectedComponent.value)
 
-function CreateNewComponent() {
+function createNewComponent() {
   const newComponent = clone(itemTemplate)
   newComponent.id = getNextId(componentList.value).toString()
   newComponent.editorId = newComponent.id
@@ -166,6 +166,14 @@ function CreateNewComponent() {
   newComponent.currentClass = newComponent.classes[0]
   componentList.value.push(newComponent)
   selectedComponent.value = newComponent
+}
+
+function removeComponent(componentToDelete) {
+  if (componentList.value.length < 2) return
+  componentList.value = componentList.value.filter( component => component.id !== componentToDelete.id )
+  if (componentToDelete.id === selectedComponent.value.id ) {
+    selectComponent(componentList.value[0])
+  }
 }
 
 function selectComponent(component) {

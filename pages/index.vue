@@ -2,13 +2,26 @@
   <div class="w-full h-20 bg-cyan-50 shadow-xl shadow-cyan-50 z-40"></div>
   <div class="flex">
     <div class="w-2/12 h-screen bg-slate-50 z-40">
-      <div class="bg-slate-600 text-white w-full">Components</div>
+      <div class="flex bg-slate-600 text-white">
+        <div class=" w-10/12">Components</div>
+        <button type="button" class="text-white bg-blue-400 w-5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" @click.stop="CreateNewComponent">+</button>
+      </div>
       <div v-for="component in componentList">
-        <div>{{component.name}}</div>
-        <TreeItem :item="selectedComponent" 
-          @update:add-child="addChild" 
-          @update:remove="removeItem" 
-          @selected="selectItem"/>
+        <div>
+          <div class="flex flex-row  bg-red-600 text-white group">
+            <div class=" w-10/12">{{component.name}}</div>
+            <div class="flex justify-self-end group-hover:block group-focus:block">            
+              <button type="button" class="text-white bg-red-200 w-5 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"  @click.stop="emit('update:remove', item )">-</button>
+            </div>
+          </div>
+          
+          <TreeItem 
+            v-if="component.id===selectedComponent.id"
+            :item="selectedComponent" 
+            @update:add-child="addChild" 
+            @update:remove="removeItem" 
+            @selected="selectItem"/>
+        </div>
       </div>
       <div class="bg-slate-600 text-white w-full mt-10">Export</div>
       <div class="bg-slate-200 m-5 p-5 h-auto">{{exported}}</div>
@@ -42,6 +55,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { getComponentRenderedClass } from '../lib/ClassGeneration'
+import { getNextId } from '../lib/IdGeneration'
 import { getItemById, findClassBy, findOrCreateClassBy, clone, copy, removeItemFrom } from '../lib/EditorUtils'
 import { printTree } from '../lib/DebugUtils'
 import { toHtml } from '../lib/HtmlExporter.js'
@@ -58,6 +72,24 @@ import {
     initTabs, 
     initTooltips } from 'flowbite'
 
+    let tailwindLoaded = false
+
+    useHead({
+      script: [
+        {
+          hid: 'tailswindcss',
+          src: '<https://cdn.tailwindcss.com>',
+          defer: true,
+          // Changed after script load
+          callback: () => { tailwindLoaded = true } 
+        }
+      ]
+    })
+
+// the component name is unique
+// the sub-component id is created by 'componentName' + treeId(1-2-3) + max id of level + 1
+// the sub-component editorId is initialized to the same value as subcomponent id
+// the sub-component editorId is editable as long as it is unique within the whole components project
 
 
 // initialize components based on data attribute selectors
@@ -124,9 +156,22 @@ const componentList = ref([])
 
 const selectedComponent = ref(clone(itemTemplate))
 
+function CreateNewComponent() {
+  const newComponent = clone(itemTemplate)
+  newComponent.id = getNextId(componentList.value).toString()
+  newComponent.editorId = newComponent.id
+  newComponent.name = `Component-${newComponent.id}`
+  newComponent.type = 'template'
+  newComponent.currentClass = newComponent.classes[0]
+  componentList.value.push(newComponent)
+  selectedComponent.value = newComponent
+}
+
+
+
 selectedComponent.value.id = '1'
 selectedComponent.value.editorId = '1'
-selectedComponent.value.name = 'root'
+selectedComponent.value.name = 'Component'
 selectedComponent.value.type ='template'
 
 const refreshTreeView = ref(false)

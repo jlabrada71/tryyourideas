@@ -10,8 +10,14 @@
       </div>
       <div v-for="component in componentList">
         <div>
-          <div class="flex flex-row  bg-red-600 text-white group" @click="selectComponent(component)">
-            <div class=" w-10/12">{{component.name}}</div>
+          <EditableLabel 
+            v-model:text="component.name" 
+            @select="selectComponent(component)" 
+            @remove="removeComponent(component)">
+          </EditableLabel>
+          <!-- <div class="flex flex-row  bg-red-600 text-white group" @click="selectComponent(component)">
+            <input v-if="component.isEditing" type="text" :value="component.name">
+            <div v-else class=" w-10/12">{{component.name}}</div>
             <div class="hidden flex justify-self-end group-hover:block group-focus:block gap-4">  
               <div class="flex justify-self-end gap-4">
                 <button type="button" class="text-white w-5 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"  @click.stop="editName(component)">
@@ -28,9 +34,8 @@
                   </svg>
                 </button>
               </div>          
-              
             </div>
-          </div>
+          </div> -->
           
           <TreeItem 
             v-if="component.id===selectedComponent.id"
@@ -198,6 +203,9 @@ function selectComponent(component) {
   selectItem(selectedComponent.value)
 }
 
+function editName(component) {
+  component.isEditing
+}
 selectedComponent.value.id = '1'
 selectedComponent.value.editorId = '1'
 selectedComponent.value.name = 'Component'

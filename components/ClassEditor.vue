@@ -5,7 +5,7 @@
       <template #body>
         <div class="flex flex-col gap-2">
           <span>Id: {{item.id}}</span>
-          <SelectorsHtmlTag :type="props.item.type" @update:type="value => updateType(value)"></SelectorsHtmlTag>
+          <SelectorsTagName :type="props.item.type" @update:type="value => updateType(value)"></SelectorsTagName>
           <!-- <SelectorsModifier  @update:modifier="value => emit('add:modifier', value)">Add Modifier</SelectorsModifier> -->
           <SelectorsModifier :modifier="currentClass.modifier" @update:modifier="value => emit('update:modifier', value)">Select Modifier</SelectorsModifier>
           

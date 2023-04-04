@@ -4,7 +4,12 @@
       <template #head><span class="flex items-center">General</span></template>
       <template #body>
         <div class="flex flex-col gap-2">
-          <SelectorsTagName :type="props.item.type" @update:type="value => updateType(value)"></SelectorsTagName>
+          <SelectorsTagName :type="props.item.type" :typeList="typeList" @update:type="value => updateType(value)"></SelectorsTagName>
+          <div>Properties</div>
+          <div v-for="prop in props.item.props">
+            {{prop.name}}: {{prop.value}}
+          </div>
+
         </div>
       </template>
     </AccordionItem>
@@ -50,11 +55,37 @@ const props = defineProps({
 
 const emit = defineEmits(['update:item'])
 
+const typeList =  [
+  { name: 'template', props: [] }, 
+  { name: 'div', props: [] }, 
+  { name: 'h1', props: [] }, 
+  { name: 'span', props: [] }, 
+  { 
+    name: 'img', 
+    props: [
+      { 
+        name: 'src',
+        type: String,
+        default: ''
+      }
+    ] 
+  }, 
+  { name: 'section', props: [] }]
+
+
 const currentClass = computed(() => props.item.currentClass ? props.item.currentClass : props.item.classes[0] )
 
+
+function newProps(props) {
+  return props.map(prop => ({ name: prop.name, value: prop.default }))
+}
+
 function updateType(newType) {
+  if ( props.item.type === newType ) return
   const newItem = {...props.item }
   newItem.type = newType
+  const type = typeList.find(type => type.name === newType )
+  newItem.props = newProps(type.props)
 
   emit('update:item', newItem)
 }

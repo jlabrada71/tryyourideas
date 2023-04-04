@@ -120,6 +120,7 @@ const ringColor = ref('ring')
 const itemTemplate = {
     name: 'div',
     type: 'div',
+    props: [],
     children: [],
     text: '',
     editorClass: '',
@@ -245,6 +246,7 @@ function updateItem(modifiedItem) {
   console.log('updating item: ', item.id)
 
   item.type = modifiedItem.type
+  item.props = modifiedItem.props
 
   const editedClass = findClassBy(item, getClassKey( modifiedItem.currentClass ) )
   console.log('editedClass')

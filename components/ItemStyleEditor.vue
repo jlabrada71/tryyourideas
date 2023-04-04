@@ -105,13 +105,6 @@ const emit = defineEmits(['update:item', 'update:modifier'])
 
 const currentClass = computed(() => props.item.currentClass ? props.item.currentClass : props.item.classes[0] )
 
-function updateType(newType) {
-  const newItem = {...props.item }
-  newItem.type = newType
-
-  emit('update:item', newItem)
-}
-
 function updateClass(className, value) {
   const newItem = {...props.item }
   newItem.currentClass[className] = value

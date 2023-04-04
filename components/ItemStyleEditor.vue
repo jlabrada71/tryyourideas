@@ -1,14 +1,10 @@
 <template>
-  <div id="accordion-open" data-accordion="open" class="bg-white">
-    <AccordionItem id="1">
+  <SelectorsModifier :modifier="currentClass.modifier" @update:modifier="value => emit('update:modifier', value)">Select Modifier</SelectorsModifier>
+  <div id="item-style-accordion-open" data-accordion="open" class="bg-white">
+    <AccordionItem id="21">
       <template #head><span class="flex items-center">General</span></template>
       <template #body>
         <div class="flex flex-col gap-2">
-          <span>Id: {{item.id}}</span>
-          <SelectorsTagName :type="props.item.type" @update:type="value => updateType(value)"></SelectorsTagName>
-          <!-- <SelectorsModifier  @update:modifier="value => emit('add:modifier', value)">Add Modifier</SelectorsModifier> -->
-          <SelectorsModifier :modifier="currentClass.modifier" @update:modifier="value => emit('update:modifier', value)">Select Modifier</SelectorsModifier>
-          
           <div class="flex gap-2"> 
             <label for="text-edit">Text</label>
             <input id="text-edit" class="bg-slate-100 rounded" type="text" v-model="props.item.text">
@@ -25,7 +21,7 @@
       </template>
     </AccordionItem>
 
-    <AccordionItem id="2">
+    <AccordionItem id="22">
       <template #head><span class="flex items-center">Typography</span></template>
       <template #body>
         <SelectorsTextColor :color="currentClass.textColor" @update:color="value => updateClass('textColor', value)"></SelectorsTextColor>
@@ -39,7 +35,7 @@
       </template>
     </AccordionItem>    
 
-    <AccordionItem id="3">
+    <AccordionItem id="23">
       <template #head><span class="flex items-center">Borders</span></template>
       <template #body>
         <SelectorsBorderRadius :radius="currentClass.borderRadius"  @update:radius="value => updateClass('borderRadius', value)"></SelectorsBorderRadius>
@@ -49,7 +45,7 @@
       </template>
     </AccordionItem> 
 
-    <AccordionItem id="4">
+    <AccordionItem id="24">
       <template #head><span class="flex items-center">Shadows</span></template>
       <template #body>
         <SelectorsShadow :shadow="currentClass.shadow" @update:shadow="value => updateClass('shadow', value)"></SelectorsShadow>
@@ -57,7 +53,7 @@
       </template>
     </AccordionItem> 
     
-    <AccordionItem id="5">
+    <AccordionItem id="25">
       <template #head><span class="flex items-center">Others</span></template>
       <template #body>
         <SelectorsDivideColor :color="currentClass.divideColor" @update:color="value => updateClass('divideColor', value)"></SelectorsDivideColor>
@@ -105,7 +101,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:item', 'update:modifier', 'add:modifier'])
+const emit = defineEmits(['update:item', 'update:modifier'])
 
 const currentClass = computed(() => props.item.currentClass ? props.item.currentClass : props.item.classes[0] )
 

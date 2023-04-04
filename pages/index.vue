@@ -18,7 +18,7 @@
           
           <TreeItem 
             v-if="component.id===selectedComponent.id"
-            :item="selectedComponent" 
+            :item="selectedComponent.root" 
             @update:add-child="addChild" 
             @update:remove="removeItem" 
             @selected="selectItem"/>
@@ -42,14 +42,14 @@
         <!-- Component view -->
 
         <div :class="treeViewContainerClass">             
-          <TreeItemView :item="selectedComponent" :device="selectedDevice" :mode="selectedMode" :refresh="refreshTreeView" @selected="selectItem"></TreeItemView>
+          <TreeItemView :item="selectedComponent.root" :device="selectedDevice" :mode="selectedMode" :refresh="refreshTreeView" @selected="selectItem"></TreeItemView>
         </div>
          <!-- Component view -->
       </div>
       
     </div>
     <div class="w-2/12 bg-slate-50 px-2 h-auto container">
-      <ClassEditor :item="selectedItem" @update:item="updateItem" @update:modifier="selectModifier"></ClassEditor>    
+      <ItemEditor :item="selectedItem" @update:item="updateItem" @update:modifier="selectModifier"></ItemEditor>    
     </div>
   </div>
 </template>
@@ -86,12 +86,18 @@ import {
         }
       ]
     })
-
-// the component name is unique
-// the sub-component id is created by 'componentName' + treeId(1-2-3) + max id of level + 1
-// the sub-component editorId is initialized to the same value as subcomponent id
-// the sub-component editorId is editable as long as it is unique within the whole components project
-
+// each project has many components
+// each component has:
+//    - a root item
+//    - properties
+//    - events       
+// the component name is unique     
+// each item has:
+//    - properties
+//    - style
+// the item id is created by 'componentName' + treeId(1-2-3) + max id of level + 1
+// the item editorId is initialized to the same value as item id
+// the item editorId is editable as long as it is unique within the whole components project
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -152,21 +158,37 @@ const itemTemplate = {
       ringColor: 'ring-blue-50',
     }],
   }
+const project = ref({
+  name: '',
+  components: [],
+})
 
 const componentList = ref([])
+const selectedComponent = ref(newComponent())
+const selectedItem = ref(selectedComponent.value.root)
+componentList.value.push(selectedComponent.value)
 
-const selectedComponent = ref(clone(itemTemplate))
-const selectedItem = ref(selectedComponent.value)
+function newComponent() {
+  const component = {
+    name: 'Component',
+    root: clone(itemTemplate),
+    properties: [],
+    events: []
+  }
+  component.id = getNextId(componentList.value).toString()
+  component.editorId = component.id
+  component.name = `Component-${component.id}`
+  component.root.id = component.id
+  component.root.editorId = component.editorId
+  component.root.type = 'template'
+  component.root.currentClass = component.root.classes[0]
+  return component
+}
 
 function createNewComponent() {
-  const newComponent = clone(itemTemplate)
-  newComponent.id = getNextId(componentList.value).toString()
-  newComponent.editorId = newComponent.id
-  newComponent.name = `Component-${newComponent.id}`
-  newComponent.type = 'template'
-  newComponent.currentClass = newComponent.classes[0]
-  componentList.value.push(newComponent)
-  selectedComponent.value = newComponent
+  const component = newComponent()
+  componentList.value.push(component)
+  selectedComponent.value = component
 }
 
 function removeComponent(componentToDelete) {
@@ -179,16 +201,8 @@ function removeComponent(componentToDelete) {
 
 function selectComponent(component) {
   selectedComponent.value = component
-  selectItem(selectedComponent.value)
+  selectItem(selectedComponent.value.root)
 }
-
-function editName(component) {
-  component.isEditing
-}
-selectedComponent.value.id = '1'
-selectedComponent.value.editorId = '1'
-selectedComponent.value.name = 'Component'
-selectedComponent.value.type ='template'
 
 const refreshTreeView = ref(false)
 
@@ -203,15 +217,10 @@ const selectedDeviceWidth = {
   '2xl': '[1536px]'
 }
 
-
-
 const treeViewBackground = computed(() => selectedMode.value==='light' ? 'bg-white': 'bg-black' )
 const treeViewContainerClass = computed(() => `${selectedMode.value==='light' ? 'bg-white': 'bg-black'} ${selectedDeviceWidth[selectedDevice.value]} flex align-middle shadow-lg justify-center h-screen`)
 
 onMounted(() => {
-  // selectedComponent.value = clone(itemTemplate)
-  selectedComponent.value.currentClass = selectedComponent.value.classes[0]
-  componentList.value.push(selectedComponent.value)
   selectDevice('any')
   selectMode('light')
 })
@@ -232,7 +241,7 @@ function getClassKey(itemClass) {
 }
 
 function updateItem(modifiedItem) {
-  const item = getItemById(selectedComponent.value, modifiedItem.id)
+  const item = getItemById(selectedComponent.value.root, modifiedItem.id)
   console.log('updating item: ', item.id)
 
   item.type = modifiedItem.type
@@ -246,18 +255,18 @@ function updateItem(modifiedItem) {
 
   selectedItem.value.item
 
-  refreshTreeView.value = ! refreshTreeView.value  // this forces the selectedComponent view refresh
+  refreshTreeView.value = ! refreshTreeView.value  // this forces the selectedItem view refresh
   // console.log('******** Updating item: ')
   // console.log(selectedItem.value.id )  
   // console.log(selectedItem.value.currentClass.backgroundColor)
-  // printTree(selectedComponent.value)
+  // printTree(selectedItem.value)
   // console.log(selectedItem.value.renderedClass)
   // console.log('1111111111111111111111')
 }
 
 function removeItem(node) {
   if (node.id === '1') return; // root can not be removed
-  removeItemFrom(selectedComponent.value, node)
+  removeItemFrom(selectedComponent.value.root, node)
 }
 
 function addChild(parent) {

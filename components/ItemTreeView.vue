@@ -1,7 +1,7 @@
 <template>
   <div @click.stop="emit('selected', item)" :class="editorClass">
     {{item.text}}
-    <TreeItemView 
+    <ItemTreeView 
       v-if="item.children.length > 0" 
       v-for="child in item.children" 
       :item="child" 
@@ -9,7 +9,7 @@
       :mode="mode"
       :refresh="refreshChildren"
       @selected="value=>emit('selected', value)">
-    </TreeItemView>
+    </ItemTreeView>
   </div>
 </template>
 <script setup>

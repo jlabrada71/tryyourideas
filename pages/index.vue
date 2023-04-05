@@ -17,7 +17,7 @@
             validator="[A-Z][A-Za-z0-9\-]*">
           </EditableLabel>          
           
-          <TreeItem 
+          <ItemTree 
             v-if="component.id===selectedComponent.id"
             :item="selectedComponent.root" 
             @update:add-child="addChild" 
@@ -43,7 +43,7 @@
         <!-- Component view -->
 
         <div :class="treeViewContainerClass">             
-          <TreeItemView :item="selectedComponent.root" :device="selectedDevice" :mode="selectedMode" :refresh="refreshTreeView" @selected="selectItem"></TreeItemView>
+          <ItemTreeView :item="selectedComponent.root" :device="selectedDevice" :mode="selectedMode" :refresh="refreshTreeView" @selected="selectItem"></ItemTreeView>
         </div>
          <!-- Component view -->
       </div>

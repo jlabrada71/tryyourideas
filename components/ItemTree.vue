@@ -22,11 +22,11 @@
         </div>
       </div>
       <li v-if="item.children.length > 0" v-for="child in item.children">
-        <TreeItem :item="child"
+        <ItemTree :item="child"
           @update:add-child="value => emit('update:add-child', value)"
           @update:remove="value=>emit('update:remove', value)"
           @selected="value=>emit('selected', value)"
-          ></TreeItem>
+          ></ItemTree>
       </li>
     </ul>
   </div>

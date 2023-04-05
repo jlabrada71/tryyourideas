@@ -1,5 +1,5 @@
 <template>
-  <div @click.stop="emit('selected', item)" :class="editorClass">
+  <component :is="item.type" :class="editorClass" :src="getProperty('src')" @click.stop="emit('selected', item)">
     {{item.text}}
     <ItemTreeView 
       v-if="item.children.length > 0" 
@@ -10,7 +10,7 @@
       :refresh="refreshChildren"
       @selected="value=>emit('selected', value)">
     </ItemTreeView>
-  </div>
+  </component>
 </template>
 <script setup>
   import { getComponentEditorClass } from '../lib/ClassGeneration'
@@ -45,4 +45,9 @@
       type: Boolean
     }
   })
+
+  function getProperty(name) {
+    const prop = props.item.props.find( prop => prop.name === name )
+    return prop ? prop.value : undefined
+  }
 </script>

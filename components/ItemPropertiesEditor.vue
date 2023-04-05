@@ -7,7 +7,7 @@
           <SelectorsTagName :type="props.item.type" :typeList="typeList" @update:type="value => updateType(value)"></SelectorsTagName>
           <div>Properties</div>
           <div v-for="prop in props.item.props">
-            {{prop.name}}: {{prop.value}}
+            {{prop.name}}: <input :value="prop.value" @input="event => updateProperty({name: prop.name, value: event.target.value })">
           </div>
 
         </div>
@@ -73,11 +73,15 @@ const typeList =  [
   { name: 'section', props: [] }]
 
 
-const currentClass = computed(() => props.item.currentClass ? props.item.currentClass : props.item.classes[0] )
-
-
 function newProps(props) {
   return props.map(prop => ({ name: prop.name, value: prop.default }))
+}
+
+function updateProperty(property) {
+  const newItem = {...props.item }
+  newItem.props = props.item.props.map(prop => prop.name === property.name ? property : prop)
+
+  emit('update:item', newItem)
 }
 
 function updateType(newType) {

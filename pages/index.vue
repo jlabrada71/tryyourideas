@@ -13,7 +13,8 @@
           <EditableLabel 
             v-model:text="component.name" 
             @select="selectComponent(component)" 
-            @remove="removeComponent(component)">
+            @remove="removeComponent(component)"
+            validator="[A-Z][A-Za-z0-9\-]*">
           </EditableLabel>          
           
           <TreeItem 
@@ -88,11 +89,12 @@ import {
     })
 // each project has many components
 // each component has:
-//    - a root item
+//    - an item tree
 //    - properties
 //    - events       
 // the component name is unique     
 // each item has:
+//    - type
 //    - properties
 //    - style
 // the item id is created by 'componentName' + treeId(1-2-3) + max id of level + 1

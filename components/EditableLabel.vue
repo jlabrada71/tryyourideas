@@ -1,7 +1,7 @@
 <template>
   <div :class="labelClass" @click.stop="select">
     <input v-if="isEditing" type="text" ref="inputButton" v-model="editingText" @blur="handleBlur" :class="inputClass">
-    <div v-else>{{editingText}}</div>
+    <div v-else class="w-10/12">{{editingText}}</div>
     <div class="hidden justify-self-end group-hover:block group-focus:block">
       <div v-if="!isEditing">  
         <div class="flex justify-self-end gap-4">
@@ -69,9 +69,9 @@
   })
 
   const labelClass = computed(() => `flex flex-row group ${props.bgcolor}-600 ${props.color}-100`)
-  const inputClass = computed(() => `${props.bgcolor}-400`)
+  const inputClass = computed(() => `w-10/12 ${props.bgcolor}-400`)
   const buttonClass = computed(() => `w-5 mx-2 hover:${props.bgcolor}-800  dark:${props.bgcolor}-600 dark:hover:${props.bgcolor}-700 font-medium rounded-lg text-sm`)
-  const textButtonClass = computed(() => `w-10 mx-2 hover:${props.bgcolor}-800  dark:${props.bgcolor}-600 dark:hover:${props.bgcolor}-700 font-medium rounded-lg text-sm`)
+  const textButtonClass = computed(() => `w-15 mx-2 hover:${props.bgcolor}-800  dark:${props.bgcolor}-600 dark:hover:${props.bgcolor}-700 font-medium rounded-lg text-sm`)
 
 
   async function edit() {

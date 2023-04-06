@@ -1,5 +1,5 @@
 <template>
-  <component :is="item.type" :class="editorClass" :src="getProperty('src')" @click.stop="emit('selected', item)">
+  <component :id="item.id" :is="item.type" :class="editorClass" :src="getProperty('src')" @click.stop="emit('selected', item)">
     {{item.text}}
     <ItemTreeView 
       v-if="item.children.length > 0" 

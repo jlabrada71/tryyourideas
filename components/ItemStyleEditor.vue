@@ -9,6 +9,8 @@
             <label for="text-edit">Text</label>
             <input id="text-edit" class="bg-slate-100 rounded" type="text" v-model="props.item.text">
           </div>
+
+          <SelectorsDisplay  :display="currentClass.display" @update:display="value => updateClass('display', value)"></SelectorsDisplay>
          
           <SelectorsBackgroundColor :color="currentClass.backgroundColor" @update:color="value => updateClass('backgroundColor', value)"></SelectorsBackgroundColor>
           <SelectorsWidth  :width="currentClass.width" @update:width="value => updateClass('width', value)"></SelectorsWidth>

@@ -52,8 +52,41 @@
         <SelectorsShadowColor :color="currentClass.shadowColor" @update:color="value => updateClass('shadowColor', value)"></SelectorsShadowColor>
       </template>
     </AccordionItem> 
-    
+
     <AccordionItem id="25">
+      <template #head><span class="flex items-center">Flex</span></template>
+      <template #body>
+        
+        <SelectorsFlexDirection :direction="currentClass.flexDirection" @update:direction="value => updateClass('flexDirection', value)"></SelectorsFlexDirection>
+        <SelectorsFlexWrap :wrap="currentClass.flexWrap" @update:wrap="value => updateClass('flexWrap', value)"></SelectorsFlexWrap>
+        
+        <SelectorsGap :gap="currentClass.gap" @update:gap="value => updateClass('gap', value)"></SelectorsGap>
+
+        <SelectorsJustifyContent :justify="currentClass.justifyContent" @update:justify="value => updateClass('justifyContent', value)"></SelectorsJustifyContent>
+        <SelectorsJustifyItems :justify="currentClass.justifyItems" @update:justify="value => updateClass('justifyItems', value)"></SelectorsJustifyItems>
+
+        <SelectorsAlignContent :align="currentClass.alignContent" @update:align="value => updateClass('alignContent', value)"></SelectorsAlignContent>
+        <SelectorsAlignItems :align="currentClass.alignItems" @update:align="value => updateClass('alignItems', value)"></SelectorsAlignItems>
+
+        <SelectorsPlaceContent :place="currentClass.placeContent" @update:place="value => updateClass('placeContent', value)"></SelectorsPlaceContent>
+        <SelectorsPlaceItems :place="currentClass.placeItems" @update:place="value => updateClass('placeItems', value)"></SelectorsPlaceItems>
+
+      </template>
+    </AccordionItem>
+
+    <AccordionItem id="26">
+      <template #head><span class="flex items-center">Self</span></template>
+      <template #body>
+        <SelectorsFlexBasis :basis="currentClass.flexBasis" @update:basis="value => updateClass('flexBasis', value)"></SelectorsFlexBasis>
+        <SelectorsFlexShrinkGrow :shrinkGrow="currentClass.flexShrinkGrow" @update:shrinkGrow="value => updateClass('flexShrinkGrow', value)"></SelectorsFlexShrinkGrow>
+        <SelectorsJustifySelf :justify="currentClass.justifySelf" @update:justify="value => updateClass('justifySelf', value)"></SelectorsJustifySelf>
+        <SelectorsAlignSelf :align="currentClass.alignSelf" @update:align="value => updateClass('alignSelf', value)"></SelectorsAlignSelf>
+        <SelectorsPlaceSelf :place="currentClass.placeSelf" @update:place="value => updateClass('placeSelf', value)"></SelectorsPlaceSelf>
+
+      </template>
+    </AccordionItem>
+    
+    <AccordionItem id="99">
       <template #head><span class="flex items-center">Others</span></template>
       <template #body>
         <SelectorsDivideColor :color="currentClass.divideColor" @update:color="value => updateClass('divideColor', value)"></SelectorsDivideColor>

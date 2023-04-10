@@ -1,0 +1,15 @@
+<template>
+  <div>
+    <RangeButton :options="justifyList" :option="justify" @update:option="value=>emit('update:justify', value)">
+      <h1>Justify self: {{justify}}</h1>
+    </RangeButton>
+  </div>
+</template>
+<script setup>
+  const props = defineProps(['justify'])
+  const emit = defineEmits(['update:justify'])
+
+ const justifyList = ['default', 'justify-self-auto', 'justify-self-start', 'justify-self-end', 'justify-self-center', 'justify-self-stretch']
+
+</script>
+

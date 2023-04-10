@@ -66,6 +66,8 @@ import { getNextId } from '../lib/IdGeneration'
 import { getItemById, findClassBy, findOrCreateClassBy, clone, copy, removeItemFrom } from '../lib/EditorUtils'
 import { printTree } from '../lib/DebugUtils'
 import { toHtml } from '../lib/HtmlExporter.js'
+import axios from 'axios'
+import { throttle } from 'lodash'
 import { 
     initAccordions, 
     initCarousels, 
@@ -190,15 +192,26 @@ const project = ref({
 })
 
 const componentList = ref([])
+project.value.components = componentList.value
+
 const selectedComponent = ref(newComponent())
 const selectedItem = ref(selectedComponent.value.root)
 componentList.value.push(selectedComponent.value)
 
 function save(obj) {
-
+  axios({
+  method: 'post',
+  url: 'http://localhost:3000/api/v1/model',
+  data: obj
+  });
 }
 
-watch( project, async (newProject, oldProject) => await save(newProject)  )
+const throttledSave = throttle(save, 30*1000)
+
+function saveProject() {
+  console.log('saveProject')
+  throttledSave(project.value)
+}
 
 function newComponent() {
   const component = {
@@ -296,6 +309,7 @@ function updateItem(modifiedItem) {
   // printTree(selectedItem.value)
   // console.log(selectedItem.value.renderedClass)
   // console.log('1111111111111111111111')
+  saveProject()
 }
 
 function removeItem(node) {

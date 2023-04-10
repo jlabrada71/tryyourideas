@@ -7,3 +7,4 @@ node_modules
 .env
 dist
 pages/demo.vue
+pages/tests/demo.vue

@@ -30,6 +30,27 @@ async function createZipFile(srcDir, zipFileName) {
   }
 }
 
+function getCode(component) {
+  return '<template></template>'
+}
+
+function saveCode(directory: String, file: String, code: String) {
+
+  fse.writeFile(`${directory}/${file}`, code, err => {
+    if (err) {
+      console.log('Error writing file: ' + file)
+      console.error(err);
+    }
+  });
+}
+
+function generateComponents(model, projectDirectory: String) {
+  model.components.forEach( component => {
+    const code = getCode(component)
+    saveCode(projectDirectory + '/components', component.name + '.vue', code)
+  })
+}
+
 export default defineEventHandler(async (event) => {
   console.log('generation POST')
     const body = await readBody(event)
@@ -43,6 +64,8 @@ export default defineEventHandler(async (event) => {
     const destDir = `server/models/${body.user}/generation/${body.name}`
     const zipFileName = `${destDir}.zip`
     copyTemplate(srcDir, destDir)
+
+    generateComponents(body, destDir)
 
     createZipFile(destDir, zipFileName).then(() => {
       console.log('finished zipping')

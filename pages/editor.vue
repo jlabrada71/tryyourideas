@@ -16,9 +16,10 @@
       <div v-for="component in componentList">
         <div>
           <EditableLabel 
-            v-model:text="component.name" 
+            :text="component.name" 
             @select="selectComponent(component)" 
             @remove="removeComponent(component)"
+            @update:text="value => updateComponent(component, 'name', value)"
             validator="[A-Z][A-Za-z0-9\-]*">
           </EditableLabel>          
           
@@ -164,7 +165,7 @@ const itemTemplate = {
       placeItems: 'default',
       placeSelf: 'default',
 
-      textColor: 'text-white',
+      textColor: 'default',
       fontSize: 'default',
       fontFamily: 'default',
       fontWeight:'default',
@@ -186,8 +187,11 @@ const itemTemplate = {
       ringColor: 'ring-blue-50',
     }],
   }
+
+
 const project = ref({
-  name: '',
+  user: 'jlabrada',
+  name: 'default',
   components: [],
 })
 
@@ -206,7 +210,7 @@ function save(obj) {
   });
 }
 
-const throttledSave = throttle(save, 30*1000)
+const throttledSave = throttle(save, 5*1000)
 
 function saveProject() {
   console.log('saveProject')
@@ -226,14 +230,18 @@ function newComponent() {
   component.root.id = component.id
   component.root.editorId = component.editorId
   component.root.type = 'template'
+  component.root.name = 'template'
   component.root.currentClass = component.root.classes[0]
   return component
 }
+
+watch([componentList, project, selectedComponent, selectedItem], (newValue, oldValue) => saveProject())
 
 function createNewComponent() {
   const component = newComponent()
   componentList.value.push(component)
   selectedComponent.value = component
+  saveProject()
 }
 
 function removeComponent(componentToDelete) {
@@ -242,6 +250,12 @@ function removeComponent(componentToDelete) {
   if (componentToDelete.id === selectedComponent.value.id ) {
     selectComponent(componentList.value[0])
   }
+  saveProject()
+}
+
+function updateComponent(component, propertyName, value) {
+  component[propertyName] = value
+  saveProject()
 }
 
 function selectComponent(component) {
@@ -315,6 +329,7 @@ function updateItem(modifiedItem) {
 function removeItem(node) {
   if (node.id === '1') return; // root can not be removed
   removeItemFrom(selectedComponent.value.root, node)
+  saveProject()
 }
 
 function addChild(parent) {
@@ -326,6 +341,7 @@ function addChild(parent) {
   newItem.editorId = newItem.id
   parent.children.push(newItem)
   selectItem(newItem)
+  saveProject()
 }
 
 function selectItem(item) {

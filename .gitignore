@@ -8,3 +8,4 @@ node_modules
 dist
 pages/demo.vue
 pages/tests/demo.vue
+models

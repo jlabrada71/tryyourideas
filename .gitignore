@@ -9,3 +9,5 @@ dist
 pages/demo.vue
 pages/tests/demo.vue
 models
+tryyourideas.com.tar
+pages/version.vue

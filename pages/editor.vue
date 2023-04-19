@@ -1,8 +1,13 @@
 <template>
+  <IssueForm v-if="isIssueFormVisible" />
   <div class="w-full h-20 bg-cyan-50 shadow-xl shadow-cyan-50 z-40">
     <button type="button" class="text-white w-12 m-2" @click="generateNuxtTailwindsStorybook">
       <!-- <style type="text/css">.st0{fill:#4DBA87;} .st1{fill:#425466;}</style> -->
       <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.88 106.42" style="enable-background:new 0 0 122.88 106.42" xml:space="preserve"><g><polygon class="st0" points="75.63,0 61.44,24.58 47.25,0 0,0 61.44,106.42 122.88,0 75.63,0"/><polygon class="st1" points="75.63,0 61.44,24.58 47.25,0 24.58,0 61.44,63.85 98.3,0 75.63,0"/></g></svg>
+    </button>
+
+    <button type="button" class="text-black w-12 m-2" @click="showIssuesForm">
+      Report Issue
     </button>
   </div>
   <div class="flex">
@@ -68,7 +73,7 @@ import { getItemById, findClassBy, findOrCreateClassBy, clone, copy, removeItemF
 import { printTree } from '../lib/DebugUtils'
 import { toHtml } from '../lib/HtmlExporter.js'
 import axios from 'axios'
-import { throttle } from 'lodash'
+import _ from 'lodash'; 
 import { 
     initAccordions, 
     initCarousels, 
@@ -84,6 +89,8 @@ import {
 
     let tailwindLoaded = false
 
+    const { throttle } = _;
+    
     useHead({
       script: [
         {
@@ -124,9 +131,8 @@ onMounted(() => {
     initTooltips();
 })
 
-const divideColor = ref('divide')
-const outlineColor = ref('outline')
-const ringColor = ref('ring')
+const isIssueFormVisible = ref(false)
+
 const itemTemplate = {
     name: 'div',
     type: 'div',
@@ -378,6 +384,10 @@ function selectMode(mode) {
   selectedMode.value = mode
   const newMode = mode 
   selectedItem.value.currentClass  = findOrCreateClassBy(selectedItem.value, selectedItem.value.currentClass.device, newMode, selectedItem.value.currentClass.modifier)
+}
+
+function showIssuesForm() {
+  isIssueFormVisible.value = true
 }
 
 </script>

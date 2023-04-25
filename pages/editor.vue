@@ -1,5 +1,5 @@
 <template>
-  <IssuesForm></IssuesForm>
+  <IssuesForm :store="saveIssues"></IssuesForm>
   <div class="w-full h-20 bg-cyan-50 shadow-xl shadow-cyan-50 z-40 flex">
     <button type="button" class="text-white w-12 m-2" @click="generateNuxtTailwindsStorybook">
       <!-- <style type="text/css">.st0{fill:#4DBA87;} .st1{fill:#425466;}</style> -->
@@ -24,7 +24,6 @@
             @update:text="value => updateComponent(component, 'name', value)"
             validator="[A-Z][A-Za-z0-9\-]*">
           </EditableLabel>          
-          
           <ItemTree 
             v-if="component.id===selectedComponent.id"
             :item="selectedComponent.root" 
@@ -129,66 +128,65 @@ onMounted(() => {
 })
 
 const itemTemplate = {
-    name: 'div',
-    type: 'div',
-    props: [],
-    children: [],
-    text: '',
-    editorClass: '',
-    renderedClass: '',
-    classes: [{
-      device: 'any',
-      mode: 'light',
-      modifier: 'default',
+  name: 'div',
+  type: 'div',
+  props: [],
+  children: [],
+  text: '',
+  editorClass: '',
+  renderedClass: '',
+  classes: [{
+    device: 'any',
+    mode: 'light',
+    modifier: 'default',
 
-      backgroundColor: 'bg-blue-500',
-      width: 'w-10',
-      height: 'h-10',
-      padding: 'default',
-      margin: 'default',
-      spacing: 'default',
-      display: 'flex',
-      flexBasis: 'default',
-      flexDirection: 'flex-row',
-      flexWrap: 'default',
-      flexShrinkGrow: 'default',
+    backgroundColor: 'bg-blue-500',
+    width: 'w-10',
+    height: 'h-10',
+    padding: 'default',
+    margin: 'default',
+    spacing: 'default',
+    display: 'flex',
+    flexBasis: 'default',
+    flexDirection: 'flex-row',
+    flexWrap: 'default',
+    flexShrinkGrow: 'default',
 
-      gap: 'default', 
-      justifyContent: 'default',
-      justifyItems: 'default',
-      justifySelf: 'default',
+    gap: 'default', 
+    justifyContent: 'default',
+    justifyItems: 'default',
+    justifySelf: 'default',
 
-      alignContent: 'default',
-      alignItems: 'default',
-      alignSelf: 'default',
+    alignContent: 'default',
+    alignItems: 'default',
+    alignSelf: 'default',
 
-      placeContent: 'default',
-      placeItems: 'default',
-      placeSelf: 'default',
+    placeContent: 'default',
+    placeItems: 'default',
+    placeSelf: 'default',
 
-      textColor: 'default',
-      fontSize: 'default',
-      fontFamily: 'default',
-      fontWeight:'default',
-      letterSpacing: 'default',
-      lineHeight: 'default',
-      textAlign: 'default',
-      textVerticalAlign: 'default',
+    textColor: 'default',
+    fontSize: 'default',
+    fontFamily: 'default',
+    fontWeight:'default',
+    letterSpacing: 'default',
+    lineHeight: 'default',
+    textAlign: 'default',
+    textVerticalAlign: 'default',
 
-      borderColor: 'border-slate-100',
-      borderStyle: 'default',
-      borderWidth: 'default',
-      borderRadius: 'default',
+    borderColor: 'default',
+    borderStyle: 'default',
+    borderWidth: 'default',
+    borderRadius: 'default',
 
-      shadow: 'default',
-      shadowColor: 'shadow-slate-100',
+    shadow: 'default',
+    shadowColor: 'default',
 
-      divideColor: 'divide-blue-50',
-      outlineColor: 'outline-blue-50',
-      ringColor: 'ring-blue-50',
-    }],
-  }
-
+    divideColor: 'default',
+    outlineColor: 'default',
+    ringColor: 'default',
+  }],
+}
 
 const project = ref({
   user: 'jlabrada',
@@ -203,23 +201,27 @@ const selectedComponent = ref(newComponent())
 const selectedItem = ref(selectedComponent.value.root)
 componentList.value.push(selectedComponent.value)
 
-function save(obj) {
-  axios({
-  method: 'post',
-  url: 'http://localhost:3000/api/v1/model',
-  data: obj
+function postToServer(obj, url) {
+  return axios({
+    method: 'post',
+    url,
+    data: obj
   });
+}
+
+function saveModel(obj) {
+  return postToServer(obj, 'http://localhost:3000/api/v1/models')
+}
+
+function saveIssues(obj) {
+  return postToServer(obj, 'http://localhost:3000/api/v1/issues')
 }
 
 function generateNuxtTailwindsStorybook() {
-  axios({
-  method: 'post',
-  url: 'http://localhost:3000/api/v1/generation',
-  data: project.value
-  });
+  return postToServer(project.value, 'http://localhost:3000/api/v1/generation')
 }
 
-const throttledSave = throttle(save, 5*1000)
+const throttledSave = throttle(saveModel, 5*1000)
 
 function saveProject() {
   console.log('saveProject')
@@ -249,7 +251,7 @@ watch([componentList, project, selectedComponent, selectedItem], (newValue, oldV
 function createNewComponent() {
   const component = newComponent()
   componentList.value.push(component)
-  selectedComponent.value = component
+  selectComponent(component)
   saveProject()
 }
 

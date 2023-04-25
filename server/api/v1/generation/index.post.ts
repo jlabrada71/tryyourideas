@@ -1,15 +1,16 @@
 import { log, debug } from '@/lib/logger'
 import fse  from 'fs-extra'
 import { zip } from 'zip-a-folder';
+import { getComponentRenderedClass } from '@/lib/ClassGeneration'
 
 function copyTemplate(templateProject: String, destDir: String) {
   if (fse.pathExistsSync(destDir)) {
     fse.removeSync(destDir)
   }
   try {
-    console.log(`coping ${templateProject} to ${destDir} `)
+    log(`coping ${templateProject} to ${destDir} `)
     fse.copySync(templateProject, destDir, { overwrite: true })
-    console.log(`successfully `)
+    log(`successfully `)
   } catch (err) {
     console.error(err)
   }
@@ -21,24 +22,50 @@ async function createZipFile(srcDir, zipFileName) {
     if (fse.pathExistsSync(zipFileName)) {
       fse.removeSync(zipFileName)
     }
-    console.log('zipping ' + srcDir)
+    log('zipping ' + srcDir)
     await zip(srcDir, zipFileName);
-    console.log('zipping successful')
+    log('zipping successful')
   } catch(e) {
-    console.log('Error zipping ' + srcDir)
-    console.log(e)
+    log('Error zipping ' + srcDir)
+    log(e)
   }
 }
 
+function getItemListCode(item) {
+  return item.children.map(getItemCode).join('')
+}
+
+function getItemPropertiesCode(item) {
+  // props: [],
+  return ''
+}
+
+function cleanText(text) {
+  text = text.split('\n').join(' ')
+  while(text.indexOf('  ') > -1) 
+    text = text.split('  ').join(' ')
+  return text
+}
+
+function getItemCode(item) {
+  const renderedClass = cleanText(getComponentRenderedClass(item))
+  return `<${item.type} ${getItemPropertiesCode(item)} class="${renderedClass}">
+    ${item.text}${getItemListCode(item)}
+  </${item.type}>`
+}
+
 function getCode(component) {
-  return '<template></template>'
+  log(`getting code for: ${component.name}`)
+  const code = getItemCode(component.root)
+  log(code)
+  return code
 }
 
 function saveCode(directory: String, file: String, code: String) {
 
   fse.writeFile(`${directory}/${file}`, code, err => {
     if (err) {
-      console.log('Error writing file: ' + file)
+      log('Error writing file: ' + file)
       console.error(err);
     }
   });
@@ -52,7 +79,7 @@ function generateComponents(model, projectDirectory: String) {
 }
 
 export default defineEventHandler(async (event) => {
-  console.log('generation POST')
+  log('generation POST')
     const body = await readBody(event)
     const req = event.node.req
     const content = JSON.stringify(body, null, 2)
@@ -68,9 +95,9 @@ export default defineEventHandler(async (event) => {
     generateComponents(body, destDir)
 
     createZipFile(destDir, zipFileName).then(() => {
-      console.log('finished zipping')
+      log('finished zipping')
       fse.moveSync(zipFileName, `public/tmp/${body.name}.zip`, { overwrite: true })
-      console.log('finished publishing')
+      log('finished publishing')
     })
 
     return {

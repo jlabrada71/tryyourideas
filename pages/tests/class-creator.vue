@@ -1,5 +1,5 @@
 <template>
-<DivClassGenerator :tags="fontSizeTags" :values="fontSizes"></DivClassGenerator>
+<DivClassGenerator :tags="alignFlexTags" :values="alignFlexValues"></DivClassGenerator>
 <!-- <DivClassGenerator :tags="sizeTags" :values="sizeValues"></DivClassGenerator> -->
 <!-- <div>
   <div v-for="name in colorNames" class="flex">
@@ -43,4 +43,9 @@
                  '1/12', '2/12', '3/12', '4/12', '5/12', '6/12', '7/12', '8/12', '9/12', '10/12', '11/12', 
                  'auto', 'full', 'screen', 'min', 'max', 'fit']
 
+  const alignTags = ['text']
+  const alignValues = ['left', 'center', 'right', 'justify', 'start', 'end']
+  const alignFlexTags = ['content', 'items', 'self']
+  const alignFlexValues = ['auto', 'normal', 'start', 'end', 'center', 'between', 'around', 'evenly', 'baseline', 'stretch']
+ 
 </script>

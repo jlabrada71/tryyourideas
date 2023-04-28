@@ -2,6 +2,7 @@ import { log, debug } from '@/lib/logger'
 import fse  from 'fs-extra'
 import { zip } from 'zip-a-folder';
 import { getComponentRenderedClass } from '@/lib/ClassGeneration'
+import { selfClosingTags } from '@/lib/tags';
 
 function copyTemplate(templateProject: String, destDir: String) {
   if (fse.pathExistsSync(destDir)) {
@@ -36,8 +37,8 @@ function getItemListCode(item) {
 }
 
 function getItemPropertiesCode(item) {
-  // props: [],
-  return ''
+  const props = item.props.map(prop => `${prop.name}="${prop.value}"`).join(' ')
+  return `id="id-${item.editorId}" ${props}`
 }
 
 function cleanText(text) {
@@ -49,14 +50,20 @@ function cleanText(text) {
 
 function getItemCode(item) {
   const renderedClass = cleanText(getComponentRenderedClass(item))
-  return `<${item.type} ${getItemPropertiesCode(item)} class="${renderedClass}">
+  const code = `<${item.type} ${getItemPropertiesCode(item)} class="${renderedClass}">`
+  if (selfClosingTags.includes(item.type)) return code
+  return `${code}
     ${item.text}${getItemListCode(item)}
-  </${item.type}>`
+  </${item.type}>
+  `
 }
 
 function getCode(component) {
   log(`getting code for: ${component.name}`)
-  const code = getItemCode(component.root)
+  const code = `<template>
+    ${getItemCode(component.root)}
+  </template>
+  `
   log(code)
   return code
 }

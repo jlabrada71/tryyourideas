@@ -23,5 +23,12 @@ export default defineNuxtConfig({
     public: {
       apiBase: 'https://tryyourideas.com/api/v1',
     }
-  }
+  },
+  routeRules: {
+    // Set custom headers matching paths
+    '/_nuxt/**': { headers: { 'cache-control': 's-maxage=0' } },
+    // Add cors headers
+    '/api/v1/**': { cors: true },
+    '/analytics/**': { cors: true },
+  },
 })

@@ -5,8 +5,6 @@
   Report Issue
 </button>
 
-<TermsOfService></TermsOfService>
-
 </template>
 
 <script setup>

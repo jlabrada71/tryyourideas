@@ -86,6 +86,8 @@ import {
     let tailwindLoaded = false
 
     const { throttle } = _;
+
+    const config = useRuntimeConfig()
     
     useHead({
       script: [
@@ -208,17 +210,18 @@ function postToServer(obj, url) {
     data: obj
   });
 }
+console.log('URL: ' + config.public.apiBase)
 
 function saveModel(obj) {
-  return postToServer(obj, 'http://localhost:3000/api/v1/models')
+  return postToServer(obj, `${config.public.apiBase}/models`)
 }
 
 function saveIssues(obj) {
-  return postToServer(obj, 'http://localhost:3000/api/v1/issues')
+  return postToServer(obj, `${config.public.apiBase}/issues`)
 }
 
 function generateNuxtTailwindsStorybook() {
-  return postToServer(project.value, 'http://localhost:3000/api/v1/generation')
+  return postToServer(project.value, `${config.public.apiBase}/generation`)
 }
 
 const throttledSave = throttle(saveModel, 5*1000)
@@ -240,8 +243,8 @@ function newComponent() {
   component.name = `Component-${component.id}`
   component.root.id = component.id
   component.root.editorId = component.editorId
-  component.root.type = 'template'
-  component.root.name = 'template'
+  component.root.type = 'div'
+  component.root.name = 'root'
   component.root.currentClass = component.root.classes[0]
   return component
 }

@@ -32,12 +32,12 @@
             @selected="selectItem"/>
         </div>
       </div>
-      <div class="bg-slate-600 text-white w-full mt-10">Export</div>
+      <!-- <div class="bg-slate-600 text-white w-full mt-10">Export</div>
       <div class="bg-slate-200 m-5 p-5 h-auto">{{exported}}</div>
       <div class="bg-slate-600 text-white w-full mt-10">Rendered class</div>
       <div>
         {{selectedItem.renderedClass}}
-      </div>
+      </div> -->
     </div>
     
     <div class="w-8/12">

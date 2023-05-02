@@ -20,6 +20,8 @@ export default defineNuxtConfig({
     // The private keys which are only available within server-side
     apiSecret: '123',
     // Keys within public, will be also exposed to the client-side
+    data: '/home/ubuntu/data',
+    tmp: '/home/ubuntu/apps/tryyourideas.com/public/tmp',
     public: {
       apiBaseDev: 'http://localhost:3000/api/v1',
       apiBaseProd: 'https://tryyourideas.com/api/v1',

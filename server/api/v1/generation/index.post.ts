@@ -4,6 +4,8 @@ import { zip } from 'zip-a-folder';
 import { getComponentRenderedClass } from '@/lib/ClassGeneration'
 import { selfClosingTags } from '@/lib/tags';
 
+const config = useRuntimeConfig()
+
 function copyTemplate(templateProject: String, destDir: String) {
   if (fse.pathExistsSync(destDir)) {
     fse.removeSync(destDir)
@@ -94,8 +96,8 @@ export default defineEventHandler(async (event) => {
     debug(body.name)  
     // fs.writeFileSync( `server/models/${body.user}/${body.name}.json`, content);
 
-    const srcDir = `server/templates/nuxt3-tailwinds-storybook`
-    const destDir = `server/models/${body.user}/generation/${body.name}`
+    const srcDir = `${config.data}/templates/nuxt3-tailwinds-storybook`
+    const destDir = `${config.data}/models/${body.user}/generation/${body.name}`
     const zipFileName = `${destDir}.zip`
     copyTemplate(srcDir, destDir)
 
@@ -103,7 +105,7 @@ export default defineEventHandler(async (event) => {
 
     createZipFile(destDir, zipFileName).then(() => {
       log('finished zipping')
-      fse.moveSync(zipFileName, `public/tmp/${body.name}.zip`, { overwrite: true })
+      fse.moveSync(zipFileName, `${config.tmp}/${body.name}.zip`, { overwrite: true })
       log('finished publishing')
     })
 

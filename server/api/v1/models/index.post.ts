@@ -2,6 +2,8 @@ import { log, debug } from '@/lib/logger'
 import fs from 'fs'
 import path from "path"
 
+const config = useRuntimeConfig()
+
 export default defineEventHandler(async (event) => {
   console.log('model POST')
     const body = await readBody(event)
@@ -9,7 +11,7 @@ export default defineEventHandler(async (event) => {
     const content = JSON.stringify(body, null, 2)
     //debug(content) 
     debug(body.name)  
-    const dir = `./server/models/${body.user}`
+    const dir = `${config.data}/models/${body.user}`
 
     if (!fs.existsSync(dir)){
       fs.mkdirSync(dir, { recursive: true });

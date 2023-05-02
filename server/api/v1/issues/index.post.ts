@@ -1,10 +1,12 @@
 import { log, debug } from '@/lib/logger'
 import fse  from 'fs-extra'
 
+const config = useRuntimeConfig()
+
 export default defineEventHandler(async (event) => {
   log('issues POST')
   const body = await readBody(event)
-  const issuesDir = `server/data/issues.json`
+  const issuesDir = `${config.data}/issues.json`
   const issues = JSON.parse(fse.readFileSync(issuesDir))
   debug(issues)
   issues.issues.push(body)

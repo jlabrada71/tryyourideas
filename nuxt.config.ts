@@ -21,6 +21,8 @@ export default defineNuxtConfig({
     apiSecret: '123',
     // Keys within public, will be also exposed to the client-side
     public: {
+      apiBaseDev: 'http://localhost:3000/api/v1',
+      apiBaseProd: 'https://tryyourideas.com/api/v1',
       apiBase: 'https://tryyourideas.com/api/v1',
     }
   },

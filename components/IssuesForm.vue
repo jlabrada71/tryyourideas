@@ -52,8 +52,13 @@
     email: ''
   })
 
+  onMounted(() => {
+
+  })
+
   function sendForm() {
     props.store(form.value)
+    form.value.message = ''
   }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <ExportProjectForm :project="project" :store="generateNuxtTailwindsStorybook"></ExportProjectForm>
-  <IssuesForm :store="saveIssues"></IssuesForm>
+  <IssuesForm :project="project" :store="saveIssues"></IssuesForm>
   <div class="w-full h-20 bg-cyan-50 shadow-xl shadow-cyan-50 z-40 flex">
     <ExportProjectFormButton></ExportProjectFormButton>
     <IssuesFormButton></IssuesFormButton>

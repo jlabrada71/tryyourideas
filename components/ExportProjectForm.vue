@@ -61,7 +61,6 @@
   })
 
   onMounted(() => {
-    console.log("PROJECT: " + props.project.name)
     form.user = props.project.user
     form.name = props.project.name
     form.email = props.project.email

@@ -41,6 +41,9 @@
   import { ref } from "vue"
 
   const props = defineProps({
+    project: {
+      type: Object,
+    },
     store: {
       type: Function,
       default : () => {}
@@ -53,6 +56,7 @@
   })
 
   onMounted(() => {
+    form.value.email = props.project.email
 
   })
 

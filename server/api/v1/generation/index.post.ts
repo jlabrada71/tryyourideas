@@ -89,6 +89,17 @@ function generateComponents(model, projectDirectory: String) {
   })
 }
 
+function generateIndexPage(model, projectDirectory: String) {
+  const code = model.components.map(component => `<${component.name}></${component.name}>`).join('\n')
+  const pageCode = `
+    <template>
+      ${code}
+    </template>
+  `
+
+  saveCode(projectDirectory + '/pages', 'index.vue', pageCode)
+}
+
 function postToServer(obj, url) {
   return axios({
     method: 'post',
@@ -112,6 +123,7 @@ export default defineEventHandler(async (event) => {
     copyTemplate(srcDir, destDir)
 
     generateComponents(body, destDir)
+    generateIndexPage(body, destDir)
 
     await createZipFile(destDir, zipFileName)
 

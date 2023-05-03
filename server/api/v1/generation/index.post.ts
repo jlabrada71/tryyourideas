@@ -2,8 +2,9 @@ import { log, debug } from '@/lib/logger'
 import fse  from 'fs-extra'
 import { zip } from 'zip-a-folder';
 import { getComponentRenderedClass } from '@/lib/ClassGeneration'
-import { selfClosingTags } from '@/lib/tags';
+import { selfClosingTags } from '@/lib/typeList';
 import CloudStorage from '@/lib/firebase/cloud-storage.js'
+import axios from 'axios';
 
 const config = useRuntimeConfig()
 
@@ -88,13 +89,21 @@ function generateComponents(model, projectDirectory: String) {
   })
 }
 
+function postToServer(obj, url) {
+  return axios({
+    method: 'post',
+    url,
+    data: obj
+  });
+}
+
 export default defineEventHandler(async (event) => {
   log('generation POST')
     const body = await readBody(event)
     const req = event.node.req
     const content = JSON.stringify(body, null, 2)
 
-    debug(body.name)  
+    debug(content)  
     // fs.writeFileSync( `server/models/${body.user}/${body.name}.json`, content);
 
     const srcDir = `${config.data}/templates/nuxt3-tailwinds-storybook`
@@ -117,6 +126,18 @@ export default defineEventHandler(async (event) => {
     fse.moveSync(zipFileName, `${config.tmp}/${body.name}.zip`, { overwrite: true })
     log('finished publishing')
 
-    return JSON.stringify(downloadUrl)
+    const result = `<html>
+        <body>
+          Hi ${body.user}<br><br> 
+          The code for your project ${body.name} is ready. 
+          <a href="${downloadUrl}">Download here</a>
+        </body>
+        </html> `
+
+    // send email with download Url
+
+    postToServer({ title: 'Project Download Link', email: body.email, content: result }, config.notificationsApi)
+
+    return result
 })
 

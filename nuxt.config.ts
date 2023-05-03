@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     // Keys within public, will be also exposed to the client-side
     data: '/home/ubuntu/data',
     tmp: '/home/ubuntu/apps/tryyourideas.com/public/tmp',
+    notificationsApi: 'https://juanlabrada.com/api/v1/notifications',
     public: {
       apiBaseDev: 'http://localhost:3000/api/v1',
       apiBaseProd: 'https://tryyourideas.com/api/v1',

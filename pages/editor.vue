@@ -210,6 +210,9 @@ function saveIssues(obj) {
 
 function generateNuxtTailwindsStorybook(generate) {
   console.log(generate)
+  project.value.user = generate.user
+  project.value.name = generate.name
+  project.value.email = generate.email
   return postToServer(project.value, `${config.public.apiBase}/generation`)
 }
 

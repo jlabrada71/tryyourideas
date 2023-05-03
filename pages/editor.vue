@@ -178,7 +178,7 @@ const itemTemplate = {
 }
 
 const project = ref({
-  user: 'jlabrada',
+  user: 'incognito',
   name: 'default',
   email: '',
   components: [],

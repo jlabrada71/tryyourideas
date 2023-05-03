@@ -27,7 +27,6 @@
   const visible = ref(false)
 
   function setVisible(val) {
-    console.log(val)
     visible.value = val
   }
 

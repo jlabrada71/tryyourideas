@@ -32,7 +32,6 @@
     },
     typeList: {
       type: Array,
-      default: [{ name: 'template' }, { name: 'div' }, { name: 'h1' }, { name: 'span' }, { name: 'img' }]
     }
   })
   const emit = defineEmits(['update:type'])

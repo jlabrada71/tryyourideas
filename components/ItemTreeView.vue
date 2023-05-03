@@ -1,6 +1,12 @@
 <template>
-  <component :id="item.id" :is="item.type" :class="editorClass" :src="getProperty('src')" @click.stop="emit('selected', item)">
-    {{item.text}}
+  <component
+    :id="item.id" 
+    :is="item.type" 
+    :class="editorClass" 
+    :src="getProperty('src')"
+    :type="getProperty('type')"
+    @click.stop="emit('selected', item)">
+      {{item.text}}
     <ItemTreeView 
       v-if="item.children.length > 0" 
       v-for="child in item.children" 

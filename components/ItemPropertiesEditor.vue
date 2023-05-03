@@ -7,7 +7,11 @@
           <SelectorsTagName :type="props.item.type" :typeList="typeList" @update:type="value => updateType(value)"></SelectorsTagName>
           <div>Properties</div>
           <div v-for="prop in props.item.props">
-            {{prop.name}}: <input :value="prop.value" @input="event => updateProperty({name: prop.name, value: event.target.value })">
+            {{prop.name}}: <input v-if="prop.method!='select'" :value="prop.value" @input="event => updateProperty({...prop, value: event.target.value })">
+            <select v-if="prop.method=='select'" @input="event => updateProperty({...prop, value: event.target.value })">
+              <option v-for="val in prop.values" :value="val" :selected="val==prop.value">{{val}}</option>
+              
+            </select>
           </div>
 
         </div>
@@ -30,6 +34,7 @@
     initPopovers, 
     initTabs, 
     initTooltips } from 'flowbite'
+  import { typeList } from '@/lib/typeList'
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -55,37 +60,24 @@ const props = defineProps({
 
 const emit = defineEmits(['update:item'])
 
-const typeList =  [
-  { name: 'template', props: [] }, 
-  { name: 'div', props: [] }, 
-  { name: 'h1', props: [] }, 
-  { name: 'span', props: [] }, 
-  { 
-    name: 'img', 
-    props: [
-      { 
-        name: 'src',
-        type: String,
-        default: ''
-      }
-    ] 
-  }, 
-  { name: 'section', props: [] }]
-
-
 function newProps(props) {
-  return props.map(prop => ({ name: prop.name, value: prop.default }))
+  return props.map(prop => ({ name: prop.name, value: prop.default, type: prop.type, method: prop.method, values: prop.values }))
 }
 
 function updateProperty(property) {
+
   const newItem = {...props.item }
   newItem.props = props.item.props.map(prop => prop.name === property.name ? property : prop)
-
+  console.log("***** updateProperty")
+  console.log(newItem)
   emit('update:item', newItem)
 }
 
+onMounted(() => {
+  console.log(typeList)
+})
+
 function updateType(newType) {
-  if ( props.item.type === newType ) return
   const newItem = {...props.item }
   newItem.type = newType
   const type = typeList.find(type => type.name === newType )

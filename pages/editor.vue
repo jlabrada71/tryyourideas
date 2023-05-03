@@ -308,11 +308,10 @@ function updateItem(modifiedItem) {
 
   item.type = modifiedItem.type
   item.props = modifiedItem.props
-  console.log(modifiedItem.props)
+  console.log(modifiedItem)
 
   const editedClass = findClassBy(item, getClassKey( modifiedItem.currentClass ) )
-  console.log('editedClass')
-  console.log(editedClass)
+
   copy(modifiedItem.currentClass, editedClass)
   // item.classes = modifiedItem.classes
   item.renderedClass = getComponentRenderedClass(item)

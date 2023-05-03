@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     public: {
       apiBaseDev: 'http://localhost:3000/api/v1',
       apiBaseProd: 'https://tryyourideas.com/api/v1',
-      apiBase: 'https://tryyourideas.com/api/v1',
+      apiBase: 'http://localhost:3000/api/v1',
     }
   },
   routeRules: {

@@ -3,6 +3,7 @@ import fse  from 'fs-extra'
 import { zip } from 'zip-a-folder';
 import { getComponentRenderedClass } from '@/lib/ClassGeneration'
 import { selfClosingTags } from '@/lib/tags';
+import CloudStorage from '@/lib/firebase/cloud-storage.js'
 
 const config = useRuntimeConfig()
 
@@ -103,14 +104,19 @@ export default defineEventHandler(async (event) => {
 
     generateComponents(body, destDir)
 
-    createZipFile(destDir, zipFileName).then(() => {
-      log('finished zipping')
-      fse.moveSync(zipFileName, `${config.tmp}/${body.name}.zip`, { overwrite: true })
-      log('finished publishing')
-    })
+    await createZipFile(destDir, zipFileName)
 
-    return {
-      api: 'works'
-    }
+    const firebaseFilename = `public/images/${body.name}.zip`
+     
+    const file = await fse.readFile(zipFileName)
+
+    const downloadUrl = await CloudStorage.upload(firebaseFilename, file)
+    debug(downloadUrl)
+    
+    log('finished zipping')
+    fse.moveSync(zipFileName, `${config.tmp}/${body.name}.zip`, { overwrite: true })
+    log('finished publishing')
+
+    return JSON.stringify(downloadUrl)
 })
 

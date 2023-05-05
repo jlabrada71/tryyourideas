@@ -87,6 +87,28 @@
 
       </template>
     </AccordionItem>
+
+    <AccordionItem id="27">
+      <template #head><span class="flex items-center">Transitions</span></template>
+      <template #body>
+        <SelectorsTransition :transition="currentClass.transition" @update:transition="value => updateClass('transition', value)"></SelectorsTransition>
+        <SelectorsTransitionDuration :transition="currentClass.transitionDuration" @update:transition="value => updateClass('transitionDuration', value)"></SelectorsTransitionDuration>
+        <SelectorsTransitionDelay :transition="currentClass.transitionDelay" @update:transition="value => updateClass('transitionDelay', value)"></SelectorsTransitionDelay>
+        <SelectorsTransitionTiming :transition="currentClass.transitionTiming" @update:transition="value => updateClass('transitionTiming', value)"></SelectorsTransitionTiming>
+        <SelectorsAnimation :animation="currentClass.animation" @update:animation="value => updateClass('animation', value)"></SelectorsAnimation>
+        
+      </template>
+    </AccordionItem>
+    <AccordionItem id="28">
+      <template #head><span class="flex items-center">Transform</span></template>
+      <template #body>
+        <SelectorsTransformScale :transform="currentClass.transformScale" @update:transform="value => updateClass('transformScale', value)"></SelectorsTransformScale>
+        <SelectorsTransformRotate :transform="currentClass.transformRotate" @update:transform="value => updateClass('transformRotate', value)"></SelectorsTransformRotate>
+        <SelectorsTransformTranslate :transform="currentClass.transformTranslate" @update:transform="value => updateClass('transformTranslate', value)"></SelectorsTransformTranslate>
+        <SelectorsTransformSkew :transform="currentClass.transformSkew" @update:transform="value => updateClass('transformSkew', value)"></SelectorsTransformSkew>
+        <SelectorsTransformOrigin :transform="currentClass.transformOrigin" @update:transform="value => updateClass('transformOrigin', value)"></SelectorsTransformOrigin>
+      </template>
+    </AccordionItem>
     
     <AccordionItem id="99">
       <template #head><span class="flex items-center">Others</span></template>

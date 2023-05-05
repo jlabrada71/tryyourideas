@@ -174,6 +174,18 @@ const itemTemplate = {
     divideColor: 'default',
     outlineColor: 'default',
     ringColor: 'default',
+
+    transition: 'default',
+    transitionDuration: 'default',
+    transitionTiming: 'default',
+    transitionDelay: 'default',
+    animation: 'default',
+
+    transformScale: 'default',
+    transformRotate: 'default',
+    transformTranslate: 'default',
+    transformSkew: 'default',
+    transformOrigin: 'default',
   }],
 }
 

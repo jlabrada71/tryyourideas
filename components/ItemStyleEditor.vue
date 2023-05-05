@@ -109,6 +109,17 @@
         <SelectorsTransformOrigin :transform="currentClass.transformOrigin" @update:transform="value => updateClass('transformOrigin', value)"></SelectorsTransformOrigin>
       </template>
     </AccordionItem>
+
+    <AccordionItem id="29">
+      <template #head><span class="flex items-center">Background Gradient</span></template>
+      <template #body>
+        <SelectorsGradientDirection :direction="currentClass.gradientDirection" @update:direction="value => updateClass('gradientDirection', value)"></SelectorsGradientDirection>
+        <SelectorsGradientFromColor :color="currentClass.gradientFromColor" @update:color="value => updateClass('gradientFromColor', value)"></SelectorsGradientFromColor>
+        <SelectorsGradientViaColor :color="currentClass.gradientViaColor" @update:color="value => updateClass('gradientViaColor', value)"></SelectorsGradientViaColor>
+        <SelectorsGradientToColor :color="currentClass.gradientToColor" @update:color="value => updateClass('gradientToColor', value)"></SelectorsGradientToColor>
+       
+      </template>
+    </AccordionItem>
     
     <AccordionItem id="99">
       <template #head><span class="flex items-center">Others</span></template>

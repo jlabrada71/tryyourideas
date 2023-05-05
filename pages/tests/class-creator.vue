@@ -5,17 +5,19 @@
 <DivClassGenerator :tags="transitionsTimingsTags" :values="transitionsTimings"></DivClassGenerator>
 <DivClassGenerator :tags="animationsTags" :values="animations"></DivClassGenerator> -->
 
-<DivClassGenerator :tags="transformScaleTags" :values="transformScales"></DivClassGenerator>
+<!-- <DivClassGenerator :tags="transformScaleTags" :values="transformScales"></DivClassGenerator>
 <DivClassGenerator :tags="transformRotateTags" :values="transformRotates"></DivClassGenerator>
 <DivClassGenerator :tags="transformTranslateTags" :values="transformTranslate"></DivClassGenerator>
 <DivClassGenerator :tags="transformOriginTags" :values="transformOrigin"></DivClassGenerator>
-<DivClassGenerator :tags="transformSkewTags" :values="transformSkew"></DivClassGenerator>
+<DivClassGenerator :tags="transformSkewTags" :values="transformSkew"></DivClassGenerator> -->
+
+<DivColorClassGenerator :tags="colorTags" :values="colorNames" :values2="colorValues"></DivColorClassGenerator> 
 
 <!-- <DivClassGenerator :tags="sizeTags" :values="sizeValues"></DivClassGenerator> -->
 <!-- <div>
   <div v-for="name in colorNames" class="flex">
     &lt;div class="flex h-8"&gt;  &lt;div class="w-24"&gt;{{name}}&lt;/div&gt; <br>
-    <div v-for="cl in colorValues" class="'w-80 h-8">&lt;div class="w-8 h-8 bg-{{name}}-{{cl}} text-{{name}}-{{cl}} {{name}}-{{cl}} divide-{{name}}-{{cl}} ring-{{name}}-{{cl}} outline-{{name}}-{{cl}} shadow-{{name}}-{{cl}}"&gt; &lt;/div&gt;</div>
+    <div v-for="cl in colorValues" class="'w-80 h-8">&lt;div class="w-8 h-8 bg-{{name}}-{{cl}} text-{{name}}-{{cl}} border-{{name}}-{{cl}} divide-{{name}}-{{cl}} ring-{{name}}-{{cl}} outline-{{name}}-{{cl}} shadow-{{name}}-{{cl}}"&gt; &lt;/div&gt;</div>
     &lt;/div&gt;
   </div>
 </div> -->
@@ -34,6 +36,8 @@
 
   const props = defineProps(['color'])
   const emit = defineEmits(['update:color'])
+
+  const colorTags = ['bg', 'text', 'shadow', 'border', 'divide', 'ring', 'outline', 'from', 'via', 'to']
 
   const colorNames = ref(['slate', 'gray', 'zinc', 'neutral', 'stone', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 
 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'])

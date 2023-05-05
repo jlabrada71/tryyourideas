@@ -186,6 +186,11 @@ const itemTemplate = {
     transformTranslate: 'default',
     transformSkew: 'default',
     transformOrigin: 'default',
+
+    gradientDirection: 'default',
+    gradientFromColor: 'default',
+    gradientViaColor: 'default',
+    gradientToColor: 'default',
   }],
 }
 

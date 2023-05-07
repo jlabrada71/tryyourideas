@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="widths" :option="width" @update:option="value=>emit('update:width', value)">
+    <SelectButton :options="widths" :option="width" @update:option="value=>emit('update:width', value)">
       <h1>Width: {{width}}</h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="transforms" :option="transform" @update:option="value=>emit('update:transform', value)">
+    <SelectButton :options="transforms" :option="transform" @update:option="value=>emit('update:transform', value)">
       <h1>Rotate: <span>{{transform}}</span></h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="aligns" :option="align" @update:option="value=>emit('update:align', value)">
+    <SelectButton :options="aligns" :option="align" @update:option="value=>emit('update:align', value)">
       <h1>Align: <span>{{align}}</span></h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

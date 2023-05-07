@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="borderWidths" :option="width" @update:option="value=>emit('update:width', value)">
+    <SelectButton :options="borderWidths" :option="width" @update:option="value=>emit('update:width', value)">
       <h1>Border Width: <span>{{width}}</span></h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

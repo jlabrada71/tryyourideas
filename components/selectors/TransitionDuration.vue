@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="transitions" :option="transition" @update:option="value=>emit('update:transition', value)">
+    <SelectButton :options="transitions" :option="transition" @update:option="value=>emit('update:transition', value)">
       <h1>Duration: <span>{{transition}}</span></h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

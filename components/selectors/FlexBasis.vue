@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="basisList" :option="basis" @update:option="value=>emit('update:basis', value)">
+    <SelectButton :options="basisList" :option="basis" @update:option="value=>emit('update:basis', value)">
       <h1>Flex basis: {{basis}}</h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

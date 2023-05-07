@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="paddings" :option="padding" @update:option="value=>emit('update:padding', value)">
+    <SelectButton :options="paddings" :option="padding" @update:option="value=>emit('update:padding', value)">
       <h1>Padding: <span>{{padding}}</span></h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

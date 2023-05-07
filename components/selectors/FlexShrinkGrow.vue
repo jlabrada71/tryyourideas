@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="shrinkGrows" :option="shrinkGrow" @update:option="value=>emit('update:shrinkGrow', value)">
+    <SelectButton :options="shrinkGrows" :option="shrinkGrow" @update:option="value=>emit('update:shrinkGrow', value)">
       <h1>Flex shrink/grow: <span>{{shrinkGrow}}</span></h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="displayList" :option="display" @update:option="value=>emit('update:display', value)">
+    <SelectButton :options="displayList" :option="display" @update:option="value=>emit('update:display', value)">
       <h1>Display: <span>{{display}}</span></h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

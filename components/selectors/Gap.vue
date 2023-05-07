@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="gapList" :option="gap" @update:option="value=>emit('update:gap', value)">
+    <SelectButton :options="gapList" :option="gap" @update:option="value=>emit('update:gap', value)">
       <h1>Gap: {{gap}}</h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

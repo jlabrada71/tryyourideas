@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="wraps" :option="wrap" @update:option="value=>emit('update:wrap', value)">
+    <SelectButton :options="wraps" :option="wrap" @update:option="value=>emit('update:wrap', value)">
       <h1>Flex wrap: <span>{{wrap}}</span></h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

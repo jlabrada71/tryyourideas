@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="directionList" :option="direction" @update:option="value=>emit('update:direction', value)">
+    <SelectButton :options="directionList" :option="direction" @update:option="value=>emit('update:direction', value)">
       <h1>Direction: {{direction}}</h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

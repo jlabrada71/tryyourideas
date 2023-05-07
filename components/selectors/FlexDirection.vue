@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="directions" :option="direction" @update:option="value=>emit('update:direction', value)">
+    <SelectButton :options="directions" :option="direction" @update:option="value=>emit('update:direction', value)">
       <h1>Flex direction: <span>{{direction}}</span></h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <RangeButton :options="shadows" :option="shadow" @update:option="value=>emit('update:shadow', value)">
+    <SelectButton :options="shadows" :option="shadow" @update:option="value=>emit('update:shadow', value)">
       <h1>Shadow: {{shadow}}</h1>
-    </RangeButton>
+    </SelectButton>
   </div>
 </template>
 <script setup>

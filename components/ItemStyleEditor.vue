@@ -176,6 +176,7 @@ const currentClass = computed(() => props.item.currentClass ? props.item.current
 function updateClass(className, value) {
   const newItem = {...props.item }
   newItem.currentClass[className] = value
+  console.log(`updating "${className}" to "${value}"`)
 
   emit('update:item', newItem)
 }

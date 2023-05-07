@@ -39,8 +39,7 @@
       // console.log('setting: ' + props.options[value])
       emit('update:option', props.options[value])
     }
-  }
-    )
+  })
   // const selectedText = computed(() => props.options[selected.value])
  
 </script>

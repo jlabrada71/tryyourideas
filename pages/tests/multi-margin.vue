@@ -1,18 +1,27 @@
 <template>
-  <SelectorsMultiMargin
+  <SelectorsMultiMarginInput
     :top="top"
     :left="left"
     :right="right"
     :bottom="bottom"
     @update:values="values => updateValues(values) "
     >
-  </SelectorsMultiMargin>
+  </SelectorsMultiMarginInput>
+  <SelectorsMultiMarginSelect
+    :top="top"
+    :left="left"
+    :right="right"
+    :bottom="bottom"
+    @update:values="values => updateValues(values) "
+    >
+  </SelectorsMultiMarginSelect>
+
 </template>
 <script setup>
-  const top = ref(0)
-  const left = ref(0)
-  const right = ref(0)
-  const bottom = ref(0)
+  const top = ref('default')
+  const left = ref('default')
+  const right = ref('default')
+  const bottom = ref('default')
 
   function updateValues(values) {
     alert('updating values ' + values.prop + ':' + values.value )

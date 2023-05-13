@@ -50,7 +50,7 @@
     </div>
   </template>
   <script setup>
-    import { ref } from 'vue'
+    import { ref, onMounted } from 'vue'
 
     const props = defineProps({
       top: {
@@ -64,21 +64,31 @@
       },
       bottom: {
         type: String
+      },
+      config: {
+        type: Object
       }
 
     })
     const emit = defineEmits(['update:values'])
 
-    const names = ref(['T', 'L', 'R', 'B'])
-    const disabledInput = ref([false, false, false, false])
-    const nameList = [['T', 'L', 'R', 'B'], ['Y', 'X', '', ''], ['A', '', '', '']]
-    const disabledInputList = [[false, false, false, false], [false, false, true, true], [false, true, true, true]]
+    const names = ref([])
+    const disabledInput = ref([])
+
+    function setValueSet() {
+      names.value = props.config.nameList[count]
+      disabledInput.value = props.config.disabledInputList[count]
+    }
+
+    onMounted(() => {
+      setValueSet()
+    })
+    
     let count = 0
 
     function changeInputs() {
-      count = (count + 1) % nameList.length
-      names.value = nameList[count]
-      disabledInput.value = disabledInputList[count]
+      count = (count + 1) % props.config.nameList.length
+      setValueSet()
     }
 
     function changeValue(prop, value) {

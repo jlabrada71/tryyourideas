@@ -101,6 +101,8 @@ function generateIndexPage(model, projectDirectory: String) {
 }
 
 function postToServer(obj, url) {
+  log('POSTING to ' + url)
+  log(JSON.stringify(obj, null, 2))
   return axios({
     method: 'post',
     url,
@@ -148,7 +150,14 @@ export default defineEventHandler(async (event) => {
 
     // send email with download Url
 
-    postToServer({ title: 'Project Download Link', email: body.email, content: result }, config.notificationsApi)
+    try {
+      await postToServer({ title: 'Project Download Link', email: body.email, content: result }, config.notificationsApi)
+      log('email sent')
+    }
+    catch(e) {
+      log('Error sending email')
+      log(e)
+    }
 
     return result
 })

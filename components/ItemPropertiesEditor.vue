@@ -85,7 +85,7 @@ function updateProperty(property) {
 }
 
 onMounted(() => {
-  console.log(typeList)
+  
 })
 
 function updateType(newType) {

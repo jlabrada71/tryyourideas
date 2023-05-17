@@ -8,6 +8,7 @@ npm run build
 tar -czf tryyourideas.com.tar .output
 cd ../aws-config
 ./copy_ssh.sh ../tryyourideascom tryyourideas.com.tar
+cd ../tryyourideascom
 ./rm-color-pages.sh  
 ./cp-dev-color-pages.sh
 

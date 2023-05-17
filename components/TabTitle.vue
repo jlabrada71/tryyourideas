@@ -18,7 +18,7 @@
   })
 
   const defaultClass = "inline-flex p-4 border-b-2 rounded-t-lg group border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-  const activeClass =  "inline-flex p-4 border-b-2 font-bold rounded-t-lg group active text-blue-600 border-blue-600 dark:text-blue-500 dark:border-blue-500"
+  const activeClass =  "inline-flex p-4 border-b-2 font-bold rounded-t-lg group active text-slate-600 border-slate-600 dark:text-slate-500 dark:border-slate-500"
 
   const currentClass = computed({
     get() {

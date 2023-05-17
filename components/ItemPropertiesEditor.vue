@@ -5,15 +5,26 @@
       <template #body>
         <div class="flex flex-col gap-2">
           <SelectorsTagName :type="props.item.type" :typeList="typeList" @update:type="value => updateType(value)"></SelectorsTagName>
-          <div>Properties</div>
-          <div v-for="prop in props.item.props">
-            {{prop.name}}: <input v-if="prop.method!='select'" :value="prop.value" @input="event => updateProperty({...prop, value: event.target.value })">
-            <select v-if="prop.method=='select'" @input="event => updateProperty({...prop, value: event.target.value })">
-              <option v-for="val in prop.values" :value="val" :selected="val==prop.value">{{val}}</option>
-              
-            </select>
+          <div class="bg-slate-200">
+            <div>Properties</div>
+            <div class="bg-slate-100 px-2">
+              <div v-for="prop in props.item.props" class="flex flex-row">
+                <div class="w-20">{{prop.name}}:</div>
+                <input 
+                  type="text"
+                  v-if="prop.method!='select'" 
+                  :value="prop.value" 
+                  class="bg-slate-200 w-40 h-8 rounded-lg border-2 border-slate-400 "
+                  @input="event => updateProperty({...prop, value: event.target.value })">
+                <select 
+                  v-if="prop.method=='select'" 
+                  @input="event => updateProperty({...prop, value: event.target.value })"
+                  class="bg-slate-200 w-40 h-8 rounded-lg border-2 border-slate-400 ">
+                  <option v-for="val in prop.values" :value="val" :selected="val==prop.value">{{val}}</option>
+                </select>
+              </div>
+            </div>
           </div>
-
         </div>
       </template>
     </AccordionItem>

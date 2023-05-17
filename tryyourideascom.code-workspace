@@ -4,7 +4,10 @@
 			"path": "."
 		},
 		{
-			"path": "../juanlabrada/home"
+			"path": "../../experiments/vue/tailwind-editor"
+		},
+		{
+			"path": "../Test"
 		}
 	],
   "settings": {}

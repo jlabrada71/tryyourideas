@@ -10,7 +10,7 @@
           type="range" 
           min="0" :max="len" 
           step="1"
-        class="w-full h-1 bg-gray-200 rounded-md appearance-none cursor-pointer dark:bg-gray-700">
+        class="w-full h-1 bg-slate-200 rounded-md appearance-none cursor-pointer dark:bg-slate-700">
      
   </div>
 </template>

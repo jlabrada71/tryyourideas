@@ -42,7 +42,7 @@
     },
     bgcolor: {
       type: String,
-      default: 'bg-red'
+      default: 'bg-slate'
     },
     color: {
       type: String,
@@ -68,7 +68,7 @@
     }
   })
 
-  const labelClass = computed(() => `flex flex-row group ${props.bgcolor}-600 ${props.color}-100`)
+  const labelClass = computed(() => `flex flex-row group ${props.bgcolor}-500 ${props.color}-100`)
   const inputClass = computed(() => `w-10/12 ${props.bgcolor}-400`)
   const buttonClass = computed(() => `w-5 mx-2 hover:${props.bgcolor}-800  dark:${props.bgcolor}-600 dark:hover:${props.bgcolor}-700 font-medium rounded-lg text-sm`)
   const textButtonClass = computed(() => `w-15 mx-2 hover:${props.bgcolor}-800  dark:${props.bgcolor}-600 dark:hover:${props.bgcolor}-700 font-medium rounded-lg text-sm`)

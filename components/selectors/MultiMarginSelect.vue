@@ -4,7 +4,7 @@
       :left="props.left"
       :right="props.right"
       :bottom="props.bottom"
-      :config="{ nameList, disabledInputList, dataList }"
+      :config="{ nameList, disabledInputList, dataList, start }"
       @update:values="values => changeValue(values)"
       ></SelectorsMultiValueSelect>
   </template>
@@ -28,7 +28,7 @@
     })
     const emit = defineEmits(['update:values'])
 
-    const nameList = [['T', 'L', 'R', 'B'], ['Y', 'X', ' ', ' '], ['A', '  ', ' ', ' ']]
+    const nameList = [['T', 'L', 'R', 'B'], ['Y', 'X', ' ', ' '], ['A', ' ', ' ', ' ']]
     const disabledInputList = [[false, false, false, false], [false, false, true, true], [false, true, true, true]]
     
     const allList =    ['default',  'm-0',  'm-px',  'm-0.5',  'm-1',  'm-1.5',  'm-2',  'm-2.5',  'm-3',  'm-3.5',  'm-4',  'm-5',  'm-6',  'm-7',  'm-8',  'm-9',  'm-10',  'm-11',  'm-12',  'm-14',  'm-16',  'm-20',  'm-24',  'm-28',  'm-32',  'm-36',  'm-40',  'm-44',  'm-48',  'm-52',  'm-56',  'm-60',  'm-64',  'm-72',  'm-80',  'm-96',  'm-auto']
@@ -39,8 +39,13 @@
     const bottomList = ['default', 'mb-0', 'mb-px', 'mb-0.5', 'mb-1', 'mb-1.5', 'mb-2', 'mb-2.5', 'mb-3', 'mb-3.5', 'mb-4', 'mb-5', 'mb-6', 'mb-7', 'mb-8', 'mb-9', 'mb-10', 'mb-11', 'mb-12', 'mb-14', 'mb-16', 'mb-20', 'mb-24', 'mb-28', 'mb-32', 'mb-36', 'mb-40', 'mb-44', 'mb-48', 'mb-52', 'mb-56', 'mb-60', 'mb-64', 'mb-72', 'mb-80', 'mb-96', 'mb-auto']
     const leftList =   ['default', 'ml-0', 'ml-px', 'ml-0.5', 'ml-1', 'ml-1.5', 'ml-2', 'ml-2.5', 'ml-3', 'ml-3.5', 'ml-4', 'ml-5', 'ml-6', 'ml-7', 'ml-8', 'ml-9', 'ml-10', 'ml-11', 'ml-12', 'ml-14', 'ml-16', 'ml-20', 'ml-24', 'ml-28', 'ml-32', 'ml-36', 'ml-40', 'ml-44', 'ml-48', 'ml-52', 'ml-56', 'ml-60', 'ml-64', 'ml-72', 'ml-80', 'ml-96', 'ml-auto' ]
     const dataList =   [[topList, leftList, rightList, bottomList], [ yList, xList, [], []], [allList, [], [], [], []]]
+    let start = 0
 
-    let count = 0
+    onMounted(() => {
+      if (props.top.startsWith('m-')) start = 0
+      if (props.top.startsWith('my')) start = 1
+      if (props.top.startsWith('mt')) start = 2
+    })
 
     function changeValue(values) {
       emit('update:values', values)

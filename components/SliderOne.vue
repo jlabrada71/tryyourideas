@@ -25,10 +25,10 @@
                 <input type="range" min="0" max="255" value="211" data-color="#090" class="range-slider range-slider-green" id="range-slider-green" />
                 <input type="number" min="0" max="255" value="211" class="input-slider input-slider-green" id="input-slider-green" />
               </div>
-              <div class="range-slider-group range-slider-group-blue">
-                <h2 class="range-label range-label-blue">Blue</h2>
-                <input type="range" min="0" max="255" value="121" data-color="#00f" class="range-slider range-slider-blue" id="range-slider-blue" />
-                <input type="number" min="0" max="255" value="121" class="input-slider input-slider-blue" id="input-slider-blue" />
+              <div class="range-slider-group range-slider-group-slate">
+                <h2 class="range-label range-label-slate">slate</h2>
+                <input type="range" min="0" max="255" value="121" data-color="#00f" class="range-slider range-slider-slate" id="range-slider-slate" />
+                <input type="number" min="0" max="255" value="121" class="input-slider input-slider-slate" id="input-slider-slate" />
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@ function ge(className) {
 
 	// Pre Init
 	const preInit = () => {
-		const rangeSliders = [ 'range-slider-red', 'range-slider-green', 'range-slider-blue' ];
+		const rangeSliders = [ 'range-slider-red', 'range-slider-green', 'range-slider-slate' ];
 		rangeSliders.forEach( function( key ) {
 			// Background Change
 			const $this = ge( `#${ key }` );
@@ -408,23 +408,23 @@ footer .credits {
 	background-color: #090;
 }
 
-.range-sliders input[type=range].range-slider-blue {
+.range-sliders input[type=range].range-slider-slate {
 	background: linear-gradient(to right, #00f 0%, #00f 50%, #fff 50%, #fff 100%);
 }
 
-.range-sliders input[type=range].range-slider-blue::-webkit-slider-runnable-track {
+.range-sliders input[type=range].range-slider-slate::-webkit-slider-runnable-track {
 	background-color: rgba(0, 0, 255, 0.1);
 }
 
-.range-sliders input[type=range].range-slider-blue::-moz-range-track {
+.range-sliders input[type=range].range-slider-slate::-moz-range-track {
 	background-color: rgba(0, 0, 255, 0.1);
 }
 
-.range-sliders input[type=range].range-slider-blue::-webkit-slider-thumb {
+.range-sliders input[type=range].range-slider-slate::-webkit-slider-thumb {
 	background-color: #00f;
 }
 
-.range-sliders input[type=range].range-slider-blue::-moz-range-thumb {
+.range-sliders input[type=range].range-slider-slate::-moz-range-thumb {
 	background-color: #00f;
 }
 

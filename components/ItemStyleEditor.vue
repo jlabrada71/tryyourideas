@@ -17,6 +17,13 @@
           <SelectorsHeight :height="currentClass.height" @update:height="value => updateClass('height', value)"></SelectorsHeight>
           <SelectorsPadding :padding="currentClass.padding" @update:padding="value => updateClass('padding', value)"></SelectorsPadding>
           <SelectorsMargin :margin="currentClass.margin" @update:margin="value => updateClass('margin', value)"></SelectorsMargin>
+          <SelectorsMultiMarginSelect 
+            :top="currentClass.marginTop"
+            :left="currentClass.marginLeft"
+            :right="currentClass.marginRight"
+            :bottom="currentClass.marginBottom"
+            @update:values="values => updateMargins(values)">
+          </SelectorsMultiMarginSelect>
           <SelectorsSpacing :spacing="currentClass.spacing" @update:spacing="value => updateClass('spacing', value)"></SelectorsSpacing>
         </div>
         
@@ -179,5 +186,11 @@ function updateClass(className, value) {
   console.log(`updating "${className}" to "${value}"`)
 
   emit('update:item', newItem)
+}
+
+function updateMargins(values) {
+  alert('Missing implementation')
+  console.log(values)
+
 }
 </script>

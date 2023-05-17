@@ -1,5 +1,5 @@
 <template>
-    <div id="multi-margin-id"  class=" flex flex-row flex-wrap content-between bg-gray-100 w-96 h-60 ">
+    <div id="multi-margin-id"  class=" flex flex-row flex-wrap content-between bg-slate-100 w-80 h-60 ">
       <div id="multi-margin-id-1"  class=" flex flex-col justify-stretch items-center bg-slate-100 w-full h-20 ">
         <div id="multi-margin-id-1-1"  class=" block flex-row bg-stone-50 w-8 h-8 p-1.5 font-semibold text-center ">
         {{names[0]}}
@@ -7,14 +7,14 @@
         <SelectShortButton 
           id="multi-margin-id-1-2" 
           :disabled="disabledInput[0]"
-          class=" flex flex-row bg-gray-500 w-28 h-10 border-2 text-gray-100 "
+          class=" flex flex-row bg-slate-500 w-24 h-10 border-2 text-slate-100 "
           :options="currentDataList[0]" 
           :option="props.top" 
           @update:option="value=>changeValue(names[0], value)">
         </SelectShortButton>          
       </div>
       <div id="multi-margin-id-2"  class=" flex flex-row justify-between bg-slate-100 w-full h-10 ">
-        <div id="multi-margin-id-2-1"  class=" flex flex-row items-center bg-gray-100 w-28 h-10 ">
+        <div id="multi-margin-id-2-1"  class=" flex flex-row items-center bg-slate-100 w-28 h-10 ">
           <div id="multi-margin-id-2-1-1"  class=" block flex-row bg-stone-50 w-8 h-8 p-1 font-semibold text-center ">
             {{names[1]}}
           </div>
@@ -22,7 +22,7 @@
             <SelectShortButton 
               id="multi-margin-id-2-2" 
               :disabled="disabledInput[1]"
-              class=" flex flex-row bg-gray-500 w-24 h-10 border-2 text-gray-100 "
+              class=" flex flex-row bg-slate-500 w-24 h-10 border-2 text-slate-100 "
               :options="currentDataList[1]" 
               :option="props.left" 
               @update:option="value=>changeValue(names[1], value)">
@@ -30,13 +30,13 @@
           </div>
           
         </div>
-        <input id="multi-margin-id-2-2" @click="changeInputs" type="button" class=" flex flex-row bg-blue-500 w-10 h-10 rounded-xl hover:flex hover:flex-row hover:bg-blue-600 hover:w-10 hover:h-10 hover:rounded-xl ">
-        <div id="multi-margin-id-2-3" class=" flex flex-row items-center bg-gray-100 w-28 h-10 ">
+        <RotateButton id="multi-margin-id-2-2" @click="changeInputs"></RotateButton>
+        <div id="multi-margin-id-2-3" class=" flex flex-row items-center bg-slate-100 w-28 h-10 ">
           <div class="w-24">
             <SelectShortButton 
               id="multi-margin-id-2-3-1" 
               :disabled="disabledInput[2]"
-              class=" flex flex-row bg-gray-500 w-24 h-10 border-2 text-gray-100 "
+              class=" flex flex-row bg-slate-500 w-24 h-10 border-2 text-slate-100 "
               :options="currentDataList[2]" 
               :option="props.right" 
               @update:option="value=>changeValue(names[2], value)">
@@ -54,7 +54,7 @@
         <SelectShortButton 
           id="multi-margin-id-3-2" 
           :disabled="disabledInput[3]"
-          class=" flex flex-row bg-gray-500 w-28 h-10 border-2 text-gray-100 "
+          class=" flex flex-row bg-slate-500 w-24 h-10 border-2 text-slate-100 "
           :options="currentDataList[3]" 
           :option="props.bottom" 
           @update:option="value=>changeValue(names[3], value)">
@@ -84,6 +84,7 @@
           nameList: [['','','','']],
           disabledInputList: [[true, true, true, true]],
           dataList: [[[],[],[],[]]],
+          start: 0
         }
       }
     })
@@ -102,6 +103,7 @@
     }
 
     onMounted(() => {
+      count = props.config.start
       setValueSet(count)
     })
 
@@ -111,7 +113,16 @@
     }
 
     function changeValue(prop, value) {
-      emit('update:values', { prop, value })
+      const values = { 
+        [names.value[0]]: props.top,
+        [names.value[1]]: props.left,
+        [names.value[2]]: props.right,
+        [names.value[3]]: props.bottom,
+      }
+      console.log('---values')
+      console.log(values)
+      values[prop] = value
+      emit('update:values', values)
     }
 
   </script>

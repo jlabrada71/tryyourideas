@@ -16,7 +16,6 @@
           <SelectorsWidth  :width="currentClass.width" @update:width="value => updateClass('width', value)"></SelectorsWidth>
           <SelectorsHeight :height="currentClass.height" @update:height="value => updateClass('height', value)"></SelectorsHeight>
           <SelectorsPadding :padding="currentClass.padding" @update:padding="value => updateClass('padding', value)"></SelectorsPadding>
-          <SelectorsMargin :margin="currentClass.margin" @update:margin="value => updateClass('margin', value)"></SelectorsMargin>
           <SelectorsMultiMarginSelect 
             :top="currentClass.marginTop"
             :left="currentClass.marginLeft"
@@ -183,14 +182,31 @@ const currentClass = computed(() => props.item.currentClass ? props.item.current
 function updateClass(className, value) {
   const newItem = {...props.item }
   newItem.currentClass[className] = value
-  console.log(`updating "${className}" to "${value}"`)
+  console.log(`updating "${className}" to "${value}" as ${newItem.currentClass[className]}`)
 
   emit('update:item', newItem)
 }
 
 function updateMargins(values) {
-  alert('Missing implementation')
   console.log(values)
-
+  if (values.A) {
+    updateClass('marginTop', values.A)
+    updateClass('marginLeft', 'default')
+    updateClass('marginRight',  'default')
+    updateClass('marginBottom',  'default')
+  }
+  if (values.Y) {
+    updateClass('marginTop', values.Y)
+    updateClass('marginLeft', values.X)
+    updateClass('marginRight',  'default')
+    updateClass('marginBottom',  'default')
+  }
+  if (values.T) {
+    updateClass('marginTop', values.T)
+    updateClass('marginLeft', values.L)
+    updateClass('marginRight', values.R)
+    updateClass('marginBottom', values.B)
+  }
+  
 }
 </script>

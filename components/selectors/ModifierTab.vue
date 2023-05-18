@@ -50,12 +50,12 @@
       
     }
     onMounted(() => {
-      console.log(`Mounting ${props.value} ${props.active}`)
+      // console.log(`Mounting ${props.value} ${props.active}`)
       setActive(props.active)
     })
 
     watch(()=> props.active, (newValue, oldValue) => {
-      console.log(`Watching ${props.value} ${props.active} ${newValue} ${oldValue}`)
+      // console.log(`Watching ${props.value} ${props.active} ${newValue} ${oldValue}`)
       setActive(props.active)
     })
 

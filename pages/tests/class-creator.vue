@@ -11,7 +11,9 @@
 <DivClassGenerator :tags="transformOriginTags" :values="transformOrigin"></DivClassGenerator>
 <DivClassGenerator :tags="transformSkewTags" :values="transformSkew"></DivClassGenerator> -->
 
-<DivColorClassGenerator :tags="colorTags" :values="colorNames" :values2="colorValues"></DivColorClassGenerator> 
+<DivClassGenerator :tags="marginTags" :values="margins"></DivClassGenerator> 
+
+<!-- <DivColorClassGenerator :tags="colorTags" :values="colorNames" :values2="colorValues"></DivColorClassGenerator>  -->
 
 <!-- <DivClassGenerator :tags="sizeTags" :values="sizeValues"></DivClassGenerator> -->
 <!-- <div>
@@ -92,5 +94,8 @@
   const transformOrigin = ['center', 'top', 'top-right', 'right', 'bottom-right', 'bottom', 'bottom-left', 'left', 'top-left']
  
   const transformSkewTags = ['skew']
-  const transformSkew = ['default', 'x-0', 'y-0', 'x-1', 'y-1', 'x-2', 'y-2', 'x-3', 'y-3', 'x-6', 'y-6', 'x-12', 'y-12']
+  const transformSkew = [ 'x-0', 'y-0', 'x-1', 'y-1', 'x-2', 'y-2', 'x-3', 'y-3', 'x-6', 'y-6', 'x-12', 'y-12']
+
+  const marginTags = ['m', 'mx', 'my', 'mt', 'mr', 'mb', 'ml']
+  const margins = ['0', 'px', '0.5', '1',  '1.5','2',  '2.5',  '3', '3.5','4', '5', '6',  '7',  '8','9', '10', '11', '12', '14', '16', '20','24','28', '32', '36', '40','44','48', '52', '56',  '60', '64', '72',  '80', '96', 'auto']
 </script>

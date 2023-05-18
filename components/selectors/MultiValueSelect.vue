@@ -1,5 +1,5 @@
 <template>
-    <div id="multi-margin-id"  class=" flex flex-row flex-wrap content-between bg-slate-100 w-80 h-60 ">
+    <div id="multi-margin-id"  class=" flex flex-row flex-wrap content-between bg-slate-100 w-72 h-60 ">
       <div id="multi-margin-id-1"  class=" flex flex-col justify-stretch items-center bg-slate-100 w-full h-20 ">
         <div id="multi-margin-id-1-1"  class=" block flex-row bg-stone-50 w-8 h-8 p-1.5 font-semibold text-center ">
         {{names[0]}}

@@ -1,22 +1,25 @@
 <template>
   <!-- <div>
     <div v-for="name in colorNames" class="flex">
-      &lt;div class="flex h-8"&gt;  &lt;div class="w-24"&gt;{{name}}&lt;/div&gt; <br>
+      &lt;div class="flex h-8"&gt;  &lt;div class="w-30"&gt;{{name}}&lt;/div&gt; <br>
       <div v-for="cl in colorValues" :class="'w-80 h-8 bg-' + name + '-' + cl">&lt;div class="w-8 h-8 bg-{{name}}-{{cl}} text-{{name}}-{{cl}} border-{{name}}-{{cl}} divide-{{name}}-{{cl}} ring-{{name}}-{{cl}} outline-{{name}}-{{cl}}" @click="emit('update:color','{{name}}-{{cl}}')"&gt; &lt;/div&gt;</div>
       &lt;/div&gt;
     </div>
   </div> -->
   <div class="flex flex-col">
     <div class="flex h-8"> <div class="w-30">Other</div>
-    <div class="w-30 h-8 px-3 bg-inherit text-inherit border-inherit divide-inherit ring-inherit outline-inherit" @click="emit('update:color','inherit')">Inherit</div>
-    <div class="w-30 h-8 px-3 bg-black text-white border-current divide-current ring-current outline-current" @click="emit('update:color','current')">Current</div>
-    <div class="w-30 h-8 px-3 bg-white text-black border-transparent divide-transparent ring-transparent outline-transparent" @click="emit('update:color','transparent')">Transparent</div>
-    <div class="w-30 h-8 px-3 bg-black text-white border-black divide-black ring-black outline-black" @click="emit('update:color','black')">Black</div>
-    <div class="w-30 h-8 px-3 bg-transparent text-black border-white divide-white ring-white outline-white" @click="emit('update:color','white')">White</div>
-    <div class="w-0 h-8 bg-current text-current border-white divide-white ring-white outline-white" ></div>
-    <div class="w-0 h-8 bg-transparent text-transparent border-white divide-white ring-white outline-white"></div>
+      <div class="w-30 h-8 px-3 bg-black text-white border-current divide-current ring-current outline-current" @click="emit('update:color','current')">Current</div>
+      <div class="w-30 h-8 px-3 bg-inherit text-inherit border-inherit divide-inherit ring-inherit outline-inherit" @click="emit('update:color','inherit')">Inherit</div>
     </div>
-    <div class="flex h-8"> <div class="w-24">slate</div>
+    <div class="flex h-8"> <div class="w-30"></div>
+      <div class="w-30 h-8 px-3 bg-white text-black border-transparent divide-transparent ring-transparent outline-transparent" @click="emit('update:color','transparent')">Transparent</div>
+    </div>
+    <div class="flex h-8"> <div class="w-30"></div>
+      <div class="w-30 h-8 px-3 bg-black text-white border-black divide-black ring-black outline-black" @click="emit('update:color','black')">Black</div>
+      <div class="w-30 h-8 px-3 bg-transparent text-black border-white divide-white ring-white outline-white" @click="emit('update:color','white')">White</div>
+    </div>
+    
+    <div class="flex h-8"> <div class="w-30">slate</div>
     <div class="w-8 h-8 bg-slate-50 text-slate-50 border-slate-50 divide-slate-50 ring-slate-50 outline-slate-50" @click="emit('update:color','slate-50')"> </div>
     <div class="w-8 h-8 bg-slate-100 text-slate-100 border-slate-100 divide-slate-100 ring-slate-100 outline-slate-100" @click="emit('update:color','slate-100')"> </div>
     <div class="w-8 h-8 bg-slate-200 text-slate-200 border-slate-200 divide-slate-200 ring-slate-200 outline-slate-200" @click="emit('update:color','slate-200')"> </div>
@@ -28,7 +31,7 @@
     <div class="w-8 h-8 bg-slate-800 text-slate-800 border-slate-800 divide-slate-800 ring-slate-800 outline-slate-800" @click="emit('update:color','slate-800')"> </div>
     <div class="w-8 h-8 bg-slate-900 text-slate-900 border-slate-900 divide-slate-900 ring-slate-900 outline-slate-900" @click="emit('update:color','slate-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">gray</div>
+    <div class="flex h-8"> <div class="w-30">gray</div>
     <div class="w-8 h-8 bg-gray-50 text-gray-50 border-gray-50 divide-gray-50 ring-gray-50 outline-gray-50" @click="emit('update:color','gray-50')"> </div>
     <div class="w-8 h-8 bg-gray-100 text-gray-100 border-gray-100 divide-gray-100 ring-gray-100 outline-gray-100" @click="emit('update:color','gray-100')"> </div>
     <div class="w-8 h-8 bg-gray-200 text-gray-200 border-gray-200 divide-gray-200 ring-gray-200 outline-gray-200" @click="emit('update:color','gray-200')"> </div>
@@ -40,7 +43,7 @@
     <div class="w-8 h-8 bg-gray-800 text-gray-800 border-gray-800 divide-gray-800 ring-gray-800 outline-gray-800" @click="emit('update:color','gray-800')"> </div>
     <div class="w-8 h-8 bg-gray-900 text-gray-900 border-gray-900 divide-gray-900 ring-gray-900 outline-gray-900" @click="emit('update:color','gray-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">zinc</div>
+    <div class="flex h-8"> <div class="w-30">zinc</div>
     <div class="w-8 h-8 bg-zinc-50 text-zinc-50 border-zinc-50 divide-zinc-50 ring-zinc-50 outline-zinc-50" @click="emit('update:color','zinc-50')"> </div>
     <div class="w-8 h-8 bg-zinc-100 text-zinc-100 border-zinc-100 divide-zinc-100 ring-zinc-100 outline-zinc-100" @click="emit('update:color','zinc-100')"> </div>
     <div class="w-8 h-8 bg-zinc-200 text-zinc-200 border-zinc-200 divide-zinc-200 ring-zinc-200 outline-zinc-200" @click="emit('update:color','zinc-200')"> </div>
@@ -52,7 +55,7 @@
     <div class="w-8 h-8 bg-zinc-800 text-zinc-800 border-zinc-800 divide-zinc-800 ring-zinc-800 outline-zinc-800" @click="emit('update:color','zinc-800')"> </div>
     <div class="w-8 h-8 bg-zinc-900 text-zinc-900 border-zinc-900 divide-zinc-900 ring-zinc-900 outline-zinc-900" @click="emit('update:color','zinc-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">neutral</div>
+    <div class="flex h-8"> <div class="w-30">neutral</div>
     <div class="w-8 h-8 bg-neutral-50 text-neutral-50 border-neutral-50 divide-neutral-50 ring-neutral-50 outline-neutral-50" @click="emit('update:color','neutral-50')"> </div>
     <div class="w-8 h-8 bg-neutral-100 text-neutral-100 border-neutral-100 divide-neutral-100 ring-neutral-100 outline-neutral-100" @click="emit('update:color','neutral-100')"> </div>
     <div class="w-8 h-8 bg-neutral-200 text-neutral-200 border-neutral-200 divide-neutral-200 ring-neutral-200 outline-neutral-200" @click="emit('update:color','neutral-200')"> </div>
@@ -64,7 +67,7 @@
     <div class="w-8 h-8 bg-neutral-800 text-neutral-800 border-neutral-800 divide-neutral-800 ring-neutral-800 outline-neutral-800" @click="emit('update:color','neutral-800')"> </div>
     <div class="w-8 h-8 bg-neutral-900 text-neutral-900 border-neutral-900 divide-neutral-900 ring-neutral-900 outline-neutral-900" @click="emit('update:color','neutral-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">stone</div>
+    <div class="flex h-8"> <div class="w-30">stone</div>
     <div class="w-8 h-8 bg-stone-50 text-stone-50 border-stone-50 divide-stone-50 ring-stone-50 outline-stone-50" @click="emit('update:color','stone-50')"> </div>
     <div class="w-8 h-8 bg-stone-100 text-stone-100 border-stone-100 divide-stone-100 ring-stone-100 outline-stone-100" @click="emit('update:color','stone-100')"> </div>
     <div class="w-8 h-8 bg-stone-200 text-stone-200 border-stone-200 divide-stone-200 ring-stone-200 outline-stone-200" @click="emit('update:color','stone-200')"> </div>
@@ -76,7 +79,7 @@
     <div class="w-8 h-8 bg-stone-800 text-stone-800 border-stone-800 divide-stone-800 ring-stone-800 outline-stone-800" @click="emit('update:color','stone-800')"> </div>
     <div class="w-8 h-8 bg-stone-900 text-stone-900 border-stone-900 divide-stone-900 ring-stone-900 outline-stone-900" @click="emit('update:color','stone-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">red</div>
+    <div class="flex h-8"> <div class="w-30">red</div>
     <div class="w-8 h-8 bg-red-50 text-red-50 border-red-50 divide-red-50 ring-red-50 outline-red-50" @click="emit('update:color','red-50')"> </div>
     <div class="w-8 h-8 bg-red-100 text-red-100 border-red-100 divide-red-100 ring-red-100 outline-red-100" @click="emit('update:color','red-100')"> </div>
     <div class="w-8 h-8 bg-red-200 text-red-200 border-red-200 divide-red-200 ring-red-200 outline-red-200" @click="emit('update:color','red-200')"> </div>
@@ -88,7 +91,7 @@
     <div class="w-8 h-8 bg-red-800 text-red-800 border-red-800 divide-red-800 ring-red-800 outline-red-800" @click="emit('update:color','red-800')"> </div>
     <div class="w-8 h-8 bg-red-900 text-red-900 border-red-900 divide-red-900 ring-red-900 outline-red-900" @click="emit('update:color','red-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">orange</div>
+    <div class="flex h-8"> <div class="w-30">orange</div>
     <div class="w-8 h-8 bg-orange-50 text-orange-50 border-orange-50 divide-orange-50 ring-orange-50 outline-orange-50" @click="emit('update:color','orange-50')"> </div>
     <div class="w-8 h-8 bg-orange-100 text-orange-100 border-orange-100 divide-orange-100 ring-orange-100 outline-orange-100" @click="emit('update:color','orange-100')"> </div>
     <div class="w-8 h-8 bg-orange-200 text-orange-200 border-orange-200 divide-orange-200 ring-orange-200 outline-orange-200" @click="emit('update:color','orange-200')"> </div>
@@ -100,7 +103,7 @@
     <div class="w-8 h-8 bg-orange-800 text-orange-800 border-orange-800 divide-orange-800 ring-orange-800 outline-orange-800" @click="emit('update:color','orange-800')"> </div>
     <div class="w-8 h-8 bg-orange-900 text-orange-900 border-orange-900 divide-orange-900 ring-orange-900 outline-orange-900" @click="emit('update:color','orange-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">amber</div>
+    <div class="flex h-8"> <div class="w-30">amber</div>
     <div class="w-8 h-8 bg-amber-50 text-amber-50 border-amber-50 divide-amber-50 ring-amber-50 outline-amber-50" @click="emit('update:color','amber-50')"> </div>
     <div class="w-8 h-8 bg-amber-100 text-amber-100 border-amber-100 divide-amber-100 ring-amber-100 outline-amber-100" @click="emit('update:color','amber-100')"> </div>
     <div class="w-8 h-8 bg-amber-200 text-amber-200 border-amber-200 divide-amber-200 ring-amber-200 outline-amber-200" @click="emit('update:color','amber-200')"> </div>
@@ -112,7 +115,7 @@
     <div class="w-8 h-8 bg-amber-800 text-amber-800 border-amber-800 divide-amber-800 ring-amber-800 outline-amber-800" @click="emit('update:color','amber-800')"> </div>
     <div class="w-8 h-8 bg-amber-900 text-amber-900 border-amber-900 divide-amber-900 ring-amber-900 outline-amber-900" @click="emit('update:color','amber-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">yellow</div>
+    <div class="flex h-8"> <div class="w-30">yellow</div>
     <div class="w-8 h-8 bg-yellow-50 text-yellow-50 border-yellow-50 divide-yellow-50 ring-yellow-50 outline-yellow-50" @click="emit('update:color','yellow-50')"> </div>
     <div class="w-8 h-8 bg-yellow-100 text-yellow-100 border-yellow-100 divide-yellow-100 ring-yellow-100 outline-yellow-100" @click="emit('update:color','yellow-100')"> </div>
     <div class="w-8 h-8 bg-yellow-200 text-yellow-200 border-yellow-200 divide-yellow-200 ring-yellow-200 outline-yellow-200" @click="emit('update:color','yellow-200')"> </div>
@@ -124,7 +127,7 @@
     <div class="w-8 h-8 bg-yellow-800 text-yellow-800 border-yellow-800 divide-yellow-800 ring-yellow-800 outline-yellow-800" @click="emit('update:color','yellow-800')"> </div>
     <div class="w-8 h-8 bg-yellow-900 text-yellow-900 border-yellow-900 divide-yellow-900 ring-yellow-900 outline-yellow-900" @click="emit('update:color','yellow-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">lime</div>
+    <div class="flex h-8"> <div class="w-30">lime</div>
     <div class="w-8 h-8 bg-lime-50 text-lime-50 border-lime-50 divide-lime-50 ring-lime-50 outline-lime-50" @click="emit('update:color','lime-50')"> </div>
     <div class="w-8 h-8 bg-lime-100 text-lime-100 border-lime-100 divide-lime-100 ring-lime-100 outline-lime-100" @click="emit('update:color','lime-100')"> </div>
     <div class="w-8 h-8 bg-lime-200 text-lime-200 border-lime-200 divide-lime-200 ring-lime-200 outline-lime-200" @click="emit('update:color','lime-200')"> </div>
@@ -136,7 +139,7 @@
     <div class="w-8 h-8 bg-lime-800 text-lime-800 border-lime-800 divide-lime-800 ring-lime-800 outline-lime-800" @click="emit('update:color','lime-800')"> </div>
     <div class="w-8 h-8 bg-lime-900 text-lime-900 border-lime-900 divide-lime-900 ring-lime-900 outline-lime-900" @click="emit('update:color','lime-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">green</div>
+    <div class="flex h-8"> <div class="w-30">green</div>
     <div class="w-8 h-8 bg-green-50 text-green-50 border-green-50 divide-green-50 ring-green-50 outline-green-50" @click="emit('update:color','green-50')"> </div>
     <div class="w-8 h-8 bg-green-100 text-green-100 border-green-100 divide-green-100 ring-green-100 outline-green-100" @click="emit('update:color','green-100')"> </div>
     <div class="w-8 h-8 bg-green-200 text-green-200 border-green-200 divide-green-200 ring-green-200 outline-green-200" @click="emit('update:color','green-200')"> </div>
@@ -148,7 +151,7 @@
     <div class="w-8 h-8 bg-green-800 text-green-800 border-green-800 divide-green-800 ring-green-800 outline-green-800" @click="emit('update:color','green-800')"> </div>
     <div class="w-8 h-8 bg-green-900 text-green-900 border-green-900 divide-green-900 ring-green-900 outline-green-900" @click="emit('update:color','green-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">emerald</div>
+    <div class="flex h-8"> <div class="w-30">emerald</div>
     <div class="w-8 h-8 bg-emerald-50 text-emerald-50 border-emerald-50 divide-emerald-50 ring-emerald-50 outline-emerald-50" @click="emit('update:color','emerald-50')"> </div>
     <div class="w-8 h-8 bg-emerald-100 text-emerald-100 border-emerald-100 divide-emerald-100 ring-emerald-100 outline-emerald-100" @click="emit('update:color','emerald-100')"> </div>
     <div class="w-8 h-8 bg-emerald-200 text-emerald-200 border-emerald-200 divide-emerald-200 ring-emerald-200 outline-emerald-200" @click="emit('update:color','emerald-200')"> </div>
@@ -160,7 +163,7 @@
     <div class="w-8 h-8 bg-emerald-800 text-emerald-800 border-emerald-800 divide-emerald-800 ring-emerald-800 outline-emerald-800" @click="emit('update:color','emerald-800')"> </div>
     <div class="w-8 h-8 bg-emerald-900 text-emerald-900 border-emerald-900 divide-emerald-900 ring-emerald-900 outline-emerald-900" @click="emit('update:color','emerald-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">teal</div>
+    <div class="flex h-8"> <div class="w-30">teal</div>
     <div class="w-8 h-8 bg-teal-50 text-teal-50 border-teal-50 divide-teal-50 ring-teal-50 outline-teal-50" @click="emit('update:color','teal-50')"> </div>
     <div class="w-8 h-8 bg-teal-100 text-teal-100 border-teal-100 divide-teal-100 ring-teal-100 outline-teal-100" @click="emit('update:color','teal-100')"> </div>
     <div class="w-8 h-8 bg-teal-200 text-teal-200 border-teal-200 divide-teal-200 ring-teal-200 outline-teal-200" @click="emit('update:color','teal-200')"> </div>
@@ -172,7 +175,7 @@
     <div class="w-8 h-8 bg-teal-800 text-teal-800 border-teal-800 divide-teal-800 ring-teal-800 outline-teal-800" @click="emit('update:color','teal-800')"> </div>
     <div class="w-8 h-8 bg-teal-900 text-teal-900 border-teal-900 divide-teal-900 ring-teal-900 outline-teal-900" @click="emit('update:color','teal-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">cyan</div>
+    <div class="flex h-8"> <div class="w-30">cyan</div>
     <div class="w-8 h-8 bg-cyan-50 text-cyan-50 border-cyan-50 divide-cyan-50 ring-cyan-50 outline-cyan-50" @click="emit('update:color','cyan-50')"> </div>
     <div class="w-8 h-8 bg-cyan-100 text-cyan-100 border-cyan-100 divide-cyan-100 ring-cyan-100 outline-cyan-100" @click="emit('update:color','cyan-100')"> </div>
     <div class="w-8 h-8 bg-cyan-200 text-cyan-200 border-cyan-200 divide-cyan-200 ring-cyan-200 outline-cyan-200" @click="emit('update:color','cyan-200')"> </div>
@@ -184,7 +187,7 @@
     <div class="w-8 h-8 bg-cyan-800 text-cyan-800 border-cyan-800 divide-cyan-800 ring-cyan-800 outline-cyan-800" @click="emit('update:color','cyan-800')"> </div>
     <div class="w-8 h-8 bg-cyan-900 text-cyan-900 border-cyan-900 divide-cyan-900 ring-cyan-900 outline-cyan-900" @click="emit('update:color','cyan-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">sky</div>
+    <div class="flex h-8"> <div class="w-30">sky</div>
     <div class="w-8 h-8 bg-sky-50 text-sky-50 border-sky-50 divide-sky-50 ring-sky-50 outline-sky-50" @click="emit('update:color','sky-50')"> </div>
     <div class="w-8 h-8 bg-sky-100 text-sky-100 border-sky-100 divide-sky-100 ring-sky-100 outline-sky-100" @click="emit('update:color','sky-100')"> </div>
     <div class="w-8 h-8 bg-sky-200 text-sky-200 border-sky-200 divide-sky-200 ring-sky-200 outline-sky-200" @click="emit('update:color','sky-200')"> </div>
@@ -196,7 +199,7 @@
     <div class="w-8 h-8 bg-sky-800 text-sky-800 border-sky-800 divide-sky-800 ring-sky-800 outline-sky-800" @click="emit('update:color','sky-800')"> </div>
     <div class="w-8 h-8 bg-sky-900 text-sky-900 border-sky-900 divide-sky-900 ring-sky-900 outline-sky-900" @click="emit('update:color','sky-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">blue</div>
+    <div class="flex h-8"> <div class="w-30">blue</div>
     <div class="w-8 h-8 bg-blue-50 text-blue-50 border-blue-50 divide-blue-50 ring-blue-50 outline-blue-50" @click="emit('update:color','blue-50')"> </div>
     <div class="w-8 h-8 bg-blue-100 text-blue-100 border-blue-100 divide-blue-100 ring-blue-100 outline-blue-100" @click="emit('update:color','blue-100')"> </div>
     <div class="w-8 h-8 bg-blue-200 text-blue-200 border-blue-200 divide-blue-200 ring-blue-200 outline-blue-200" @click="emit('update:color','blue-200')"> </div>
@@ -208,7 +211,7 @@
     <div class="w-8 h-8 bg-blue-800 text-blue-800 border-blue-800 divide-blue-800 ring-blue-800 outline-blue-800" @click="emit('update:color','blue-800')"> </div>
     <div class="w-8 h-8 bg-blue-900 text-blue-900 border-blue-900 divide-blue-900 ring-blue-900 outline-blue-900" @click="emit('update:color','blue-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">indigo</div>
+    <div class="flex h-8"> <div class="w-30">indigo</div>
     <div class="w-8 h-8 bg-indigo-50 text-indigo-50 border-indigo-50 divide-indigo-50 ring-indigo-50 outline-indigo-50" @click="emit('update:color','indigo-50')"> </div>
     <div class="w-8 h-8 bg-indigo-100 text-indigo-100 border-indigo-100 divide-indigo-100 ring-indigo-100 outline-indigo-100" @click="emit('update:color','indigo-100')"> </div>
     <div class="w-8 h-8 bg-indigo-200 text-indigo-200 border-indigo-200 divide-indigo-200 ring-indigo-200 outline-indigo-200" @click="emit('update:color','indigo-200')"> </div>
@@ -220,7 +223,7 @@
     <div class="w-8 h-8 bg-indigo-800 text-indigo-800 border-indigo-800 divide-indigo-800 ring-indigo-800 outline-indigo-800" @click="emit('update:color','indigo-800')"> </div>
     <div class="w-8 h-8 bg-indigo-900 text-indigo-900 border-indigo-900 divide-indigo-900 ring-indigo-900 outline-indigo-900" @click="emit('update:color','indigo-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">violet</div>
+    <div class="flex h-8"> <div class="w-30">violet</div>
     <div class="w-8 h-8 bg-violet-50 text-violet-50 border-violet-50 divide-violet-50 ring-violet-50 outline-violet-50" @click="emit('update:color','violet-50')"> </div>
     <div class="w-8 h-8 bg-violet-100 text-violet-100 border-violet-100 divide-violet-100 ring-violet-100 outline-violet-100" @click="emit('update:color','violet-100')"> </div>
     <div class="w-8 h-8 bg-violet-200 text-violet-200 border-violet-200 divide-violet-200 ring-violet-200 outline-violet-200" @click="emit('update:color','violet-200')"> </div>
@@ -232,7 +235,7 @@
     <div class="w-8 h-8 bg-violet-800 text-violet-800 border-violet-800 divide-violet-800 ring-violet-800 outline-violet-800" @click="emit('update:color','violet-800')"> </div>
     <div class="w-8 h-8 bg-violet-900 text-violet-900 border-violet-900 divide-violet-900 ring-violet-900 outline-violet-900" @click="emit('update:color','violet-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">purple</div>
+    <div class="flex h-8"> <div class="w-30">purple</div>
     <div class="w-8 h-8 bg-purple-50 text-purple-50 border-purple-50 divide-purple-50 ring-purple-50 outline-purple-50" @click="emit('update:color','purple-50')"> </div>
     <div class="w-8 h-8 bg-purple-100 text-purple-100 border-purple-100 divide-purple-100 ring-purple-100 outline-purple-100" @click="emit('update:color','purple-100')"> </div>
     <div class="w-8 h-8 bg-purple-200 text-purple-200 border-purple-200 divide-purple-200 ring-purple-200 outline-purple-200" @click="emit('update:color','purple-200')"> </div>
@@ -244,7 +247,7 @@
     <div class="w-8 h-8 bg-purple-800 text-purple-800 border-purple-800 divide-purple-800 ring-purple-800 outline-purple-800" @click="emit('update:color','purple-800')"> </div>
     <div class="w-8 h-8 bg-purple-900 text-purple-900 border-purple-900 divide-purple-900 ring-purple-900 outline-purple-900" @click="emit('update:color','purple-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">fuchsia</div>
+    <div class="flex h-8"> <div class="w-30">fuchsia</div>
     <div class="w-8 h-8 bg-fuchsia-50 text-fuchsia-50 border-fuchsia-50 divide-fuchsia-50 ring-fuchsia-50 outline-fuchsia-50" @click="emit('update:color','fuchsia-50')"> </div>
     <div class="w-8 h-8 bg-fuchsia-100 text-fuchsia-100 border-fuchsia-100 divide-fuchsia-100 ring-fuchsia-100 outline-fuchsia-100" @click="emit('update:color','fuchsia-100')"> </div>
     <div class="w-8 h-8 bg-fuchsia-200 text-fuchsia-200 border-fuchsia-200 divide-fuchsia-200 ring-fuchsia-200 outline-fuchsia-200" @click="emit('update:color','fuchsia-200')"> </div>
@@ -256,7 +259,7 @@
     <div class="w-8 h-8 bg-fuchsia-800 text-fuchsia-800 border-fuchsia-800 divide-fuchsia-800 ring-fuchsia-800 outline-fuchsia-800" @click="emit('update:color','fuchsia-800')"> </div>
     <div class="w-8 h-8 bg-fuchsia-900 text-fuchsia-900 border-fuchsia-900 divide-fuchsia-900 ring-fuchsia-900 outline-fuchsia-900" @click="emit('update:color','fuchsia-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">pink</div>
+    <div class="flex h-8"> <div class="w-30">pink</div>
     <div class="w-8 h-8 bg-pink-50 text-pink-50 border-pink-50 divide-pink-50 ring-pink-50 outline-pink-50" @click="emit('update:color','pink-50')"> </div>
     <div class="w-8 h-8 bg-pink-100 text-pink-100 border-pink-100 divide-pink-100 ring-pink-100 outline-pink-100" @click="emit('update:color','pink-100')"> </div>
     <div class="w-8 h-8 bg-pink-200 text-pink-200 border-pink-200 divide-pink-200 ring-pink-200 outline-pink-200" @click="emit('update:color','pink-200')"> </div>
@@ -268,7 +271,7 @@
     <div class="w-8 h-8 bg-pink-800 text-pink-800 border-pink-800 divide-pink-800 ring-pink-800 outline-pink-800" @click="emit('update:color','pink-800')"> </div>
     <div class="w-8 h-8 bg-pink-900 text-pink-900 border-pink-900 divide-pink-900 ring-pink-900 outline-pink-900" @click="emit('update:color','pink-900')"> </div>
     </div>
-    <div class="flex h-8"> <div class="w-24">rose</div>
+    <div class="flex h-8"> <div class="w-30">rose</div>
     <div class="w-8 h-8 bg-rose-50 text-rose-50 border-rose-50 divide-rose-50 ring-rose-50 outline-rose-50" @click="emit('update:color','rose-50')"> </div>
     <div class="w-8 h-8 bg-rose-100 text-rose-100 border-rose-100 divide-rose-100 ring-rose-100 outline-rose-100" @click="emit('update:color','rose-100')"> </div>
     <div class="w-8 h-8 bg-rose-200 text-rose-200 border-rose-200 divide-rose-200 ring-rose-200 outline-rose-200" @click="emit('update:color','rose-200')"> </div>

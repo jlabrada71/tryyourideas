@@ -15,7 +15,7 @@
       </span>
       <input id="id-1-2" 
         type="checkbox" 
-        class=" flex flex-row bg-slate-300 w-4 h-10 "
+        class=" flex flex-row bg-slate-300 w-4 h-6 "
         :disabled="props.disabled"
         >
     </button>

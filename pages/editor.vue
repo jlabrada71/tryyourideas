@@ -130,9 +130,9 @@ const itemTemplate = {
     mode: 'light',
     modifier: 'default',
 
-    backgroundColor: 'bg-slate-300',
-    width: 'w-10',
-    height: 'h-10',
+    backgroundColor: 'default',
+    width: 'default',
+    height: 'default',
     padding: 'default',
     
     margin: 'default',
@@ -142,9 +142,9 @@ const itemTemplate = {
     marginBottom: 'default',
 
     spacing: 'default',
-    display: 'flex',
+    display: 'default',
     flexBasis: 'default',
-    flexDirection: 'flex-row',
+    flexDirection: 'default',
     flexWrap: 'default',
     flexShrinkGrow: 'default',
 
@@ -247,6 +247,22 @@ function saveProject() {
   throttledSave(project.value)
 }
 
+function initializeComponentClass(componentClass) {
+  componentClass.width = 'w-40'
+  componentClass.height = 'h-40'
+  componentClass.backgroundColor = 'bg-slate-100'
+  componentClass.display = 'flex'
+  componentClass.flexDirection = 'flex-row'
+}
+
+function initializeItemClass(itemClass) {
+  itemClass.width = 'w-10'
+  itemClass.height = 'h-10'
+  itemClass.backgroundColor = 'bg-slate-200'
+  itemClass.display = 'flex'
+  itemClass.flexDirection = 'flex-row'
+}
+
 function newComponent() {
   const component = {
     name: 'Component',
@@ -262,8 +278,7 @@ function newComponent() {
   component.root.type = 'div'
   component.root.name = 'root'
   component.root.currentClass = component.root.classes[0]
-  component.root.currentClass.width = 'w-40'
-  component.root.currentClass.height = 'h-40'
+  initializeComponentClass(component.root.currentClass)
   return component
 }
 
@@ -385,14 +400,20 @@ function cancelAddChild() {
   closeSelectTypeDialog()
 }
 
+function newProps(props) {
+  return props.map(prop => ({ name: prop.name, value: prop.default, type: prop.type, method: prop.method, values: prop.values }))
+}
+
 function addChild(type)  {
   const newItem = clone(itemTemplate)
   newItem.currentClass = newItem.classes[0]
+  initializeItemClass(newItem.currentClass)
   newItem.currentClass.modifier = 'default' // selectedItem.value.currentClass.modifier
   
   newItem.id = `${parentForNewChild.value.id}-${parentForNewChild.value.children.length + 1}`,
   newItem.editorId = newItem.id
   newItem.type = type.name
+  newItem.props = newProps(type.props)
   parentForNewChild.value.children.push(newItem)
   closeSelectTypeDialog()
   selectItem(newItem)

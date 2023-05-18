@@ -4,7 +4,7 @@
       <template #head><span class="flex items-center">General</span></template>
       <template #body>
         <div class="flex flex-col gap-2">
-          <SelectorsTagName :type="props.item.type" :typeList="typeList" @update:type="value => updateType(value)"></SelectorsTagName>
+          <span>{{props.item.type}}</span>
           <div class="bg-slate-200">
             <div>Properties</div>
             <div class="bg-slate-100 px-2">
@@ -71,29 +71,12 @@ const props = defineProps({
 
 const emit = defineEmits(['update:item'])
 
-function newProps(props) {
-  return props.map(prop => ({ name: prop.name, value: prop.default, type: prop.type, method: prop.method, values: prop.values }))
-}
-
 function updateProperty(property) {
 
   const newItem = {...props.item }
   newItem.props = props.item.props.map(prop => prop.name === property.name ? property : prop)
   console.log("***** updateProperty")
   console.log(newItem)
-  emit('update:item', newItem)
-}
-
-onMounted(() => {
-  
-})
-
-function updateType(newType) {
-  const newItem = {...props.item }
-  newItem.type = newType
-  const type = typeList.find(type => type.name === newType )
-  newItem.props = newProps(type.props)
-
   emit('update:item', newItem)
 }
 

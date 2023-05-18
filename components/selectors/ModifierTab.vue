@@ -4,13 +4,13 @@
         type="button" 
         ref="target"
         value="" 
-        class=" flex flex-row flex-wrap items-center w-auto h-10 px-2 rounded-t-2xl text-base   
-                                  hover:gap-2 hover:bg-slate-300   hover:text-slate-700   hover:font-bold 
-                                 active:gap-2 active:bg-slate-400  active:text-slate-100  active:font-bold 
-                                  focus:gap-2 focus:bg-slate-500   focus:text-slate-100   focus:font-bold focus:border-2 "
+        class=" flex flex-row flex-wrap items-center w-auto h-8 px-2 rounded-t-2xl text-sm   
+                                  hover:gap-1 hover:bg-slate-300   hover:text-slate-600   
+                                 active:gap-1 active:bg-slate-400  active:text-slate-100  
+                                  focus:gap-1 focus:bg-slate-600   focus:text-slate-100"
         :class="selectClass"
       >
-      <span id="id-1-1"  class=" flex flex-row bg-transparent w-auto h-6 active:text-slate-100 focus:text-slate-100 ">
+      <span id="id-1-1"  class="bg-transparent w-auto h-6 active:text-slate-100 focus:text-slate-100 ">
         <slot></slot>
       </span>
       <input id="id-1-2" 
@@ -23,7 +23,7 @@
   <script setup>
     const emit = defineEmits(['selected:modifier'])
 
-    const selectClass = ref('gap-4       bg-slate-200        text-slate-700        font-medium')
+    const selectClass = ref('gap-1 bg-slate-200 text-slate-700 font-medium')
 
     const props = defineProps({
       value: {
@@ -42,10 +42,10 @@
 
     function setActive(active) {
       if (active) {
-        selectClass.value = 'gap-1 bg-slate-500 text-slate-100 font-bold border-2'
+        selectClass.value = 'gap-1 bg-slate-600 text-slate-100 font-medium'
         target.value.focus()
       } else {
-        selectClass.value = 'gap-4 bg-slate-200 text-slate-700 font-medium'
+        selectClass.value = 'gap-1 bg-slate-200 text-slate-700 font-medium'
       }
       
     }

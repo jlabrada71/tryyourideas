@@ -7,15 +7,13 @@
   </div>
   <div class="flex">
     <div class="w-72 h-screen bg-slate-50 z-40">
-      <div class="relative flex bg-slate-600 text-white">
+      <div class="flex bg-slate-600 text-white">
         <div class=" w-10/12">Components</div>
         <button type="button" class="text-white w-5 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium text-sm dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800" @click.stop="createNewComponent">
           <svg id="Layer_1" data-name="Layer 1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 100.06"><title>Add component</title><path class="cls-1" d="M50.34,34.25h5.39a2.49,2.49,0,0,1,2.48,2.48v8h8a2.51,2.51,0,0,1,2.48,2.48v5.4a2.52,2.52,0,0,1-2.48,2.48h-8v8a2.51,2.51,0,0,1-2.48,2.48H50.34a2.51,2.51,0,0,1-2.49-2.48v-8h-8a2.5,2.5,0,0,1-2.48-2.48v-5.4a2.48,2.48,0,0,1,2.48-2.48h8v-8a2.49,2.49,0,0,1,2.49-2.48ZM7.67,0H98.35A7.69,7.69,0,0,1,106,7.67v68a7.7,7.7,0,0,1-7.67,7.67H7.67A7.69,7.69,0,0,1,0,75.69v-68A7.69,7.69,0,0,1,7.67,0ZM99.05,23.92H7.31V74a2.09,2.09,0,0,0,.62,1.5,2.13,2.13,0,0,0,1.51.62H96.89a2.11,2.11,0,0,0,1.51-.62A2.09,2.09,0,0,0,99,74V23.92ZM91,8.62a3.79,3.79,0,1,1-3.79,3.79A3.79,3.79,0,0,1,91,8.62Zm-25.68,0a3.79,3.79,0,1,1-3.79,3.79,3.79,3.79,0,0,1,3.79-3.79Zm12.84,0a3.79,3.79,0,1,1-3.79,3.79A3.79,3.79,0,0,1,78.2,8.62Zm37,8.07.36,23.92V90.69a2.12,2.12,0,0,1-2.13,2.13H26a2.12,2.12,0,0,1-2.12-2.13h-7v1.68a7.7,7.7,0,0,0,7.67,7.68h90.68a7.7,7.7,0,0,0,7.67-7.68v-68a7.7,7.7,0,0,0-7.67-7.68Z"/></svg>
         </button>
-        <!-- <div class="absolute w-60 h-60 bg-blue-50 text-black top-0 left-96">
-          Component Menu
-        </div> -->
       </div>
+      <ComponentTypeMenu v-if="selectingChildType" @cancel="cancelAddChild" @selected="addChild"></ComponentTypeMenu>
       <div v-for="component in componentList">
         <div>
           <EditableLabel 
@@ -28,7 +26,7 @@
           <ItemTree 
             v-if="component.id===selectedComponent.id"
             :item="selectedComponent.root" 
-            @update:add-child="addChild" 
+            @update:add-child="selectChildType" 
             @update:remove="removeItem" 
             @selected="selectItem"/>
         </div>
@@ -41,7 +39,7 @@
       </div> -->
     </div>
     
-    <div class="w-8/12">
+    <div class="w-full">
       <div class="bg-slate-100 p-10 ">
         <div class="flex justify-between">
           <SelectorsDevice :device="selectedDevice" @update:device="selectDevice"></SelectorsDevice>
@@ -57,7 +55,7 @@
       </div>
       
     </div>
-    <div class="w-2/12 bg-slate-50 px-2 h-auto container">
+    <div class="w-96 bg-slate-50 px-2 h-auto container">
       <ItemEditor :item="selectedItem" @update:item="updateItem" @update:modifier="selectModifier"></ItemEditor>    
     </div>
   </div>
@@ -366,14 +364,37 @@ function removeItem(node) {
   saveProject()
 }
 
-function addChild(parent) {
+const selectingChildType = ref(false)
+const parentForNewChild = ref(null)
+
+function openSelectTypeDialog(parent) {
+  selectingChildType.value = true
+  parentForNewChild.value = parent
+}
+
+function closeSelectTypeDialog() {
+  selectingChildType.value = false
+  parentForNewChild.value = null
+}
+
+function selectChildType(parent) {
+  openSelectTypeDialog(parent)
+}
+
+function cancelAddChild() {
+  closeSelectTypeDialog()
+}
+
+function addChild(type)  {
   const newItem = clone(itemTemplate)
   newItem.currentClass = newItem.classes[0]
   newItem.currentClass.modifier = 'default' // selectedItem.value.currentClass.modifier
   
-  newItem.id = `${parent.id}-${parent.children.length + 1}`,
+  newItem.id = `${parentForNewChild.value.id}-${parentForNewChild.value.children.length + 1}`,
   newItem.editorId = newItem.id
-  parent.children.push(newItem)
+  newItem.type = type.name
+  parentForNewChild.value.children.push(newItem)
+  closeSelectTypeDialog()
   selectItem(newItem)
   saveProject()
 }

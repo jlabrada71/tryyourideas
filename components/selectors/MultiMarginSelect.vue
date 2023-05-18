@@ -1,4 +1,5 @@
 <template>
+    <h2>Margins {{props.top}} {{props.left}} {{props.right}} {{props.bottom}}</h2>
     <SelectorsMultiValueSelect
       :top="props.top" 
       :left="props.left"

@@ -1,10 +1,19 @@
 <template>
   <component
     :id="item.id" 
-    :is="item.type" 
+    :is="resolvedType" 
     :class="editorClass" 
+    :href="getProperty('href')"
     :src="getProperty('src')"
+    :alt="getProperty('alt')"
     :type="getProperty('type')"
+    :name="getProperty('name')"
+    :target="getProperty('target')"
+    :value="getProperty('value')"
+    :min="getProperty('min')"
+    :max="getProperty('max')"
+    :for="getProperty('for')"
+    :svg="getProperty('svg')"
     @click.stop="emit('selected', item)">
       {{item.text}}
     <ItemTreeView 
@@ -20,10 +29,18 @@
 </template>
 <script setup>
   import { getComponentEditorClass } from '../lib/ClassGeneration'
+  const resolvedComponents = {}
+  resolvedComponents['Icon'] = resolveComponent('Icon')
 
   const emit = defineEmits(['selected'])
-
   const refreshChildren = ref('false')
+
+  const resolvedType = computed(() => {
+    if (props.item.needsResolve) {
+      return resolvedComponents[props.item.type]  // tryyourideas components
+    }
+    return props.item.type
+  })
 
   const editorClass = computed(() => {
     // console.log('updating tree View')

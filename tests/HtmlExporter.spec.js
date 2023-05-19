@@ -1,0 +1,21 @@
+
+import { itemToHtml } from '../lib/HtmlExporter.js'
+
+describe('getFetchUrl function', () => {
+  describe('given an item and a prop return the replaced url', () => {
+    const item = {
+      type: 'Icon',
+      id: 'test',
+      props: [
+        { name: 'test', value: 'tonton' },
+        { name: 'category', value: 'brand' },
+        { name: 'svg', value: '<svg xml="" ></svg>' }
+      ]
+    }
+    
+    it('generate simplest svg', () => {
+      const url = itemToHtml(item)
+      expect(url).toBe('<svg xml="" id="id-test"  class="undefined" ></svg>')
+    })
+  })
+})

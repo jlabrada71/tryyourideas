@@ -2,16 +2,14 @@
   <SelectorsModifier :modifier="currentClass.modifier" @update:modifier="value => emit('update:modifier', value)">Select Modifier</SelectorsModifier>
   <div id="item-style-accordion-open" data-accordion="open" class="bg-white">
     <AccordionItem id="21">
-      <template #head><span class="flex items-center">General</span></template>
+      <template #head><span class="flex items-center">Main</span></template>
       <template #body>
         <div class="flex flex-col gap-2">
           <div class="flex gap-2"> 
             <label for="text-edit">Text</label>
             <input id="text-edit" class="bg-slate-100 rounded" type="text" v-model="props.item.text">
           </div>
-
           <SelectorsDisplay  :display="currentClass.display" @update:display="value => updateClass('display', value)"></SelectorsDisplay>
-         
           <SelectorsBackgroundColor :color="currentClass.backgroundColor" @update:color="value => updateClass('backgroundColor', value)"></SelectorsBackgroundColor>
           <SelectorsWidth  :width="currentClass.width" @update:width="value => updateClass('width', value)"></SelectorsWidth>
           <SelectorsHeight :height="currentClass.height" @update:height="value => updateClass('height', value)"></SelectorsHeight>
@@ -133,6 +131,7 @@
         <SelectorsDivideColor :color="currentClass.divideColor" @update:color="value => updateClass('divideColor', value)"></SelectorsDivideColor>
         <SelectorsOutlineColor :color="currentClass.outlineColor" @update:color="value => updateClass('outlineColor', value)"></SelectorsOutlineColor>
         <SelectorsRingColor :color="currentClass.ringColor" @update:color="value => updateClass('ringColor', value)"></SelectorsRingColor>
+        <SelectorsFillColor :color="currentClass.fillColor" @update:color="value => updateClass('fillColor', value)"></SelectorsFillColor>
       </template>
     </AccordionItem>
   </div>

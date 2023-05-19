@@ -39,7 +39,7 @@
   const props = defineProps(['color'])
   const emit = defineEmits(['update:color'])
 
-  const colorTags = ['bg', 'text', 'shadow', 'border', 'divide', 'ring', 'outline', 'from', 'via', 'to']
+  const colorTags = ['bg', 'text', 'shadow', 'border', 'divide', 'ring', 'outline', 'from', 'via', 'to', 'fill']
 
   const colorNames = ref(['slate', 'gray', 'zinc', 'neutral', 'stone', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 
 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'])

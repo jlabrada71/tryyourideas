@@ -42,7 +42,6 @@ describe('modifierAdder function', () => {
       expect(modeClass).toBe('test')
     })
   })
-
 })
 
 describe('modifierComposer function', () => {
@@ -65,6 +64,7 @@ describe('getClassString function', () => {
   describe('generate class for two properties and "hover" modifier ', () => {
     const itemClass = {
       backgroundColor: 'test-blue',
+      marginTop: 'default',
       shadow: 'test-shadow'
     }
     const modeClass = getClassString(itemClass, modifierAdder('hover', 'default') )
@@ -77,6 +77,7 @@ describe('getClassString function', () => {
   describe('generate class for two properties and "" modifier ', () => {
     const itemClass = {
       backgroundColor: 'test-blue',
+      marginTop: 'default',
       shadow: 'test-shadow'
     }
     const modeClass = getClassString(itemClass, modifierAdder('') )
@@ -92,7 +93,8 @@ describe('getEditorClass function', () => {
     const itemClass = {
       modifier: 'active',
       backgroundColor: 'test-blue',
-      shadow: 'test-shadow'
+      shadow: 'test-shadow',
+      marginTop: 'default',
     }
     const modeClass = getEditorClass(itemClass)
     it('returns empty string', () => {
@@ -110,6 +112,7 @@ describe('getComponentEditorClass function', () => {
         mode: 'dark',
         modifier: 'active',
         backgroundColor: 'bg-md-dark-active',
+        marginTop: 'default',
         shadow: 'sh-md-dark-active'
       }, 
       {
@@ -117,6 +120,7 @@ describe('getComponentEditorClass function', () => {
         mode: 'dark',
         modifier: 'hover',
         backgroundColor: 'bg-md-dark-hover',
+        marginTop: 'default',
         shadow: 'sh-md-dark-hover'
       },
       {
@@ -124,6 +128,7 @@ describe('getComponentEditorClass function', () => {
         mode: 'light',
         modifier: 'hover',
         backgroundColor: 'bg-md-hover',
+        marginTop: 'default',
         shadow: 'sh-md-hover'
       },
       {
@@ -131,6 +136,7 @@ describe('getComponentEditorClass function', () => {
         mode: 'light',
         modifier: 'hover',
         backgroundColor: 'bg-hover',
+        marginTop: 'default',
         shadow: 'sh-hover'
       },
       {
@@ -138,6 +144,7 @@ describe('getComponentEditorClass function', () => {
         mode: 'light',
         modifier: 'default',
         backgroundColor: 'bg-none',
+        marginTop: 'default',
         shadow: 'sh-none'
       }
     ]
@@ -202,12 +209,14 @@ describe('getComponentRenderedClass function', () => {
         mode: 'dark',
         modifier: 'active',
         backgroundColor: 'bg-md-dark-active',
+        marginTop: 'default',
         shadow: 'sh-md-dark-active'
       }, 
       {
         device: 'md',
         mode: 'dark',
         modifier: 'default',
+        marginTop: 'default',
         backgroundColor: 'bg-md-dark',
         shadow: 'sh-md-dark'
       },
@@ -215,6 +224,7 @@ describe('getComponentRenderedClass function', () => {
         device: 'md',
         mode: 'light',
         modifier: 'hover',
+        marginTop: 'default',
         backgroundColor: 'bg-md-hover',
         shadow: 'sh-md-hover'
       },
@@ -222,6 +232,7 @@ describe('getComponentRenderedClass function', () => {
         device: 'md',
         mode: 'light',
         modifier: 'default',
+        marginTop: 'default',
         backgroundColor: 'bg-md',
         shadow: 'sh-md'
       },
@@ -229,6 +240,7 @@ describe('getComponentRenderedClass function', () => {
         device: 'any',
         mode: 'light',
         modifier: 'hover',
+        marginTop: 'default',
         backgroundColor: 'bg-hover',
         shadow: 'sh-hover'
       },
@@ -237,12 +249,14 @@ describe('getComponentRenderedClass function', () => {
         mode: 'dark',
         modifier: 'default',
         backgroundColor: 'bg-dark',
+        marginTop: 'default',
         shadow: 'sh-dark'
       },
       {
         device: 'any',
         mode: 'light',
         modifier: 'default',
+        marginTop: 'default',
         backgroundColor: 'bg-none',
         shadow: 'sh-none'
       }

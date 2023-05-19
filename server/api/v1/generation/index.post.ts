@@ -1,8 +1,7 @@
 import { log, debug } from '@/lib/logger'
 import fse  from 'fs-extra'
 import { zip } from 'zip-a-folder';
-import { getComponentRenderedClass } from '@/lib/ClassGeneration'
-import { selfClosingTags } from '@/lib/typeList';
+import { toHtml } from '@/lib/HtmlExporter'
 import CloudStorage from '@/lib/firebase/cloud-storage.js'
 import axios from 'axios';
 
@@ -36,39 +35,8 @@ async function createZipFile(srcDir, zipFileName) {
   }
 }
 
-function getItemListCode(item) {
-  return item.children.map(getItemCode).join('')
-}
-
-function getItemPropertiesCode(item) {
-  const props = item.props.map(prop => `${prop.name}="${prop.value}"`).join(' ')
-  return `id="id-${item.editorId}" ${props}`
-}
-
-function cleanText(text) {
-  text = text.split('\n').join(' ')
-  while(text.indexOf('  ') > -1) 
-    text = text.split('  ').join(' ')
-  return text
-}
-
-function getItemCode(item) {
-  const renderedClass = cleanText(getComponentRenderedClass(item))
-  const code = `<${item.type} ${getItemPropertiesCode(item)} class="${renderedClass}">`
-  if (selfClosingTags.includes(item.type)) return code
-  return `${code}
-    ${item.text}${getItemListCode(item)}
-  </${item.type}>
-  `
-}
-
 function getCode(component) {
-  log(`getting code for: ${component.name}`)
-  const code = `<template>
-    ${getItemCode(component.root)}
-  </template>
-  `
-  log(code)
+  const code = toHtml(component)
   return code
 }
 

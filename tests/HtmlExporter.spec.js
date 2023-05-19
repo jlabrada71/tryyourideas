@@ -10,12 +10,14 @@ describe('itemToHtml function', () => {
         { name: 'test', value: 'tonton' },
         { name: 'category', value: 'brand' },
         { name: 'svg', value: '<svg xml="" ></svg>' }
-      ]
+      ],
+      children: [],
+      classes: []
     }
     
     it('generate simplest svg', () => {
       const url = itemToHtml(item)
-      expect(url).toBe('<svg xml="" id="id-test"  class="undefined" ></svg>')
+      expect(url).toBe('<svg xml="" id="id-test"  class="" ></svg>')
     })
   })
 })

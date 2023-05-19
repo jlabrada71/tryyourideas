@@ -4,7 +4,7 @@
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "npm run test & nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -24,7 +24,8 @@
     "jest": "^29.4.3",
     "nuxt": "^3.2.0",
     "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.4"
+    "tailwindcss": "^3.1.4",
+    "vitest": "^0.31.1"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.8",
@@ -36,6 +37,7 @@
     "lodash": "^4.17.21",
     "multer": "^1.4.5-lts.1",
     "pinia": "^2.0.34",
+    
     "zip-a-folder": "^1.1.5"
   },
   "wallaby": {

@@ -31,12 +31,6 @@
             @selected="selectItem"/>
         </div>
       </div>
-      <!-- <div class="bg-slate-600 text-white w-full mt-10">Export</div>
-      <div class="bg-slate-200 m-5 p-5 h-auto">{{exported}}</div>
-      <div class="bg-slate-600 text-white w-full mt-10">Rendered class</div>
-      <div>
-        {{selectedItem.renderedClass}}
-      </div> -->
     </div>
     
     <div class="w-full">
@@ -333,8 +327,6 @@ onMounted(() => {
   selectMode('light')
 })
 
-const exported = computed(() => toHtml(selectedComponent.value))
-
 function printClassKey({ mode, device, modifier }) {
   console.log(`key: "${mode}:${device}:${modifier}"`)
 }
@@ -366,12 +358,6 @@ function updateItem(modifiedItem) {
   selectedItem.value.item
 
   refreshTreeView.value = ! refreshTreeView.value  // this forces the selectedItem view refresh
-  // console.log('******** Updating item: ')
-  // console.log(selectedItem.value.id )  
-  // console.log(selectedItem.value.currentClass.backgroundColor)
-  // printTree(selectedItem.value)
-  // console.log(selectedItem.value.renderedClass)
-  // console.log('1111111111111111111111')
   saveProject()
 }
 

@@ -11,27 +11,12 @@
 <DivClassGenerator :tags="transformOriginTags" :values="transformOrigin"></DivClassGenerator>
 <DivClassGenerator :tags="transformSkewTags" :values="transformSkew"></DivClassGenerator> -->
 
-<DivClassGenerator :tags="marginTags" :values="margins"></DivClassGenerator> 
+<!-- <DivClassGenerator :tags="marginTags" :values="margins"></DivClassGenerator>  -->
 
-<!-- <DivColorClassGenerator :tags="colorTags" :values="colorNames" :values2="colorValues"></DivColorClassGenerator>  -->
+<DivColorClassGenerator :tags="colorTags" :values="colorNames" :values2="colorValues"></DivColorClassGenerator> 
 
 <!-- <DivClassGenerator :tags="sizeTags" :values="sizeValues"></DivClassGenerator> -->
-<!-- <div>
-  <div v-for="name in colorNames" class="flex">
-    &lt;div class="flex h-8"&gt;  &lt;div class="w-24"&gt;{{name}}&lt;/div&gt; <br>
-    <div v-for="cl in colorValues" class="'w-80 h-8">&lt;div class="w-8 h-8 bg-{{name}}-{{cl}} text-{{name}}-{{cl}} border-{{name}}-{{cl}} divide-{{name}}-{{cl}} ring-{{name}}-{{cl}} outline-{{name}}-{{cl}} shadow-{{name}}-{{cl}}"&gt; &lt;/div&gt;</div>
-    &lt;/div&gt;
-  </div>
-</div> -->
-  <!-- <div>
-    <div v-for="modifier in modifiers">
-      <div v-for="name in colorNames" class="flex">
-        &lt;div class="flex h-8"&gt;  &lt;div class="w-24"&gt;{{name}}&lt;/div&gt; <br>
-        <div v-for="cl in colorValues" class="'w-80 h-8">&lt;div class="w-8 h-8 {{modifier}}:bg-{{name}}-{{cl}} {{modifier}}:text-{{name}}-{{cl}} {{modifier}}:{{name}}-{{cl}} {{modifier}}:divide-{{name}}-{{cl}} {{modifier}}:ring-{{name}}-{{cl}} {{modifier}}:outline-{{name}}-{{cl}} {{modifier}}:shadow-{{name}}-{{cl}}"&gt; &lt;/div&gt;</div>
-        &lt;/div&gt;
-      </div>
-    </div>
-  </div> -->
+
 </template>
 <script setup>
   import { ref } from 'vue'

@@ -1,14 +1,14 @@
 <template>
   <div class="bg-slate-50 text-slate-50 shadow-slate-50 border-slate-50 divide-slate-50 ring-slate-50 outline-slate-50 from-slate-50 via-slate-50 to-slate-50 ">-slate-50 </div>
-<div class="bg-slate-100 text-slate-100 shadow-slate-100 border-slate-100 divide-slate-100 ring-slate-100 outline-slate-100 from-slate-100 via-slate-100 to-slate-100 fill-slate-100 ">-slate-100 </div>
-<div class="bg-slate-200 text-slate-200 shadow-slate-200 border-slate-200 divide-slate-200 ring-slate-200 outline-slate-200 from-slate-200 via-slate-200 to-slate-200 fill-slate-200 ">-slate-200 </div>
-<div class="bg-slate-300 text-slate-300 shadow-slate-300 border-slate-300 divide-slate-300 ring-slate-300 outline-slate-300 from-slate-300 via-slate-300 to-slate-300 fill-slate-300 ">-slate-300 </div>
-<div class="bg-slate-400 text-slate-400 shadow-slate-400 border-slate-400 divide-slate-400 ring-slate-400 outline-slate-400 from-slate-400 via-slate-400 to-slate-400 fill-slate-400 ">-slate-400 </div>
-<div class="bg-slate-500 text-slate-500 shadow-slate-500 border-slate-500 divide-slate-500 ring-slate-500 outline-slate-500 from-slate-500 via-slate-500 to-slate-500 fill-slate-500 ">-slate-500 </div>
-<div class="bg-slate-600 text-slate-600 shadow-slate-600 border-slate-600 divide-slate-600 ring-slate-600 outline-slate-600 from-slate-600 via-slate-600 to-slate-600 fill-slate-600 ">-slate-600 </div>
-<div class="bg-slate-700 text-slate-700 shadow-slate-700 border-slate-700 divide-slate-700 ring-slate-700 outline-slate-700 from-slate-700 via-slate-700 to-slate-700 fill-slate-700 ">-slate-700 </div>
-<div class="bg-slate-800 text-slate-800 shadow-slate-800 border-slate-800 divide-slate-800 ring-slate-800 outline-slate-800 from-slate-800 via-slate-800 to-slate-800 fill-slate-800 ">-slate-800 </div>
-<div class="bg-slate-900 text-slate-900 shadow-slate-900 border-slate-900 divide-slate-900 ring-slate-900 outline-slate-900 from-slate-900 via-slate-900 to-slate-900 fill-slate-900 ">-slate-900 </div>
+<div class="bg-slate-100 text-slate-100 shadow-slate-100 border-slate-100 divide-slate-100 ring-slate-100 outline-slate-100 from-slate-100 via-slate-100 to-slate-100 ">-slate-100 </div>
+<div class="bg-slate-200 text-slate-200 shadow-slate-200 border-slate-200 divide-slate-200 ring-slate-200 outline-slate-200 from-slate-200 via-slate-200 to-slate-200 ">-slate-200 </div>
+<div class="bg-slate-300 text-slate-300 shadow-slate-300 border-slate-300 divide-slate-300 ring-slate-300 outline-slate-300 from-slate-300 via-slate-300 to-slate-300 ">-slate-300 </div>
+<div class="bg-slate-400 text-slate-400 shadow-slate-400 border-slate-400 divide-slate-400 ring-slate-400 outline-slate-400 from-slate-400 via-slate-400 to-slate-400 ">-slate-400 </div>
+<div class="bg-slate-500 text-slate-500 shadow-slate-500 border-slate-500 divide-slate-500 ring-slate-500 outline-slate-500 from-slate-500 via-slate-500 to-slate-500 ">-slate-500 </div>
+<div class="bg-slate-600 text-slate-600 shadow-slate-600 border-slate-600 divide-slate-600 ring-slate-600 outline-slate-600 from-slate-600 via-slate-600 to-slate-600 ">-slate-600 </div>
+<div class="bg-slate-700 text-slate-700 shadow-slate-700 border-slate-700 divide-slate-700 ring-slate-700 outline-slate-700 from-slate-700 via-slate-700 to-slate-700 ">-slate-700 </div>
+<div class="bg-slate-800 text-slate-800 shadow-slate-800 border-slate-800 divide-slate-800 ring-slate-800 outline-slate-800 from-slate-800 via-slate-800 to-slate-800 ">-slate-800 </div>
+<div class="bg-slate-900 text-slate-900 shadow-slate-900 border-slate-900 divide-slate-900 ring-slate-900 outline-slate-900 from-slate-900 via-slate-900 to-slate-900 ">-slate-900 </div>
 <div class="bg-gray-50 text-gray-50 shadow-gray-50 border-gray-50 divide-gray-50 ring-gray-50 outline-gray-50 from-gray-50 via-gray-50 to-gray-50 ">-gray-50 </div>
 <div class="bg-gray-100 text-gray-100 shadow-gray-100 border-gray-100 divide-gray-100 ring-gray-100 outline-gray-100 from-gray-100 via-gray-100 to-gray-100 ">-gray-100 </div>
 <div class="bg-gray-200 text-gray-200 shadow-gray-200 border-gray-200 divide-gray-200 ring-gray-200 outline-gray-200 from-gray-200 via-gray-200 to-gray-200 ">-gray-200 </div>

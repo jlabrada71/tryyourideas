@@ -1,7 +1,7 @@
 
 import { itemToHtml } from '../lib/HtmlExporter.js'
 
-describe('getFetchUrl function', () => {
+describe('itemToHtml function', () => {
   describe('given an item and a prop return the replaced url', () => {
     const item = {
       type: 'Icon',

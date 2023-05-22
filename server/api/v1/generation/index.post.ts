@@ -3,7 +3,8 @@ import fse  from 'fs-extra'
 import { zip } from 'zip-a-folder';
 import { toHtml } from '@/lib/HtmlExporter'
 import CloudStorage from '@/lib/firebase/cloud-storage.js'
-import axios from 'axios';
+import axios from 'axios'
+const { js, css, html } from 'js-beautify' // also available under "js" export
 
 const config = useRuntimeConfig()
 
@@ -35,8 +36,32 @@ async function createZipFile(srcDir, zipFileName) {
   }
 }
 
+function beautifyHtml(code: String) {
+  return html( code, {
+    "end_with_newline": true,
+    "js": {
+        "indent_size": 2
+    },
+    "css": {
+        "indent_size": 2
+    }
+  })
+}
+
+function beautifyJs(code: String) {
+  return js(code, {
+    "preserve-newlines": true
+  })
+}
+
+function beautifyCss(code: String) {
+  return css(code, {
+    "indent_size": 1
+  })
+}
+
 function getCode(component) {
-  const code = toHtml(component)
+  const code = beautifyHtml(toHtml(component) )
   return code
 }
 

@@ -34,10 +34,10 @@
     "firebase": "^9.21.0",
     "flowbite": "^1.6.3",
     "fs-extra": "^11.1.1",
+    "js-beautify": "^1.14.7",
     "lodash": "^4.17.21",
     "multer": "^1.4.5-lts.1",
     "pinia": "^2.0.34",
-    
     "zip-a-folder": "^1.1.5"
   },
   "wallaby": {

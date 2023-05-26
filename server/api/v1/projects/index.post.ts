@@ -6,21 +6,30 @@ const config = useRuntimeConfig()
 
 export default defineEventHandler(async (event) => {
   console.log('model POST')
+  try {
     const body = await readBody(event)
     const req = event.node.req
     const content = JSON.stringify(body, null, 2)
     //debug(content) 
     debug(body.name)  
-    const dir = `${config.data}/models/${body.user}`
+    const dir = `${config.data}/projects/${body.userId}`
 
     if (!fs.existsSync(dir)){
-      fs.mkdirSync(dir, { recursive: true });
+      fs.mkdirSync(dir, { recursive: true })
     }
     debug(path.resolve(dir))
 
-    fs.writeFileSync( `${dir}/${body.name}.json`, content);
-    //return store(req, body)
+    fs.writeFileSync( `${dir}/${body.name}.json`, content)
+  }
+  catch(e) {
     return {
-      api: 'works'
+      result: 'error',
+      msg: e.msg
     }
+  }
+  
+  //return store(req, body)
+  return {
+    result: 'ok'
+  }
 })

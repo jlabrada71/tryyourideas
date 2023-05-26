@@ -4,7 +4,9 @@ import { zip } from 'zip-a-folder';
 import { toHtml } from '@/lib/HtmlExporter'
 import CloudStorage from '@/lib/firebase/cloud-storage.js'
 import axios from 'axios'
-const { js, css, html } from 'js-beautify' // also available under "js" export
+import beautify from 'js-beautify'
+
+const { js, css, html } = beautify
 
 const config = useRuntimeConfig()
 

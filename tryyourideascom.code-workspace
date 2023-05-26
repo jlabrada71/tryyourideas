@@ -1,14 +1,14 @@
 {
 	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "../../experiments/vue/tailwind-editor"
-		},
-		{
-			"path": "../Test"
-		}
-	],
+    {
+      "path": "."
+    },
+    {
+      "path": "../../experiments/vue/tailwind-editor"
+    },
+    {
+      "path": "../juanlabrada/home"
+    }
+  ],
   "settings": {}
 }

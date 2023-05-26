@@ -1,9 +1,16 @@
 <template>
-  <ExportProjectForm :project="project" :store="generateNuxtTailwindsStorybook"></ExportProjectForm>
+  <UserForm :user="currentUser" @update:user="account=>updateUser(account)"></UserForm>
+  <ProjectNewForm :project="project" :store="newProject"></ProjectNewForm>
+  <ProjectOpenForm :user="currentUser" :store="openProject"></ProjectOpenForm>
+  <ProjectExportForm :project="project" :store="generateNuxtTailwindsStorybook"></ProjectExportForm>
   <IssuesForm :project="project" :store="saveIssues"></IssuesForm>
-  <div class="w-full h-20 bg-slate-50 shadow-xl shadow-slate-50 z-40 flex">
-    <ExportProjectFormButton></ExportProjectFormButton>
-    <IssuesFormButton></IssuesFormButton>
+  <div class="w-full h-10 bg-slate-100 text-black flex">User: {{currentUser.name}} Project: {{project.name}} Licence: {{currentUser.licence}} </div>
+  <div class="w-full h-10 bg-slate-50 shadow-xl shadow-slate-50 z-40 flex">
+    <OpenFormButton target="newUserForm">New User</OpenFormButton>
+    <OpenFormButton target="newProjectForm">New Project</OpenFormButton>
+    <OpenFormButton target="openProjectForm">Open Project</OpenFormButton>
+    <OpenFormButton target="exportProjectForm">Export Project</OpenFormButton>
+    <OpenFormButton target="issuesForm">Report Issue</OpenFormButton>
   </div>
   <div class="flex">
     <div class="w-72 h-screen bg-slate-50 z-40">
@@ -56,6 +63,7 @@
 </template>
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
+import { useStorage } from '@vueuse/core'
 import { getComponentRenderedClass } from '../lib/ClassGeneration'
 import { getNextId } from '../lib/IdGeneration'
 import { getItemById, findClassBy, findOrCreateClassBy, clone, copy, removeItemFrom } from '../lib/EditorUtils'
@@ -197,19 +205,55 @@ const itemTemplate = {
   }],
 }
 
+const currentUser = useStorage('user', {
+  name: 'anonimous',
+  email: 'default',
+  id: 'undefined',
+  licence: 'community',
+  maxProjects: '1'
+})
+
+function updateUser(account) {
+  currentUser.value = account
+}
+
 const project = ref({
-  user: 'incognito',
   name: 'default',
-  email: '',
   components: [],
 })
 
-const componentList = ref([])
-project.value.components = componentList.value
+function initProject(projectValue) {
+  componentList.value = projectValue.components
+  selectComponent(projectValue.components[0])
+  selectDevice('any')
+  selectMode('light')
+}
 
+function newProject(data) {
+  project.value = {
+    name: data.name,
+    components: []
+  }
+  project.value.components.push(newComponent())
+  initProject(project.value)
+}
+
+function openProject(projectValue) {
+  project.value = projectValue
+  initProject(projectValue)
+}
+
+const throttledSave = throttle(saveModel, 5*1000)
+
+function saveProject() {
+  if (currentUser.value.id === 'undefined') return
+  project.value.userId = currentUser.value.id
+  throttledSave(project.value)
+}
+
+const componentList = ref([])
 const selectedComponent = ref(newComponent())
 const selectedItem = ref(selectedComponent.value.root)
-componentList.value.push(selectedComponent.value)
 
 function postToServer(obj, url) {
   return axios({
@@ -219,9 +263,8 @@ function postToServer(obj, url) {
   });
 }
 
-
 function saveModel(obj) {
-  return postToServer(obj, `${config.public.apiBase}/models`)
+  return postToServer(obj, `${config.public.apiBase}/projects`)
 }
 
 function saveIssues(obj) {
@@ -229,18 +272,7 @@ function saveIssues(obj) {
 }
 
 function generateNuxtTailwindsStorybook(generate) {
-  console.log(generate)
-  project.value.user = generate.user
-  project.value.name = generate.name
-  project.value.email = generate.email
   return postToServer(project.value, `${config.public.apiBase}/generation`)
-}
-
-const throttledSave = throttle(saveModel, 5*1000)
-
-function saveProject() {
-
-  throttledSave(project.value)
 }
 
 function initializeComponentClass(componentClass) {
@@ -323,8 +355,8 @@ const treeViewBackground = computed(() => selectedMode.value==='light' ? 'bg-whi
 const treeViewContainerClass = computed(() => `${selectedMode.value==='light' ? 'bg-white': 'bg-black'} ${selectedDeviceWidth[selectedDevice.value]} flex align-middle shadow-lg justify-center h-screen`)
 
 onMounted(() => {
-  selectDevice('any')
-  selectMode('light')
+  
+  newProject( {name: 'Default'} )
 })
 
 function printClassKey({ mode, device, modifier }) {

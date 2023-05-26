@@ -1,4 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const variables = {
+  development: {
+    apiBase: 'http://localhost:3000/api/v1',
+  },
+  production: {
+    apiBase: 'https://tryyourideas.com/api/v1',
+  }
+}
+
+const env = process.env.NODE_ENV
+
 export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   postcss: {
@@ -24,10 +35,8 @@ export default defineNuxtConfig({
     tmp: '/home/ubuntu/apps/tryyourideas.com/public/tmp',
     notificationsApi: 'https://juanlabrada.com/api/v1/notifications',
     public: {
-      apiBaseDev: 'http://localhost:3000/api/v1',
-      apiBaseProd: 'https://tryyourideas.com/api/v1',
-      apiBase: 'https://tryyourideas.com/api/v1',
-      env: process.env.NODE_ENV
+      apiBase: variables[env].apiBase,
+      env
     }
   },
   routeRules: {

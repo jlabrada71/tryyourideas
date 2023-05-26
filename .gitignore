@@ -11,3 +11,4 @@ pages/tests/demo.vue
 tryyourideas.com.tar
 pages/version.vue
 public/tmp
+components/version.vue

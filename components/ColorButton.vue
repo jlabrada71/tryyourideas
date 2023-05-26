@@ -119,7 +119,7 @@
     <div class="w-8 h-8 bg-yellow-50 text-yellow-50 border-yellow-50 divide-yellow-50 ring-yellow-50 outline-yellow-50" @click="emit('update:color','yellow-50')"> </div>
     <div class="w-8 h-8 bg-yellow-100 text-yellow-100 border-yellow-100 divide-yellow-100 ring-yellow-100 outline-yellow-100" @click="emit('update:color','yellow-100')"> </div>
     <div class="w-8 h-8 bg-yellow-200 text-yellow-200 border-yellow-200 divide-yellow-200 ring-yellow-200 outline-yellow-200" @click="emit('update:color','yellow-200')"> </div>
-    <div class="w-8 h-8 bg-yellow-400 text-yellow-400 border-yellow-400 divide-yellow-400 ring-yellow-400 outline-yellow-400" @click="emit('update:color','yellow-400')"> </div>
+    <div class="w-8 h-8 bg-yellow-300 text-yellow-300 border-yellow-300 divide-yellow-300 ring-yellow-300 outline-yellow-300" @click="emit('update:color','yellow-300')"> </div>
     <div class="w-8 h-8 bg-yellow-400 text-yellow-400 border-yellow-400 divide-yellow-400 ring-yellow-400 outline-yellow-400" @click="emit('update:color','yellow-400')"> </div>
     <div class="w-8 h-8 bg-yellow-500 text-yellow-500 border-yellow-500 divide-yellow-500 ring-yellow-500 outline-yellow-500" @click="emit('update:color','yellow-500')"> </div>
     <div class="w-8 h-8 bg-yellow-600 text-yellow-600 border-yellow-600 divide-yellow-600 ring-yellow-600 outline-yellow-600" @click="emit('update:color','yellow-600')"> </div>

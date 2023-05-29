@@ -143,7 +143,7 @@ export default defineEventHandler(async (event) => {
           To run your project: <br>
           <ul>
             <li>Unzip the file</li>
-            <li>cd ${body.name} </li
+            <li>cd ${body.name} </li>
             <li>npm install</li>
             <li>npm run dev</li>
           </ul>

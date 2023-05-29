@@ -18,16 +18,22 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6">
               <div class="mb-6">
-                <label for="large-input" class="block mb-2 text-sm font-medium text-slate-900 dark:text-white">Your name</label>
-                <input type="text" id="user" v-model="form.user" class="block w-full p-2 text-slate-900 border border-slate-300 rounded-lg bg-slate-50 sm:text-xs focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500">
+                <div for="large-input" class="block mb-2 text-sm font-medium text-slate-900 dark:text-white">Your name</div>
+                <div class="block w-full p-2 text-slate-900 border border-slate-300 rounded-lg bg-slate-50 sm:text-xs focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500">
+                  {{user.name }}
+                </div>
               </div>
               <div class="mb-6">
-                <label for="large-input" class="block mb-2 text-sm font-medium text-slate-900 dark:text-white">Project Name</label>
-                <input type="text" id="name" v-model="form.name" class="block w-full p-2 text-slate-900 border border-slate-300 rounded-lg bg-slate-50 sm:text-xs focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500">
+                <div for="large-input" class="block mb-2 text-sm font-medium text-slate-900 dark:text-white">Project Name</div>
+                <div class="block w-full p-2 text-slate-900 border border-slate-300 rounded-lg bg-slate-50 sm:text-xs focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500">
+                  {{project.name }}
+                </div>
               </div>
               <div>
-                  <label for="small-input" class="block mb-2 text-sm font-medium text-slate-900 dark:text-white">Enter your email receive the download link</label>
-                  <input type="email" id="email" v-model="form.email" class="block w-full p-2 text-slate-900 border border-slate-300 rounded-lg bg-slate-50 sm:text-xs focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500">
+                <div for="small-input" class="block mb-2 text-sm font-medium text-slate-900 dark:text-white">download link will be sent to</div>
+                <div  class="block w-full p-2 text-slate-900 border border-slate-300 rounded-lg bg-slate-50 sm:text-xs focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500">
+                  {{user.email}}
+                </div>
               </div>
             </div>
             <!-- Modal footer -->
@@ -45,6 +51,9 @@
   import { ref, onMounted } from "vue"
 
   const props = defineProps({
+    user: {
+      type: Object
+    },
     project: {
       type: Object,
     },

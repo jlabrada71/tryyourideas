@@ -2,7 +2,7 @@
   <UserForm :user="currentUser" @update:user="account=>updateUser(account)"></UserForm>
   <ProjectNewForm :project="project" :store="newProject"></ProjectNewForm>
   <ProjectOpenForm :user="currentUser" :store="openProject"></ProjectOpenForm>
-  <ProjectExportForm :project="project" :store="generateNuxtTailwindsStorybook"></ProjectExportForm>
+  <ProjectExportForm :user="currentUser" :project="project" :store="generateNuxtTailwindsStorybook"></ProjectExportForm>
   <IssuesForm :project="project" :store="saveIssues"></IssuesForm>
   <div class="w-full h-10 bg-slate-100 text-black flex">User: {{currentUser.name}} Project: {{project.name}} Licence: {{currentUser.licence}} </div>
   <div class="w-full h-10 bg-slate-50 shadow-xl shadow-slate-50 z-40 flex">

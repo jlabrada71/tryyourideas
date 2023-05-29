@@ -78,6 +78,9 @@
     user: {
       type: Object,
     },
+    project: {
+      type: Object,
+    },
     store: {
       type: Function,
       default : () => {}

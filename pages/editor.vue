@@ -1,17 +1,19 @@
 <template>
-  <UserForm :user="currentUser" @update:user="account=>updateUser(account)"></UserForm>
-  <ProjectNewForm :project="project" :store="newProject"></ProjectNewForm>
-  <ProjectOpenForm :user="currentUser" :store="openProject"></ProjectOpenForm>
-  <ProjectExportForm :user="currentUser" :project="project" :store="generateNuxtTailwindsStorybook"></ProjectExportForm>
+  <UserLoginForm @update:user="account=>updateUser(account)"></UserLoginForm>
+  <UserForm      @update:user="account=>updateUser(account)"></UserForm>
+  <ProjectNewForm  @new="newProject"></ProjectNewForm>
+  <ProjectOpenForm :user="currentUser" @open="openProject"></ProjectOpenForm>
+  <ProjectExportForm :user="currentUser" :project="project" @export="generateNuxtTailwindsStorybook"></ProjectExportForm>
   <IssuesForm :project="project" :store="saveIssues"></IssuesForm>
   <div class="w-full h-10 bg-slate-100 text-black flex">User: {{currentUser.name}} Project: {{project.name}} Licence: {{currentUser.licence}} </div>
   <div class="w-full h-10 bg-slate-50 shadow-xl shadow-slate-50 z-40 flex">
     <OpenFormButton target="newUserForm">New User</OpenFormButton>
+    <OpenFormButton target="loginUserForm">Login</OpenFormButton>
     <OpenFormButton target="newProjectForm">New Project</OpenFormButton>
     <OpenFormButton target="openProjectForm">Open Project</OpenFormButton>
     <OpenFormButton target="exportProjectForm">Export Project</OpenFormButton>
     <OpenFormButton target="issuesForm">Report Issue</OpenFormButton>
-  </div>
+  </div> 
   <div class="flex">
     <div class="w-72 h-screen bg-slate-50 z-40">
       <div class="flex bg-slate-600 text-white">
@@ -271,8 +273,9 @@ function saveIssues(obj) {
   return postToServer(obj, `${config.public.apiBase}/issues`)
 }
 
-function generateNuxtTailwindsStorybook(generate) {
-  return postToServer(project.value, `${config.public.apiBase}/generation`)
+async function generateNuxtTailwindsStorybook() {
+  const result = await postToServer( { project: project.value, user: currentUser.value }, `${config.public.apiBase}/generation`)
+  console.log(result.data)
 }
 
 function initializeComponentClass(componentClass) {

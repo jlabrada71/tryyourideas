@@ -139,7 +139,15 @@ export default defineEventHandler(async (event) => {
         <body>
           Hi ${body.user}<br><br> 
           The code for your project ${body.name} is ready. 
-          <a href="${downloadUrl}">Download here</a>
+          <a href="${downloadUrl}">Download here</a><br>
+          To run your project: <br>
+          <ul>
+            <li>Unzip the file</li>
+            <li>cd ${body.name} </li
+            <li>npm install</li>
+            <li>npm run dev</li>
+          </ul>
+
         </body>
         </html> `
 

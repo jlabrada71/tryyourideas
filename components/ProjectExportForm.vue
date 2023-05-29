@@ -57,26 +57,12 @@
     project: {
       type: Object,
     },
-    store: {
-      type: Function,
-      default : () => {}
-    }
   })
 
-  const form = ref({
-    name:'',
-    email: '',
-    user: ''
-  })
-
-  onMounted(() => {
-    form.user = props.project.user
-    form.name = props.project.name
-    form.email = props.project.email
-  })
+  const emit = defineEmits(['export'])
 
   function sendForm() {
-    props.store(form.value)
+    emit('export')
   }
 </script>
 

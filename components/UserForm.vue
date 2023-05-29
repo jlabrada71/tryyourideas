@@ -41,12 +41,6 @@
   import { ref, onMounted } from 'vue'
   import { AccountRepositoryProxy } from '@/lib/AccountRepositoryProxy'
 
-  const props = defineProps({
-    user: {
-      type: Object,
-    }
-  })
-
   const emit = defineEmits(['update:user'])
 
   const config = useRuntimeConfig()
@@ -54,11 +48,6 @@
   const form = ref({
     email: '',
     user: ''
-  })
-
-  onMounted(() => {
-    form.value.name = props.user.name
-    form.value.email = props.user.email
   })
 
   function isValidForm() {
@@ -88,6 +77,8 @@
       return
     }
     emit('update:user', result.data.account)
+    form.value.name = ''
+    form.value.email = ''
   }
 </script>
 

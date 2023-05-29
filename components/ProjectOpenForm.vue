@@ -74,17 +74,12 @@
   import { ref, onMounted } from "vue"
   import { ProjectRepositoryProxy } from '@/lib/ProjectRepositoryProxy'
 
+  const emit = defineEmits(['open'])
+
   const props = defineProps({
     user: {
       type: Object,
     },
-    project: {
-      type: Object,
-    },
-    store: {
-      type: Function,
-      default : () => {}
-    }
   })
 
   const config = useRuntimeConfig()
@@ -98,14 +93,24 @@
     return result.data.files
   }
 
-  onMounted(async () => {
-    const result = await getProjectList(props.user.id)
+  async function updateProjectList(user) {
+    const result = await getProjectList(user.id)
     projectList.value = result.map(project => project.substring(0, project.indexOf('.json')))
+
+  }
+
+  onMounted(() => {
+    updateProjectList(props.user)
+  })
+
+  watchEffect(()=> {
+    console.log('USER: ' + props.user.name)
+    updateProjectList(props.user)
   })
 
   async function openProject() {
     const result = await projectRepository.select({ userId: props.user.id, name: selectedProject.value })
-    props.store(result.data.project)   
+    emit('open', result.data.project)
   }
 
   function selectProject(project) {

@@ -36,10 +36,9 @@
 <script setup>
   import { ref, onMounted } from "vue"
 
+  const emit = defineEmits(['new'])
+
   const props = defineProps({
-    project: {
-      type: Object,
-    },
     store: {
       type: Function,
       default : () => {}
@@ -50,14 +49,9 @@
     name:'',
   })
 
-  onMounted(() => {
-    form.user = props.project.user
-    form.name = props.project.name
-    form.email = props.project.email
-  })
-
   function sendForm() {
-    props.store(form.value)
+    emit('new', { name: form.value.name })
+    form.value.name = ''
   }
 </script>
 

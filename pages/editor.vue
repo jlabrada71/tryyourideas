@@ -216,7 +216,11 @@ const currentUser = useStorage('user', {
 })
 
 function updateUser(account) {
+  console.log('before')
+  console.log(currentUser.value)
   currentUser.value = account
+  console.log('after')
+  console.log(currentUser.value)
 }
 
 const project = ref({

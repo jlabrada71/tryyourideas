@@ -70,7 +70,7 @@
     const repository = new AccountRepositoryProxy(config)
     const result = await repository.select(form.value)
     console.log(result)
-    if (result.statusText !== 'OK') {
+    if (result.status !== 200) {
       keepFormOpened()
       showErrors()
       return

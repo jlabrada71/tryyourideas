@@ -71,7 +71,7 @@
     const repository = new AccountRepositoryProxy(config)
     const result = await repository.insert(form.value)
     console.log(result)
-    if (result.statusText !== 'OK' || result.data.result !== 'ok') {
+    if (result.status !== 200 || result.data.result !== 'ok') {
       keepFormOpened()
       showErrors()
       return

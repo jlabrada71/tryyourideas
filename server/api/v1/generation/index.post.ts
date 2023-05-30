@@ -108,53 +108,49 @@ function postToServer(obj, url) {
 export default defineEventHandler(async (event) => {
   log('generation POST')
     const body = await readBody(event)
+    const { project, user } = body
     const req = event.node.req
-    const content = JSON.stringify(body, null, 2)
-
-    debug(content)  
     // fs.writeFileSync( `server/models/${body.user}/${body.name}.json`, content);
 
     const srcDir = `${config.data}/templates/nuxt3-tailwinds-storybook`
-    const destDir = `${config.data}/models/${body.user}/generation/${body.name}`
+    const destDir = `${config.data}/projects/${user.id}/generation/${project.name}`
     const zipFileName = `${destDir}.zip`
     copyTemplate(srcDir, destDir)
 
-    generateComponents(body, destDir)
-    generateIndexPage(body, destDir)
+    generateComponents(project, destDir)
+    generateIndexPage(project, destDir)
 
     await createZipFile(destDir, zipFileName)
+    log('finished zipping')
 
-    const firebaseFilename = `public/images/${body.name}.zip`
+    const firebaseFilename = `public/images/${project.name}.zip`
      
     const file = await fse.readFile(zipFileName)
 
     const downloadUrl = await CloudStorage.upload(firebaseFilename, file)
     debug(downloadUrl)
-    
-    log('finished zipping')
-    fse.moveSync(zipFileName, `${config.tmp}/${body.name}.zip`, { overwrite: true })
+   
     log('finished publishing')
 
     const result = `<html>
         <body>
-          Hi ${body.user}<br><br> 
-          The code for your project ${body.name} is ready. 
+          Hi ${user.name}<br><br> 
+          The code for your project ${project.name} is ready. 
           <a href="${downloadUrl}">Download here</a><br>
           To run your project: <br>
           <ul>
             <li>Unzip the file</li>
-            <li>cd ${body.name} </li>
+            <li>cd ${project.name} </li>
             <li>npm install</li>
             <li>npm run dev</li>
           </ul>
-
         </body>
         </html> `
 
     // send email with download Url
 
     try {
-      await postToServer({ title: 'Project Download Link', email: body.email, content: result }, config.notificationsApi)
+      await postToServer({ title: 'Project Download Link', email: user.email, content: result }, config.notificationsApi)
       log('email sent')
     }
     catch(e) {

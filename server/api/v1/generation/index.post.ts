@@ -144,6 +144,11 @@ export default defineEventHandler(async (event) => {
             <li>npm install</li>
             <li>npm run dev</li>
           </ul>
+          <br>
+          <br>
+          Kind regards<br>
+          The TryYourIdeas team<br>
+          <br>
         </body>
         </html> `
 

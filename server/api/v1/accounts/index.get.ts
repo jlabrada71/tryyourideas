@@ -1,10 +1,10 @@
 // curl -H "Content-Type: application/json"  'localhost:3000/api/v1/accounts'
 // https://www.jsdocs.io/package/h3#getQuery
 import { log, debug } from '@/lib/logger'
-import { FileRepository } from '@/lib/FileRepository'
+import { AccountRepository } from '@/lib/AccountRepository'
 
 const config = useRuntimeConfig() 
-const repository = new FileRepository(`${config.data}/accounts/accounts.json`, { createIfNotExists: true })
+const repository = new AccountRepository(`${config.data}/accounts/accounts.json`, { createIfNotExists: true })
 
 export default defineEventHandler(async (event) => {
   log('account GET')

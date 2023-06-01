@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const variables = {
   development: {
+    // apiBase: 'https://tryyourideas.com/api/v1',
     apiBase: 'http://localhost:3000/api/v1',
   },
   production: {

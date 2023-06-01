@@ -4,7 +4,7 @@ import { log, debug } from '@/lib/logger'
 import { AccountRepository } from '@/lib/AccountRepository'
 
 const config = useRuntimeConfig() 
-const repository = new AccountRepository(`${config.data}/accounts/accounts.json`, { createIfNotExists: true })
+const repository = new AccountRepository(config)
 
 export default defineEventHandler(async (event) => {
   log('account GET')

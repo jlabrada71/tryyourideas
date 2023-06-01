@@ -21,12 +21,10 @@ const shadow = ref('shadow-none')
 const backgroundColor = ref('bg-blue-500')
 
 const buttonClass = computed(() => {
-return "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded " + shadow.value
+  return "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded " + shadow.value
 })
 
 function selectedShadow(value) {
-console.log(value)
-shadow.value = value
-
+  shadow.value = value
 }
 </script>

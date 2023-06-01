@@ -9,6 +9,7 @@ const repository = new AccountRepository(config)
 export default defineEventHandler(async (event) => {
   log('account GET')
   const query = await getQuery(event)
+  log(query)
   if (query.email) {
     return await repository.select(acc => acc.email === query.email )
   }

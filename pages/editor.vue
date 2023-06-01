@@ -145,6 +145,8 @@ onMounted(() => {
     initTooltips();
 })
 
+
+
 const itemTemplate = {
   name: 'div',
   type: 'div',
@@ -237,6 +239,15 @@ const currentUser = useStorage('user', {
   id: 'undefined',
   licence: 'community',
   maxProjects: '1'
+})
+
+onMounted(() => {
+  if (currentUser.value.id === 'undefined') {
+    const router = useRouter()
+    router.push({
+      path: '/',
+    })
+  }
 })
 
 const session = useStorage('session', null)

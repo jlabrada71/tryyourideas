@@ -1,19 +1,43 @@
 <template>
-  <UserLoginForm @update:user="account=>updateUser(account)"></UserLoginForm>
-  <UserForm      @update:user="account=>updateUser(account)"></UserForm>
   <ProjectNewForm  @new="newProject"></ProjectNewForm>
   <ProjectOpenForm :user="currentUser" @open="openProject"></ProjectOpenForm>
   <ProjectExportForm :user="currentUser" :project="project" @export="generateNuxtTailwindsStorybook"></ProjectExportForm>
   <IssuesForm :project="project" :store="saveIssues"></IssuesForm>
   <div class="w-full h-10 bg-slate-100 text-black flex">User: {{currentUser.name}} Project: {{project.name}} Licence: {{currentUser.licence}} </div>
-  <div class="w-full h-10 bg-slate-50 shadow-xl shadow-slate-50 z-40 flex">
-    <OpenFormButton target="newUserForm">New User</OpenFormButton>
-    <OpenFormButton target="loginUserForm">Login</OpenFormButton>
-    <OpenFormButton target="newProjectForm">New Project</OpenFormButton>
-    <OpenFormButton target="openProjectForm">Open Project</OpenFormButton>
-    <OpenFormButton target="exportProjectForm">Export Project</OpenFormButton>
-    <OpenFormButton target="issuesForm">Report Issue</OpenFormButton>
-  </div> 
+  <ToolBar>
+    <ToolBarButton target="newProjectForm" title="Create new project">
+      <svg xmlns="http://www.w3.org/2000/svg" id="id-8-1-1" class=" flex flex-row bg-transparent w-8 h-8 " viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
+        <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384v38.6C310.1 219.5 256 287.4 256 368c0 59.1 29.1 111.3 73.7 143.3c-3.2 .5-6.4 .7-9.7 .7H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zm48 96a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm16 80c0-8.8-7.2-16-16-16s-16 7.2-16 16v48H368c-8.8 0-16 7.2-16 16s7.2 16 16 16h48v48c0 8.8 7.2 16 16 16s16-7.2 16-16V384h48c8.8 0 16-7.2 16-16s-7.2-16-16-16H448V304z" />
+      </svg>
+    </ToolBarButton>
+    <ToolBarButton title="Save changes" @click="saveProject">
+      <div v-if="project.dirty">
+        <svg  xmlns="http://www.w3.org/2000/svg" class=" flex flex-row bg-red-200 w-8 h-8 " viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+          <path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V428.7c-2.7 1.1-5.4 2-8.2 2.7l-60.1 15c-3 .7-6 1.2-9 1.4c-.9 .1-1.8 .2-2.7 .2H240c-6.1 0-11.6-3.4-14.3-8.8l-8.8-17.7c-1.7-3.4-5.1-5.5-8.8-5.5s-7.2 2.1-8.8 5.5l-8.8 17.7c-2.9 5.9-9.2 9.4-15.7 8.8s-12.1-5.1-13.9-11.3L144 381l-9.8 32.8c-6.1 20.3-24.8 34.2-46 34.2H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h8.2c7.1 0 13.3-4.6 15.3-11.4l14.9-49.5c3.4-11.3 13.8-19.1 25.6-19.1s22.2 7.8 25.6 19.1l11.6 38.6c7.4-6.2 16.8-9.7 26.8-9.7c15.9 0 30.4 9 37.5 23.2l4.4 8.8h8.9c-3.1-8.8-3.7-18.4-1.4-27.8l15-60.1c2.8-11.3 8.6-21.5 16.8-29.7L384 203.6V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM549.8 139.7c-15.6-15.6-40.9-15.6-56.6 0l-29.4 29.4 71 71 29.4-29.4c15.6-15.6 15.6-40.9 0-56.6l-14.4-14.4zM311.9 321c-4.1 4.1-7 9.2-8.4 14.9l-15 60.1c-1.4 5.5 .2 11.2 4.2 15.2s9.7 5.6 15.2 4.2l60.1-15c5.6-1.4 10.8-4.3 14.9-8.4L512.1 262.7l-71-71L311.9 321z"/>
+        </svg>
+      </div>
+      <div v-else>
+        <svg xmlns="http://www.w3.org/2000/svg" id="id-8-2-1" class=" flex flex-row bg-transparent w-8 h-8 " viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
+          <path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 408c0 13.3-10.7 24-24 24s-24-10.7-24-24V305.9l-31 31c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l72-72c9.4-9.4 24.6-9.4 33.9 0l72 72c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-31-31V408z" />
+        </svg>
+      </div>
+    </ToolBarButton>
+    <ToolBarButton target="openProjectForm" title="Open project">
+      <svg xmlns="http://www.w3.org/2000/svg" id="id-8-3-1" class=" flex flex-row bg-transparent w-8 h-8 " viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
+        <path d="M88.7 223.8L0 375.8V96C0 60.7 28.7 32 64 32H181.5c17 0 33.3 6.7 45.3 18.7l26.5 26.5c12 12 28.3 18.7 45.3 18.7H416c35.3 0 64 28.7 64 64v32H144c-22.8 0-43.8 12.1-55.3 31.8zm27.6 16.1C122.1 230 132.6 224 144 224H544c11.5 0 22 6.1 27.7 16.1s5.7 22.2-.1 32.1l-112 192C453.9 474 443.4 480 432 480H32c-11.5 0-22-6.1-27.7-16.1s-5.7-22.2 .1-32.1l112-192z" />
+      </svg>
+    </ToolBarButton>
+    <ToolBarButton target="exportProjectForm" title="Generate project code">
+      <svg xmlns="http://www.w3.org/2000/svg" id="id-8-4-1" class=" flex flex-row bg-transparent w-8 h-8 " viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
+        <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-167l80 80c9.4 9.4 24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-39 39V184c0-13.3-10.7-24-24-24s-24 10.7-24 24V318.1l-39-39c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z" />
+      </svg>
+    </ToolBarButton>
+    <ToolBarButton target="issuesForm" title="Report issues">
+      <svg xmlns="http://www.w3.org/2000/svg" id="id-8-5-1" class=" flex flex-row bg-transparent w-8 h-8 " viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
+        <path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L477.4 348.9c1.7-9.4 2.6-19 2.6-28.9h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H479.7c-1.1-14.1-5-27.5-11.1-39.5c.7-.6 1.4-1.2 2.1-1.9l64-64c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-64 64c-.7 .7-1.3 1.4-1.9 2.1C409.2 164.1 393.1 160 376 160H264c-8.3 0-16.3 1-24 2.8L38.8 5.1zM320 0c-53 0-96 43-96 96v3.6c0 15.7 12.7 28.4 28.4 28.4H387.6c15.7 0 28.4-12.7 28.4-28.4V96c0-53-43-96-96-96zM160.3 256H96c-17.7 0-32 14.3-32 32s14.3 32 32 32h64c0 24.6 5.5 47.8 15.4 68.6c-2.2 1.3-4.2 2.9-6 4.8l-64 64c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l63.1-63.1c24.5 21.8 55.8 36.2 90.3 39.6V335.5L166.7 227.3c-3.4 9-5.6 18.7-6.4 28.7zM336 479.2c36.6-3.6 69.7-19.6 94.8-43.8L336 360.7V479.2z" />
+      </svg>
+    </ToolBarButton>
+  </ToolBar>
   <div class="flex">
     <div class="w-72 h-screen bg-slate-50 z-40">
       <div class="flex bg-slate-600 text-white">
@@ -215,16 +239,15 @@ const currentUser = useStorage('user', {
   maxProjects: '1'
 })
 
+const session = useStorage('session', null)
+
 function updateUser(account) {
-  console.log('before')
-  console.log(currentUser.value)
   currentUser.value = account
-  console.log('after')
-  console.log(currentUser.value)
 }
 
-const project = ref({
+const project = useStorage('currentProject', {
   name: 'default',
+  dirty: false,
   components: [],
 })
 
@@ -233,6 +256,7 @@ function initProject(projectValue) {
   selectComponent(projectValue.components[0])
   selectDevice('any')
   selectMode('light')
+  projectValue.dirty = false
 }
 
 function newProject(data) {
@@ -253,8 +277,13 @@ const throttledSave = throttle(saveModel, 5*1000)
 
 function saveProject() {
   if (currentUser.value.id === 'undefined') return
+  project.value.dirty = false
   project.value.userId = currentUser.value.id
   throttledSave(project.value)
+}
+
+function dirtyProject() {
+  project.value.dirty = true
 }
 
 const componentList = ref([])
@@ -317,13 +346,13 @@ function newComponent() {
   return component
 }
 
-watch([componentList, project, selectedComponent, selectedItem], (newValue, oldValue) => saveProject())
+watch([componentList, selectedComponent, selectedItem], (newValue, oldValue) => dirtyProject())
 
 function createNewComponent() {
   const component = newComponent()
   componentList.value.push(component)
   selectComponent(component)
-  saveProject()
+  dirtyProject()
 }
 
 function removeComponent(componentToDelete) {
@@ -332,12 +361,12 @@ function removeComponent(componentToDelete) {
   if (componentToDelete.id === selectedComponent.value.id ) {
     selectComponent(componentList.value[0])
   }
-  saveProject()
+  dirtyProject()
 }
 
 function updateComponent(component, propertyName, value) {
   component[propertyName] = value
-  saveProject()
+  dirtyProject()
 }
 
 function selectComponent(component) {
@@ -397,13 +426,13 @@ function updateItem(modifiedItem) {
   selectedItem.value.item
 
   refreshTreeView.value = ! refreshTreeView.value  // this forces the selectedItem view refresh
-  saveProject()
+  dirtyProject()
 }
 
 function removeItem(node) {
   if (node.id === '1') return; // root can not be removed
   removeItemFrom(selectedComponent.value.root, node)
-  saveProject()
+  dirtyProject()
 }
 
 const selectingChildType = ref(false)
@@ -449,7 +478,7 @@ function addItem(type)  {
   parentForNewChild.value.children.push(newItem)
   closeSelectTypeDialog()
   selectItem(newItem)
-  saveProject()
+  dirtyProject()
 }
 
 function selectItem(item) {

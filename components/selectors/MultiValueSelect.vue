@@ -7,38 +7,38 @@
         <SelectShortButton 
           id="multi-margin-id-1-2" 
           :disabled="disabledInput[0]"
-          class=" flex flex-row bg-slate-500 w-24 h-10 border-2 text-slate-100 "
+          class=" flex flex-row bg-slate-500 w-20 h-12 border-2 text-slate-100 "
           :options="currentDataList[0]" 
-          :option="props.top" 
+          :option="top" 
           @update:option="value=>changeValue(names[0], value)">
         </SelectShortButton>          
       </div>
-      <div id="multi-margin-id-2"  class=" flex flex-row justify-between bg-slate-100 w-full h-10 ">
-        <div id="multi-margin-id-2-1"  class=" flex flex-row items-center bg-slate-100 w-28 h-10 ">
+      <div id="multi-margin-id-2"  class=" flex flex-row justify-between bg-slate-100 w-full h-12 ">
+        <div id="multi-margin-id-2-1"  class=" flex flex-row items-center bg-slate-100 w-28 h-12 ">
           <div id="multi-margin-id-2-1-1"  class=" block flex-row bg-stone-50 w-8 h-8 p-1 font-semibold text-center ">
             {{names[1]}}
           </div>
-          <div class="w-24">
+          <div class="w-20">
             <SelectShortButton 
               id="multi-margin-id-2-2" 
               :disabled="disabledInput[1]"
-              class=" flex flex-row bg-slate-500 w-24 h-10 border-2 text-slate-100 "
+              class=" flex flex-row bg-slate-500 w-20 h-12 border-2 text-slate-100 "
               :options="currentDataList[1]" 
-              :option="props.left" 
+              :option="left" 
               @update:option="value=>changeValue(names[1], value)">
             </SelectShortButton>   
           </div>
           
         </div>
         <RotateButton id="multi-margin-id-2-2" @click="changeInputs"></RotateButton>
-        <div id="multi-margin-id-2-3" class=" flex flex-row items-center bg-slate-100 w-28 h-10 ">
-          <div class="w-24">
+        <div id="multi-margin-id-2-3" class=" flex flex-row items-center bg-slate-100 w-28 h-12 ">
+          <div class="w-20">
             <SelectShortButton 
               id="multi-margin-id-2-3-1" 
               :disabled="disabledInput[2]"
-              class=" flex flex-row bg-slate-500 w-24 h-10 border-2 text-slate-100 "
+              class=" flex flex-row bg-slate-500 w-20 h-12 border-2 text-slate-100 "
               :options="currentDataList[2]" 
-              :option="props.right" 
+              :option="right" 
               @update:option="value=>changeValue(names[2], value)">
             </SelectShortButton>   
           </div>
@@ -54,9 +54,9 @@
         <SelectShortButton 
           id="multi-margin-id-3-2" 
           :disabled="disabledInput[3]"
-          class=" flex flex-row bg-slate-500 w-24 h-10 border-2 text-slate-100 "
+          class=" flex flex-row bg-slate-500 w-20 h-12 border-2 text-slate-100 "
           :options="currentDataList[3]" 
-          :option="props.bottom" 
+          :option="bottom" 
           @update:option="value=>changeValue(names[3], value)">
         </SelectShortButton>
       </div>
@@ -84,6 +84,7 @@
           nameList: [['','','','']],
           disabledInputList: [[true, true, true, true]],
           dataList: [[[],[],[],[]]],
+          tagList:[{}],
           start: 0
         }
       }
@@ -93,6 +94,16 @@
     const names = ref(['','','',''])
     const disabledInput = ref([true, true, true, true])
     const currentDataList = ref([[],[],[],[]])
+    const currentTagList = ref({})
+
+    const top = computed(() => clean(props.top))
+    const left = computed(() => clean(props.left))
+    const right = computed(() => clean(props.right))
+    const bottom = computed(() => clean(props.bottom))
+
+    function clean(value) {
+      return value.substring(value.indexOf('-') + 1)
+    }
 
     let count = 0
 
@@ -100,6 +111,7 @@
       names.value = props.config.nameList[count]
       disabledInput.value = props.config.disabledInputList[count]
       currentDataList.value = props.config.dataList[count]
+      currentTagList.value = props.config.tagList[count]
     }
 
     onMounted(() => {
@@ -112,16 +124,19 @@
       setValueSet(count)
     }
 
+    function newValue(value, tag) {
+      return value === 'default' ? value : tag + '-' + value
+    }
+
     function changeValue(prop, value) {
       const values = { 
-        [names.value[0]]: props.top,
-        [names.value[1]]: props.left,
-        [names.value[2]]: props.right,
-        [names.value[3]]: props.bottom,
+        [names.value[0]]: newValue( top.value, currentTagList.value[names.value[0]] ),
+        [names.value[1]]: newValue( left.value, currentTagList.value[names.value[1]] ),
+        [names.value[2]]: newValue( right.value, currentTagList.value[names.value[2]]),
+        [names.value[3]]: newValue( bottom.value, currentTagList.value[names.value[3]])
       }
-      console.log('---values')
-      console.log(values)
-      values[prop] = value
+
+      values[prop] = newValue(value, currentTagList.value[prop])
       emit('update:values', values)
     }
 

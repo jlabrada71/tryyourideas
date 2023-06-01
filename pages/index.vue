@@ -16,6 +16,9 @@
     initTabs, 
     initTooltips } from 'flowbite'
   import { useStorage } from '@vueuse/core'
+  import { AccountRepositoryProxy } from '@/lib/AccountRepositoryProxy'
+
+  const config = useRuntimeConfig()
 
   onMounted(() => {
       initAccordions();
@@ -39,11 +42,22 @@
     maxProjects: '1'
   })
 
-  function updateUser(account) {
-    currentUser.value = account
+  function updateUser() {
+    const router = useRouter()
+    router.push({
+      path: '/registered',
+    })
   }
 
-  function updateSession(session) {
+  async function updateSession(data) {
+    console.log('SESSION')
+    console.log(data.session)
+    const repository = new AccountRepositoryProxy(config)
+    const result = await repository.select({ email: data.session.email })
+    const account = result.data[0]
+    console.log('ACCOUNT')
+    console.log(account)
+    currentUser.value = account
     const router = useRouter()
     router.push({
       path: '/editor',

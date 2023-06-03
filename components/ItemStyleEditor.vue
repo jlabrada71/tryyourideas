@@ -1,11 +1,11 @@
 <template>
   <SelectorsModifier :modifier="currentClass.modifier" @update:modifier="value => emit('update:modifier', value)">Select Modifier</SelectorsModifier>
-  <div id="item-style-accordion-open" data-accordion="open" class="bg-white">
+  <div id="item-style-accordion-open" data-accordion="collapse" class="bg-white">
     <AccordionItem id="21">
       <template #head><span class="flex items-center">Main</span></template>
       <template #body>
-        <div class="flex flex-col gap-2">
-          <div class="flex gap-2"> 
+        <div class="flex flex-col gap-1">
+          <div class="flex gap-1"> 
             <label for="text-edit">Text</label>
             <input id="text-edit" class="bg-slate-100 rounded" type="text" v-model="props.item.text">
           </div>

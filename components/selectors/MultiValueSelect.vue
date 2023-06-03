@@ -125,7 +125,7 @@
     }
 
     function newValue(value, tag) {
-      return value === 'default' ? value : tag + '-' + value
+      return value === 'unset' ? value : tag + '-' + value
     }
 
     function changeValue(prop, value) {

@@ -12,7 +12,7 @@
   const props = defineProps(['align'])
   const emit = defineEmits(['update:align'])
 
- const alignList = ['default','content-normal', 'content-start', 'content-end', 'content-center', 'content-between', 'content-around', 'content-evenly', 'content-baseline', 'content-stretch']
+ const alignList = ['unset','content-normal', 'content-start', 'content-end', 'content-center', 'content-between', 'content-around', 'content-evenly', 'content-baseline', 'content-stretch']
 
 </script>
 

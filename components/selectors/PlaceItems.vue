@@ -9,7 +9,7 @@
   const props = defineProps(['place'])
   const emit = defineEmits(['update:place'])
 
- const placeList = ['default', 'place-items-start', 'place-items-end', 'place-items-center', 'place-items-baseline', 'place-items-stretch']
+ const placeList = ['unset', 'place-items-start', 'place-items-end', 'place-items-center', 'place-items-baseline', 'place-items-stretch']
 
 </script>
 

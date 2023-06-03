@@ -9,5 +9,5 @@
   const props = defineProps(['direction'])
   const emit = defineEmits(['update:direction'])
 
-  const directions = ['default', 'flex-row', 'flex-row-reverse', 'flex-col', 'flex-col-reverse']
+  const directions = ['unset', 'flex-row', 'flex-row-reverse', 'flex-col', 'flex-col-reverse']
 </script>

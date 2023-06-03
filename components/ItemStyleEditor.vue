@@ -190,15 +190,15 @@ function updateMargins(values) {
   console.log(values)
   if (values.A) {
     updateClass('marginTop', values.A)
-    updateClass('marginLeft', 'default')
-    updateClass('marginRight',  'default')
-    updateClass('marginBottom',  'default')
+    updateClass('marginLeft', 'unset')
+    updateClass('marginRight',  'unset')
+    updateClass('marginBottom',  'unset')
   }
   if (values.Y) {
     updateClass('marginTop', values.Y)
     updateClass('marginLeft', values.X)
-    updateClass('marginRight',  'default')
-    updateClass('marginBottom',  'default')
+    updateClass('marginRight',  'unset')
+    updateClass('marginBottom',  'unset')
   }
   if (values.T) {
     updateClass('marginTop', values.T)

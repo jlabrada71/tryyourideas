@@ -43,9 +43,6 @@
   })
 
   const editorClass = computed(() => {
-    // console.log('updating tree View')
-    // console.log(props.item.id)
-    // console.log(props.item.classes)
     const forceRefresh = props.refresh // use the refresh prop to for the treeView to refresh
     refreshChildren.value = forceRefresh
     const device = props.device

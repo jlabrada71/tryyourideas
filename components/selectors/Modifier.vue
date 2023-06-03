@@ -21,13 +21,13 @@
     },
     modifierList: {
       type: Array,
-      default: ['default', 'hover', 'focus', 'active']
+      default: ['unset', 'hover', 'focus', 'active']
     }
   })
 
   const currentModifier = computed({
     get() {
-      return props.modifier || 'default'
+      return props.modifier || 'unset'
     },
     set(value) {
       emit('update:modifier', value)

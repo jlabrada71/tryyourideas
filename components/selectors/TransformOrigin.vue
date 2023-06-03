@@ -9,7 +9,7 @@
   const props = defineProps(['transform'])
   const emit = defineEmits(['update:transform'])
 
-  const transforms = ['default', 'origin-center', 'origin-top', 'origin-top-right', 'origin-right', 'origin-bottom-right', 'origin-bottom', 'origin-bottom-left', 'origin-left', 'origin-top-left']
+  const transforms = ['unset', 'origin-center', 'origin-top', 'origin-top-right', 'origin-right', 'origin-bottom-right', 'origin-bottom', 'origin-bottom-left', 'origin-left', 'origin-top-left']
   
   </script>
 

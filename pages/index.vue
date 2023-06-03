@@ -36,7 +36,7 @@
 
   const currentUser = useStorage('user', {
     name: 'anonimous',
-    email: 'default',
+    email: 'unset',
     id: 'undefined',
     licence: 'community',
     maxProjects: '1'

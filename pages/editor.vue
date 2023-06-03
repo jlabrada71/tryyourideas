@@ -160,84 +160,84 @@ const itemTemplate = {
   classes: [{
     device: 'any',
     mode: 'light',
-    modifier: 'default',
+    modifier: 'unset',
 
-    backgroundColor: 'default',
-    width: 'default',
-    height: 'default',
-    padding: 'default',
+    backgroundColor: 'unset',
+    width: 'unset',
+    height: 'unset',
+    padding: 'unset',
     
-    margin: 'default',
-    marginTop: 'default',
-    marginLeft: 'default',
-    marginRight: 'default',
-    marginBottom: 'default',
+    margin: 'unset',
+    marginTop: 'unset',
+    marginLeft: 'unset',
+    marginRight: 'unset',
+    marginBottom: 'unset',
 
-    spacing: 'default',
-    display: 'default',
-    flexBasis: 'default',
-    flexDirection: 'default',
-    flexWrap: 'default',
-    flexShrinkGrow: 'default',
+    spacing: 'unset',
+    display: 'unset',
+    flexBasis: 'unset',
+    flexDirection: 'unset',
+    flexWrap: 'unset',
+    flexShrinkGrow: 'unset',
 
-    gap: 'default', 
-    justifyContent: 'default',
-    justifyItems: 'default',
-    justifySelf: 'default',
+    gap: 'unset', 
+    justifyContent: 'unset',
+    justifyItems: 'unset',
+    justifySelf: 'unset',
 
-    alignContent: 'default',
-    alignItems: 'default',
-    alignSelf: 'default',
+    alignContent: 'unset',
+    alignItems: 'unset',
+    alignSelf: 'unset',
 
-    placeContent: 'default',
-    placeItems: 'default',
-    placeSelf: 'default',
+    placeContent: 'unset',
+    placeItems: 'unset',
+    placeSelf: 'unset',
 
-    textColor: 'default',
-    fontSize: 'default',
-    fontFamily: 'default',
-    fontWeight:'default',
-    letterSpacing: 'default',
-    lineHeight: 'default',
-    textAlign: 'default',
-    textVerticalAlign: 'default',
+    textColor: 'unset',
+    fontSize: 'unset',
+    fontFamily: 'unset',
+    fontWeight:'unset',
+    letterSpacing: 'unset',
+    lineHeight: 'unset',
+    textAlign: 'unset',
+    textVerticalAlign: 'unset',
 
-    borderColor: 'default',
-    borderStyle: 'default',
-    borderWidth: 'default',
-    borderRadius: 'default',
+    borderColor: 'unset',
+    borderStyle: 'unset',
+    borderWidth: 'unset',
+    borderRadius: 'unset',
 
-    shadow: 'default',
-    shadowColor: 'default',
+    shadow: 'unset',
+    shadowColor: 'unset',
 
-    divideColor: 'default',
-    outlineColor: 'default',
-    ringColor: 'default',
+    divideColor: 'unset',
+    outlineColor: 'unset',
+    ringColor: 'unset',
 
-    transition: 'default',
-    transitionDuration: 'default',
-    transitionTiming: 'default',
-    transitionDelay: 'default',
-    animation: 'default',
+    transition: 'unset',
+    transitionDuration: 'unset',
+    transitionTiming: 'unset',
+    transitionDelay: 'unset',
+    animation: 'unset',
 
-    transformScale: 'default',
-    transformRotate: 'default',
-    transformTranslate: 'default',
-    transformSkew: 'default',
-    transformOrigin: 'default',
+    transformScale: 'unset',
+    transformRotate: 'unset',
+    transformTranslate: 'unset',
+    transformSkew: 'unset',
+    transformOrigin: 'unset',
 
-    gradientDirection: 'default',
-    gradientFromColor: 'default',
-    gradientViaColor: 'default',
-    gradientToColor: 'default',
+    gradientDirection: 'unset',
+    gradientFromColor: 'unset',
+    gradientViaColor: 'unset',
+    gradientToColor: 'unset',
 
-    fillColor: 'default',
+    fillColor: 'unset',
   }],
 }
 
 const currentUser = useStorage('user', {
   name: 'anonimous',
-  email: 'default',
+  email: 'unset',
   id: 'undefined',
   licence: 'community',
   maxProjects: '1'
@@ -259,7 +259,7 @@ function updateUser(account) {
 }
 
 const project = useStorage('currentProject', {
-  name: 'default',
+  name: 'unset',
   dirty: false,
   components: [],
 })
@@ -405,7 +405,7 @@ const treeViewContainerClass = computed(() => `${selectedMode.value==='light' ? 
 
 onMounted(() => {
   
-  newProject( {name: 'Default'} )
+  newProject( {name: 'unset'} )
 })
 
 function printClassKey({ mode, device, modifier }) {
@@ -478,7 +478,7 @@ function addItem(type)  {
   const newItem = clone(itemTemplate)
   newItem.currentClass = newItem.classes[0]
   initializeItemClass(newItem.currentClass)
-  newItem.currentClass.modifier = 'default' // selectedItem.value.currentClass.modifier
+  newItem.currentClass.modifier = 'unset' // selectedItem.value.currentClass.modifier
   
   newItem.id = `${parentForNewChild.value.id}-${parentForNewChild.value.children.length + 1}`,
   newItem.editorId = newItem.id
@@ -495,7 +495,7 @@ function selectItem(item) {
 
   selectedItem.value.isSelected = false
   selectedItem.value = item
-  selectedItem.value.currentClass = findOrCreateClassBy(item, selectedDevice.value, selectedMode.value, 'default' /*item.currentClass.modifier */)
+  selectedItem.value.currentClass = findOrCreateClassBy(item, selectedDevice.value, selectedMode.value, 'unset' /*item.currentClass.modifier */)
   selectedItem.value.isSelected = true 
 }
 

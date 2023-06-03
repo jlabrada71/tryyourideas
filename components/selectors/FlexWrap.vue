@@ -9,5 +9,5 @@
   const props = defineProps(['wrap'])
   const emit = defineEmits(['update:wrap'])
 
-  const wraps = ['default', 'flex-wrap', 'flex-wrap-reverse', 'flex-nowrap']
+  const wraps = ['unset', 'flex-wrap', 'flex-wrap-reverse', 'flex-nowrap']
 </script>

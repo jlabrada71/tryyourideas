@@ -36,7 +36,6 @@
       return props.options.indexOf(props.option)
     },
     set (value) {
-      // console.log('setting: ' + props.options[value])
       emit('update:option', props.options[value])
     }
   })

@@ -18,10 +18,10 @@
 
 </template>
 <script setup>
-  const top = ref('default')
-  const left = ref('default')
-  const right = ref('default')
-  const bottom = ref('default')
+  const top = ref('unset')
+  const left = ref('unset')
+  const right = ref('unset')
+  const bottom = ref('unset')
 
   function updateValues(values) {
     alert('updating values ' + values.prop + ':' + values.value )

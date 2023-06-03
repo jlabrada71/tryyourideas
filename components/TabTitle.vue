@@ -30,8 +30,6 @@
   })
 
   function clicked() {
-    console.log(props.active)
-    console.log(currentClass.value)
     currentClass.value = !props.active    
   }
 </script>

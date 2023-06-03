@@ -9,21 +9,21 @@ import {
 
 describe('modifierAdder function', () => {
   describe('common case: add "hover" to "bg-white"', () => {
-    const modifiedClass = modifierAdder('hover', 'default')('bg-white')
+    const modifiedClass = modifierAdder('hover', 'unset')('bg-white')
     it('adds hover', () => {
       expect(modifiedClass).toBe('hover:bg-white')
     })
   })
 
   describe('no style case: add "hover" to ""', () => {
-    const modifiedClass = modifierAdder('hover', 'default')('')
+    const modifiedClass = modifierAdder('hover', 'unset')('')
     it('returns empty string', () => {
       expect(modifiedClass).toBe('')
     })
   })
 
   describe('"default" style case: add "hover" to "default"', () => {
-    const modifiedClass = modifierAdder('hover')('default')
+    const modifiedClass = modifierAdder('hover')('unset')
     it('returns empty string', () => {
       expect(modifiedClass).toBe('')
     })
@@ -37,7 +37,7 @@ describe('modifierAdder function', () => {
   })
 
   describe('composing default modifiers "light", "any", "default" with "test" style should return "test"', () => {
-    const modeClass = modifierComposer('light', 'any', 'default')( 'test' )
+    const modeClass = modifierComposer('light', 'any', 'unset')( 'test' )
     it('returns "dark:md:hover:test"', () => {
       expect(modeClass).toBe('test')
     })
@@ -46,7 +46,7 @@ describe('modifierAdder function', () => {
 
 describe('modifierComposer function', () => {
   describe('composing modifiers "dark", "md", "hover" with "default" style', () => {
-    const modeClass = modifierComposer('dark', 'md', 'hover')( 'default' )
+    const modeClass = modifierComposer('dark', 'md', 'hover')( 'unset' )
     it('returns empty string', () => {
       expect(modeClass).toBe('')
     })
@@ -64,10 +64,10 @@ describe('getClassString function', () => {
   describe('generate class for two properties and "hover" modifier ', () => {
     const itemClass = {
       backgroundColor: 'test-blue',
-      marginTop: 'default',
+      marginTop: 'unset',
       shadow: 'test-shadow'
     }
-    const modeClass = getClassString(itemClass, modifierAdder('hover', 'default') )
+    const modeClass = getClassString(itemClass, modifierAdder('hover', 'unset') )
     it('returns empty string', () => {
       expect(modeClass).toContain(' hover:test-blue')
       expect(modeClass).toContain(' hover:test-shadow')
@@ -77,7 +77,7 @@ describe('getClassString function', () => {
   describe('generate class for two properties and "" modifier ', () => {
     const itemClass = {
       backgroundColor: 'test-blue',
-      marginTop: 'default',
+      marginTop: 'unset',
       shadow: 'test-shadow'
     }
     const modeClass = getClassString(itemClass, modifierAdder('') )
@@ -94,7 +94,7 @@ describe('getEditorClass function', () => {
       modifier: 'active',
       backgroundColor: 'test-blue',
       shadow: 'test-shadow',
-      marginTop: 'default',
+      marginTop: 'unset',
     }
     const modeClass = getEditorClass(itemClass)
     it('returns empty string', () => {
@@ -112,7 +112,7 @@ describe('getComponentEditorClass function', () => {
         mode: 'dark',
         modifier: 'active',
         backgroundColor: 'bg-md-dark-active',
-        marginTop: 'default',
+        marginTop: 'unset',
         shadow: 'sh-md-dark-active'
       }, 
       {
@@ -120,7 +120,7 @@ describe('getComponentEditorClass function', () => {
         mode: 'dark',
         modifier: 'hover',
         backgroundColor: 'bg-md-dark-hover',
-        marginTop: 'default',
+        marginTop: 'unset',
         shadow: 'sh-md-dark-hover'
       },
       {
@@ -128,7 +128,7 @@ describe('getComponentEditorClass function', () => {
         mode: 'light',
         modifier: 'hover',
         backgroundColor: 'bg-md-hover',
-        marginTop: 'default',
+        marginTop: 'unset',
         shadow: 'sh-md-hover'
       },
       {
@@ -136,15 +136,15 @@ describe('getComponentEditorClass function', () => {
         mode: 'light',
         modifier: 'hover',
         backgroundColor: 'bg-hover',
-        marginTop: 'default',
+        marginTop: 'unset',
         shadow: 'sh-hover'
       },
       {
         device: 'any',
         mode: 'light',
-        modifier: 'default',
+        modifier: 'unset',
         backgroundColor: 'bg-none',
-        marginTop: 'default',
+        marginTop: 'unset',
         shadow: 'sh-none'
       }
     ]
@@ -209,14 +209,14 @@ describe('getComponentRenderedClass function', () => {
         mode: 'dark',
         modifier: 'active',
         backgroundColor: 'bg-md-dark-active',
-        marginTop: 'default',
+        marginTop: 'unset',
         shadow: 'sh-md-dark-active'
       }, 
       {
         device: 'md',
         mode: 'dark',
-        modifier: 'default',
-        marginTop: 'default',
+        modifier: 'unset',
+        marginTop: 'unset',
         backgroundColor: 'bg-md-dark',
         shadow: 'sh-md-dark'
       },
@@ -224,15 +224,15 @@ describe('getComponentRenderedClass function', () => {
         device: 'md',
         mode: 'light',
         modifier: 'hover',
-        marginTop: 'default',
+        marginTop: 'unset',
         backgroundColor: 'bg-md-hover',
         shadow: 'sh-md-hover'
       },
       {
         device: 'md',
         mode: 'light',
-        modifier: 'default',
-        marginTop: 'default',
+        modifier: 'unset',
+        marginTop: 'unset',
         backgroundColor: 'bg-md',
         shadow: 'sh-md'
       },
@@ -240,23 +240,23 @@ describe('getComponentRenderedClass function', () => {
         device: 'any',
         mode: 'light',
         modifier: 'hover',
-        marginTop: 'default',
+        marginTop: 'unset',
         backgroundColor: 'bg-hover',
         shadow: 'sh-hover'
       },
       {
         device: 'any',
         mode: 'dark',
-        modifier: 'default',
+        modifier: 'unset',
         backgroundColor: 'bg-dark',
-        marginTop: 'default',
+        marginTop: 'unset',
         shadow: 'sh-dark'
       },
       {
         device: 'any',
         mode: 'light',
-        modifier: 'default',
-        marginTop: 'default',
+        modifier: 'unset',
+        marginTop: 'unset',
         backgroundColor: 'bg-none',
         shadow: 'sh-none'
       }

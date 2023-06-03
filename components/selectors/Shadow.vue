@@ -9,7 +9,7 @@
   const props = defineProps(['shadow'])
   const emit = defineEmits(['update:shadow'])
 
-  const shadows = ['default', "shadow-sm", "shadow", "shadow-md", "shadow-lg", "shadow-xl", "shadow-2xl", "shadow-inner", "shadow-none" ]
+  const shadows = ['unset', "shadow-sm", "shadow", "shadow-md", "shadow-lg", "shadow-xl", "shadow-2xl", "shadow-inner", "shadow-none" ]
   // sm md lg xl 2xl inner none
 
 </script>

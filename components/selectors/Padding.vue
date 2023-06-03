@@ -9,7 +9,7 @@
   const props = defineProps(['padding'])
   const emit = defineEmits(['update:padding'])
 
-  const paddings = ['default', 
+  const paddings = ['unset', 
    'p-px', 'p-0.5' , 'p-1' , 'p-1.5' , 'p-2' ,'p-2.5' , 'p-3' ,'p-3.5','p-4', 'p-5', 'p-6', 'p-7', 'p-8', 'p-9',  'p-10', 'p-11', 'p-12','p-14', 'p-16','p-20', 'p-24', 'p-28', 'p-32', 'p-36', 'p-40', 'p-44', 'p-48', 'p-52', 'p-56', 'p-60', 'p-64', 'p-72', 'p-80', 'p-96',
   'px-px', 'px-0.5', 'px-1', 'px-1.5', 'px-2','px-2.5', 'px-3','px-3.5','px-4', 'px-5', 'px-6', 'px-7', 'px-8', 'px-9',  'px-10', 'px-11', 'px-12','px-14', 'px-16','px-20', 'px-24', 'px-28', 'px-32', 'px-36', 'px-40', 'px-44', 'px-48', 'px-52', 'px-56', 'px-60', 'px-64', 'px-72', 'px-80', 'px-96',
   'py-px', 'py-0.5', 'py-1', 'py-1.5', 'py-2','py-2.5', 'py-3','py-3.5','py-4', 'py-5', 'py-6', 'py-7', 'py-8', 'py-9',  'py-10', 'py-11', 'py-12','py-14', 'py-16','py-20', 'py-24', 'py-28', 'py-32', 'py-36', 'py-40', 'py-44', 'py-48', 'py-52', 'py-56', 'py-60', 'py-64', 'py-72', 'py-80', 'py-96',

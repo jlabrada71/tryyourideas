@@ -104,7 +104,6 @@
   })
 
   watchEffect(()=> {
-    console.log('USER: ' + props.user.name)
     updateProjectList(props.user)
   })
 

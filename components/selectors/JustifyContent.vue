@@ -9,7 +9,7 @@
   const props = defineProps(['justify'])
   const emit = defineEmits(['update:justify'])
 
- const justifyList = ['default','justify-normal', 'justify-start', 'justify-end', 'justify-center', 'justify-between', 'justify-around', 'justify-evenly', 'justify-stretch']
+ const justifyList = ['unset','justify-normal', 'justify-start', 'justify-end', 'justify-center', 'justify-between', 'justify-around', 'justify-evenly', 'justify-stretch']
 
 </script>
 

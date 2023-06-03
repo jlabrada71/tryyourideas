@@ -107,7 +107,6 @@ async function sendForm() {
   }
   const repository = new AccountRepositoryProxy(config)
   const result = await repository.insert(form.value)
-  console.log(result)
   if (result.status !== 200 || result.data.result == 'error') {
     keepFormOpened()
     showErrors()

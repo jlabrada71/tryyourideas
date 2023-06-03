@@ -19,14 +19,6 @@
 
   const show = ref(false)
 
-  // onUpdated(() => {
-  //   console.log('tag: ' + props.tag)
-  //   console.log('updated: ' + props.color)
-  //   console.log('raw: ' + rawColor.value)
-  //   console.log('background: ' + backgroundColor.value)
-  //   console.log('buttonClass ' + buttonClass.value)
-  // })
-
   function selectedColor(color) {
     console.log(color)
     emit('update:color', `${props.tag}-${color}`)

@@ -9,5 +9,5 @@
   const props = defineProps(['shrinkGrow'])
   const emit = defineEmits(['update:shrinkGrow'])
 
-  const shrinkGrows = ['default', 'flex-1', 'flex-auto', 'flex-initial', 'flex-none', 'grow', 'grow-0', 'shrink', 'shrink-0']
+  const shrinkGrows = ['unset', 'flex-1', 'flex-auto', 'flex-initial', 'flex-none', 'grow', 'grow-0', 'shrink', 'shrink-0']
 </script>

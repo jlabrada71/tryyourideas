@@ -64,6 +64,7 @@
   </template>
   <script setup>
     import { ref, onMounted } from 'vue'
+    import { removeTag } from '@/lib/ValueUtils'
 
     const props = defineProps({
       top: {
@@ -102,7 +103,7 @@
     const bottom = computed(() => clean(props.bottom))
 
     function clean(value) {
-      return value.substring(value.indexOf('-') + 1)
+      return removeTag(value)
     }
 
     let count = 0

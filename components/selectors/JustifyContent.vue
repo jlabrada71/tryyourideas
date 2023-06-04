@@ -1,15 +1,21 @@
 <template>
-  <div>
-    <SelectButton :options="justifyList" :option="justify" @update:option="value=>emit('update:justify', value)">
-      <h1>Justify content: {{justify}}</h1>
-    </SelectButton>
-  </div>
+  <RadioButton 
+    id="justify-content"
+    :options="justifyList" 
+    :option="justify" 
+    name="justify-content-group" 
+    tag="justify" 
+    @update:option="value=>emit('update:justify', value)">
+    Justify content: {{txt}}
+  </RadioButton> 
 </template>
 <script setup>
+  import { removeTag } from '@/lib/ValueUtils.js'
+
   const props = defineProps(['justify'])
   const emit = defineEmits(['update:justify'])
 
- const justifyList = ['unset','justify-normal', 'justify-start', 'justify-end', 'justify-center', 'justify-between', 'justify-around', 'justify-evenly', 'justify-stretch']
+ const justifyList = ['unset','normal', 'start', 'end', 'center', 'between', 'around', 'evenly', 'stretch']
+ const txt = computed(() => removeTag(props.justify))
 
 </script>
-

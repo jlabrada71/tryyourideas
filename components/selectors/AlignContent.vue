@@ -1,18 +1,20 @@
 <template>
-  <div>
-    <!-- <SelectButton :options="alignList" :option="align" @update:option="value=>emit('update:align', value)">
-      <h1>align content: {{align}}</h1>
-    </SelectButton> -->
-    <SelectButton :options="alignList" :option="align" @update:option="value=>emit('update:align', value)">
-      <h1>Align content: {{align}}</h1>
-    </SelectButton>
-  </div>
+  <RadioButton 
+    :options="alignList" 
+    :option="align" 
+    name="align-content-group" 
+    tag="content" 
+    @update:option="value=>emit('update:align', value)">
+    Align content: {{txt}}
+  </RadioButton> 
 </template>
 <script setup>
+  import { removeTag } from '@/lib/ValueUtils.js'
+
   const props = defineProps(['align'])
   const emit = defineEmits(['update:align'])
 
- const alignList = ['unset','content-normal', 'content-start', 'content-end', 'content-center', 'content-between', 'content-around', 'content-evenly', 'content-baseline', 'content-stretch']
+ const alignList = ['unset','normal', 'start', 'end', 'center', 'between', 'around', 'evenly', 'baseline', 'stretch']
 
+ const txt = computed(() => removeTag(props.align))
 </script>
-

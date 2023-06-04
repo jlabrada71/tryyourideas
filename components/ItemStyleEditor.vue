@@ -72,7 +72,7 @@
         <SelectorsJustifyItems :justify="currentClass.justifyItems" @update:justify="value => updateClass('justifyItems', value)"></SelectorsJustifyItems>
 
         <SelectorsAlignContent :align="currentClass.alignContent" @update:align="value => updateClass('alignContent', value)"></SelectorsAlignContent>
-        <SelectorsAlignItems :align="currentClass.alignItems" @update:align="value => updateClass('alignItems', value)"></SelectorsAlignItems>
+        <SelectorsAlignItems :align="currentClass.alignItems" tag="items" @update:align="value => updateClass('alignItems', value)"></SelectorsAlignItems>
 
         <SelectorsPlaceContent :place="currentClass.placeContent" @update:place="value => updateClass('placeContent', value)"></SelectorsPlaceContent>
         <SelectorsPlaceItems :place="currentClass.placeItems" @update:place="value => updateClass('placeItems', value)"></SelectorsPlaceItems>

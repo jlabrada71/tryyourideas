@@ -1,15 +1,17 @@
 <template>
   <div>
-    <SelectButton :options="placeList" :option="place" @update:option="value=>emit('update:place', value)">
-      <h1>Place items: {{place}}</h1>
-    </SelectButton>
+    <RadioButton :options="placeList" :option="place" name="place-items-group" tag="place-items" @update:option="value=>emit('update:place', value)">
+      Place items: {{txt}}
+    </RadioButton> 
   </div>
 </template>
 <script setup>
+  import { removeTag } from '@/lib/ValueUtils.js'
+
   const props = defineProps(['place'])
   const emit = defineEmits(['update:place'])
 
- const placeList = ['unset', 'place-items-start', 'place-items-end', 'place-items-center', 'place-items-baseline', 'place-items-stretch']
-
+  const placeList = ['unset', 'start', 'end', 'center', 'baseline', 'stretch']
+  const txt = computed(() => removeTag(props.place, 'place-items-'))
 </script>
 

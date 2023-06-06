@@ -1,5 +1,6 @@
 export default function () {
   return {
+    runAllTestsWhenNoAffectedTests: true,
     files: [
       'src/**/*.js' // adjust if required
     ],

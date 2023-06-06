@@ -55,8 +55,6 @@
     const repository = new AccountRepositoryProxy(config)
     const result = await repository.select({ email: data.session.email })
     const account = result.data[0]
-    console.log('ACCOUNT')
-    console.log(account)
     currentUser.value = account
     const router = useRouter()
     router.push({

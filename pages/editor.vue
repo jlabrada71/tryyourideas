@@ -237,7 +237,7 @@ const itemTemplate = {
 
 const currentUser = useStorage('user', {
   name: 'anonimous',
-  email: 'unset',
+  email: 'undefined',
   id: 'undefined',
   licence: 'community',
   maxProjects: '1'
@@ -405,7 +405,7 @@ const treeViewContainerClass = computed(() => `${selectedMode.value==='light' ? 
 
 onMounted(() => {
   
-  newProject( {name: 'unset'} )
+  newProject( {name: 'NewProject'} )
 })
 
 function printClassKey({ mode, device, modifier }) {

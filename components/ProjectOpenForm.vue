@@ -95,6 +95,7 @@
   }
 
   async function updateProjectList(user) {
+    if (!user) return
     const result = await getProjectList(user.id)
     projectList.value = result.map(project => project.substring(0, project.indexOf('.json')))
 

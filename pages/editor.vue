@@ -1,5 +1,5 @@
 <template>
-  <ProjectNewForm  @new="newProject"></ProjectNewForm>
+  <ProjectNewForm  @new="createNewProject"></ProjectNewForm>
   <ProjectOpenForm :user="currentUser" @open="openProject"></ProjectOpenForm>
   <ProjectExportForm :user="currentUser" :project="project" @export="generateNuxtTailwindsStorybook"></ProjectExportForm>
   <IssuesForm :project="project" :store="saveIssues"></IssuesForm>
@@ -47,7 +47,7 @@
         </button>
       </div>
       <ComponentTypeMenu v-if="selectingChildType" @cancel="cancelAddItem" @selected="addItem"></ComponentTypeMenu>
-      <div v-for="component in componentList">
+      <div v-for="component in project.components">
         <div>
           <EditableLabel 
             :text="component.name" 
@@ -147,8 +147,6 @@ onMounted(() => {
     initTooltips();
 })
 
-
-
 const itemTemplate = {
   name: 'div',
   type: 'div',
@@ -243,14 +241,7 @@ const currentUser = useStorage('user', {
   maxProjects: '1'
 })
 
-onMounted(() => {
-  if (currentUser.value.id === 'undefined') {
-    const router = useRouter()
-    router.push({
-      path: '/',
-    })
-  }
-})
+
 
 const session = useStorage('session', null)
 
@@ -258,14 +249,38 @@ function updateUser(account) {
   currentUser.value = account
 }
 
-const project = useStorage('currentProject', {
+
+const currentProject = useStorage('currentProject', {
   name: 'Default',
   dirty: false,
   components: [],
 })
 
+const project = ref({
+  name: 'Default',
+  dirty: false,
+  components: [],
+})
+
+const selectedComponent = ref(null)
+const selectedItem = ref(null)
+
+const refreshTreeView = ref(false)
+
+const selectedDevice = ref('any')
+const selectedMode = ref('light')
+const selectedDeviceWidth = {
+  any: 'w-full',
+  sm: 'w-[640px]',
+  md: 'w-[768px]',
+  lg: 'w-[1024px]',
+  xl: 'w-[1280px]',
+  '2xl': '[1536px]'
+}
+
+createNewProject({ name: 'Default' })
+
 function initProject(projectValue) {
-  componentList.value = projectValue.components
   selectComponent(projectValue.components[0])
   selectDevice('any')
   selectMode('light')
@@ -273,11 +288,16 @@ function initProject(projectValue) {
 }
 
 function newProject(data) {
-  project.value = {
+  const project = {
     name: data.name,
     components: []
   }
-  project.value.components.push(newComponent())
+  project.components.push(newComponent())
+  return project 
+}
+
+function createNewProject( data ) {
+  project.value = newProject(data)
   initProject(project.value)
 }
 
@@ -289,9 +309,9 @@ function openProject(projectValue) {
 const throttledSave = throttle(saveModel, 5*1000)
 
 function saveProject() {
-  debug('SAVING: ' + project.value.components[0].name)
-  debug('CURRENT: ' + selectedComponent.value.name)
-  debug('CURRENT USER: ' + currentUser.value.id)
+  // debug('SAVING: ' + project.value.components[0].name)
+  // debug('CURRENT: ' + selectedComponent.value.name)
+  // debug('CURRENT USER: ' + currentUser.value.id)
   if (currentUser.value.id === 'undefined') return
   project.value.dirty = false
   project.value.userId = currentUser.value.id
@@ -302,9 +322,7 @@ function dirtyProject() {
   project.value.dirty = true
 }
 
-const componentList = ref(project.value.components)
-const selectedComponent = ref(componentList.value[0])
-const selectedItem = ref(selectedComponent.value.root)
+
 
 function postToServer(obj, url) {
   return axios({
@@ -324,7 +342,7 @@ function saveIssues(obj) {
 
 async function generateNuxtTailwindsStorybook() {
   const result = await postToServer( { project: project.value, user: currentUser.value }, `${config.public.apiBase}/generation`)
-  debug(result.data)
+  // debug(result.data)
 }
 
 function initializeComponentClass(componentClass) {
@@ -350,7 +368,7 @@ function newComponent() {
     properties: [],
     events: []
   }
-  component.id = getNextId(componentList.value).toString()
+  component.id = getNextId(project.value.components).toString()
   component.editorId = component.id
   component.name = `Component-${component.id}`
   component.root.id = component.id
@@ -362,20 +380,20 @@ function newComponent() {
   return component
 }
 
-watch([componentList, selectedComponent, selectedItem], (newValue, oldValue) => dirtyProject())
+watch([project, selectedComponent, selectedItem], (newValue, olddirtyProjectValue) => dirtyProject())
 
 function createNewComponent() {
   const component = newComponent()
-  componentList.value.push(component)
+  project.value.components.push(component)
   selectComponent(component)
   dirtyProject()
 }
 
 function removeComponent(componentToDelete) {
-  if (componentList.value.length < 2) return
-  componentList.value = componentList.value.filter( component => component.id !== componentToDelete.id )
+  if (project.value.components.length < 2) return
+  project.value.components = project.value.components.filter( component => component.id !== componentToDelete.id )
   if (componentToDelete.id === selectedComponent.value.id ) {
-    selectComponent(componentList.value[0])
+    selectComponent(project.value.components[0])
   }
   dirtyProject()
 }
@@ -390,29 +408,24 @@ function selectComponent(component) {
   selectItem(selectedComponent.value.root)
 }
 
-const refreshTreeView = ref(false)
 
-const selectedDevice = ref('any')
-const selectedMode = ref('light')
-const selectedDeviceWidth = {
-  any: 'w-full',
-  sm: 'w-[640px]',
-  md: 'w-[768px]',
-  lg: 'w-[1024px]',
-  xl: 'w-[1280px]',
-  '2xl': '[1536px]'
-}
 
 const treeViewBackground = computed(() => selectedMode.value==='light' ? 'bg-white': 'bg-black' )
 const treeViewContainerClass = computed(() => `${selectedMode.value==='light' ? 'bg-white': 'bg-black'} ${selectedDeviceWidth[selectedDevice.value]} flex align-middle shadow-lg justify-center h-screen`)
 
 onMounted(() => {
+  if (currentUser.value.id === 'undefined') {
+    const router = useRouter()
+    router.push({
+      path: '/',
+    })
+  }
   
-  newProject( { name: 'NewProject' } )
+  createNewProject( { name: 'NewProject' } )
 })
 
 function printClassKey({ mode, device, modifier }) {
-  debug(`key: "${mode}:${device}:${modifier}"`)
+  // debug(`key: "${mode}:${device}:${modifier}"`)
 }
 
 function createClassKey( mode, device, modifier ) {
@@ -495,8 +508,10 @@ function addItem(type)  {
 }
 
 function selectItem(item) {
-
-  selectedItem.value.isSelected = false
+  if (selectedItem.value) {
+    selectedItem.value.isSelected = false
+  }
+  
   selectedItem.value = item
   selectedItem.value.currentClass = findOrCreateClassBy(item, selectedDevice.value, selectedMode.value, 'unset' /*item.currentClass.modifier */)
   selectedItem.value.isSelected = true 

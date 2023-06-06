@@ -89,6 +89,7 @@
   const selectedProject = ref(null)
 
   async function getProjectList(userId) {
+    if (!userId) return []
     const result = await projectRepository.select({ userId })
     return result.data.files
   }

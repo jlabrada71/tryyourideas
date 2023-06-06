@@ -1,8 +1,8 @@
 <template>
   <div>
     <ul>
-      <li>env: {{config.env}}</li>
-      <li>api: {{config.apiBase}}</li>
+      <li>env: {{config.public.env}}</li>
+      <li>api: {{config.public.apiBase}}</li>
     </ul>
   </div>
 

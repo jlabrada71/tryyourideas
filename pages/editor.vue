@@ -259,7 +259,7 @@ function updateUser(account) {
 }
 
 const project = useStorage('currentProject', {
-  name: 'unset',
+  name: 'Default',
   dirty: false,
   components: [],
 })
@@ -289,6 +289,9 @@ function openProject(projectValue) {
 const throttledSave = throttle(saveModel, 5*1000)
 
 function saveProject() {
+  debug('SAVING: ' + project.value.components[0].name)
+  debug('CURRENT: ' + selectedComponent.value.name)
+  debug('CURRENT USER: ' + currentUser.value.id)
   if (currentUser.value.id === 'undefined') return
   project.value.dirty = false
   project.value.userId = currentUser.value.id
@@ -299,8 +302,8 @@ function dirtyProject() {
   project.value.dirty = true
 }
 
-const componentList = ref([])
-const selectedComponent = ref(newComponent())
+const componentList = ref(project.value.components)
+const selectedComponent = ref(componentList.value[0])
 const selectedItem = ref(selectedComponent.value.root)
 
 function postToServer(obj, url) {
@@ -405,7 +408,7 @@ const treeViewContainerClass = computed(() => `${selectedMode.value==='light' ? 
 
 onMounted(() => {
   
-  newProject( {name: 'NewProject'} )
+  newProject( { name: 'NewProject' } )
 })
 
 function printClassKey({ mode, device, modifier }) {

@@ -13,13 +13,15 @@ export default defineEventHandler(async (event) => {
     //debug(content) 
     debug(body.name)  
     const dir = `${config.data}/projects/${body.userId}`
+    debug(dir)
 
     if (!fs.existsSync(dir)){
       fs.mkdirSync(dir, { recursive: true })
     }
     debug(path.resolve(dir))
-
-    fs.writeFileSync( `${dir}/${body.name}.json`, content)
+    const fileName = `${dir}/${body.name}.json`
+    debug(fileName)
+    fs.writeFileSync( fileName, content)
   }
   catch(e) {
     return {

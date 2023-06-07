@@ -3,6 +3,7 @@
   <HomeSignUpForm @update:user="updateUser"></HomeSignUpForm>
   <HomeNavigationBar @sign-in="signIn" @sign-up="signUp"/>
   <HomeHero @sign-up="signUp"/>
+  <div class="min-h-screen"></div>
 </template>
 <script setup>
   import { 

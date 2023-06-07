@@ -23,7 +23,7 @@
   const message = ref('')
 
   onMounted(async () => {
-    const activationUrl = `${config.apiBase}/accounts/activation?code=${route.query.code}&email=${route.query.email}`
+    const activationUrl = `${config.public.apiBase}/accounts/activation?code=${route.query.code}&email=${route.query.email}`
     const response = await getFromServer(activationUrl)
     result.value = response.data.msg
     if (response.data.status === 'ok') {

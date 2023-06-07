@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-screen">
+  <div class="flex flex-col h-screen min-h-screen">
     <div class="h-full">
       <slot />
     </div>
@@ -12,5 +12,4 @@
 </template>
 <script setup>
   const config = useRuntimeConfig()
-
 </script>

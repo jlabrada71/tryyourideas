@@ -1,6 +1,8 @@
 <template>
-  <HomeNavigationBar @update:session="updateSession" @update:user="updateUser"/>
-  <HomeHero />
+  <HomeSignInForm @update:session="updateSession"></HomeSignInForm>
+  <HomeSignUpForm @update:user="updateUser"></HomeSignUpForm>
+  <HomeNavigationBar @sign-in="signIn" @sign-up="signUp"/>
+  <HomeHero @sign-up="signUp"/>
 </template>
 <script setup>
   import { 
@@ -60,5 +62,14 @@
     router.push({
       path: '/editor',
     })
+  }
+
+  function signIn() {
+    alert('sign in')
+
+  }
+
+  function signUp() {
+    alert('sign-up')
   }
 </script>

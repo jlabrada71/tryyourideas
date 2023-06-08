@@ -1,5 +1,6 @@
 export default function () {
   return {
+    autoDetect: true,
     runAllTestsWhenNoAffectedTests: true,
     files: [
       'src/**/*.js' // adjust if required
@@ -11,10 +12,14 @@ export default function () {
 
     env: {
       type: 'node',
-      runner: '/home/jlabrada/.nvm/versions/node/v16.20.0/bin/node',
+      runner: 'node',
+      // runner: '/home/jlabrada/.nvm/versions/node/v16.20.0/bin/node',
       params: {
         runner: '--experimental-vm-modules'
       }
+    },
+    testFramework: {
+     configFile: './jest.config.wallaby.js'
     }
-  };
+  }
 }

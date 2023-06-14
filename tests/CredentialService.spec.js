@@ -1,7 +1,7 @@
 
 import { 
   CredentialService
- } from '../lib/credentials/service.js'
+ } from '@/lib/credentials/service.js'
 
 describe('send function', () => {
   describe('given a body calls the email sender send function with the body', () => {
@@ -22,8 +22,18 @@ describe('send function', () => {
       hasherList.push( x )
       return x
     }
+
+    const accountRepository = {
+
+    }
+
+    const sessionRepository = {
+      
+    }
+
+    const randomIdCreator = () => 10
    
-    const credentialService = new CredentialService(credentialRepository, idCreator, hasher)
+    const credentialService = new CredentialService(credentialRepository, accountRepository, sessionRepository, idCreator, randomIdCreator, hasher)
     credentialService.add({email: 'this is an email', password: 'this is a password'})
     it(' should store the email', () => {
       expect(credentialRepository.body.email).toBe('this is an email')

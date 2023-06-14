@@ -1,5 +1,5 @@
 
-import { log, debug } from '@/lib/logger'
+import { log, debug } from '@/lib/logger.js'
 import CloudStorage from '@/lib/firebase/cloud-storage.js'
 
 const config = useRuntimeConfig()

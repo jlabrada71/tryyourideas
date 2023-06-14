@@ -1,4 +1,4 @@
-import { log, debug } from '@/lib/logger'
+import { log, debug } from '@/lib/logger.js'
 import fs from 'fs'
 import path from "path"
 

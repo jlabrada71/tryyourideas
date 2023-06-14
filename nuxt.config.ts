@@ -18,6 +18,9 @@ const variables = {
 const env = process.env.NODE_ENV || 'development'
 
 export default defineNuxtConfig({
+  alias: {
+    "@/lib": "./lib",
+  },
   css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {

@@ -6,7 +6,7 @@ import {
 
  import jwt from 'jsonwebtoken'
 
- import { signJwt, verifyJwt } from '../lib/authorization/jwt-utils.js'
+ import { signJwt, verifyJwt } from '@/lib/authorization/jwt-utils.js'
 
 describe('getReplacedUrl function', () => {
   describe('hashing some text', () => {

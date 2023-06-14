@@ -1,0 +1,64 @@
+@startuml
+autoactivate on
+boundary api 
+participant authentication #cyan
+collections redis <<pending>>
+database Repository as db
+boundary notification
+
+== create credentials ==
+api -> authentication: create credentials
+alt user not in database
+  authentication -> authentication: hash password
+  return
+  authentication -> db: store credentials
+  return
+  authentication -> authentication: set result to success
+  return
+else user in database
+  authentication -> authentication: set result to error
+  return
+end
+return result
+
+== sign in ==
+api -> authentication: sign in
+  alt credentials in database 
+    authentication -> authentication: hash candidate credentials
+    return 
+    authentication -> db: get hashed credentials
+    return
+    authentication -> authentication: create session token
+    return
+    authentication -> db: store session token
+    return
+  else credentials not found 
+    authentication -> authentication: set result to error
+    return
+  end
+return result
+
+== validate access token ==
+api -> authentication: access token
+  alt access token in database
+    authentication -> db: get access token for email
+    return access token
+    authentication -> authentication: validate
+    return validation result
+  else access token not in database
+    authentication -> authentication: set result to error
+    return
+  end
+return result
+
+== log out ==
+api -> authentication: log out
+authentication -> db: remove access token
+return
+return result
+== reset password  ==
+api -> authentication: update user
+authentication -> db: update user
+return
+return result
+@enduml

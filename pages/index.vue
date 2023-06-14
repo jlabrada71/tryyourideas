@@ -19,7 +19,7 @@
     initTabs, 
     initTooltips } from 'flowbite'
   import { useStorage } from '@vueuse/core'
-  import { AccountRepositoryProxy } from '@/lib/AccountRepositoryProxy'
+  import { AccountRepositoryProxy } from '@/lib/accounts/RepositoryProxy'
 
   const config = useRuntimeConfig()
 

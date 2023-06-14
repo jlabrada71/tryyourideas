@@ -8,13 +8,18 @@
                 </svg>
             </button>
         </div>
-        <button id="id-4-2" type="button" class=" flex flex-row gap-3 justify-center items-center mx-6 bg-slate-200 w-10/12 h-8 rounded-lg border-4 border-slate-500 transition-all   hover:bg-slate-200  hover:border-slate-500 hover:transition-all hover:translate-y-1 ">
-            <svg xmlns="http://www.w3.org/2000/svg" id="id-4-2-1" class=" flex flex-row justify-center bg-slate-200 w-5 h-5 rounded-lg " viewBox="0 0 488 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
-                <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
-            </svg><span id="id-4-2-2" class=" flex flex-row bg-slate-200 w-auto h-6 text-xs font-semibold ">
-                Continue with Google
-            </span>
+        <button id="id-4-2" type="button" class=" flex flex-row gap-3 justify-center items-center bg-slate-200 w-full h-10 rounded-lg border-4 border-slate-500 transition-all  hover:bg-slate-200  hover:border-slate-500 hover:translate-y-1 ">
+          <img :src="GitHubLogo" class="h-8" alt="GitHub Logo" />
+          <span id="id-4-2-2" class=" flex flex-row bg-slate-200 w-auto h-6 text-xs font-semibold ">
+              Sign In with Github
+          </span>
         </button>
+        <!-- <button id="id-4-2" type="button" class=" flex flex-row gap-3 justify-center items-center mx-6 bg-slate-200 w-10/12 h-10 rounded-lg border-4 border-slate-500 transition-all hover:bg-slate-200  hover:border-slate-500 hover:translate-y-1 ">
+          <img :src="GoogleLogo" class="h-8" alt="Google Logo" />
+          <span id="id-4-2-2" class=" flex flex-row bg-slate-200 w-auto h-6 text-xs font-semibold ">
+            Sign In with Google
+          </span>
+        </button> -->
         <span id="id-4-3" class=" bg-inherit w-full h-6 text-center ">
             or
         </span>
@@ -63,9 +68,11 @@
 </template>
 
 <script setup>
-
 import { ref, onMounted } from 'vue'
-import { AccountRepositoryProxy } from '@/lib/AccountRepositoryProxy'
+import { AccountRepositoryProxy } from '@/lib/accounts/RepositoryProxy'
+import GoogleLogo from '@/assets/svg/google.svg'
+import GitHubLogo from '@/assets/svg/github.svg'
+import { getGoogleOAuthUrl, getGitHubOAuthUrl } from '@/lib/url-utils'
 
 const emit = defineEmits(['update:user'])
 

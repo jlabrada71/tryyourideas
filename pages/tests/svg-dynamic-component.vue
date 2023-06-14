@@ -1,5 +1,5 @@
 <script setup>
-  import { typeList } from '@/lib/typeList'
+  import { typeList } from '@/lib/typeList.js'
 
   const needResolve = typeList.filter(type => type.needsResolve)
   const resolvedComponents = {}

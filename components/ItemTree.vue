@@ -38,7 +38,7 @@
   </div>
 </template>
 <script setup>
-  import { selfClosingTags } from '@/lib/typeList'
+  import { selfClosingTags } from '@/lib/typeList.js'
 
   const emit = defineEmits(['update:add-child', 'update:remove', 'selected'])
 

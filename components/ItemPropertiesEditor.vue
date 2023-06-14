@@ -47,7 +47,7 @@
     initPopovers, 
     initTabs, 
     initTooltips } from 'flowbite'
-  import { typeList } from '@/lib/typeList'
+  import { typeList } from '@/lib/typeList.js'
 
 // initialize components based on data attribute selectors
 onMounted(() => {

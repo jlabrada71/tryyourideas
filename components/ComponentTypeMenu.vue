@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-  import { typeList } from '@/lib/typeList'
+  import { typeList } from '@/lib/typeList.js'
   const emit = defineEmits(['cancel', 'selected'])
 
   const selectedType = ref(null)

@@ -1,6 +1,6 @@
 
 import { getNextId, idFromEmail, getRandomId } from '../lib/IdGeneration.js'
-
+import { v5 as uuidv5, v4 as uuidv4 } from 'uuid'
 
 describe('getNextId function', () => {
   describe('common case: given an array of object with id return the max id + 1', () => {
@@ -14,6 +14,12 @@ describe('getNextId function', () => {
     const maxId = getNextId([])
     it('returns 1', () => {
       expect(maxId).toBe(1)
+    })
+  })
+  describe('generate my space id', () => {
+    const MY_NAMESPACE = uuidv5('https://www.tryyourideas.com/', uuidv5.URL)
+    it('shoud be ', () => {
+      expect(MY_NAMESPACE).toBe('b5de7f0d-50a2-5c5d-beb3-6ee12a19ed20')
     })
   })
 })

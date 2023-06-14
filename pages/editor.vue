@@ -241,14 +241,11 @@ const currentUser = useStorage('user', {
   maxProjects: '1'
 })
 
-
-
 const session = useStorage('session', null)
 
 function updateUser(account) {
   currentUser.value = account
 }
-
 
 const currentProject = useStorage('currentProject', {
   name: 'Default',

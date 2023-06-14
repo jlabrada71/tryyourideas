@@ -1,7 +1,7 @@
-import { log, debug } from '@/lib/logger'
+import { log, debug } from '@/lib/logger.js'
 import fse  from 'fs-extra'
 import { zip } from 'zip-a-folder';
-import { toHtml } from '@/lib/HtmlExporter'
+import { toHtml } from '@/lib/HtmlExporter.js'
 import CloudStorage from '@/lib/firebase/cloud-storage.js'
 import axios from 'axios'
 import beautify from 'js-beautify'

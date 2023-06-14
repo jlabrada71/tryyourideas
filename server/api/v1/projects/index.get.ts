@@ -1,4 +1,4 @@
-import { log, debug } from '@/lib/logger'
+import { log, debug } from '@/lib/logger.js'
 import { promises, mkdirSync, existsSync, readFileSync } from 'fs'
 
 const { readdir } = promises

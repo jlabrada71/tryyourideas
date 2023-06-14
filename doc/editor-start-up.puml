@@ -1,0 +1,21 @@
+@startuml
+autoactivate on
+actor user 
+participant EditorUI #cyan
+participant TyiAPI #cyan
+participant TyiService #cyan
+database Repository as db #cyan
+EditorUI -> EditorUI: Get session accessToken
+EditorUI -> TyiAPI: Get user data for session accessToken
+TyiAPI -> TyiService: get user data
+TyiService -> db: get user data
+return user data
+return user data
+return user data
+EditorUI -> EditorUI: Initialize session for user
+EditorUI -> EditorUI: Welcome User
+EditorUI -> EditorUI: If first time access introduce the UI
+return
+return 
+return 
+@enduml

@@ -158,7 +158,7 @@ definePageMeta({
   middleware: [
     'auth',
   ],
-});
+})
 
 const itemTemplate = {
   name: 'div',

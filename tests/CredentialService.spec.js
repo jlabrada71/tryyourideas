@@ -1,7 +1,7 @@
 
 import { 
   CredentialService
- } from '@/lib/credentials/service.js'
+ } from '@/lib/credentials/Service.js'
 
 describe('send function', () => {
   describe('given a body calls the email sender send function with the body', () => {

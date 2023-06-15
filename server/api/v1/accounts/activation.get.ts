@@ -1,10 +1,10 @@
 // curl -H "Content-Type: application/json"  'localhost:3000/api/v1/accounts'
 // https://www.jsdocs.io/package/h3#getQuery
 import { log, debug } from '@/lib/logger.js'
-import { AccountRepository } from '@/lib/accounts/Repository.js'
+import { getAccountService } from '@/lib/accounts/Service.js'
 
 const config = useRuntimeConfig() 
-const repository = new AccountRepository(config)
+const service = getAccountService(config)
 
 export default defineEventHandler(async (event) => {
   log('account GET')
@@ -23,22 +23,8 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  const result = await repository.select(acc => acc.email === query.email )
-  if (result.length === 0) {
-    return {
-      status: 'error',
-      msg: 'Account not found'
-    }
-  }
+  const account = await service.getAccountByEamail( query.email )
 
-  if (result.length > 1) {
-    return {
-      status: 'error',
-      msg: 'Account duplicated'
-    }
-  }
-
-  const account = result[0]
   debug(account)
 
   if (account.active) {
@@ -58,7 +44,7 @@ export default defineEventHandler(async (event) => {
   }
 
   account.active = true
-  await repository.update(account)
+  await service.update(account)
 
   return {
     name: account.name,

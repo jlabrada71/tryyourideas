@@ -42,6 +42,7 @@
     "pinia": "^2.0.34",
     "qs": "^6.11.2",
     "uuid": "^9.0.0",
+    "vee-validate": "^4.9.6",
     "zip-a-folder": "^1.1.5"
   },
   "wallaby": {

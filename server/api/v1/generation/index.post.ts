@@ -159,7 +159,7 @@ export default defineEventHandler(async (event) => {
       log('email sent')
     }
     catch(e) {
-      log('Error sending email')
+      log('Error sending email' + e.message)
       log(e)
     }
 

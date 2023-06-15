@@ -17,7 +17,7 @@ export const useUserStore = defineStore('user', (to, from) => {
   }
 
   async function signIn(email, password) {
-    { data, error } = await userRepositoryProxy.signIn(email, password)
+    { data, error } = await userServiceProxy.signIn(email, password)
     const response = data.value
     user.token = response.accessToken
     user.isLoggedIn = true
@@ -26,7 +26,7 @@ export const useUserStore = defineStore('user', (to, from) => {
   }
 
   async function signUp(email, password) {
-    { data, error } = await userRepositoryProxy.signUp(email, password)
+    { data, error } = await userServiceProxy.signUp(email, password)
     const response = data.value
     user.token = response.accessToken
     user.isLoggedIn = true

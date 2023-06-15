@@ -59,7 +59,7 @@
 
 <script setup>
   import { ref, onMounted } from 'vue'
-  import { AccountRepositoryProxy } from '@/lib/accounts/RepositoryProxy'
+  import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy'
   import GoogleLogo from '@/assets/svg/google.svg'
   import GitHubLogo from '@/assets/svg/github.svg'
   import { getGoogleOAuthUrl, getGitHubOAuthUrl } from '@/lib/url-utils'
@@ -111,9 +111,9 @@
       showErrors()
       return
     }
-    const repository = new AccountRepositoryProxy(config)
+    const service = new AccountServiceProxy(config)
     waiting.value = true
-    const result = await repository.login(form.value)
+    const result = await service.login(form.value)
 
     waiting.value = false
     if (result.status !== 200) {

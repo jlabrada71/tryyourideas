@@ -1,7 +1,7 @@
 
 import { 
   EmailService
- } from '../lib/emails/service.js'
+ } from '@/lib/emails/Service.js'
 
 describe('send function', () => {
   describe('given a body calls the email sender send function with the body', () => {

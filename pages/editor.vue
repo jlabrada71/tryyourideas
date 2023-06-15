@@ -3,7 +3,12 @@
   <ProjectOpenForm :user="currentUser" @open="openProject"></ProjectOpenForm>
   <ProjectExportForm :user="currentUser" :project="project" @export="generateNuxtTailwindsStorybook"></ProjectExportForm>
   <IssuesForm :project="project" :store="saveIssues"></IssuesForm>
-  <div class="w-full h-10 bg-slate-100 text-black flex">User: {{currentUser.name}} Project: {{project.name}} Licence: {{currentUser.licence}} </div>
+  <div class="w-full h-10 bg-slate-100 text-black flex">User: {{currentUser.name}} Project: {{project.name}} Licence: {{currentUser.licence}} Provider:{{currentUser.provider}}</div>
+  <!-- <h2>Access</h2>
+  <p>{{accessToken}}</p>
+  <h2>Refresh</h2>
+  <p>{{refreshToken}}</p> -->
+  <!-- <button @click="getLoggedUserData">find user</button> -->
   <ToolBar>
     <ToolBarButton target="newProjectForm" title="Create new project">
       <svg xmlns="http://www.w3.org/2000/svg" id="id-8-1-1" class=" flex flex-row bg-transparent w-8 h-8 " viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
@@ -91,12 +96,14 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { useStorage } from '@vueuse/core'
-import { debug } from '../lib/logger'
-import { getComponentRenderedClass } from '../lib/ClassGeneration'
-import { getNextId } from '../lib/IdGeneration'
-import { getItemById, findClassBy, findOrCreateClassBy, clone, copy, removeItemFrom } from '../lib/EditorUtils'
-import { printTree } from '../lib/DebugUtils'
-import { toHtml } from '../lib/HtmlExporter.js'
+import { debug } from '@/lib/logger.js'
+import { getComponentRenderedClass } from '@/lib/ClassGeneration.js'
+import { getNextId } from '@/lib/IdGeneration.js'
+import { getItemById, findClassBy, findOrCreateClassBy, clone, copy, removeItemFrom } from '@/lib/EditorUtils.js'
+import { printTree } from '@/lib/DebugUtils.js'
+import { toHtml } from '@/lib/HtmlExporter.js'
+import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy.js'
+
 import axios from 'axios'
 import _ from 'lodash'; 
 import { 
@@ -146,6 +153,12 @@ onMounted(() => {
     initTabs();
     initTooltips();
 })
+
+definePageMeta({
+  middleware: [
+    'auth',
+  ],
+});
 
 const itemTemplate = {
   name: 'div',
@@ -233,6 +246,9 @@ const itemTemplate = {
   }],
 }
 
+const accessToken = useCookie('access_token', undefined)
+const refreshToken = useCookie('refresh_token', undefined)
+
 const currentUser = useStorage('user', {
   name: 'anonimous',
   email: 'undefined',
@@ -241,7 +257,6 @@ const currentUser = useStorage('user', {
   maxProjects: '1'
 })
 
-const session = useStorage('session', null)
 
 function updateUser(account) {
   currentUser.value = account
@@ -318,8 +333,6 @@ function saveProject() {
 function dirtyProject() {
   project.value.dirty = true
 }
-
-
 
 function postToServer(obj, url) {
   return axios({
@@ -405,21 +418,8 @@ function selectComponent(component) {
   selectItem(selectedComponent.value.root)
 }
 
-
-
 const treeViewBackground = computed(() => selectedMode.value==='light' ? 'bg-white': 'bg-black' )
 const treeViewContainerClass = computed(() => `${selectedMode.value==='light' ? 'bg-white': 'bg-black'} ${selectedDeviceWidth[selectedDevice.value]} flex align-middle shadow-lg justify-center h-screen`)
-
-onMounted(() => {
-  if (currentUser.value.id === 'undefined') {
-    const router = useRouter()
-    router.push({
-      path: '/',
-    })
-  }
-  
-  createNewProject( { name: 'NewProject' } )
-})
 
 function printClassKey({ mode, device, modifier }) {
   // debug(`key: "${mode}:${device}:${modifier}"`)

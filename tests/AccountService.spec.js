@@ -1,5 +1,5 @@
 
-import { AccountService } from '@/lib/accounts/service.js'
+import { AccountService } from '@/lib/accounts/Service.js'
 
 describe('send function', () => {
   describe('given a body calls the email sender send function with the body', () => {

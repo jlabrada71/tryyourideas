@@ -72,7 +72,7 @@
 
 <script setup>
   import { ref, onMounted } from "vue"
-  import { ProjectRepositoryProxy } from '@/lib/ProjectRepositoryProxy'
+  import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy'
 
   const emit = defineEmits(['open'])
 
@@ -83,7 +83,7 @@
   })
 
   const config = useRuntimeConfig()
-  const projectRepository = new ProjectRepositoryProxy(config)
+  const projectRepository = new ProjectServiceProxy(config)
 
   const projectList = ref([])
   const selectedProject = ref(null)

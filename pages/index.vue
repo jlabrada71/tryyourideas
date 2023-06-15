@@ -1,8 +1,8 @@
 <template>
   <HomeSignInForm @update:session="updateSession"></HomeSignInForm>
   <HomeSignUpForm @update:user="updateUser"></HomeSignUpForm>
-  <HomeNavigationBar @sign-in="signIn" @sign-up="signUp"/>
-  <HomeHero @sign-up="signUp"/>
+  <HomeNavigationBar/>
+  <HomeHero/>
   <div class="min-h-screen"></div>
 </template>
 <script setup>
@@ -19,7 +19,8 @@
     initTabs, 
     initTooltips } from 'flowbite'
   import { useStorage } from '@vueuse/core'
-  import { AccountRepositoryProxy } from '@/lib/accounts/RepositoryProxy'
+  import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy'
+  import { debug, log } from '@/lib/logger.js'
 
   const config = useRuntimeConfig()
 
@@ -53,24 +54,12 @@
   }
 
   async function updateSession(data) {
-    console.log('SESSION')
-    console.log(data.session)
-    const repository = new AccountRepositoryProxy(config)
-    const result = await repository.select({ email: data.session.email })
-    const account = result.data[0]
-    currentUser.value = account
+    debug('SESSION')
+    debug(data)
+   
     const router = useRouter()
     router.push({
       path: '/editor',
     })
-  }
-
-  function signIn() {
-    alert('sign in')
-
-  }
-
-  function signUp() {
-    alert('sign-up')
   }
 </script>

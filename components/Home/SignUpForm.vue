@@ -69,7 +69,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { AccountRepositoryProxy } from '@/lib/accounts/RepositoryProxy'
+import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy'
 import GoogleLogo from '@/assets/svg/google.svg'
 import GitHubLogo from '@/assets/svg/github.svg'
 import { getGoogleOAuthUrl, getGitHubOAuthUrl } from '@/lib/url-utils'
@@ -112,8 +112,8 @@ async function sendForm() {
     showErrors()
     return
   }
-  const repository = new AccountRepositoryProxy(config)
-  const result = await repository.insert(form.value)
+  const service = new AccountServiceProxy(config)
+  const result = await service.insert(form.value)
   if (result.status !== 200 || result.data.result == 'error') {
     keepFormOpened()
     showErrors()

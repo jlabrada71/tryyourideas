@@ -1,6 +1,5 @@
 import { log, debug } from '@/lib/logger.js'
-import { getAuthorizationService } from '@/lib/authorization/services.js'
-
+import { getAuthorizationService } from '@/lib/authorization/Service.js'
 
 const config = useRuntimeConfig()
 

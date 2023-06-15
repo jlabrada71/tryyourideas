@@ -1,6 +1,6 @@
 <template>
   <div id="signInForm" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div id="id-4" class=" flex flex-row flex-wrap justify-center bg-slate-100 w-80 h-96 rounded-lg ">
+    <div id="id-4a" class=" flex flex-row flex-wrap gap-2 justify-center bg-slate-100 w-80 h-auto rounded-lg ">
       <div id="id-4-1" class=" flex flex-row flex-wrap justify-end bg-inherit w-full h-10 rounded-lg ">
         <button ref="closeElement" id="id-4-1-1" type="button" data-modal-hide="signInForm" class=" flex flex-row bg-inherit w-6 h-6 rounded-full hover:flex hover:flex-row hover:bg-slate-300 ">
           <svg xmlns="http://www.w3.org/2000/svg" id="id-4-1-1-1" class=" flex flex-row bg-inherit w-6 h-6 rounded-full focus:flex focus:flex-row focus:bg-inherit focus:w-6 focus:h-6 hover:flex hover:flex-row hover:bg-inherit hover:w-6 hover:h-6 " viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
@@ -47,7 +47,7 @@
         type="button" 
         @click="checkCredentials"
         :disabled="waiting"
-        class=" flex flex-row justify-center content-center items-center bg-slate-800 w-10/12 h-10 rounded-lg text-slate-200 transition-all hover:flex hover:flex-row hover:justify-center hover:content-center hover:items-center hover:bg-slate-800 hover:w-10/12 hover:h-10 hover:rounded-lg hover:text-slate-200 hover:transition-all hover:translate-y-1 ">
+        class=" flex flex-row my-4 justify-center content-center items-center bg-slate-800 w-10/12 h-10 rounded-lg text-slate-200 transition-all hover:flex hover:flex-row hover:justify-center hover:content-center hover:items-center hover:bg-slate-800 hover:w-10/12 hover:h-10 hover:rounded-lg hover:text-slate-200 hover:transition-all hover:translate-y-1 ">
         <span id="id-4-7-1" class=" flex flex-row bg-inherit h-6 rounded-lg font-bold ">
           <h2 v-if="waiting">Waiting...</h2> <h2 v-else>Sign In  </h2>
         </span>

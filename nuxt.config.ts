@@ -6,12 +6,16 @@ const variables = {
     frontEndOrigin: 'http://localhost:3000',
     googleOAuthRedirect: 'http://localhost:3000/api/v1/sessions/oauth/google',
     githubOAuthRedirect: 'http://localhost:3000/api/v1/sessions/oauth/github',
+    githubOAuthClientId: 'f51061212d92f100b373',
+    githubOAuthClientSecret: 'fddf07928655b6b7cc3f56f19d91a609e48832b6'
   },
   production: {
     apiBase: 'https://tryyourideas.com/api/v1',
     frontEndOrigin: 'https://tryyourideas.com',
     googleOAuthRedirect: 'https://tryyourideas.com/api/v1/sessions/oauth/google',
     githubOAuthRedirect: 'https://tryyourideas.com/api/v1/sessions/oauth/github',
+    githubOAuthClientId: 'df162a8cc3d7d1a472a8',
+    githubOAuthClientSecret: '9b3b1079d0c352b6a5fa1397ba7d985141e935dd'
   }
 }
 
@@ -46,7 +50,7 @@ export default defineNuxtConfig({
     notificationsApi: 'https://juanlabrada.com/api/v1/notifications',
     googleOAuthClientSecret: 'undefined',
     googleOAuthRediret : 'undefined',
-    githubOAuthClientSecret: '9b3b1079d0c352b6a5fa1397ba7d985141e935dd',
+    githubOAuthClientSecret: variables[env].githubOAuthClientSecret,
     keyPassword: 'Ulloa%&91',
     accessTokenExpiresIn: 60,
     accessTokenPrivateKey: `-----BEGIN ENCRYPTED PRIVATE KEY-----
@@ -115,7 +119,7 @@ wFaTTJoV/jMlB4hdQsdcFQ==
       apiBase: variables[env].apiBase,
       googleOAuthClientId: 'undefined',
       googleOAuthRedirect: variables[env].googleOAuthRedirect,
-      githubOAuthClientId: 'df162a8cc3d7d1a472a8',
+      githubOAuthClientId: variables[env].githubOAuthClientId,
       githubOAuthRedirect: variables[env].githubOAuthRedirect,
       frontEndOrigin: variables[env].frontEndOrigin,
       accessTokenPublicKey: `-----BEGIN PUBLIC KEY-----

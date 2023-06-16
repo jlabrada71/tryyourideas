@@ -8,8 +8,12 @@
     Name: {{project.name}} <br>
     User: <br>
     Name: {{ currentUser.name}} <br> <br>
-    <button @click="cleanProject">Clean Project</button>
-    <button @click="cleanUser">Clean User</button>
+    accessToken: {{ accessToken }} <br> <br>
+    <div class="p-2 flex gap-2">
+      <button @click="cleanProject" class="bg-slate-200 p-2">Clean Project</button>
+    <button @click="cleanUser"  class="bg-slate-200 p-2">Clean User</button>
+    </div>
+    
   </div>
 
 </template>
@@ -31,6 +35,8 @@
     licence: 'community',
     maxProjects: '1'
   })
+
+  const accessToken = useCookie('access_token')
 
   function cleanProject() {
     project.value = null

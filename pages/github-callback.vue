@@ -2,7 +2,8 @@
   <p>
     Redirecting to Editor
   </p>
-  <p>{{accessToken}}</p>
+  <p>accessToken: {{accessToken}}</p>
+  <p>headers: {{headers}}</p>
 </template>
 
 <script setup>
@@ -17,6 +18,7 @@
   const accessToken = useCookie('access_token')
   const refreshToken = useCookie('refresh_token')
   const loggedIn = useCookie('logged_in')
+  const headers = ref('')
 
   const currentUser = useStorage('user', {
     name: 'anonimous',
@@ -47,6 +49,7 @@
         const router = useRouter()
         const response = await axios.get(`${config.public.apiBase}/sessions/oauth/github?code=${route.query.code}&path=editor` )
         if (response.status == 200 && response.data.result == 'ok' ) {
+          headers.value = response.headers
           await getLoggedUserData()
           router.push({
             path: response.data.path,

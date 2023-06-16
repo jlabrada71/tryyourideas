@@ -11,5 +11,5 @@ pages/tests/demo.vue
 tryyourideas.com.tar
 pages/version.vue
 public/tmp
-components/version.vue
 package-lock.json
+components/ProductVersion.vue

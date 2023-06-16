@@ -2,6 +2,7 @@
   <p>
     Redirecting to Editor
   </p>
+  <p>{{accessToken}}</p>
 </template>
 
 <script setup>

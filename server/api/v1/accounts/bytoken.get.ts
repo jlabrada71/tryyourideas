@@ -13,10 +13,14 @@ export default defineEventHandler(async (event) => {
 
     const accessToken = getCookie(event, 'access_token')
     const refreshToken = getCookie(event, 'refresh_token')
-    debug('ACCESS TOKEN')
-    debug(accessToken)
-    const { sub, iat, exp } = decodeJwt(accessToken, { key: config.accessTokenPrivateKey, passphrase: config.keyPassword } )
+    log('ACCESS TOKEN')
+    log(accessToken)
+    const decoded = decodeJwt(accessToken, { key: config.accessTokenPrivateKey, passphrase: config.keyPassword } )
+    
+    log( decoded )
+    const { sub, iat, exp } = decoded
     debug({sub, iat, exp })
+
     debug('REFRESH TOKEN')
     debug(refreshToken)
 
@@ -27,7 +31,6 @@ export default defineEventHandler(async (event) => {
       data: account,
       status: 'ok'
     }
-
   } catch(e) {
     return {
       status: 'error',

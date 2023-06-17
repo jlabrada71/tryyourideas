@@ -2,8 +2,7 @@
   <p>
     Redirecting to Editor
   </p>
-  <p>accessToken: {{accessToken}}</p>
-  <p>headers: {{headers}}</p>
+  <p>{{status}}</p>
 </template>
 
 <script setup>
@@ -17,8 +16,7 @@
   const config = useRuntimeConfig()
   const accessToken = useCookie('access_token')
   const refreshToken = useCookie('refresh_token')
-  const loggedIn = useCookie('logged_in')
-  const headers = ref('')
+  const status = ref('')
 
   const currentUser = useStorage('user', {
     name: 'anonimous',
@@ -29,6 +27,7 @@
   })
 
   async function getLoggedUserData() {
+    debug('getLoggedUserData')
     const accountService = new AccountServiceProxy(config)
     const response = await accountService.findForAccessToken(accessToken.value)
     debug(response.data.data )
@@ -36,29 +35,29 @@
   }
 
   onMounted(async () => {
-    if (loggedIn.value == true ) {
-      const router = useRouter()
-      router.push({
-        path: '/editor',
-      })
-    }
     const route = useRoute();
+    const router = useRouter()
     code.value = route.query.code
     if (route.query.code) {
       try {
-        const router = useRouter()
-        const response = await axios.get(`${config.public.apiBase}/sessions/oauth/github?code=${route.query.code}&path=editor` )
-        if (response.status == 200 && response.data.result == 'ok' ) {
-          headers.value = response.headers
-          await getLoggedUserData()
-          router.push({
-            path: response.data.path,
-          })
-        } else {
-          router.push({
-            path: response.data.path,
-          })
-        }
+        status.value = 'getting github authentication info...'
+        nextTick(async () => {
+          const response = await axios.get(`${config.public.apiBase}/sessions/oauth/github?code=${route.query.code}&path=editor` )
+          if (response.status == 200 && response.data.result == 'ok' ) {
+            accessToken.value = response.data.accessToken
+            status.value = 'getting logged user data....'
+            nextTick(async () => {
+              await getLoggedUserData()
+              router.push({
+                path: response.data.path,
+              }) 
+            })
+          } else {
+            router.push({
+              path: response.data.path,
+            })
+          }
+        })
       }
       catch(error) {
         // handle error
@@ -67,6 +66,11 @@
       finally  {
         // always executed
       }
+    } 
+    else {
+      router.push({
+        path: '/'
+      })
     }
   })
 </script>

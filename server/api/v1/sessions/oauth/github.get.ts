@@ -32,14 +32,12 @@ export default defineEventHandler(async (event) => {
     const { accessToken, refreshToken, accessTokenCookieOptions, refreshTokenCookieOptions} = await authorizationService.signinWithGithubCode(code)
     setCookie(event, 'access_token', accessToken, accessTokenCookieOptions);
     setCookie(event, 'refresh_token', refreshToken, refreshTokenCookieOptions);
-    setCookie(event, 'logged_in', true, {
-      ...accessTokenCookieOptions,
-      httpOnly: false,
-    });
+
     return {
       result: 'ok',
       action: 'redirect',
       errorCode: '',
+      accessToken: accessToken,
       path: `${pathUrl}`
     }
   } catch (err: any) {

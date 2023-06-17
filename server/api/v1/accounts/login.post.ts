@@ -14,14 +14,12 @@ export default defineEventHandler(async (event) => {
           = await authorizationService.signIn( { email: body.email, password: body.password })
     setCookie(event, 'access_token', accessToken, accessTokenCookieOptions);
     setCookie(event, 'refresh_token', refreshToken, refreshTokenCookieOptions);
-    setCookie(event, 'logged_in', true, {
-      ...accessTokenCookieOptions,
-      httpOnly: false,
-    });
+
     return {
       result: 'ok',
       action: 'redirect',
       errorCode: '',
+      accessToken: accessToken,
       path: `\editor`
     }
   } catch (err: any) {

@@ -11,18 +11,33 @@ export default defineEventHandler(async (event) => {
   try {
     const query = await getQuery(event)
 
-    const accessToken = getCookie(event, 'access_token')
-    const refreshToken = getCookie(event, 'refresh_token')
-    log('ACCESS TOKEN')
-    log(accessToken)
+    // const accessToken = getCookie(event, 'access_token')
+    // const refreshToken = getCookie(event, 'refresh_token')
+    const authorization = getRequestHeader(event, 'authorization')
+    debug('Authorization TOKEN')
+    debug(authorization)
+    if (!authorization) {
+      return {
+        status: 'error',
+        msg: 'Authorization required'
+      }
+    }
+      
+    const accessToken = authorization.substring('Bearer '.length).trim()
+    debug(' Access Token')
+    debug(accessToken)
+    if (!accessToken) {
+      return {
+        status: 'error',
+        msg: 'Authorization required'
+      }
+    }
     const decoded = decodeJwt(accessToken, { key: config.accessTokenPrivateKey, passphrase: config.keyPassword } )
     
-    log( decoded )
+    debug( decoded )
     const { sub, iat, exp } = decoded
     debug({sub, iat, exp })
 
-    debug('REFRESH TOKEN')
-    debug(refreshToken)
 
     const accountService = getAccountService(config)
     const account = await accountService.getAccountById( sub )
@@ -32,6 +47,7 @@ export default defineEventHandler(async (event) => {
       status: 'ok'
     }
   } catch(e) {
+    log(e.message)
     return {
       status: 'error',
       msg: e.message

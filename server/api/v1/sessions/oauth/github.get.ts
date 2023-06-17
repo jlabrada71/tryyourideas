@@ -38,6 +38,7 @@ export default defineEventHandler(async (event) => {
       action: 'redirect',
       errorCode: '',
       accessToken: accessToken,
+      refreshToken:  refreshToken,
       path: `${pathUrl}`
     }
   } catch (err: any) {

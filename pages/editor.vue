@@ -176,7 +176,12 @@ const itemTemplate = {
     backgroundColor: 'unset',
     width: 'unset',
     height: 'unset',
+
     padding: 'unset',
+    paddingTop: 'unset',
+    paddingLeft: 'unset',
+    paddingRight: 'unset',
+    paddingBottom: 'unset',
     
     margin: 'unset',
     marginTop: 'unset',

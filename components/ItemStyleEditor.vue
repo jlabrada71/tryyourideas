@@ -13,7 +13,13 @@
           <SelectorsBackgroundColor :color="currentClass.backgroundColor" @update:color="value => updateClass('backgroundColor', value)"></SelectorsBackgroundColor>
           <SelectorsWidth  :width="currentClass.width" @update:width="value => updateClass('width', value)"></SelectorsWidth>
           <SelectorsHeight :height="currentClass.height" @update:height="value => updateClass('height', value)"></SelectorsHeight>
-          <SelectorsPadding :padding="currentClass.padding" @update:padding="value => updateClass('padding', value)"></SelectorsPadding>
+          <SelectorsMultiPaddingSelect 
+            :top="currentClass.paddingTop"
+            :left="currentClass.paddingLeft"
+            :right="currentClass.paddingRight"
+            :bottom="currentClass.paddingBottom"
+            @update:values="values => updatePaddings(values)">
+          </SelectorsMultiPaddingSelect>
           <SelectorsMultiMarginSelect 
             :top="currentClass.marginTop"
             :left="currentClass.marginLeft"
@@ -205,6 +211,29 @@ function updateMargins(values) {
     updateClass('marginLeft', values.L)
     updateClass('marginRight', values.R)
     updateClass('marginBottom', values.B)
+  }
+  
+}
+
+function updatePaddings(values) {
+  console.log(values)
+  if (values.A) {
+    updateClass('paddingTop', values.A)
+    updateClass('paddingLeft', 'unset')
+    updateClass('paddingRight',  'unset')
+    updateClass('paddingBottom',  'unset')
+  }
+  if (values.Y) {
+    updateClass('paddingTop', values.Y)
+    updateClass('paddingLeft', values.X)
+    updateClass('paddingRight',  'unset')
+    updateClass('paddingBottom',  'unset')
+  }
+  if (values.T) {
+    updateClass('paddingTop', values.T)
+    updateClass('paddingLeft', values.L)
+    updateClass('paddingRight', values.R)
+    updateClass('paddingBottom', values.B)
   }
   
 }

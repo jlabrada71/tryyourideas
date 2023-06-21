@@ -1,18 +1,15 @@
 <template> 
   <div>
-    <SelectButton :options="borderRadius" :option="radius" @update:option="value=>emit('update:radius', value)">
-      <h1>Border Radius: <span>{{radius}}</span></h1>
-    </SelectButton>
+    <InputListWithTag :options="borderRadius" :option="radius" tag="rounded" @update:option="value=>emit('update:radius', value)">
+      <h1 class="m-2 w-20">Radius: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['radius'])
   const emit = defineEmits(['update:radius'])
 
-  const borderRadius = ['unset', "rounded-none", "rounded-sm", "rounded", "rounded-md", "rounded-lg", "rounded-xl", "rounded-2xl", "rounded-3xl", "rounded-full", "rounded-t-none", "rounded-t-sm", "rounded-t", "rounded-t-md", "rounded-t-lg", "rounded-t-xl", "rounded-t-2xl", "rounded-t-3xl", "rounded-t-full", "rounded-r-none", "rounded-r-sm", "rounded-r", "rounded-r-md", "rounded-r-lg", "rounded-r-xl", "rounded-r-2xl", "rounded-r-3xl", "rounded-r-full", "rounded-b-none", "rounded-b-sm", "rounded-b", "rounded-b-md", "rounded-b-lg", "rounded-b-xl", "rounded-b-2xl", "rounded-b-3xl", "rounded-b-full", "rounded-l-none", "rounded-l-sm", "rounded-l", "rounded-l-md", "rounded-l-lg", "rounded-l-xl", "rounded-l-2xl", "rounded-l-3xl", "rounded-l-full", "rounded-tl-none	", "rounded-tl-sm	", "rounded-tl	", "rounded-tl-md	", "rounded-tl-lg	", "rounded-tl-xl	", "rounded-tl-2xl	", "rounded-tl-3xl	", "rounded-tl-full	", "rounded-tr-none	", "rounded-tr-sm	", "rounded-tr	", "rounded-tr-md	", "rounded-tr-lg	", "rounded-tr-xl	", "rounded-tr-2xl	", "rounded-tr-3xl	", "rounded-tr-full	", "rounded-br-none	", "rounded-br-sm	", "rounded-br	", "rounded-br-md	", "rounded-br-lg	", "rounded-br-xl	", "rounded-br-2xl	", "rounded-br-3xl	", "rounded-br-full	", "rounded-bl-none	", "rounded-bl-sm	", "rounded-bl	", "rounded-bl-md	", "rounded-bl-lg	", "rounded-bl-xl	", "rounded-bl-2xl	", "rounded-bl-3xl	", "rounded-bl-full" ]
-  // function test(value) {
-  //   console.log('radius:' + value)
-  //   emit('update:radius', value)
-  // }
+  const borderRadius = ['unset', "none", "sm", "md", "lg", "xl", "2xl", "3xl", "full", "t-none", "t-sm", "t-md", "t-lg", "t-xl", "t-2xl", "t-3xl", "t-full", "r-none", "r-sm", "r-md", "r-lg", "r-xl", "r-2xl", "r-3xl", "r-full", "b-none", "b-sm", "b-md", "b-lg", "b-xl", "b-2xl", "b-3xl", "b-full", "l-none", "l-sm", "l-md", "l-lg", "l-xl", "l-2xl", "l-3xl", "l-full", "tl-none	", "tl-sm	", "tl-md	", "tl-lg	", "tl-xl	", "tl-2xl	", "tl-3xl	", "tl-full	", "tr-none	", "tr-sm	", "tr-md	", "tr-lg	", "tr-xl	", "tr-2xl	", "tr-3xl	", "tr-full	", "br-none	", "br-sm	", "br-md	", "br-lg	", "br-xl	", "br-2xl	", "br-3xl	", "br-full	", "bl-none	", "bl-sm	", "bl-md	", "bl-lg	", "bl-xl	", "bl-2xl	", "bl-3xl	", "bl-full" ]
+
 </script>
 

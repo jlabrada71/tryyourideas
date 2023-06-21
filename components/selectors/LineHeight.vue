@@ -1,14 +1,14 @@
 <template>
   <div>
-    <SelectButton :options="heights" :option="height" @update:option="value=>emit('update:height', value)">
-      <h1>Line height: <span>{{height}}</span></h1>
-    </SelectButton>
+    <InputListWithTag :options="heights" :option="height" tag="leading" @update:option="value=>emit('update:height', value)">
+      <h1 class="m-2 w-20">Leading: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['height'])
   const emit = defineEmits(['update:height'])
 
-  const heights = ['unset', 'leading-3', 'leading-4', 'leading-5', 'leading-6', 'leading-7', 'leading-8', 'leading-9', 'leading-10', 'leading-none', 'leading-tight', 'leading-snug', 'leading-normal', 'leading-relaxed', 'leading-loose']
+  const heights = ['unset', 'none', 'tight', 'snug', 'normal', 'relaxed', 'loose', '3', '4', '5', '6', '7', '8', '9', '10']
 </script>
 

@@ -103,6 +103,15 @@ import { getItemById, findClassBy, findOrCreateClassBy, clone, copy, removeItemF
 import { printTree } from '@/lib/DebugUtils.js'
 import { toHtml } from '@/lib/HtmlExporter.js'
 import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy.js'
+import { getSpacingVariables } from '@/lib/plugins/spacing.js'
+import { getTypographyVariables } from '@/lib/plugins/typography.js'
+import { getTransformVariables } from '@/lib/plugins/transform.js'
+import { getTransitionVariables } from '@/lib/plugins/transition.js'
+import { getPaddingVariables } from '@/lib/plugins/padding.js'
+import { getMarginVariables } from '@/lib/plugins/margin.js'
+import { getFlexVariables } from '@/lib/plugins/flex.js'
+import { getBorderVariables } from '@/lib/plugins/border.js'
+import { getGradientVariables } from '@/lib/plugins/gradient.js'
 
 import axios from 'axios'
 import _ from 'lodash'; 
@@ -177,24 +186,7 @@ const itemTemplate = {
     width: 'unset',
     height: 'unset',
 
-    padding: 'unset',
-    paddingTop: 'unset',
-    paddingLeft: 'unset',
-    paddingRight: 'unset',
-    paddingBottom: 'unset',
-    
-    margin: 'unset',
-    marginTop: 'unset',
-    marginLeft: 'unset',
-    marginRight: 'unset',
-    marginBottom: 'unset',
-
-    spacing: 'unset',
     display: 'unset',
-    flexBasis: 'unset',
-    flexDirection: 'unset',
-    flexWrap: 'unset',
-    flexShrinkGrow: 'unset',
 
     gap: 'unset', 
     justifyContent: 'unset',
@@ -209,20 +201,6 @@ const itemTemplate = {
     placeItems: 'unset',
     placeSelf: 'unset',
 
-    textColor: 'unset',
-    fontSize: 'unset',
-    fontFamily: 'unset',
-    fontWeight:'unset',
-    letterSpacing: 'unset',
-    lineHeight: 'unset',
-    textAlign: 'unset',
-    textVerticalAlign: 'unset',
-
-    borderColor: 'unset',
-    borderStyle: 'unset',
-    borderWidth: 'unset',
-    borderRadius: 'unset',
-
     shadow: 'unset',
     shadowColor: 'unset',
 
@@ -230,26 +208,33 @@ const itemTemplate = {
     outlineColor: 'unset',
     ringColor: 'unset',
 
-    transition: 'unset',
-    transitionDuration: 'unset',
-    transitionTiming: 'unset',
-    transitionDelay: 'unset',
     animation: 'unset',
-
-    transformScale: 'unset',
-    transformRotate: 'unset',
-    transformTranslate: 'unset',
-    transformSkew: 'unset',
-    transformOrigin: 'unset',
-
-    gradientDirection: 'unset',
-    gradientFromColor: 'unset',
-    gradientViaColor: 'unset',
-    gradientToColor: 'unset',
 
     fillColor: 'unset',
   }],
 }
+
+function addTemplateVariables(template, variables) {
+  Object.keys(variables).forEach(name => {
+    itemTemplate.classes[0][name] = variables[name]
+  })
+}
+
+const plugins = [
+  getSpacingVariables,
+  getPaddingVariables,
+  getMarginVariables,
+  getTypographyVariables,
+  getBorderVariables,
+  getFlexVariables,
+  getTransformVariables,
+  getTransitionVariables,
+  getGradientVariables,
+]
+
+plugins.forEach(plugin => {
+  addTemplateVariables( itemTemplate, plugin() )
+})
 
 const accessToken = useCookie('access_token', undefined)
 const refreshToken = useCookie('refresh_token', undefined)
@@ -261,7 +246,6 @@ const currentUser = useStorage('user', {
   licence: 'community',
   maxProjects: '1'
 })
-
 
 function updateUser(account) {
   currentUser.value = account

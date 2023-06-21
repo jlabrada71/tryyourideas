@@ -1,15 +1,15 @@
 <template>
   <div>
-    <SelectButton :options="gapList" :option="gap" @update:option="value=>emit('update:gap', value)">
-      <h1>Gap: {{gap}}</h1>
-    </SelectButton>
+    <InputListWithTag :options="gapList" :option="gap"  tag="gap" @update:option="value=>emit('update:gap', value)">
+      <h1 class="m-2 w-20">Gap: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['gap'])
   const emit = defineEmits(['update:gap'])
 
- const gapList = ['unset', "gap-0", "gap-0.5", "gap-1", "gap-1.5", "gap-2", "gap-2.5", "gap-3", "gap-3.5", "gap-4", "gap-5", "gap-6", "gap-7", "gap-8", "gap-9", "gap-10", "gap-11", "gap-12", "gap-14", "gap-16", "gap-20", "gap-24", "gap-28", "gap-32", "gap-36", "gap-40", "gap-44", "gap-48", "gap-52", "gap-56", "gap-60", "gap-64", "gap-72", "gap-80", "gap-96",  "gap-px"]
+ const gapList = ['unset',  "px", "0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "5", "6", "7", "8", "9", "10", "11", "12", "14", "16", "20", "24", "28", "32", "36", "40", "44", "48", "52", "56", "60", "64", "72", "80", "96"]
 
 </script>
 

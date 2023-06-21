@@ -1,10 +1,16 @@
 <template>
   <div class="flex flex-col">
     <div class="h-96 p-10 flex flex-col">
-      <p>Basis: {{basisValue}}</p>
-      <InputList :option="basisValue" :options="basis" @update:option="value=>basisValue = value">Basis</InputList>
+      <InputListWithTag 
+        v-model:option="basisValue" 
+        :options="basis" 
+        tag="basis">Basis {{basisValue}}</InputListWithTag>
+    
+      <!-- <p>Basis: {{basisValue}}</p>
+
+      <InputList :option="basisValue" :options="basis" @update:option="value=>basisValue = value">Basis</InputList> -->
       <p>Transforms: {{transformValue}}</p>
-      <InputList :option="transformValue" :options="transforms"  @update:option="value=>transformValue = value">Transforms</InputList>
+      <InputList v-model:option="transformValue" :options="transforms" >Transform</InputList>
     </div>
     <div class="h-96"></div>
     <div class="h-80"></div>

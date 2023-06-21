@@ -1,8 +1,8 @@
 <template>
   <div>
-    <SelectButton :options="borderStyles" :option="style" @update:option="value=>emit('update:style', value)">
-      <h1>Border Style: <span>{{style}}</span></h1>
-    </SelectButton>
+    <InputListWithTag :options="borderStyles" :option="style" tag="border" @update:option="value=>emit('update:style', value)">
+      <h1 class="m-2 w-20">Style: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
@@ -10,6 +10,6 @@
   const emit = defineEmits(['update:style'])
 
   const borderStyles = [
-  'unset', "border-solid", "border-dashed", "border-dotted", "border-double", "border-hidden", "border-none" ]
+  'unset', "solid", "dashed", "dotted", "double", "hidden", "none" ]
   
 </script>

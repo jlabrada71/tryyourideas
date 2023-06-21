@@ -1,15 +1,15 @@
 <template>
   <div>
-    <SelectButton :options="transforms" :option="transform" @update:option="value=>emit('update:transform', value)">
-      <h1>Skew: <span>{{transform}}</span></h1>
-    </SelectButton>
+    <InputListWithTag :options="transforms" :option="transform" tag="skew" @update:option="value=>emit('update:transform', value)">
+      <h1 class="m-2 w-20">Skew: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['transform'])
   const emit = defineEmits(['update:transform'])
 
-  const transforms = ['unset', 'skew-x-0', 'skew-y-0', 'skew-x-1', 'skew-y-1', 'skew-x-2', 'skew-y-2', 'skew-x-3', 'skew-y-3', 'skew-x-6', 'skew-y-6', 'skew-x-12', 'skew-y-12']
+  const transforms = ['unset', 'x-0', 'y-0', 'x-1', 'y-1', 'x-2', 'y-2', 'x-3', 'y-3', 'x-6', 'y-6', 'x-12', 'y-12']
   
   </script>
 

@@ -1,15 +1,15 @@
 <template>
   <div>
-    <SelectButton :options="transforms" :option="transform" @update:option="value=>emit('update:transform', value)">
-      <h1>Translate: <span>{{transform}}</span></h1>
-    </SelectButton>
+    <InputListWithTag :options="transforms" :option="transform" tag="translate" @update:option="value=>emit('update:transform', value)">
+      <h1 class="m-2 w-20">Translate: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['transform'])
   const emit = defineEmits(['update:transform'])
 
-  const transforms = ['unset', 'translate-x-0', 'translate-y-0', 'translate-x-px', 'translate-y-px', 'translate-x-0.5', 'translate-y-0.5', 'translate-x-1', 'translate-y-1', 'translate-x-1.5', 'translate-y-1.5', 'translate-x-2', 'translate-y-2', 'translate-x-2.5', 'translate-y-2.5', 'translate-x-3', 'translate-y-3', 'translate-x-3.5', 'translate-y-3.5', 'translate-x-4', 'translate-y-4', 'translate-x-5', 'translate-y-5', 'translate-x-6', 'translate-y-6', 'translate-x-7', 'translate-y-7', 'translate-x-8', 'translate-y-8', 'translate-x-9', 'translate-y-9', 'translate-x-10', 'translate-y-10', 'translate-x-11', 'translate-y-11', 'translate-x-12', 'translate-y-12', 'translate-x-14', 'translate-y-14', 'translate-x-16', 'translate-y-16', 'translate-x-20', 'translate-y-20', 'translate-x-24', 'translate-y-24', 'translate-x-28', 'translate-y-28', 'translate-x-32', 'translate-y-32', 'translate-x-36', 'translate-y-36', 'translate-x-40', 'translate-y-40', 'translate-x-44', 'translate-y-44', 'translate-x-48', 'translate-y-48', 'translate-x-52', 'translate-y-52', 'translate-x-56', 'translate-y-56', 'translate-x-60', 'translate-y-60', 'translate-x-64', 'translate-y-64', 'translate-x-72', 'translate-y-72', 'translate-x-80', 'translate-y-80', 'translate-x-96', 'translate-y-96', 'translate-x-1/2', 'translate-x-1/3', 'translate-x-2/3', 'translate-x-1/4', 'translate-x-2/4', 'translate-x-3/4', 'translate-x-full', 'translate-y-1/2', 'translate-y-1/3', 'translate-y-2/3', 'translate-y-1/4', 'translate-y-2/4', 'translate-y-3/4', 'translate-y-full']
+  const transforms = ['unset', 'x-px', 'y-px','x-full', 'y-full', 'x-0', 'y-0',  'x-0.5', 'y-0.5', 'x-1', 'y-1', 'x-1.5', 'y-1.5', 'x-2', 'y-2', 'x-2.5', 'y-2.5', 'x-3', 'y-3', 'x-3.5', 'y-3.5', 'x-4', 'y-4', 'x-5', 'y-5', 'x-6', 'y-6', 'x-7', 'y-7', 'x-8', 'y-8', 'x-9', 'y-9', 'x-10', 'y-10', 'x-11', 'y-11', 'x-12', 'y-12', 'x-14', 'y-14', 'x-16', 'y-16', 'x-20', 'y-20', 'x-24', 'y-24', 'x-28', 'y-28', 'x-32', 'y-32', 'x-36', 'y-36', 'x-40', 'y-40', 'x-44', 'y-44', 'x-48', 'y-48', 'x-52', 'y-52', 'x-56', 'y-56', 'x-60', 'y-60', 'x-64', 'y-64', 'x-72', 'y-72', 'x-80', 'y-80', 'x-96', 'y-96', 'x-1/2', 'x-1/3', 'x-2/3', 'x-1/4', 'x-2/4', 'x-3/4',  'y-1/2', 'y-1/3', 'y-2/3', 'y-1/4', 'y-2/4', 'y-3/4']
   
   </script>
 

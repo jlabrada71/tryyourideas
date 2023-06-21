@@ -27,9 +27,15 @@
             :bottom="currentClass.marginBottom"
             @update:values="values => updateMargins(values)">
           </SelectorsMultiMarginSelect>
-          <SelectorsSpacing :spacing="currentClass.spacing" @update:spacing="value => updateClass('spacing', value)"></SelectorsSpacing>
+          <!-- <SelectorsSpacing :spacing="currentClass.spacing" @update:spacing="value => updateClass('spacing', value)"></SelectorsSpacing> -->
+          <SelectorsMultiSpacingSelect 
+            :top="currentClass.spacingY"
+            :left="currentClass.spacingX"
+            right=""
+            bottom=""
+            @update:values="values => updateSpacings(values)">
+          </SelectorsMultiSpacingSelect>
         </div>
-        
       </template>
     </AccordionItem>
 
@@ -193,7 +199,6 @@ function updateClass(className, value) {
 }
 
 function updateMargins(values) {
-  console.log(values)
   if (values.A) {
     updateClass('marginTop', values.A)
     updateClass('marginLeft', 'unset')
@@ -212,11 +217,9 @@ function updateMargins(values) {
     updateClass('marginRight', values.R)
     updateClass('marginBottom', values.B)
   }
-  
 }
 
 function updatePaddings(values) {
-  console.log(values)
   if (values.A) {
     updateClass('paddingTop', values.A)
     updateClass('paddingLeft', 'unset')
@@ -235,6 +238,10 @@ function updatePaddings(values) {
     updateClass('paddingRight', values.R)
     updateClass('paddingBottom', values.B)
   }
-  
+}
+
+function updateSpacings(values) {
+  updateClass('spacingY', values.Y)
+  updateClass('spacingX', values.X)
 }
 </script>

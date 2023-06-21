@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-auto items-baseline">
-    <h1 class="m-2">Display: </h1><InputList :options="displayList" :option="display" @update:option="value=>emit('update:display', value)" />
+    <h1 class="m-2 w-20">Display: </h1><InputList :options="displayList" :option="display" @update:option="value=>emit('update:display', value)" />
   </div>
 </template>
 <script setup>

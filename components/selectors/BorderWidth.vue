@@ -1,15 +1,15 @@
 <template>
   <div>
-    <SelectButton :options="borderWidths" :option="width" @update:option="value=>emit('update:width', value)">
-      <h1>Border Width: <span>{{width}}</span></h1>
-    </SelectButton>
+    <InputListWithTag :options="borderWidths" :option="width"  tag="border" @update:option="value=>emit('update:width', value)">
+      <h1 class="m-2 w-20">Width: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['width'])
   const emit = defineEmits(['update:width'])
 
-  const borderWidths = ['unset', "border-0", "border-2", "border-4", "border-8", "border", "border-x-0", "border-x-2", "border-x-4", "border-x-8", "border-x", "border-y-0", "border-y-2", "border-y-4", "border-y-8", "border-y", "border-t-0", "border-t-2", "border-t-4", "border-t-8", "border-t", "border-r-0", "border-r-2", "border-r-4", "border-r-8", "border-r", "border-b-0", "border-b-2", "border-b-4", "border-b-8", "border-b", "border-l-0", "border-l-2", "border-l-4", "border-l-8", "border-l" ]
+  const borderWidths = ['unset', "0", "2", "4", "8", "x-0", "x-2", "x-4", "x-8", "y-0", "y-2", "y-4", "y-8", "t-0", "t-2", "t-4", "t-8", "r-0", "r-2", "r-4", "r-8", "b-0", "b-2", "b-4", "b-8", "l-0", "l-2", "l-4", "l-8" ]
   
 </script>
 

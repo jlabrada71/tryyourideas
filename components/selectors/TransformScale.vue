@@ -1,14 +1,14 @@
 <template>
   <div>
-    <SelectButton :options="transforms" :option="transform" @update:option="value=>emit('update:transform', value)">
-      <h1>Scale: <span>{{transform}}</span></h1>
-    </SelectButton>
+    <InputListWithTag :options="transforms" :option="transform" tag="scale" @update:option="value=>emit('update:transform', value)">
+      <h1 class="m-2 w-20">Scale: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['transform'])
   const emit = defineEmits(['update:transform'])
 
-  const transforms = ['unset', 'scale-0', 'scale-x-0', 'scale-y-0', 'scale-50', 'scale-x-50', 'scale-y-50', 'scale-75', 'scale-x-75', 'scale-y-75', 'scale-90', 'scale-x-90', 'scale-y-90', 'scale-95', 'scale-x-95', 'scale-y-95', 'scale-100', 'scale-x-100', 'scale-y-100', 'scale-105', 'scale-x-105', 'scale-y-105', 'scale-110', 'scale-x-110', 'scale-y-110', 'scale-125', 'scale-x-125', 'scale-y-125', 'scale-150', 'scale-x-150', 'scale-y-150']
+  const transforms = ['unset', '0', 'x-0', 'y-0', '50', 'x-50', 'y-50', '75', 'x-75', 'y-75', '90', 'x-90', 'y-90', '95', 'x-95', 'y-95', '100', 'x-100', 'y-100', '105', 'x-105', 'y-105', '110', 'x-110', 'y-110', '125', 'x-125', 'y-125', '150', 'x-150', 'y-150']
   
   </script>

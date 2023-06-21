@@ -1,13 +1,13 @@
 <template>
   <div>
-    <SelectButton :options="shrinkGrows" :option="shrinkGrow" @update:option="value=>emit('update:shrinkGrow', value)">
-      <h1>Flex shrink/grow: <span>{{shrinkGrow}}</span></h1>
-    </SelectButton>
+    <InputListWithTag :options="shrinkGrows" :option="shrinkGrow" tag="flex" @update:option="value=>emit('update:shrinkGrow', value)">
+      <h1 class="m-2 w-20">Shrink/grow: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['shrinkGrow'])
   const emit = defineEmits(['update:shrinkGrow'])
 
-  const shrinkGrows = ['unset', 'flex-1', 'flex-auto', 'flex-initial', 'flex-none', 'grow', 'grow-0', 'shrink', 'shrink-0']
+  const shrinkGrows = ['unset','none', 'auto', '1', 'initial',  'grow', 'grow-0', 'shrink', 'shrink-0']
 </script>

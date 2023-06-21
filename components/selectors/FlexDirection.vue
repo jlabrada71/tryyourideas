@@ -1,13 +1,13 @@
 <template>
   <div>
-    <SelectButton :options="directions" :option="direction" @update:option="value=>emit('update:direction', value)">
-      <h1>Flex direction: <span>{{direction}}</span></h1>
-    </SelectButton>
+    <InputListWithTag :options="directions" :option="direction" tag="flex" @update:option="value=>emit('update:direction', value)">
+      <h1 class="m-2 w-20">Direction: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['direction'])
   const emit = defineEmits(['update:direction'])
 
-  const directions = ['unset', 'flex-row', 'flex-row-reverse', 'flex-col', 'flex-col-reverse']
+  const directions = ['unset', 'row', 'row-reverse', 'col', 'col-reverse']
 </script>

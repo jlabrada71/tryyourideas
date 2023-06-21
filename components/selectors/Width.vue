@@ -1,22 +1,22 @@
 <template>
   <div>
-    <div class="flex w-auto items-baseline">
-      <h1 class="m-2">Width: </h1><InputList :options="widths" :option="width" @update:option="value=>emit('update:width', value)" />
-    </div>
+    <InputListWithTag :options="widths" :option="width" tag="w" @update:option="value=>emit('update:width', value)" >
+      <h1 class="m-2 w-20">Width: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['width'])
   const emit = defineEmits(['update:width'])
 
- const widths = ['unset',  "w-auto", "w-full", "w-screen", "w-min", "w-max", "w-fit",
-                "w-0", "w-px", "w-0.5", "w-1", "w-1.5", "w-2", "w-2.5", "w-3", "w-3.5", "w-4", "w-5", "w-6", "w-7", "w-8", "w-9", "w-10", "w-11", "w-12", "w-14", "w-16", "w-20", "w-24", "w-28", "w-32", "w-36", "w-40", "w-44", "w-48", "w-52", "w-56", "w-60", "w-64", "w-72", "w-80", "w-96", 
-                 "w-1/2", 
-                 "w-1/3", "w-2/3", 
-                 "w-1/4", "w-2/4", "w-3/4", 
-                 "w-1/5", "w-2/5", "w-3/5", "w-4/5", 
-                 "w-1/6", "w-2/6", "w-3/6", "w-4/6", "w-5/6", 
-                 "w-1/12", "w-2/12", "w-3/12", "w-4/12", "w-5/12", "w-6/12", "w-7/12", "w-8/12", "w-9/12", "w-10/12", "w-11/12"
+ const widths = ['unset',  "auto", "full", "screen", "min", "max", "fit", "px",
+                "0",  "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "5", "6", "7", "8", "9", "10", "11", "12", "14", "16", "20", "24", "28", "32", "36", "40", "44", "48", "52", "56", "60", "64", "72", "80", "96", 
+                 "1/2", 
+                 "1/3", "2/3", 
+                 "1/4", "2/4", "3/4", 
+                 "1/5", "2/5", "3/5", "4/5", 
+                 "1/6", "2/6", "3/6", "4/6", "5/6", 
+                 "1/12", "2/12", "3/12", "4/12", "5/12", "6/12", "7/12", "8/12", "9/12", "10/12", "11/12"
                 ]
 
 </script>

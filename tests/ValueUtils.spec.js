@@ -23,7 +23,7 @@ describe('removeTag function', () => {
   })
 
   describe('expecified delimiter', () => {
-    const text = removeTag('this-name-value', 'this-name-')
+    const text = removeTag('this-name-value', 'this-name')
     
     it('should return "value"', async () => {
       expect(text).toBe('value')
@@ -31,7 +31,7 @@ describe('removeTag function', () => {
   })
 
   describe('"unset" value case', () => {
-    const text = removeTag(EditorStyles.UNSET, 'this-name-')
+    const text = removeTag(EditorStyles.UNSET, 'this-name')
     
     it('should return "unset"', async () => {
       expect(text).toBe(EditorStyles.UNSET)

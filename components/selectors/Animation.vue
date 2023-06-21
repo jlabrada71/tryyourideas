@@ -1,13 +1,13 @@
 <template>
   <div>
-    <SelectButton :options="animations" :option="animation" @update:option="value=>emit('update:animation', value)">
-      <h1>Animation: <span>{{animation}}</span></h1>
-    </SelectButton>
+    <InputListWithTag :options="animations" :option="animation"  tag="animate" @update:option="value=>emit('update:animation', value)">
+      <h1 class="m-2 w-20">Animation: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['animation'])
   const emit = defineEmits(['update:animation'])
 
-  const animations = ['animate-none', 'animate-spin', 'animate-ping', 'animate-pulse', 'animate-bounce']
+  const animations = ['unset', 'none', 'spin', 'ping', 'pulse', 'bounce']
   </script>

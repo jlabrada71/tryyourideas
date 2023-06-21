@@ -1,15 +1,15 @@
 <template>
   <div>
-    <SelectButton :options="transforms" :option="transform" @update:option="value=>emit('update:transform', value)">
-      <h1>Origin: <span>{{transform}}</span></h1>
-    </SelectButton>
+    <InputListWithTag :options="transforms" :option="transform" tag="origin" @update:option="value=>emit('update:transform', value)">
+      <h1 class="m-2 w-20">Origin: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['transform'])
   const emit = defineEmits(['update:transform'])
 
-  const transforms = ['unset', 'origin-center', 'origin-top', 'origin-top-right', 'origin-right', 'origin-bottom-right', 'origin-bottom', 'origin-bottom-left', 'origin-left', 'origin-top-left']
+  const transforms = ['unset', 'center', 'top', 'top-right', 'right', 'bottom-right', 'bottom', 'bottom-left', 'left', 'top-left']
   
   </script>
 

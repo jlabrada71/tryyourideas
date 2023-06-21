@@ -1,13 +1,13 @@
 <template>
   <div>
-    <SelectButton :options="sizes" :option="size" @update:option="value=>emit('update:size', value)">
-      <h1>Size: <span>{{size}}</span></h1>
-    </SelectButton>
+    <InputListWithTag :options="sizes" :option="size" tag="text" @update:option="value=>emit('update:size', value)" >
+      <h1 class="m-2 w-20">Size: </h1>
+    </InputListWithTag>
   </div>
 </template>
 <script setup>
   const props = defineProps(['size'])
   const emit = defineEmits(['update:size'])
 
-  const sizes = ['unset', 'text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl', 'text-2xl', 'text-3xl', 'text-4xl', 'text-5xl', 'text-6xl', 'text-7xl', 'text-8xl', 'text-9xl']
+  const sizes = ['unset', 'xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl']
 </script>

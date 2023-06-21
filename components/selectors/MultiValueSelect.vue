@@ -97,13 +97,13 @@
     const currentDataList = ref([[],[],[],[]])
     const currentTagList = ref({})
 
-    const top = computed(() => clean(props.top))
-    const left = computed(() => clean(props.left))
-    const right = computed(() => clean(props.right))
-    const bottom = computed(() => clean(props.bottom))
+    const top = computed(() => clean(props.top, currentTagList.value[names.value[0]]))
+    const left = computed(() => clean(props.left, currentTagList.value[names.value[1]]))
+    const right = computed(() => clean(props.right, currentTagList.value[names.value[2]]))
+    const bottom = computed(() => clean(props.bottom, currentTagList.value[names.value[3]]))
 
-    function clean(value) {
-      return removeTag(value)
+    function clean(value, tag) {
+      return removeTag(value, tag)
     }
 
     let count = 0

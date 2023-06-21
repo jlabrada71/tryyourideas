@@ -1,23 +1,17 @@
 <template>
-    <button id="id-1"
-        :disabled="props.disabled"
+    <button id="id-1"        
         type="button" 
         ref="target"
         value="" 
-        class=" flex flex-row flex-wrap items-center w-auto h-8 px-2 rounded-t-2xl text-sm   
-                                  hover:gap-1 hover:bg-slate-300   hover:text-slate-600   
-                                 active:gap-1 active:bg-slate-400  active:text-slate-100  
-                                  focus:gap-1 focus:bg-slate-600   focus:text-slate-100"
+        class=" flex flex-row justify-center flex-wrap items-center w-14 h-8 rounded-t-2xl text-sm   
+                                   hover:bg-slate-300   hover:text-slate-600   
+                                 active:bg-slate-400  active:text-slate-100  
+                                  focus:bg-slate-600   focus:text-slate-100"
         :class="selectClass"
       >
       <span id="id-1-1"  class="bg-transparent w-auto h-6 active:text-slate-100 focus:text-slate-100 ">
         <slot></slot>
       </span>
-      <input id="id-1-2" 
-        type="checkbox" 
-        class=" flex flex-row bg-slate-300 w-4 h-6 "
-        :disabled="props.disabled"
-        >
     </button>
   </template>
   <script setup>
@@ -33,7 +27,7 @@
         type: Boolean,
         default: false
       },
-      disabled: {
+      inUse: {
         type: Boolean,
         default: false
       },

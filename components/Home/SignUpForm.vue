@@ -32,22 +32,22 @@
       <input id="id-4-4" 
               v-model="form.name" 
               type="text" 
-              class=" flex flex-row w-10/12 bg-slate-200 h-9 rounded-lg border-4 border-teal-400 " 
+              class=" flex flex-row w-10/12 bg-slate-200 h-9 px-2 rounded-lg border-4 border-teal-400 " 
               placeholder=" name">
       <input id="id-4-4-1" 
               v-model="form.email" 
               type="email" 
-              class=" flex flex-row w-10/12 bg-slate-200 h-9 rounded-lg border-4 border-teal-400 " 
+              class=" flex flex-row w-10/12 bg-slate-200 h-9  px-2 rounded-lg border-4 border-teal-400 " 
               placeholder=" email">
       <input  id="id-4-5" 
               type="password" 
               v-model="form.password"
-              class=" flex flex-row w-10/12 bg-slate-200 h-9 rounded-lg border-4 border-teal-400 " 
+              class=" flex flex-row w-10/12 bg-slate-200 h-9  px-2 rounded-lg border-4 border-teal-400 " 
               placeholder=" password">
       <input id="id-4-repeat" 
               type="password" 
               v-model="form.confirmPassword"
-              class=" flex flex-row w-10/12 bg-slate-200 h-9 rounded-lg border-4 border-teal-400 " 
+              class=" flex flex-row w-10/12 bg-slate-200 h-9  px-2 rounded-lg border-4 border-teal-400 " 
               placeholder="confirm password">
       <div id="id-4-6" class=" flex flex-row w-10/12 gap-2 bg-inherit h-6 ">
           <input id="id-4-6-1" 
@@ -58,13 +58,14 @@
             I agree to join TYI's mailing list
           </span>
       </div>
-      <span id="id-4-8" class=" flex flex-row w-10/12 my-4 p-4 text-red-600 bg-slate-200 h-auto text-sm ">
-        {{error}}
-      </span>
+      <div class=" flex flex-col w-10/12 my-4 p-4 text-red-600 bg-slate-200 h-auto text-sm ">
+        <span v-for="error in errors" id="id-4-8" class="w-full my-1 ">
+          {{error}}
+        </span>
+      </div>
+      
       <button id="id-4-7" type="button" @click="sendForm" class=" flex flex-row w-10/12 justify-center content-center items-center bg-slate-800  h-10 rounded-lg text-slate-200 transition-all hover:flex hover:flex-row hover:justify-center hover:content-center hover:items-center hover:bg-slate-800 hover:text-slate-200 hover:transition-all hover:translate-y-1 ">
-          <span id="id-4-7-1" class=" flex flex-row w-10/12 bg-inherit h-6 rounded-lg font-bold ">
-              Create account
-          </span>
+        Create account
       </button>
       <span id="id-4-8" class=" flex flex-row my-4 w-10/12 mx-6 bg-slate-200 h-10 text-xs ">
           By clicking "Create account" or "Continue with Google", you agree to the TYI TOS and Privacy Policy.
@@ -96,15 +97,46 @@ const form = ref({
   mailing: true
 })
 
-const error = ref('')
+const errors = ref([])
 
 const closeElement = ref(null)
 
 function isValidForm() {
-  if (form.value.password !== form.value.confirmPassword) {
-    return false
+  const password = form.value.password.trim()
+  const name = form.value.name.trim()
+  const email = form.value.email.trim()
+
+  if( password !== form.value.password || password.indexOf(' ') > -1) {
+    errors.value.push('Password can not contain spaces')
   }
-  return true
+
+  if (password.length < 8) {
+    errors.value.push('Minimum password length 8 chars')
+  }
+
+  if (form.value.password !== form.value.confirmPassword) {
+    errors.value.push('Password and confirm password must be equal')
+  }
+
+  if (name.length === 0) {
+    errors.value.push('Name must not be empty')
+  }
+
+  if (email.length === 0) {
+    errors.value.push('Email must not be empty')
+  }
+
+  const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  if (!email.match(validRegex)) {
+    errors.value.push('Invalid email address')
+  }
+
+  form.value.password = password
+  form.value.name = name
+  form.value.email = email
+
+  return errors.value.length === 0
 }
 
 function keepFormOpened() {
@@ -116,18 +148,19 @@ function showErrors() {
 }
 
 async function sendForm() {
-  error.value = ''
+  errors.value = []
   if (!isValidForm() ) {
     keepFormOpened()
     showErrors()
     return
   }
+  
   const service = new AccountServiceProxy(config)
   const result = await service.insert(form.value)
   if (result.status !== 200 || result.data.result == 'error') {
     keepFormOpened()
     showErrors()
-    error.value = result.data.msg
+    errors.value.push(result.data.msg)
     return
   }
   emit('update:user', form.value)

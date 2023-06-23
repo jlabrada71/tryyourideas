@@ -62,8 +62,38 @@ function beautifyCss(code: String) {
   })
 }
 
+function toCss(component) {
+  return ''
+}
+
+function toJavascript(component) {
+  return `
+    const props = defineProps({
+      name: {
+        type: String
+      }
+
+    })
+    const emits = defineEmits(['update:name'])
+    const _name = computed({
+      get() {
+        return props.name
+      },
+      set(value) {
+        emit('update:name', value)
+      }
+    })
+  `
+}
+
 function getCode(component) {
-  const code = beautifyHtml(toHtml(component) )
+  const code = beautifyHtml(toHtml(component) ) + 
+    '<script setup>\n' +
+      beautifyJs(toJavascript(component)) +
+    '\n</script>' + 
+    '<style scoped>\n' +
+      beautifyCss(toCss(component)) +
+    '\n</style>'
   return code
 }
 
@@ -85,13 +115,17 @@ function generateComponents(model, projectDirectory: String) {
 }
 
 function generateIndexPage(model, projectDirectory: String) {
-  const code = model.components.map(component => `<${component.name}></${component.name}>`).join('\n')
+  const code = model.components.map(component => `<div class="flex flex-col gap-2 p-4 bg-slate-50"><span class="font-bold text-2xl">${component.name}</span><${component.name}></${component.name}></div>`).join('\n')
   const pageCode = `
-    <template>
-      ${code}
+    <template> 
+      <div class="flex flex-col m-8 bg-slate-500 h-screen">
+        <h1 class="text-5xl text-slate-50 font-bold p-4">Component List</h1>
+        <div class="flex flex-col gap-4 m-8 bg-slate-200 p-4">
+        ${code}
+        </div>
+      </div>
     </template>
   `
-
   saveCode(projectDirectory + '/pages', 'index.vue', pageCode)
 }
 

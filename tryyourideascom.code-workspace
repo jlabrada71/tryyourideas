@@ -17,6 +17,9 @@
     },
     {
       "path": "../../experiments/nodejs-howtos/vue_auth-vue-auth-github"
+    },
+    {
+      "path": "../../../../../ubuntu"
     }
   ],
   "settings": {}

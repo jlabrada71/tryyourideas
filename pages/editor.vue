@@ -97,7 +97,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useStorage } from '@vueuse/core'
 import { debug } from '@/lib/logger.js'
-import { getComponentRenderedClass } from '@/lib/ClassGeneration.js'
+import { getItemRenderedClass } from '@/lib/ClassGeneration.js'
 import { getNextId } from '@/lib/IdGeneration.js'
 import { getItemById, findClassBy, findOrCreateClassBy, clone, copy, removeItemFrom } from '@/lib/EditorUtils.js'
 import { printTree } from '@/lib/DebugUtils.js'
@@ -363,6 +363,7 @@ function initializeItemClass(itemClass) {
 function newComponent() {
   const component = {
     name: 'Component',
+    isComponent: true,
     root: clone(itemTemplate),
     props: [],
     events: []
@@ -433,7 +434,7 @@ function updateItem(modifiedItem) {
 
   copy(modifiedItem.currentClass, editedClass)
   // item.classes = modifiedItem.classes
-  item.renderedClass = getComponentRenderedClass(item)
+  item.renderedClass = getItemRenderedClass(item)
 
   selectedItem.value.item
 
@@ -486,6 +487,8 @@ function addItem(type)  {
   newItem.id = `${parentForNewChild.value.id}-${parentForNewChild.value.children.length + 1}`,
   newItem.editorId = newItem.id
   newItem.type = type.name
+  newItem.isComponent = type.isComponent
+  newItem.definition = type
   newItem.props = newProps(type.props)
   newItem.needsResolve = type.needsResolve
   parentForNewChild.value.children.push(newItem)

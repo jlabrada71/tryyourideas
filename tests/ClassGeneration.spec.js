@@ -4,8 +4,8 @@ import {
   modifierComposer, 
   getClassString,
   getEditorClass,
-  getComponentEditorClass,
-  getComponentRenderedClass } from '../lib/ClassGeneration.js'
+  getItemEditorClass,
+  getItemRenderedClass } from '../lib/ClassGeneration.js'
 
 
  const dumbGenerators = [(value, f) => { 
@@ -113,7 +113,7 @@ describe('getEditorClass function', () => {
   })
 })
 
-describe('getComponentEditorClass function', () => {
+describe('getItemEditorClass function', () => {
   const component = {
     classes: [
       {
@@ -160,7 +160,7 @@ describe('getComponentEditorClass function', () => {
   } 
   describe('generalCase dark mode', () => {
     debugger;
-    const componentClass = getComponentEditorClass(component, 'md', 'dark', dumbGenerators)
+    const componentClass = getItemEditorClass(component, 'md', 'dark', dumbGenerators)
     it('returns empty string', () => {
       expect(componentClass).toContain('active:bg-md-dark-active')
       expect(componentClass).toContain(' active:sh-md-dark-active')
@@ -177,7 +177,7 @@ describe('getComponentEditorClass function', () => {
 
   describe('generalCase light mode', () => {
     
-    const componentClass = getComponentEditorClass(component, 'md', 'light', dumbGenerators)
+    const componentClass = getItemEditorClass(component, 'md', 'light', dumbGenerators)
     it('returns empty string', () => {
       expect(componentClass).not.toContain(' dark:md:active:bg-md-dark-active')
       expect(componentClass).not.toContain(' dark:md:active:sh-md-dark-active')
@@ -194,7 +194,7 @@ describe('getComponentEditorClass function', () => {
 
   describe('generalCase no mode any device', () => {
     
-    const componentClass = getComponentEditorClass(component, 'any', 'light', dumbGenerators)
+    const componentClass = getItemEditorClass(component, 'any', 'light', dumbGenerators)
     it('returns empty string', () => {
       expect(componentClass).not.toContain(' active:bg-md-dark-active')
       expect(componentClass).not.toContain(' active:sh-md-dark-active')
@@ -210,7 +210,7 @@ describe('getComponentEditorClass function', () => {
   })
 })
 
-describe('getComponentRenderedClass function', () => {
+describe('getItemRenderedClass function', () => {
   const component = {
     classes: [
       {
@@ -273,7 +273,7 @@ describe('getComponentRenderedClass function', () => {
   } 
   describe('generalCase mode', () => {
     
-    const componentClass = getComponentRenderedClass(component, dumbGenerators)
+    const componentClass = getItemRenderedClass(component, dumbGenerators)
     it('returns empty string', () => {
       expect(componentClass).toContain('dark:md:active:bg-md-dark-active ')
       expect(componentClass).toContain(' dark:md:active:sh-md-dark-active ')

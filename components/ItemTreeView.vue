@@ -17,8 +17,8 @@
     @click.stop="emit('selected', item)">
       {{item.text}}
     <ItemTreeView 
-      v-if="item.children.length > 0" 
-      v-for="child in item.children" 
+      v-if="viewedItem.children.length > 0" 
+      v-for="child in viewedItem.children" 
       :item="child" 
       :device="device"
       :mode="mode"
@@ -28,7 +28,7 @@
   </component>
 </template>
 <script setup>
-  import { getComponentEditorClass } from '../lib/ClassGeneration'
+  import { getItemEditorClass } from '../lib/ClassGeneration'
   const resolvedComponents = {}
   resolvedComponents['Icon'] = resolveComponent('Icon')
 
@@ -36,18 +36,29 @@
   const refreshChildren = ref('false')
 
   const resolvedType = computed(() => {
-    if (props.item.needsResolve) {
-      return resolvedComponents[props.item.type]  // tryyourideas components
+    if (viewedItem.value.needsResolve) {
+      return resolvedComponents[viewedItem.value.type]  // tryyourideas components
     }
-    return props.item.type
+    return viewedItem.value.type
   })
+
+  // for a project component show the root, otherwise show the item
+  const viewedItem = computed(() => props.item.isComponent ? props.item.definition.root: props.item)
 
   const editorClass = computed(() => {
     const forceRefresh = props.refresh // use the refresh prop to for the treeView to refresh
     refreshChildren.value = forceRefresh
     const device = props.device
     const mode = props.mode
-    const cls = getComponentEditorClass(props.item, device, mode)
+    console.log('Item Tree View')
+    console.log(props.item.name)
+    console.log(props.item.id)
+    console.log('Is Component' + props.item.isComponent)
+    console.log('Props Item')
+    console.log(props.item)
+    console.log('Viewed Item')
+    console.log(viewedItem.value)
+    const cls = getItemEditorClass(viewedItem.value, device, mode)
     return cls
   })
 
@@ -67,7 +78,7 @@
   })
 
   function getProperty(name) {
-    const prop = props.item.props.find( prop => prop.name === name )
+    const prop = viewedItem.value.props.find( prop => prop.name === name )
     return prop ? prop.value : undefined
   }
 </script>

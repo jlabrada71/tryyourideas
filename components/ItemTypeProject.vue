@@ -28,13 +28,6 @@
     }
   })
 
-  onMounted(() => {
-    console.log('Item Type Project')
-    props.components.forEach(component => {
-      console.log(component.name)
-    })
-  })
-
   function selectType(component) {
     emit('selected', component)
   }

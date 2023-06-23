@@ -3,7 +3,7 @@
 
     <div class="flex flex-row"><ItemTypeTab @selected:category="selectHtml5">Html 5</ItemTypeTab><ItemTypeTab @selected:category="selectProject">Project</ItemTypeTab></div>
     <ItemTypeHtml5 v-if="html5Tab.active" @select="selectType"></ItemTypeHtml5>
-    <ItemTypeProject  v-if="projectTab.active" :components="props.components" @select="selectType"></ItemTypeProject>
+    <ItemTypeProject  v-if="projectTab.active" :components="props.components" @selected="selectType"></ItemTypeProject>
     <footer
       id="id-2-3"
       class="
@@ -63,13 +63,6 @@
     components: {
       type: Object
     }
-  })
-
-  onMounted(() => {
-    console.log('Item Type Menu')
-    props.components.forEach(component => {
-      console.log(component.name)
-    })
   })
 
   const html5Tab = ref({

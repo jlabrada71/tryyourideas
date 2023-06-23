@@ -364,7 +364,7 @@ function newComponent() {
   const component = {
     name: 'Component',
     root: clone(itemTemplate),
-    properties: [],
+    props: [],
     events: []
   }
   component.id = getNextId(project.value.components).toString()
@@ -477,6 +477,7 @@ function newProps(props) {
 }
 
 function addItem(type)  {
+  console.log(type.name)
   const newItem = clone(itemTemplate)
   newItem.currentClass = newItem.classes[0]
   initializeItemClass(newItem.currentClass)

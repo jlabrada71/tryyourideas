@@ -33,13 +33,13 @@
         id="id-4-4-1" 
         type="email" 
         v-model="form.email" 
-        class=" flex flex-row bg-slate-200 w-10/12 h-9 rounded-lg border-4 border-teal-400 " 
+        class=" flex flex-row bg-slate-200 w-10/12 h-9 px-2 rounded-lg border-4 border-teal-400 " 
         placeholder="email">
       <input 
         id="id-4-5-1" 
         type="password" 
         v-model="form.password" 
-        class=" flex flex-row bg-slate-200 w-10/12 h-9 rounded-lg border-4 border-teal-400 " 
+        class=" flex flex-row bg-slate-200 w-10/12 h-9 px-2 rounded-lg border-4 border-teal-400 " 
         placeholder="password">
       <span class=" flex flex-row bg-slate-200 px-2 text-red-600 w-10/12 h-auto " >{{error}}</span>
       <button 

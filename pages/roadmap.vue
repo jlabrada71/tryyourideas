@@ -12,7 +12,7 @@
 <script setup>
   const roadMap = ref([
   { goal: 'MVP',  date:'06/2023', status:'release v0.12'},
-  { goal: 'Implement component composition',  date:'N/A', status:'work in progress'},
+  { goal: 'Implement component composition',  date:'06/2023', status:'work in progress'},
   { goal: 'Implement design tokens',  date:'N/A', status:'planned'},
   { goal: 'Implement component variables',  date:'N/A', status:'planned'},
   { goal: 'Implement component properties',  date:'N/A', status:'planned'},

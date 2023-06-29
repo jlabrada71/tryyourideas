@@ -12,10 +12,15 @@
 <DivClassGenerator :tags="transformSkewTags" :values="transformSkew"></DivClassGenerator> -->
 
 <!-- <DivClassGenerator :tags="marginTags" :values="margins"></DivClassGenerator>  -->
+<!-- 
+<DivColorClassGenerator :tags="colorTags" :values="colorNames" :values2="colorValues"></DivColorClassGenerator>  -->
 
-<DivColorClassGenerator :tags="colorTags" :values="colorNames" :values2="colorValues"></DivColorClassGenerator> 
+<!-- <DivClassGenerator :tags="gradientDirectionTags" :values="gradientDirection"></DivClassGenerator> -->
 
 <!-- <DivClassGenerator :tags="sizeTags" :values="sizeValues"></DivClassGenerator> -->
+
+<DivClassGenerator :tags="animationTags" :values="animation"></DivClassGenerator>
+
 
 </template>
 <script setup>
@@ -83,4 +88,10 @@
 
   const marginTags = ['m', 'mx', 'my', 'mt', 'mr', 'mb', 'ml']
   const margins = ['0', 'px', '0.5', '1',  '1.5','2',  '2.5',  '3', '3.5','4', '5', '6',  '7',  '8','9', '10', '11', '12', '14', '16', '20','24','28', '32', '36', '40','44','48', '52', '56',  '60', '64', '72',  '80', '96', 'auto']
+  
+  const gradientDirectionTags = ['bg-gradient']
+  const gradientDirection = [ 'to-t', 'to-tr', 'to-r', 'to-br', 'to-b', 'to-bl', 'to-l', 'to-tl']
+
+  const animationTags = ['animation']
+  const animation = [ 'spin', 'bounce', 'ping', 'pulse']
 </script>

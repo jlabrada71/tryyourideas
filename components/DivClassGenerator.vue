@@ -1,5 +1,5 @@
  <template>
-  <div>
+  <div>  &lt;template&gt;
     <div v-for="mode in modes">
       <div v-for="device in devices">
         <div v-for="modifier in modifiers">
@@ -8,8 +8,8 @@
           </div>
         </div>
       </div>
-  </div>
-    
+    </div>
+  &lt;/template&gt;
   </div>
 </template>
 <script setup>

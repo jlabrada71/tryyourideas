@@ -6,7 +6,7 @@
         <div class="hidden group-hover:block group-focus:block">
           <div class="relative flex flex-row justify-self-end gap-4">            
             <button 
-              v-if="!isSelfClosing" 
+              v-if="allowChild" 
               type="button" 
               class="text-white w-5 hover:text-white font-medium rounded-lg text-sm" 
               @click.stop="emit('update:add-child', item )">
@@ -48,7 +48,7 @@
     }
   })
 
-  const isSelfClosing = computed(() => selfClosingTags.includes(props.item.type))
+  const allowChild = computed(() => !selfClosingTags.includes(props.item.type) && !props.item.isComponent)
   const selected = computed(() => props.item.isSelected ? 'bg-slate-400 text-white' : 'bg-slate-100 text-black' )
   const itemClass = computed(() => `flex ${selected.value} hover:bg-slate-600 hover:text-slate-200 w-full group focus:bg-slate-300`)
 </script>

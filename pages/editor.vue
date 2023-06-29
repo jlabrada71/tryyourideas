@@ -112,6 +112,7 @@ import { getMarginVariables } from '@/lib/plugins/margin.js'
 import { getFlexVariables } from '@/lib/plugins/flex.js'
 import { getBorderVariables } from '@/lib/plugins/border.js'
 import { getGradientVariables } from '@/lib/plugins/gradient.js'
+import { getAnimationVariables } from '@/lib/plugins/animation.js'
 
 import axios from 'axios'
 import _ from 'lodash'; 
@@ -208,8 +209,6 @@ const itemTemplate = {
     outlineColor: 'unset',
     ringColor: 'unset',
 
-    animation: 'unset',
-
     fillColor: 'unset',
   }],
 }
@@ -230,6 +229,7 @@ const plugins = [
   getTransformVariables,
   getTransitionVariables,
   getGradientVariables,
+  getAnimationVariables
 ]
 
 plugins.forEach(plugin => {

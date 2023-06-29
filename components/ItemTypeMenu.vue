@@ -1,7 +1,8 @@
 <template>
   <div class="absolute top-20 left-72 w-80 h-auto  bg-slate-200 p-5 shadow-md rounded-2xl flex flex-col">
-
-    <div class="flex flex-row"><ItemTypeTab @selected:category="selectHtml5">Html 5</ItemTypeTab><ItemTypeTab @selected:category="selectProject">Project</ItemTypeTab></div>
+    <div class="flex flex-row">
+      <ItemTypeTab :active="html5Tab.active" @selected:category="selectHtml5">Html 5</ItemTypeTab>
+      <ItemTypeTab :active="projectTab.active" @selected:category="selectProject">Project</ItemTypeTab></div>
     <ItemTypeHtml5 v-if="html5Tab.active" @selected="selectType"></ItemTypeHtml5>
     <ItemTypeProject  v-if="projectTab.active" :components="props.components" @selected="selectType"></ItemTypeProject>
     <footer

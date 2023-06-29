@@ -113,6 +113,10 @@ import { getFlexVariables } from '@/lib/plugins/flex.js'
 import { getBorderVariables } from '@/lib/plugins/border.js'
 import { getGradientVariables } from '@/lib/plugins/gradient.js'
 import { getAnimationVariables } from '@/lib/plugins/animation.js'
+import { getJustifyVariables } from '@/lib/plugins/justify.js'
+import { getAlignVariables } from '@/lib/plugins/align.js'
+import { getPlaceVariables } from '@/lib/plugins/place.js'
+import { getShadowVariables } from '@/lib/plugins/shadow.js'
 
 import axios from 'axios'
 import _ from 'lodash'; 
@@ -190,20 +194,7 @@ const itemTemplate = {
     display: 'unset',
 
     gap: 'unset', 
-    justifyContent: 'unset',
-    justifyItems: 'unset',
-    justifySelf: 'unset',
 
-    alignContent: 'unset',
-    alignItems: 'unset',
-    alignSelf: 'unset',
-
-    placeContent: 'unset',
-    placeItems: 'unset',
-    placeSelf: 'unset',
-
-    shadow: 'unset',
-    shadowColor: 'unset',
 
     divideColor: 'unset',
     outlineColor: 'unset',
@@ -229,7 +220,11 @@ const plugins = [
   getTransformVariables,
   getTransitionVariables,
   getGradientVariables,
-  getAnimationVariables
+  getAnimationVariables,
+  getJustifyVariables,
+  getAlignVariables,
+  getPlaceVariables,
+  getShadowVariables,
 ]
 
 plugins.forEach(plugin => {

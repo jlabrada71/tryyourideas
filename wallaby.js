@@ -13,7 +13,6 @@ export default function () {
     env: {
       type: 'node',
       runner: 'node',
-      // runner: '/home/jlabrada/.nvm/versions/node/v16.20.0/bin/node',
       params: {
         runner: '--experimental-vm-modules'
       }

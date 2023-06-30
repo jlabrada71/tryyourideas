@@ -1,6 +1,6 @@
 <template>
   <ProjectNewForm  @new="createNewProject"></ProjectNewForm>
-  <ProjectOpenForm :user="currentUser" @open="openProject"></ProjectOpenForm>
+  <ProjectOpenForm :projectList="projectList" @open="getProject"></ProjectOpenForm>
   <ProjectExportForm :user="currentUser" :project="project" @export="generateNuxtTailwindsStorybook"></ProjectExportForm>
   <IssuesForm :project="project" :store="saveIssues"></IssuesForm>
   <div class="w-full h-20 bg-slate-100 text-black flex">
@@ -121,6 +121,7 @@ import { getJustifyVariables } from '@/lib/plugins/justify.js'
 import { getAlignVariables } from '@/lib/plugins/align.js'
 import { getPlaceVariables } from '@/lib/plugins/place.js'
 import { getShadowVariables } from '@/lib/plugins/shadow.js'
+import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy'
 
 import axios from 'axios'
 import _ from 'lodash'; 
@@ -250,6 +251,27 @@ function updateUser(account) {
   currentUser.value = account
 }
 
+const projectRepository = new ProjectServiceProxy(config)
+
+async function getProjectList(userId) {
+  if (!userId) return []
+  const result = await projectRepository.select({ userId })
+  return result.data.files
+}
+
+const projectList = ref([])
+
+async function updateProjectList() {
+  debug('updating project list for ' + currentUser.value.id)
+  if (!currentUser.value.id === 'undefined') return
+  const result = await getProjectList(currentUser.value.id)
+  projectList.value = result.map(project => project.substring(0, project.indexOf('.json')))
+}
+
+watch(currentUser, () => {
+  updateProjectList()
+})
+
 const currentProject = useStorage('currentProject', {
   name: 'Default',
   dirty: false,
@@ -260,6 +282,11 @@ const project = ref({
   name: 'Default',
   dirty: false,
   components: [],
+})
+
+onMounted(() => {
+  updateProjectList()
+  openProject(currentProject.value)
 })
 
 const selectedComponent = ref(null)
@@ -297,25 +324,34 @@ function newProject(data) {
 }
 
 function createNewProject( data ) {
+  if (projectList.value.length >= currentUser.value.maxProjects ) {
+    // licence max project count reached.
+    return
+  }
   project.value = newProject(data)
   initProject(project.value)
 }
 
 function openProject(projectValue) {
   project.value = projectValue
+  currentProject.value = projectValue
   initProject(projectValue)
 }
 
-const throttledSave = throttle(saveModel, 5*1000)
+async function getProject(projectName) {
+  const result = await projectRepository.select({ userId: currentUser.value.id, name: projectName })
+  openProject(result.data.project)
+}
+
+const throttledSave = throttle(sendToServer, 5*1000)
 
 function saveProject() {
-  // debug('SAVING: ' + project.value.components[0].name)
-  // debug('CURRENT: ' + selectedComponent.value.name)
-  // debug('CURRENT USER: ' + currentUser.value.id)
   if (currentUser.value.id === 'undefined') return
   project.value.dirty = false
   project.value.userId = currentUser.value.id
+  currentProject.value = project.value
   throttledSave(project.value)
+  updateProjectList()
 }
 
 function dirtyProject() {
@@ -330,7 +366,7 @@ function postToServer(obj, url) {
   });
 }
 
-function saveModel(obj) {
+function sendToServer(obj) {
   return postToServer(obj, `${config.public.apiBase}/projects`)
 }
 

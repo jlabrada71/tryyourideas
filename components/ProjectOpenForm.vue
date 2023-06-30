@@ -72,46 +72,19 @@
 
 <script setup>
   import { ref, onMounted } from "vue"
-  import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy'
 
   const emit = defineEmits(['open'])
 
   const props = defineProps({
-    user: {
-      type: Object,
-    },
+    projectList: {
+      type: Array
+    }
   })
 
-  const config = useRuntimeConfig()
-  const projectRepository = new ProjectServiceProxy(config)
-
-  const projectList = ref([])
   const selectedProject = ref(null)
 
-  async function getProjectList(userId) {
-    if (!userId) return []
-    const result = await projectRepository.select({ userId })
-    return result.data.files
-  }
-
-  async function updateProjectList(user) {
-    if (!user) return
-    const result = await getProjectList(user.id)
-    projectList.value = result.map(project => project.substring(0, project.indexOf('.json')))
-
-  }
-
-  onMounted(() => {
-    updateProjectList(props.user)
-  })
-
-  watchEffect(()=> {
-    updateProjectList(props.user)
-  })
-
   async function openProject() {
-    const result = await projectRepository.select({ userId: props.user.id, name: selectedProject.value })
-    emit('open', result.data.project)
+    emit('open', selectedProject.value)
   }
 
   function selectProject(project) {

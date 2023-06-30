@@ -22,6 +22,7 @@ const variables = {
 const env = process.env.NODE_ENV || 'development'
 
 export default defineNuxtConfig({
+  devtools: { enabled: true },
   alias: {
     "@/lib": "./lib",
   },

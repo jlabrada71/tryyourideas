@@ -4,7 +4,7 @@
   <ProjectExportForm :user="currentUser" :project="project" @export="generateNuxtTailwindsStorybook"></ProjectExportForm>
   <IssuesForm :project="project" :store="saveIssues"></IssuesForm>
   <div class="w-full h-20 bg-slate-100 text-black flex">
-    <img src="logo.png" alt="Try Your Ideas logo">
+    <img src="/logo.png" alt="Try Your Ideas logo">
     <div>User: {{currentUser.name}} Project: {{project.name}} Licence: {{currentUser.licence}} Provider:{{currentUser.provider}}</div>
   </div>
   <!-- <h2>Access</h2>

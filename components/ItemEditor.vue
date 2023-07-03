@@ -1,5 +1,8 @@
 <template>
-  <span>Id: {{props.item.id}}</span>
+  <div class="flex flex-col">
+    <span>{{props.item.type}}</span>
+    <span>Id: {{props.item.id}}</span>
+  </div>
   <div id="accordion-open" data-accordion="open" class="bg-white">
     <AccordionItem id="1">
       <template #head><span class="flex items-center">Properties</span></template>

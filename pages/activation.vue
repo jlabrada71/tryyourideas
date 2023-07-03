@@ -1,7 +1,7 @@
 <template>
-  <div class="flex w-full h-96 flex-col">
-    <span>{{result}}</span>
-    <span>{{message}}</span>
+  <HomeNavigationBar/>
+  <div class="flex w-full h-screen flex-col">
+    <AccountActivation :message="message" :result="result"/>
   </div>
   
 </template>

@@ -29,17 +29,17 @@
                   {{project.name }}
                 </div>
               </div>
-              <div>
-                <div for="small-input" class="block mb-2 text-sm font-medium text-slate-900 dark:text-white">download link will be sent to</div>
-                <div  class="block w-full p-2 text-slate-900 border border-slate-300 rounded-lg bg-slate-50 sm:text-xs focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500">
-                  {{user.email}}
+              <div v-if="getEmail()">
+                <div for="small-input" class="block mb-2 text-sm font-medium text-slate-900 dark:text-white">Email to send the download link
+                <input v-model="email" type="email" placeholder="name@example.com" class="block w-full p-2 text-slate-900 border border-slate-300 rounded-lg bg-slate-50 sm:text-xs focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" >
                 </div>
+                <span class="text-red-700">{{error}}</span>
               </div>
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
-                <button @click="sendForm" data-modal-hide="exportProjectForm" type="button" class="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800">Send the download link</button>
-                <button data-modal-hide="exportProjectForm" type="button" class="text-slate-500 bg-white hover:bg-slate-100 focus:ring-4 focus:outline-none focus:ring-slate-300 rounded-lg border border-slate-200 text-sm font-medium px-5 py-2.5 hover:text-slate-900 focus:z-10 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-500 dark:hover:text-white dark:hover:bg-slate-600 dark:focus:ring-slate-600">Cancel</button>
+                <button @click="sendForm" type="button" class="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800">Send the download link</button>
+                <button ref="closeFormButton" data-modal-hide="exportProjectForm" type="button" class="text-slate-500 bg-white hover:bg-slate-100 focus:ring-4 focus:outline-none focus:ring-slate-300 rounded-lg border border-slate-200 text-sm font-medium px-5 py-2.5 hover:text-slate-900 focus:z-10 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-500 dark:hover:text-white dark:hover:bg-slate-600 dark:focus:ring-slate-600">Cancel</button>
             </div>
         </div>
     </div>
@@ -61,8 +61,38 @@
 
   const emit = defineEmits(['export'])
 
+  const tempEmail = ref('')
+
+  const getEmail = () => props.user.email.endsWith('fakemail.com')
+
+  const email = computed({
+    get() {
+      if ( getEmail()) return tempEmail.value
+      return props.user.email
+    },
+    set(value) {
+      tempEmail.value = value
+    }
+  })
+
+  const closeFormButton = ref(null)
+
+  function closeForm() {
+    closeFormButton.value.click()
+  }
+
+  const error = ref('')
+
   function sendForm() {
-    emit('export')
+    const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if (! email.value.match(validRegex)) {
+      error.value = 'Invalid email address'
+      return
+    }
+    closeForm()
+    error.value = ''
+    emit('export', email.value)
   }
 </script>
 

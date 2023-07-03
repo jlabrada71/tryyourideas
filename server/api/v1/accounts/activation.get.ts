@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  const account = await service.getAccountByEamail( query.email )
+  const account = await service.getAccountByEmail( query.email )
 
   debug(account)
 

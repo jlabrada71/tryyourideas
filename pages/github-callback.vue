@@ -26,12 +26,23 @@
     maxProjects: '1'
   })
 
+  const currentProject = useStorage('currentProject', {
+    name: 'Default',
+    dirty: false,
+    components: [],
+  })
+
   async function getLoggedUserData() {
     debug('getLoggedUserData')
     const accountService = new AccountServiceProxy(config)
     const response = await accountService.findForAccessToken(accessToken.value)
     debug(response.data.data )
     currentUser.value = response.data.data
+    currentProject.value = {
+      name: 'Default',
+      dirty: false,
+      components: [],
+    }
   }
 
   onMounted(async () => {

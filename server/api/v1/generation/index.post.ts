@@ -3,7 +3,7 @@ import fse  from 'fs-extra'
 import { zip } from 'zip-a-folder';
 import CloudStorage from '@/lib/firebase/cloud-storage.js'
 import axios from 'axios'
-import { generateVueComponentCode } from '@/lib/GenerateVueComponentCode';
+import { generateVueComponentCode } from '@/lib/GenerateVueComponentCode.js';
 
 
 const config = useRuntimeConfig()

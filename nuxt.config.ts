@@ -117,6 +117,8 @@ wFaTTJoV/jMlB4hdQsdcFQ==
 -----END ENCRYPTED PRIVATE KEY-----`,
 
     public: {
+      domain: 'tryyourideas.com',
+      analyticsServer: 'https://juanlabrada.com',
       apiBase: variables[env].apiBase,
       googleOAuthClientId: 'undefined',
       googleOAuthRedirect: variables[env].googleOAuthRedirect,

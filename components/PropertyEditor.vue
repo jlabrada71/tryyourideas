@@ -10,7 +10,15 @@
       </div>
       <div class="flex">
         <span class="w-20 px-2">Type</span>
-        <input type="text" v-model="property.type">
+        <input type="text" list="propertyTypes" v-model="property.type">
+        <datalist id="propertyTypes">
+          <option value="String" />
+          <option value="Number" />
+          <option value="Boolean" />
+          <option value="Array" />
+          <option value="Object" />
+        </datalist>
+
       </div>
       <div class="flex">
         <span class="w-20 px-2">Default</span>

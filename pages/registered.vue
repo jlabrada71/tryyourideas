@@ -10,8 +10,8 @@ const result = ref('')
 const message = ref('')
 
 onMounted(async () => {
-  result.value = 'Account have been registered'
-  message.value = 'To activate your account click on the link of the activation email that was sent to your email account.'
+  message.value = 'Account have been registered'
+  result.value = 'To activate your account click on the link of the activation email that was sent to your email account.'
 })
 
 </script>

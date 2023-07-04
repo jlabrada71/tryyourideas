@@ -1,12 +1,10 @@
 import { log, debug } from '@/lib/logger.js'
 import fse  from 'fs-extra'
 import { zip } from 'zip-a-folder';
-import { toHtml } from '@/lib/HtmlExporter.js'
 import CloudStorage from '@/lib/firebase/cloud-storage.js'
 import axios from 'axios'
-import beautify from 'js-beautify'
+import { generateVueComponentCode } from '@/lib/GenerateVueComponentCode';
 
-const { js, css, html } = beautify
 
 const config = useRuntimeConfig()
 
@@ -38,64 +36,7 @@ async function createZipFile(srcDir, zipFileName) {
   }
 }
 
-function beautifyHtml(code: String) {
-  return html( code, {
-    "end_with_newline": true,
-    "js": {
-        "indent_size": 2
-    },
-    "css": {
-        "indent_size": 2
-    }
-  })
-}
 
-function beautifyJs(code: String) {
-  return js(code, {
-    "preserve-newlines": true
-  })
-}
-
-function beautifyCss(code: String) {
-  return css(code, {
-    "indent_size": 1
-  })
-}
-
-function toCss(component) {
-  return ''
-}
-
-function toJavascript(component) {
-  return `
-    const props = defineProps({
-      name: {
-        type: String
-      }
-
-    })
-    const emits = defineEmits(['update:name'])
-    const _name = computed({
-      get() {
-        return props.name
-      },
-      set(value) {
-        emit('update:name', value)
-      }
-    })
-  `
-}
-
-function getCode(component) {
-  const code = beautifyHtml(toHtml(component) ) + 
-    '<script setup>\n' +
-      beautifyJs(toJavascript(component)) +
-    '\n</script>' + 
-    '<style scoped>\n' +
-      beautifyCss(toCss(component)) +
-    '\n</style>'
-  return code
-}
 
 function saveCode(directory: String, file: String, code: String) {
 
@@ -109,7 +50,7 @@ function saveCode(directory: String, file: String, code: String) {
 
 function generateComponents(model, projectDirectory: String) {
   model.components.forEach( component => {
-    const code = getCode(component)
+    const code = generateVueComponentCode(component)
     saveCode(projectDirectory + '/components', component.name + '.vue', code)
   })
 }

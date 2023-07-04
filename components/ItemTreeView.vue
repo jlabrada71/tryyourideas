@@ -50,14 +50,14 @@
     refreshChildren.value = forceRefresh
     const device = props.device
     const mode = props.mode
-    console.log('Item Tree View')
-    console.log(props.item.name)
-    console.log(props.item.id)
-    console.log('Is Component' + props.item.isComponent)
-    console.log('Props Item')
-    console.log(props.item)
-    console.log('Viewed Item')
-    console.log(viewedItem.value)
+    // console.log('Item Tree View')
+    // console.log(props.item.name)
+    // console.log(props.item.id)
+    // console.log('Is Component' + props.item.isComponent)
+    // console.log('Props Item')
+    // console.log(props.item)
+    // console.log('Viewed Item')
+    // console.log(viewedItem.value)
     const cls = getItemEditorClass(viewedItem.value, device, mode)
     return cls
   })

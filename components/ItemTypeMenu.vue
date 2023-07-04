@@ -50,6 +50,7 @@
           active:shadow-none
         "
         @click.stop="acceptSelectType"
+        :disabled="selectedType==null"
       >
         Select
       </button>

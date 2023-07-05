@@ -36,8 +36,6 @@ async function createZipFile(srcDir, zipFileName) {
   }
 }
 
-
-
 function saveCode(directory: String, file: String, code: String) {
 
   fse.writeFile(`${directory}/${file}`, code, err => {
@@ -85,10 +83,11 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event)
     const { project, user } = body
     const req = event.node.req
-    // fs.writeFileSync( `server/models/${body.user}/${body.name}.json`, content);
 
+    const projectFolder = user.id === 'undefined' ? 'freetrial' : user.id
+    log(`User ID: ${user.id} projectFolder: ${projectFolder}`)
     const srcDir = `${config.data}/templates/nuxt3-tailwinds-storybook`
-    const destDir = `${config.data}/projects/${user.id}/generation/${project.name}`
+    const destDir = `${config.data}/projects/${projectFolder}/generation/${project.name}`
     const zipFileName = `${destDir}.zip`
     copyTemplate(srcDir, destDir)
 

@@ -357,7 +357,7 @@ onMounted(() => {
       intro: 'Finally, here you can report any issue you might find working with the editor.',
      // position: 'top'
     }]
-  }).start()
+  }).setOption("dontShowAgain", true).start()
 })
 
 const selectedComponent = ref(null)

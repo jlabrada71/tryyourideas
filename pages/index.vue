@@ -3,12 +3,8 @@
   <HomeSignUpForm @update:user="updateUser"></HomeSignUpForm>
   <HomeNavigationBar/>
   <HomeHeroForFree/>
-  <div class="flex justify-center">
-    <a id="id-7-1-2" @click="goEditor" class=" flex bg-fuchsia-500 w-56 justify-center align-baseline h-14 m-10 text-xl font-bold  rounded-full border-fuchsia-400 text-slate-50  hover:bg-fuchsia-600 hover:text-slate-50 active:flex active:flex-row active:bg-fuchsia-700  focus:bg-fuchsia-600 focus:border-4 focus:border-fuchsia-300 ">
-      <span id="id-7-1-2-1" class=" flex flex-row mx-3 bg-inherit h-6 hover:flex hover:flex-row hover:mx-3 hover:bg-inherit hover:h-6 ">
-          Try it for free
-      </span>
-    </a>    
+  <div class="flex justify-center p-5">
+    <HomeTryForFree @click="goEditor"></HomeTryForFree>
   </div>
 
   <div class="flex justify-center w-full">

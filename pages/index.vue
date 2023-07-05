@@ -5,6 +5,14 @@
   <HomeHero/>
   <div class="flex justify-center w-full">
     <div class="p-10 gap-10 m-10 w-4/5 flex flex-col content-center">
+      <div class="flex flex-col gap-10 p-10 m-10 ">
+        <span class="text-5xl flex w-full justify-center">The easiest way of creating VueJS components with TailwindCSS</span>
+        <div class="flex flex-wrap w-full justify-around">
+          <img class="w-1/3" src="/assets/images/vue-js.png" alt="VueJS logo">
+          <img class="w-1/3" src="/assets/images/tailwind-css.png" alt="TailwindCSS logo">
+        </div>
+        
+      </div>
       <div class="flex justify-around gap-10 p-10 m-10 bg-slate-600 rounded-xl">
         <img class="w-1/2" src="/assets/images/create-visually.png" alt="Create your components Visually">
         <div class="w-1/2">
@@ -12,7 +20,6 @@
           <p class="text-2xl text-slate-50 m-10">Why struggling remembering CSS codes when you can focus on your design?</p>
           <p class="text-2xl text-slate-50 m-10">Why make silly mistakes when boilerplate code can be easily generate?</p>
         </div>
-        
       </div>
       <div class="flex justify-around gap-10 p-10 m-10  bg-slate-100 rounded-xl">
         <div class="w-1/2">

@@ -2,11 +2,19 @@
   <HomeSignInForm @update:session="updateSession"></HomeSignInForm>
   <HomeSignUpForm @update:user="updateUser"></HomeSignUpForm>
   <HomeNavigationBar/>
-  <HomeHero/>
+  <HomeHeroForFree/>
+  <div class="flex justify-center">
+    <a id="id-7-1-2" @click="goEditor" class=" flex bg-fuchsia-500 w-56 justify-center align-baseline h-14 m-10 text-xl font-bold  rounded-full border-fuchsia-400 text-slate-50  hover:bg-fuchsia-600 hover:text-slate-50 active:flex active:flex-row active:bg-fuchsia-700  focus:bg-fuchsia-600 focus:border-4 focus:border-fuchsia-300 ">
+      <span id="id-7-1-2-1" class=" flex flex-row mx-3 bg-inherit h-6 hover:flex hover:flex-row hover:mx-3 hover:bg-inherit hover:h-6 ">
+          Try it for free
+      </span>
+    </a>    
+  </div>
+
   <div class="flex justify-center w-full">
     <div class="p-10 gap-10 m-10 w-4/5 flex flex-col content-center">
       <div class="flex flex-col gap-10 p-10 m-10 ">
-        <span class="text-5xl flex w-full justify-center">The easiest way of creating VueJS components with TailwindCSS</span>
+        <span class="text-5xl flex w-full justify-center">The easiest way to create VueJS components with TailwindCSS</span>
         <div class="flex flex-wrap w-full justify-around">
           <img class="w-1/3" src="/assets/images/vue-js.png" alt="VueJS logo">
           <img class="w-1/3" src="/assets/images/tailwind-css.png" alt="TailwindCSS logo">
@@ -18,13 +26,13 @@
         <div class="w-1/2">
           <p class="text-5xl text-slate-50 font-bold">Create your components in the way you wanted</p>
           <p class="text-2xl text-slate-50 m-10">Why struggling remembering CSS codes when you can focus on your design?</p>
-          <p class="text-2xl text-slate-50 m-10">Why make silly mistakes when boilerplate code can be easily generate?</p>
+          <p class="text-2xl text-slate-50 m-10">Why making silly mistakes when boilerplate code can be easily generated?</p>
         </div>
       </div>
       <div class="flex justify-around gap-10 p-10 m-10  bg-slate-100 rounded-xl">
         <div class="w-1/2">
           <p class="text-5xl font-bold">Then, write the logic in your favorite IDE</p>
-          <p class="text-2xl m-10">Why not use your IDE for what it is good for? Writing code, tests, logic, things that can not be visually validated</p>
+          <p class="text-2xl m-10">Use your IDE for what it is good for: Writing code, tests, logic, things that can not be visually validated</p>
           <p class="text-2xl m-10">We generate the code for your favorites frontend frameworks VueJS and TailwindCSS</p>
         </div>
         <img class="w-1/2" src="/assets/images/edit-in-ide.png" alt="Then edit in your favorite ide">
@@ -34,7 +42,7 @@
         <div class="w-1/4 bg-slate-300 rounded-xl">
           <img  class="h-1/4 w-full rounded-t-xl" src="/assets/images/gradient.png" alt="Gradient Image">
           <p class="text-4xl mx-10 my-5 font-bold">Gradients</p>
-          <p class="text-2xl m-10">Finding the right color combination and directions for gradients is quite time consuming. With our component editor it can be done in two mouse clicks.</p>
+          <p class="text-2xl m-10">Finding the right color combination and directions for gradients is quite time consuming. With our component editor this can be done in two mouse clicks.</p>
           <p class="text-2xl m-10"></p>
         </div>
         <div class="w-1/4 bg-slate-300 rounded-xl">
@@ -121,6 +129,13 @@
     currentUser.value = response.data.data
   }
 
+  function goEditor() {
+    const router = useRouter()
+    router.push({
+      path: '/editor',
+    })
+  }
+
   async function updateSession(data) {
     debug('SESSION')
     debug(data)
@@ -129,10 +144,7 @@
     nextTick(async () => {
       await getLoggedUserData(accessToken.value)
    
-      const router = useRouter()
-      router.push({
-        path: '/editor',
-      })
+      goEditor()
     })
   }
 </script>

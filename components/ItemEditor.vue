@@ -5,14 +5,14 @@
   </div>
   <div id="accordion-open" data-accordion="open" class="bg-white">
     <AccordionItem id="1">
-      <template #head><span class="flex items-center">Properties</span></template>
+      <template #head><span class="flex items-center" data-id="itemProperties">Properties</span></template>
       <template #body>
         <ItemPropertiesEditor :item="props.item" @update:item="item => emit('update:item', item)"></ItemPropertiesEditor>
       </template>
     </AccordionItem>
 
     <AccordionItem id="2">
-      <template #head><span class="flex items-center">Styles</span></template>
+      <template #head><span class="flex items-center" data-id="itemStyles">Styles</span></template>
       <template #body>
         <ItemStyleEditor :item="props.item" @update:item="item => emit('update:item', item)" @update:modifier="modifier => emit('update:modifier', modifier)"></ItemStyleEditor>
       </template>

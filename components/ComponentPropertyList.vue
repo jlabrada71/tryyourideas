@@ -6,7 +6,11 @@
     @cancel:property="cancelEditProperty" 
     @update:property="updateProperty">
   </PropertyEditor>
-  <div id="id-12" class="bg-yellow-200 w-96 flex-row flex ">
+  <div 
+    id="id-12" 
+    class="bg-yellow-200 w-96 flex-row flex "
+    data-id="propertyList"
+    >
     <div id="id-12-1" class="bg-slate-200 w-full p-2 content-start flex-row flex-wrap flex ">
       <div class="bg-slate-300 w-full h-8 p-1 flex-row flex hover:bg-slate-600 hover:text-slate-100"> 
         <span class="w-full">

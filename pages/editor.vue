@@ -4,7 +4,7 @@
   <ProjectExportForm :user="currentUser" :project="project" @export="email => generateNuxtTailwindsStorybook(email)"></ProjectExportForm>
   <IssuesForm :project="project" :store="saveIssues"></IssuesForm>
   <div class="w-full h-20 bg-slate-100 text-black flex">
-    <img src="/logo.png" alt="Try Your Ideas logo">
+    <img src="/logo.png" alt="Try Your Ideas logo" data-id="logo">
     <SystemStatus :name="currentUser.name" :project="project.name" :licence="currentUser.licence"></SystemStatus>
   </div>
   <!-- <h2>Access</h2>
@@ -19,8 +19,11 @@
         <div class="ml-2 w-10/12">Components</div>
         <button type="button" 
           class="text-white w-5 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium text-sm dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800" 
-          @click.stop="createNewComponent">
+          @click.stop="createNewComponent"
+          data-id="newComponent"
+          >
           <svg id="Layer_1" data-name="Layer 1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 100.06"><title>Add component</title><path class="cls-1" d="M50.34,34.25h5.39a2.49,2.49,0,0,1,2.48,2.48v8h8a2.51,2.51,0,0,1,2.48,2.48v5.4a2.52,2.52,0,0,1-2.48,2.48h-8v8a2.51,2.51,0,0,1-2.48,2.48H50.34a2.51,2.51,0,0,1-2.49-2.48v-8h-8a2.5,2.5,0,0,1-2.48-2.48v-5.4a2.48,2.48,0,0,1,2.48-2.48h8v-8a2.49,2.49,0,0,1,2.49-2.48ZM7.67,0H98.35A7.69,7.69,0,0,1,106,7.67v68a7.7,7.7,0,0,1-7.67,7.67H7.67A7.69,7.69,0,0,1,0,75.69v-68A7.69,7.69,0,0,1,7.67,0ZM99.05,23.92H7.31V74a2.09,2.09,0,0,0,.62,1.5,2.13,2.13,0,0,0,1.51.62H96.89a2.11,2.11,0,0,0,1.51-.62A2.09,2.09,0,0,0,99,74V23.92ZM91,8.62a3.79,3.79,0,1,1-3.79,3.79A3.79,3.79,0,0,1,91,8.62Zm-25.68,0a3.79,3.79,0,1,1-3.79,3.79,3.79,3.79,0,0,1,3.79-3.79Zm12.84,0a3.79,3.79,0,1,1-3.79,3.79A3.79,3.79,0,0,1,78.2,8.62Zm37,8.07.36,23.92V90.69a2.12,2.12,0,0,1-2.13,2.13H26a2.12,2.12,0,0,1-2.12-2.13h-7v1.68a7.7,7.7,0,0,0,7.67,7.68h90.68a7.7,7.7,0,0,0,7.67-7.68v-68a7.7,7.7,0,0,0-7.67-7.68Z"/></svg>
+          
         </button>
       </div>
 
@@ -41,7 +44,8 @@
             class="pl-2">
           </EditableLabel>
 
-          <ComponentItemList
+          <ComponentItemList 
+            data-id="itemList"
             v-if="component.id===selectedComponent.id"
             :component="component"
             @update:add-child="selectItemType" 
@@ -82,17 +86,18 @@
             <path d="M88.7 223.8L0 375.8V96C0 60.7 28.7 32 64 32H181.5c17 0 33.3 6.7 45.3 18.7l26.5 26.5c12 12 28.3 18.7 45.3 18.7H416c35.3 0 64 28.7 64 64v32H144c-22.8 0-43.8 12.1-55.3 31.8zm27.6 16.1C122.1 230 132.6 224 144 224H544c11.5 0 22 6.1 27.7 16.1s5.7 22.2-.1 32.1l-112 192C453.9 474 443.4 480 432 480H32c-11.5 0-22-6.1-27.7-16.1s-5.7-22.2 .1-32.1l112-192z" />
           </svg>
         </ToolBarButton>
-        <ToolBarButton target="exportProjectForm" title="Generate project code">
+        <ToolBarButton data-id="generateCode" target="exportProjectForm" title="Generate project code">
           <svg xmlns="http://www.w3.org/2000/svg" id="id-8-4-1" class=" flex flex-row bg-transparent w-8 h-8 " viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
             <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-167l80 80c9.4 9.4 24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-39 39V184c0-13.3-10.7-24-24-24s-24 10.7-24 24V318.1l-39-39c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z" />
           </svg>
         </ToolBarButton>
-        <ToolBarButton target="issuesForm" title="Report issues">
+        <ToolBarButton data-id="reportIssues" target="issuesForm" title="Report issues">
           <svg xmlns="http://www.w3.org/2000/svg" id="id-8-5-1" class=" flex flex-row bg-transparent w-8 h-8 " viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
             <path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L477.4 348.9c1.7-9.4 2.6-19 2.6-28.9h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H479.7c-1.1-14.1-5-27.5-11.1-39.5c.7-.6 1.4-1.2 2.1-1.9l64-64c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-64 64c-.7 .7-1.3 1.4-1.9 2.1C409.2 164.1 393.1 160 376 160H264c-8.3 0-16.3 1-24 2.8L38.8 5.1zM320 0c-53 0-96 43-96 96v3.6c0 15.7 12.7 28.4 28.4 28.4H387.6c15.7 0 28.4-12.7 28.4-28.4V96c0-53-43-96-96-96zM160.3 256H96c-17.7 0-32 14.3-32 32s14.3 32 32 32h64c0 24.6 5.5 47.8 15.4 68.6c-2.2 1.3-4.2 2.9-6 4.8l-64 64c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l63.1-63.1c24.5 21.8 55.8 36.2 90.3 39.6V335.5L166.7 227.3c-3.4 9-5.6 18.7-6.4 28.7zM336 479.2c36.6-3.6 69.7-19.6 94.8-43.8L336 360.7V479.2z" />
           </svg>
         </ToolBarButton>
       </ToolBar>
+
       <div class="bg-slate-100 px-10 ">
         <div class="flex justify-between">
           <SelectorsDevice :device="selectedDevice" @update:device="selectDevice"></SelectorsDevice>
@@ -138,6 +143,7 @@ import { getAlignVariables } from '@/lib/plugins/align.js'
 import { getPlaceVariables } from '@/lib/plugins/place.js'
 import { getShadowVariables } from '@/lib/plugins/shadow.js'
 import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy'
+import introJs from 'intro.js'
 
 import axios from 'axios'
 import _ from 'lodash'; 
@@ -159,6 +165,11 @@ import {
     const { throttle } = _;
 
     const config = useRuntimeConfig()
+
+    useHead({
+      script: [{ src: 'https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.0.1/intro.min.js'}],
+      link: [{ rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.0.1/introjs.min.css'}]
+    })
     
 // each project has many components
 // each component has:
@@ -303,6 +314,50 @@ const project = ref({
 onMounted(() => {
   updateProjectList()
   openProject(currentProject.value)
+  introJs().setOptions({
+    steps: [
+    {
+      element: document.querySelector('[data-id="logo"]'),
+      title: 'Welcome!!',
+      intro: 'You are using TryYourIdeas Components Editor! Let\' see quickly how to use it',
+      //position: 'right'
+    },
+    {
+      element: document.querySelector('[data-id="newComponent"]'),
+      intro: 'Here you can add a new component to the project.',
+      //position: 'left'
+    },
+    {
+      element: document.querySelector('[data-id="itemList"]'),
+      intro: 'This is the list of the component items. You can add new items like div, buttons, or other components already created in the project.',
+      //position: 'bottom'
+    },
+    {
+      element: document.querySelector('[data-id="propertyList"]'),
+      intro: 'This is the list of the component properties. You can use these properties to pass in values to the component that can be shown in some component items.',
+      //position: 'bottom'
+    },
+    {
+      element: document.querySelector('[data-id="itemProperties"]'),
+      intro: 'Here you can edit the properties of the currently selected item. For example, you can set the "src" attribute of an "img" item.',
+      //position: 'bottom'
+    },
+    {
+      element: document.querySelector('[data-id="itemStyles"]'),
+      intro: 'And here you can define the styles for the selected item. Size, color, shadows, gradients and many more.',
+      //position: 'bottom'
+    },
+    {
+      element: document.querySelector('[data-id="generateCode"]'),
+      intro: 'And with this button you can generate the project code. An email will be sent with a download link and instruction for how to test it.',
+     // position: 'top'
+    },
+    {
+      element: document.querySelector('[data-id="reportIssues"]'),
+      intro: 'Finally, here you can report any issue you might find working with the editor.',
+     // position: 'top'
+    }]
+  }).start()
 })
 
 const selectedComponent = ref(null)

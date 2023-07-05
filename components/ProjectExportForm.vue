@@ -2,7 +2,7 @@
 
   <!-- Main modal -->
   <div id="exportProjectForm" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-2xl max-h-full">
+    <div class="relative w-full max-w-2xl max-h-full">  
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
             <!-- Modal header -->
@@ -30,7 +30,7 @@
                 </div>
               </div>
               <div v-if="getEmail()">
-                <div for="small-input" class="block mb-2 text-sm font-medium text-slate-900 dark:text-white">Email to send the download link
+                <div for="small-input" class="block mb-2 text-sm font-medium text-slate-900 dark:text-white">Email to send the project's download link
                 <input v-model="email" type="email" placeholder="name@example.com" class="block w-full p-2 text-slate-900 border border-slate-300 rounded-lg bg-slate-50 sm:text-xs focus:ring-slate-500 focus:border-slate-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" >
                 </div>
                 <span class="text-red-700">{{error}}</span>
@@ -63,7 +63,7 @@
 
   const tempEmail = ref('')
 
-  const getEmail = () => props.user.email.endsWith('fakemail.com')
+  const getEmail = () => props.user.email.endsWith('fakemail.com') || props.user.email=='undefined'
 
   const email = computed({
     get() {

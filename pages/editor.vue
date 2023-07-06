@@ -302,7 +302,7 @@ watch(currentUser, () => {
 const currentProject = useStorage('currentProject', {
   name: 'Default',
   dirty: false,
-  components: [],
+  components: [newComponent()],
 })
 
 const project = ref({

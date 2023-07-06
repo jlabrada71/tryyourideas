@@ -77,6 +77,7 @@
     initTooltips } from 'flowbite'
   import { useStorage } from '@vueuse/core'
   import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy'
+  import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy'
   import { debug, log } from '@/lib/logger.js'
 
   const config = useRuntimeConfig()
@@ -113,12 +114,54 @@
     })
   }
 
+  const currentProject = useStorage('currentProject', {
+    name: 'Default',
+    dirty: false,
+    components: [],
+  })
+
   async function getLoggedUserData(accessToken) {
     debug('getLoggedUserData')
     const accountService = new AccountServiceProxy(config)
     const response = await accountService.findForAccessToken(accessToken)
     debug(response.data.data )
     currentUser.value = response.data.data
+  }
+
+  const projectService = new ProjectServiceProxy(config)
+
+  async function getDefaultProject(userId) {
+    const  { data } = await projectService.select({ userId, name: 'Default' })
+    debug(data)
+    if (data.result !== 'ok' ) return
+    currentProject.value = data.project
+  }
+
+  function tryForFree() {
+
+    currentUser.value = {
+      name: 'anonimous',
+      email: 'unset',
+      id: 'undefined',
+      licence: 'community',
+      maxProjects: '1'
+    }
+
+    currentProject.value = {
+      name: 'Default',
+      dirty: false,
+      components: [],
+    }
+
+    goEditor()
+
+  }
+
+  function goEditor() {
+    const router = useRouter()
+    router.push({
+      path: '/editor',
+    })
   }
 
   async function updateSession(data) {
@@ -128,11 +171,9 @@
     refreshToken.value = data.refreshToken
     nextTick(async () => {
       await getLoggedUserData(accessToken.value)
+      await getDefaultProject(currentUser.value.id)
    
-      const router = useRouter()
-      router.push({
-        path: '/editor',
-      })
+      goEditor()
     })
   }
 </script>

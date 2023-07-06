@@ -8,6 +8,7 @@
 <script setup>
   import axios from 'axios'
   import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy.js'
+  import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy.js'
   import { useStorage } from '@vueuse/core'
   import { log, debug } from '@/lib/logger.js'
 
@@ -31,6 +32,15 @@
     dirty: false,
     components: [],
   })
+
+  const projectService = new ProjectServiceProxy(config)
+
+  async function getDefaultProject(userId) {
+    const  { data } = await projectService.select({ userId, name: 'Default' })
+    debug(data)
+    if (data.result !== 'ok' ) return
+    currentProject.value = data.project
+  }
 
   async function getLoggedUserData() {
     debug('getLoggedUserData')
@@ -59,6 +69,7 @@
             status.value = 'getting logged user data....'
             nextTick(async () => {
               await getLoggedUserData()
+              await getDefaultProject(currentUser.value.id)
               router.push({
                 path: response.data.path,
               }) 

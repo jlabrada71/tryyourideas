@@ -4,7 +4,7 @@
   <HomeNavigationBar/>
   <HomeHeroForFree/>
   <div class="flex justify-center p-5">
-    <HomeTryForFree @click="goEditor"></HomeTryForFree>
+    <HomeTryForFree @click="tryForFree"></HomeTryForFree>
   </div>
 
   <div class="flex justify-center w-full">
@@ -81,6 +81,7 @@
     initTooltips } from 'flowbite'
   import { useStorage } from '@vueuse/core'
   import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy'
+  import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy'
   import { debug, log } from '@/lib/logger.js'
 
   const config = useRuntimeConfig()
@@ -117,12 +118,47 @@
     })
   }
 
+  const currentProject = useStorage('currentProject', {
+    name: 'Default',
+    dirty: false,
+    components: [],
+  })
+
   async function getLoggedUserData(accessToken) {
     debug('getLoggedUserData')
     const accountService = new AccountServiceProxy(config)
     const response = await accountService.findForAccessToken(accessToken)
     debug(response.data.data )
     currentUser.value = response.data.data
+  }
+
+  const projectService = new ProjectServiceProxy(config)
+
+  async function getDefaultProject(userId) {
+    const  { data } = await projectService.select({ userId, name: 'Default' })
+    debug(data)
+    if (data.result !== 'ok' ) return
+    currentProject.value = data.project
+  }
+
+  function tryForFree() {
+
+    currentUser.value = {
+      name: 'anonimous',
+      email: 'unset',
+      id: 'undefined',
+      licence: 'community',
+      maxProjects: '1'
+    }
+
+    currentProject.value = {
+      name: 'Default',
+      dirty: false,
+      components: [],
+    }
+
+    goEditor()
+
   }
 
   function goEditor() {
@@ -139,6 +175,7 @@
     refreshToken.value = data.refreshToken
     nextTick(async () => {
       await getLoggedUserData(accessToken.value)
+      await getDefaultProject(currentUser.value.id)
    
       goEditor()
     })

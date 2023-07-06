@@ -142,7 +142,7 @@ import { getJustifyVariables } from '@/lib/plugins/justify.js'
 import { getAlignVariables } from '@/lib/plugins/align.js'
 import { getPlaceVariables } from '@/lib/plugins/place.js'
 import { getShadowVariables } from '@/lib/plugins/shadow.js'
-import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy'
+import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy.js'
 import introJs from 'intro.js'
 
 import axios from 'axios'
@@ -278,11 +278,11 @@ function updateUser(account) {
   currentUser.value = account
 }
 
-const projectRepository = new ProjectServiceProxy(config)
+const projectService = new ProjectServiceProxy(config)
 
 async function getProjectList(userId) {
   if (!userId) return []
-  const result = await projectRepository.select({ userId })
+  const result = await projectService.select({ userId })
   return result.data.files
 }
 
@@ -299,16 +299,16 @@ watch(currentUser, () => {
   updateProjectList()
 })
 
-const currentProject = useStorage('currentProject', {
-  name: 'Default',
-  dirty: false,
-  components: [newComponent()],
-})
-
 const project = ref({
   name: 'Default',
   dirty: false,
   components: [],
+})
+
+const currentProject = useStorage('currentProject', {
+  name: 'Default',
+  dirty: false,
+  components: [newComponent()],
 })
 
 onMounted(() => {
@@ -421,7 +421,7 @@ function openProject(projectValue) {
 }
 
 async function getProject(projectName) {
-  const result = await projectRepository.select({ userId: currentUser.value.id, name: projectName })
+  const result = await projectService.select({ userId: currentUser.value.id, name: projectName })
   openProject(result.data.project)
 }
 

@@ -43,6 +43,7 @@ export default defineEventHandler(async (event) => {
     }
   }
 
+  account.activationDate = Date.now()
   account.active = true
   await service.update(account)
 

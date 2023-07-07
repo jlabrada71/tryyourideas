@@ -11,7 +11,7 @@ const message = ref('')
 
 onMounted(async () => {
   message.value = 'Account have been registered'
-  result.value = 'To activate your account click the link in the activation email that was sent to your email account.'
+  result.value = 'To activate your account click the link in the activation email that was sent to your email account. Check also the spam folder, as sometimes it gets missclassified.'
 })
 
 </script>

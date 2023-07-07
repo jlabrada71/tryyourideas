@@ -1,16 +1,7 @@
 import { log, debug } from '@/lib/logger.js'
-import fse  from 'fs-extra'
-import axios from 'axios'
+import { getEmailService } from '@/lib/emails/Service.js'
 
 const config = useRuntimeConfig()
-
-function postToServer(obj, url) {
-  return axios({
-    method: 'post',
-    url,
-    data: obj
-  });
-}
 
 export default defineEventHandler(async (event) => {
   log('issues POST')
@@ -21,7 +12,7 @@ export default defineEventHandler(async (event) => {
   // issues.issues.push(body)
   // fse.writeFileSync(issuesDir, JSON.stringify(issues, null, 2))
 
-  const result = `<html>
+  const notificationText = `<html>
     <body>
       Hi Juan<br><br> 
 
@@ -39,8 +30,16 @@ export default defineEventHandler(async (event) => {
 
   // send email with download Url
 
-  postToServer({ title: 'Issue Notification', email: 'jlabrada@yahoo.com', content: result }, config.notificationsApi)
+  const emailService = getEmailService(config)
 
-  return;
+  try {
+
+    const result = await emailService.send({ title: 'Issue Notification', email: 'jlabrada@yahoo.com', content: notificationText })
+
+    return result;
+  } catch (e) {
+    log(e.stack, 'message-routes')
+    return { error: e.msg }
+  } 
 })
 

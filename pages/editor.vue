@@ -319,22 +319,22 @@ onMounted(() => {
     {
       element: document.querySelector('[data-id="logo"]'),
       title: 'Welcome!!',
-      intro: 'You are using TryYourIdeas Components Editor! Let\' see quickly how to use it',
+      intro: 'You are using TryYourIdeas Components Editor! Let\' see quickly how to use it. First there is a Default project that is created automatically to start off creating components.',
       //position: 'right'
     },
     {
       element: document.querySelector('[data-id="newComponent"]'),
-      intro: 'Here you can add a new component to the project.',
+      intro: 'By clicking on this button, you can start by adding a new component to your project. A component is composed by visual items, properties and events, which can modified in this section.',
       //position: 'left'
     },
     {
       element: document.querySelector('[data-id="generateCode"]'),
-      intro: 'And with this button you can generate the project code. An email will be sent with a download link and instruction for how to test it.',
+      intro: 'And with this button you can generate your VueJS project code. An email will be sent with a download link and instructions for how to test it.',
      // position: 'top'
     },
     {
       element: document.querySelector('[data-id="reportIssues"]'),
-      intro: 'Finally, here you can report any issue you might find working with the editor.',
+      intro: 'You can use this button for reporting any issue you might find working with the editor, or request a new feature. We are glad to help.',
      // position: 'top'
     },
     // {
@@ -354,7 +354,7 @@ onMounted(() => {
     },
     {
       element: document.querySelector('[data-id="itemStyles"]'),
-      intro: 'And here you can define the styles for the selected item. Size, color, shadows, gradients and many more.',
+      intro: 'Finally in this section, you can define the styles for the selected item. Size, color, shadows, gradients and many more.',
       //position: 'bottom'
     }]
   }).setOption("dontShowAgain", true).start()

@@ -100,8 +100,8 @@
 
       <div class="bg-slate-100 px-10 ">
         <div class="flex justify-between">
-          <SelectorsDevice :device="selectedDevice" @update:device="selectDevice"></SelectorsDevice>
-          <SelectorsMode :mode="selectedMode" @update:mode="selectMode"></SelectorsMode>
+          <SelectorsDevice data-id="deviceSelector" :device="selectedDevice" @update:device="selectDevice"></SelectorsDevice>
+          <SelectorsMode data-id="modeSelector" :mode="selectedMode" @update:mode="selectMode"></SelectorsMode>
         </div>
 
         <!-- Component view -->
@@ -319,22 +319,32 @@ onMounted(() => {
     {
       element: document.querySelector('[data-id="logo"]'),
       title: 'Welcome!!',
-      intro: 'You are using TryYourIdeas Components Editor! Let\' see quickly how to use it. First there is a Default project that is created automatically to start off creating components.',
+      intro: 'You are using TryYourIdeas Components Editor! Let\' quickly see how to use it. First there is a Default project that is created automatically to start off creating components.',
       //position: 'right'
     },
     {
       element: document.querySelector('[data-id="newComponent"]'),
-      intro: 'By clicking on this button, you can start by adding a new component to your project. A component is composed by visual items, properties and events, which can modified in this section.',
+      intro: 'By clicking on this button, you can start adding a new component to your project. A component is composed by visual items, properties and events, which can be modified in this section.',
       //position: 'left'
     },
     {
       element: document.querySelector('[data-id="generateCode"]'),
-      intro: 'And with this button you can generate your VueJS project code. An email will be sent with a download link and instructions for how to test it.',
+      intro: 'And with this button you can generate your VueJS project code. An email will be sent to the address you provided with a download link and instructions for how to test it.',
      // position: 'top'
     },
     {
       element: document.querySelector('[data-id="reportIssues"]'),
       intro: 'You can use this button for reporting any issue you might find working with the editor, or request a new feature. We are glad to help.',
+     // position: 'top'
+    },
+    {
+      element: document.querySelector('[data-id="deviceSelector"]'),
+      intro: 'With the device selector you can customize your designs for different devices.',
+     // position: 'top'
+    },
+    {
+      element: document.querySelector('[data-id="modeSelector"]'),
+      intro: 'Also, you can create custom design for both Dark and Light mode.',
      // position: 'top'
     },
     // {

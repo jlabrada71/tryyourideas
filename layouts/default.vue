@@ -48,8 +48,10 @@
           isAnalyticsLoaded = true
           sendAnalytics()
         }
-      }
-    ]
+      },
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.0.1/intro.min.js'}
+    ],
+    link: [{ rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.0.1/introjs.min.css'}]
   })
 
 </script>

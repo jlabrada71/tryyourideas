@@ -47,6 +47,7 @@ export default defineNuxtConfig({
     MONGO_DB: process.env.MONGO_DB,
     MAILER_PASS: 'bUVWGSxHfcp6',
     MAILER_ACCOUNT: 'support@tryyourideas.com',
+    supportInbox: 'support@tryyourideas.com',
 
     // The private keys which are only available within server-side
     apiSecret: '123',

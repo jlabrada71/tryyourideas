@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
 
   try {
 
-    const result = await emailService.send({ title: 'Issue Notification', email: 'jlabrada@yahoo.com', content: notificationText })
+    const result = await emailService.send({ title: 'Issue Notification', email: config.supportInbox, content: notificationText })
 
     return result;
   } catch (e) {

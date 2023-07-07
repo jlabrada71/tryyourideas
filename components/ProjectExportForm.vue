@@ -49,6 +49,7 @@
 
 <script setup>
   import { ref, onMounted } from "vue"
+  import { debug } from '@/lib/logger.js'
 
   const props = defineProps({
     user: {
@@ -63,8 +64,11 @@
 
   const tempEmail = ref('')
 
-  const getEmail = () => props.user.email.endsWith('fakemail.com') || props.user.email=='undefined'
-
+  const getEmail = () => {
+    debug(`email: '${props.user.email}'`)
+    return !props.user.email || props.user.email.endsWith('fakemail.com') || props.user.email == 'unset' 
+  }
+  
   const email = computed({
     get() {
       if ( getEmail()) return tempEmail.value

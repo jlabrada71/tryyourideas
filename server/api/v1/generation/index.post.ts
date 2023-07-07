@@ -2,7 +2,7 @@ import { log, debug } from '@/lib/logger.js'
 import fse  from 'fs-extra'
 import { zip } from 'zip-a-folder';
 import CloudStorage from '@/lib/firebase/cloud-storage.js'
-import axios from 'axios'
+import { getEmailService } from '@/lib/emails/Service.js'
 import { generateVueComponentCode } from '@/lib/GenerateVueComponentCode.js';
 
 
@@ -68,75 +68,67 @@ function generateIndexPage(model, projectDirectory: String) {
   saveCode(projectDirectory + '/pages', 'index.vue', pageCode)
 }
 
-function postToServer(obj, url) {
-  log('POSTING to ' + url)
-  log(JSON.stringify(obj, null, 2))
-  return axios({
-    method: 'post',
-    url,
-    data: obj
-  });
-}
-
 export default defineEventHandler(async (event) => {
   log('generation POST')
-    const body = await readBody(event)
-    const { project, user } = body
-    const req = event.node.req
+  const body = await readBody(event)
+  const { project, user } = body
+  const req = event.node.req
 
-    const projectFolder = user.id === 'undefined' ? 'freetrial' : user.id
-    log(`User ID: ${user.id} projectFolder: ${projectFolder}`)
-    const srcDir = `${config.data}/templates/nuxt3-tailwinds-storybook`
-    const destDir = `${config.data}/projects/${projectFolder}/generation/${project.name}`
-    const zipFileName = `${destDir}.zip`
-    copyTemplate(srcDir, destDir)
+  const projectFolder = user.id === 'undefined' ? 'freetrial' : user.id
+  log(`User ID: ${user.id} projectFolder: ${projectFolder}`)
+  const srcDir = `${config.data}/templates/nuxt3-tailwinds-storybook`
+  const destDir = `${config.data}/projects/${projectFolder}/generation/${project.name}`
+  const zipFileName = `${destDir}.zip`
+  copyTemplate(srcDir, destDir)
 
-    generateComponents(project, destDir)
-    generateIndexPage(project, destDir)
+  generateComponents(project, destDir)
+  generateIndexPage(project, destDir)
 
-    await createZipFile(destDir, zipFileName)
-    log('finished zipping')
+  await createZipFile(destDir, zipFileName)
+  log('finished zipping')
 
-    const firebaseFilename = `public/images/${project.name}.zip`
-     
-    const file = await fse.readFile(zipFileName)
+  const firebaseFilename = `public/images/${project.name}.zip`
+    
+  const file = await fse.readFile(zipFileName)
 
-    const downloadUrl = await CloudStorage.upload(firebaseFilename, file)
-    debug(downloadUrl)
-   
-    log('finished publishing')
+  const downloadUrl = await CloudStorage.upload(firebaseFilename, file)
+  debug(downloadUrl)
+  
+  log('finished publishing')
 
-    const result = `<html>
-        <body>
-          Hi ${user.name}<br><br> 
-          The code for your project ${project.name} is ready. 
-          <a href="${downloadUrl}">Download here</a><br>
-          To run your project: <br>
-          <ul>
-            <li>Unzip the file</li>
-            <li>cd ${project.name} </li>
-            <li>npm install</li>
-            <li>npm run dev</li>
-          </ul>
-          <br>
-          <br>
-          Kind regards<br>
-          The TryYourIdeas team<br>
-          <br>
-        </body>
-        </html> `
+  const emailText = `<html>
+      <body>
+        Hi ${user.name}<br><br> 
+        The code for your project ${project.name} is ready. 
+        <a href="${downloadUrl}">Download here</a><br>
+        To run your project: <br>
+        <ul>
+          <li>Unzip the file</li>
+          <li>cd ${project.name} </li>
+          <li>npm install</li>
+          <li>npm run dev</li>
+        </ul>
+        <br>
+        <br>
+        Kind regards<br>
+        The TryYourIdeas team<br>
+        <br>
+      </body>
+      </html> `
 
-    // send email with download Url
+  // send email with download Url
+  const emailService = getEmailService(config)
 
-    try {
-      await postToServer({ title: 'Project Download Link', email: user.email, content: result }, config.notificationsApi)
-      log('email sent')
-    }
-    catch(e) {
-      log('Error sending email' + e.message)
-      log(e)
-    }
+  try {
 
-    return result
+    const result = await emailService.send({ title: 'Project Download Link', email: user.email, content: emailText })
+
+    return result;
+  } catch (e) {
+    log(e.stack, 'message-routes')
+    return { error: e.msg }
+  }
+
+  return result
 })
 

@@ -3,7 +3,7 @@
   <HomeSignUpForm @update:user="updateUser"></HomeSignUpForm>
   <HomeNavigationBar/>
   <HomeHeroForFree/>
-  <div class="flex justify-center p-5">
+  <div class="flex justify-center p-5 cursor-pointer">
     <HomeTryForFree @click="tryForFree"></HomeTryForFree>
   </div>
 

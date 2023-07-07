@@ -43,6 +43,11 @@ export default defineNuxtConfig({
     ]
   },
   runtimeConfig: {
+    MONGO_URL: process.env.MONGO_URL,
+    MONGO_DB: process.env.MONGO_DB,
+    MAILER_PASS: 'bUVWGSxHfcp6',
+    MAILER_ACCOUNT: 'support@tryyourideas.com',
+
     // The private keys which are only available within server-side
     apiSecret: '123',
     // Keys within public, will be also exposed to the client-side

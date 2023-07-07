@@ -328,15 +328,25 @@ onMounted(() => {
       //position: 'left'
     },
     {
-      element: document.querySelector('[data-id="itemList"]'),
-      intro: 'This is the list of the component items. You can add new items like div, buttons, or other components already created in the project.',
-      //position: 'bottom'
+      element: document.querySelector('[data-id="generateCode"]'),
+      intro: 'And with this button you can generate the project code. An email will be sent with a download link and instruction for how to test it.',
+     // position: 'top'
     },
     {
-      element: document.querySelector('[data-id="propertyList"]'),
-      intro: 'This is the list of the component properties. You can use these properties to pass in values to the component that can be shown in some component items.',
-      //position: 'bottom'
+      element: document.querySelector('[data-id="reportIssues"]'),
+      intro: 'Finally, here you can report any issue you might find working with the editor.',
+     // position: 'top'
     },
+    // {
+    //   element: document.querySelector('[data-id="itemList"]'),
+    //   intro: 'This is the list of the component items. You can add new items like div, buttons, or other components already created in the project.',
+    //   //position: 'bottom'
+    // },
+    // {
+    //   element: document.querySelector('[data-id="propertyList"]'),
+    //   intro: 'This is the list of the component properties. You can use these properties to pass in values to the component that can be shown in some component items.',
+    //   //position: 'bottom'
+    // },
     {
       element: document.querySelector('[data-id="itemProperties"]'),
       intro: 'Here you can edit the properties of the currently selected item. For example, you can set the "src" attribute of an "img" item.',
@@ -346,16 +356,6 @@ onMounted(() => {
       element: document.querySelector('[data-id="itemStyles"]'),
       intro: 'And here you can define the styles for the selected item. Size, color, shadows, gradients and many more.',
       //position: 'bottom'
-    },
-    {
-      element: document.querySelector('[data-id="generateCode"]'),
-      intro: 'And with this button you can generate the project code. An email will be sent with a download link and instruction for how to test it.',
-     // position: 'top'
-    },
-    {
-      element: document.querySelector('[data-id="reportIssues"]'),
-      intro: 'Finally, here you can report any issue you might find working with the editor.',
-     // position: 'top'
     }]
   }).setOption("dontShowAgain", true).start()
 })

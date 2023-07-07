@@ -1,5 +1,5 @@
 <template>
-    <h2>Paddings {{props.top}} {{props.left}} {{props.right}} {{props.bottom}}</h2>
+    <h2 class="mt-3">Paddings <span class="bg-slate-200 ml-6 px-2.5 py-1 border-2 rounded-lg border-slate-400">{{selections}}</span></h2>
     <SelectorsMultiValueSelect
       :top="props.top" 
       :left="props.left"
@@ -48,6 +48,10 @@
       if (props.top.startsWith('py')) start = 1
       if (props.top.startsWith('pt')) start = 2
     })
+
+    const f = x => x === 'unset' ? '' : x
+
+    const selections = computed(() => `${f(props.top)} ${f(props.left)} ${f(props.right)} ${f(props.bottom)}`)
 
     function changeValue(values) {
       emit('update:values', values)

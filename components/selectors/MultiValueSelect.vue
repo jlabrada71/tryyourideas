@@ -1,5 +1,5 @@
 <template>
-    <div id="multi-margin-id"  class=" flex flex-row flex-wrap content-between bg-slate-100 w-72 h-60 ">
+    <div id="multi-margin-id"  class=" flex flex-row flex-wrap content-between bg-slate-100 w-60 h-60 ">
       <div id="multi-margin-id-1"  class=" flex flex-col justify-stretch items-center bg-slate-100 w-full h-20 ">
         <div id="multi-margin-id-1-1"  class=" block flex-row bg-stone-50 w-8 h-8 p-1.5 font-semibold text-center ">
         {{names[0]}}
@@ -7,7 +7,7 @@
         <SelectShortButton 
           id="multi-margin-id-1-2" 
           :disabled="disabledInput[0]"
-          class=" flex flex-row bg-slate-500 w-20 h-12 border-2 text-slate-100 "
+          class=" flex flex-row bg-slate-500 w-16 h-12 border-2 text-slate-100 "
           :options="currentDataList[0]" 
           :option="top" 
           @update:option="value=>changeValue(names[0], value)">
@@ -18,11 +18,11 @@
           <div id="multi-margin-id-2-1-1"  class=" block flex-row bg-stone-50 w-8 h-8 p-1 font-semibold text-center ">
             {{names[1]}}
           </div>
-          <div class="w-20">
+          <div class="w-16">
             <SelectShortButton 
               id="multi-margin-id-2-2" 
               :disabled="disabledInput[1]"
-              class=" flex flex-row bg-slate-500 w-20 h-12 border-2 text-slate-100 "
+              class=" flex flex-row bg-slate-500 w-16 h-12 border-2 text-slate-100 "
               :options="currentDataList[1]" 
               :option="left" 
               @update:option="value=>changeValue(names[1], value)">
@@ -32,11 +32,11 @@
         </div>
         <RotateButton id="multi-margin-id-2-2" @click="changeInputs"></RotateButton>
         <div id="multi-margin-id-2-3" class=" flex flex-row items-center bg-slate-100 w-28 h-12 ">
-          <div class="w-20">
+          <div class="w-16">
             <SelectShortButton 
               id="multi-margin-id-2-3-1" 
               :disabled="disabledInput[2]"
-              class=" flex flex-row bg-slate-500 w-20 h-12 border-2 text-slate-100 "
+              class=" flex flex-row bg-slate-500 w-16 h-12 border-2 text-slate-100 "
               :options="currentDataList[2]" 
               :option="right" 
               @update:option="value=>changeValue(names[2], value)">
@@ -54,7 +54,7 @@
         <SelectShortButton 
           id="multi-margin-id-3-2" 
           :disabled="disabledInput[3]"
-          class=" flex flex-row bg-slate-500 w-20 h-12 border-2 text-slate-100 "
+          class=" flex flex-row bg-slate-500 w-16 h-12 border-2 text-slate-100 "
           :options="currentDataList[3]" 
           :option="bottom" 
           @update:option="value=>changeValue(names[3], value)">

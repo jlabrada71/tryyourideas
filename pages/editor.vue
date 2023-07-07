@@ -113,7 +113,7 @@
       </div>
       
     </div>
-    <div class="w-96 bg-slate-50 px-2 h-auto container">
+    <div class="w-96 bg-slate-50 h-auto">
       <ItemEditor :item="selectedItem" @update:item="updateItem" @update:modifier="selectModifier"></ItemEditor>    
     </div>
   </div>

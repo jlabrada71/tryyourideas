@@ -7,7 +7,7 @@
         <div class="flex flex-col gap-1">
           <div class="flex gap-1"> 
             <label for="text-edit">Text</label>
-            <input id="text-edit" class="bg-slate-100 rounded" type="text" v-model="props.item.text">
+            <input id="text-edit" class="bg-slate-100 w-52 rounded" type="text" v-model="props.item.text">
           </div>
           <SelectorsDisplay  :display="currentClass.display" @update:display="value => updateClass('display', value)"></SelectorsDisplay>
           <SelectorsBackgroundColor :color="currentClass.backgroundColor" @update:color="value => updateClass('backgroundColor', value)"></SelectorsBackgroundColor>

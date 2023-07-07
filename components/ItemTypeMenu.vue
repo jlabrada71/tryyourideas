@@ -59,7 +59,6 @@
 </template>
 
 <script setup>
-  import { typeList } from '@/lib/typeList.js'
   const emit = defineEmits(['cancel', 'selected'])
   const props = defineProps({
     components: {

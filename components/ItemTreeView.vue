@@ -78,7 +78,7 @@
   })
 
   function getProperty(name) {
-    const prop = viewedItem.value.props.find( prop => prop.name === name )
+    const prop = viewedItem.value.properties.find( prop => prop.name === name )
     return prop ? prop.value : undefined
   }
 </script>

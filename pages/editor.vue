@@ -165,11 +165,6 @@ import {
     const { throttle } = _;
 
     const config = useRuntimeConfig()
-
-    useHead({
-      script: [{ src: 'https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.0.1/intro.min.js'}],
-      link: [{ rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.0.1/introjs.min.css'}]
-    })
     
 // each project has many components
 // each component has:
@@ -209,7 +204,7 @@ definePageMeta({
 const itemTemplate = {
   name: 'div',
   type: 'div',
-  props: [],
+  properties: [],
   children: [],
   text: '',
   editorClass: '',
@@ -393,7 +388,7 @@ function migrateProject(project) {
     return // already migrated
   }
   project.version = '0.14'
-  project.components.forEach(component => component.properties = component.props )
+  project.components.forEach(component => component.properties = component.props || component.properties )
   project.variables = []
 }
 
@@ -557,7 +552,7 @@ function updateItem(modifiedItem) {
   const item = getItemById(selectedComponent.value.root, modifiedItem.id)
 
   item.type = modifiedItem.type
-  item.props = modifiedItem.props
+  item.properties = modifiedItem.properties
  
   const editedClass = findClassBy(item, getClassKey( modifiedItem.currentClass ) )
 
@@ -602,12 +597,17 @@ function initializeProp(prop) {
   return { ...prop, value: prop.default }
 }
 
-function newProps(props) {
-  return props.map(prop => initializeProp(prop))
+function newProps(properties) {
+  return properties.map(prop => initializeProp(prop))
 }
 
 function addItem(type)  {
-  console.log(type.name)
+  debug(type.name)
+  debug(selectedComponent.value.name)
+  if (type.name === selectedComponent.value.name ) {
+    alert('Recursive components are not allowed (yet)')
+    return
+  }
   const newItem = clone(itemTemplate)
   newItem.currentClass = newItem.classes[0]
   initializeItemClass(newItem.currentClass)
@@ -618,7 +618,7 @@ function addItem(type)  {
   newItem.type = type.name
   newItem.isComponent = type.isComponent
   newItem.definition = type
-  newItem.props = newProps(type.props)
+  newItem.properties = newProps(type.properties)
   newItem.needsResolve = type.needsResolve
   parentForNewChild.value.children.push(newItem)
   closeSelectTypeDialog()

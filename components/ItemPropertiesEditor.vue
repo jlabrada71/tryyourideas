@@ -1,6 +1,6 @@
 <template>
   <div class="bg-slate-100 flex flex-col gap-2 px-2">
-    <div v-for="prop in props.item.props" class="flex flex-row">
+    <div v-for="prop in props.item.properties" class="flex flex-row">
       <div class="w-20">{{prop.name}}:</div>
       <input 
         type="text"
@@ -54,16 +54,16 @@ function updateItem(item) {
 }
 
 function updateFetchProperties(item) {
-  const fetchProperties = item.props.filter(prop => prop.method === 'fetch')
+  const fetchProperties = item.properties.filter(prop => prop.method === 'fetch')
   fetchProperties.forEach( async property => {
-    property.value = await throttledGetSvg(getReplacedUrl(item.props, property.url))
+    property.value = await throttledGetSvg(getReplacedUrl(item.properties, property.url))
     updateItem(item)
   })
 }
 
 function updateProperty(property) {
   const newItem = {...props.item }
-  newItem.props = props.item.props.map(prop => prop.name === property.name ? property : prop)
+  newItem.properties = props.item.properties.map(prop => prop.name === property.name ? property : prop)
   updateFetchProperties(newItem)
   updateItem(newItem)
 }

@@ -195,6 +195,31 @@ onMounted(() => {
     initTooltips();
 })
 
+function track (event) {
+    const url = `${config.public.analyticsServer}/api/v1/analytics`
+    const logData = (data) => {
+      const newData = { domain: config.public.domain, ...data }
+      if (newData.name === 'CLS') {
+        newData.entries = []
+        // if (data.entries) {
+        //   for (const entry of data.entries) {
+        //     delete entry.sources
+        //   }
+        // }
+      }
+      window.jl.sendAnalytics(url, newData)
+    }
+    // getCLS(logData)
+    // getFID(logData)
+    // getLCP(logData)
+
+    logData({
+    //  userId: getUserId(),
+      url: window.location.href,
+      event
+    })
+  }
+
 definePageMeta({
   middleware: [
     'auth',
@@ -462,6 +487,7 @@ function saveIssues(obj) {
 }
 
 async function generateNuxtTailwindsStorybook(email) {
+  track({ action: 'generate project'})
   currentUser.value.email = email
   const result = await postToServer( { project: project.value, user: currentUser.value }, `${config.public.apiBase}/generation`)
   // debug(result.data)

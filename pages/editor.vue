@@ -398,12 +398,12 @@ const refreshTreeView = ref(false)
 const selectedDevice = ref('any')
 const selectedMode = ref('light')
 const selectedDeviceWidth = {
-  any: 'w-full',
-  sm: 'w-[640px]',
-  md: 'w-[768px]',
-  lg: 'w-[1024px]',
-  xl: 'w-[1280px]',
-  '2xl': '[1536px]'
+  any: 'w-[639px]',
+  sm: 'w-[767px]',
+  md: 'w-[1023px]',
+  lg: 'w-[1279px]',
+  xl: 'w-[1535px]',
+  '2xl': 'w-full'
 }
 
 createNewProject({ name: 'Default' })
@@ -494,9 +494,9 @@ async function generateNuxtTailwindsStorybook(email) {
 }
 
 function initializeComponentClass(componentClass) {
-  componentClass.width = 'w-40'
+  componentClass.width = 'w-full'
   componentClass.height = 'h-40'
-  componentClass.backgroundColor = 'bg-slate-100'
+  componentClass.backgroundColor = 'bg-slate-200'
   componentClass.display = 'flex'
   componentClass.flexDirection = 'flex-row'
 }
@@ -504,7 +504,7 @@ function initializeComponentClass(componentClass) {
 function initializeItemClass(itemClass) {
   itemClass.width = 'w-10'
   itemClass.height = 'h-10'
-  itemClass.backgroundColor = 'bg-slate-200'
+  itemClass.backgroundColor = 'bg-slate-300'
   itemClass.display = 'flex'
   itemClass.flexDirection = 'flex-row'
 }

@@ -8,7 +8,7 @@
   </PropertyEditor>
   <div 
     id="id-12" 
-    class="bg-yellow-200 w-96 flex-row flex "
+    class="bg-yellow-200 w-full flex-row flex "
     data-id="propertyList"
     >
     <div id="id-12-1" class="bg-slate-200 w-full p-2 content-start flex-row flex-wrap flex ">

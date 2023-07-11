@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="flex flex-col pl-3">
+    <ul class="flex flex-col pl-2">
       <div :class="itemClass" @click="emit('selected', item)">
         <span class="justify-self-start w-full">{{item.type}}</span>
         <div class="hidden group-hover:block group-focus:block">
@@ -50,5 +50,5 @@
 
   const allowChild = computed(() => !selfClosingTags.includes(props.item.type) && !props.item.isComponent)
   const selected = computed(() => props.item.isSelected ? 'bg-slate-400 text-white' : 'bg-slate-100 text-black' )
-  const itemClass = computed(() => `flex ${selected.value} hover:bg-slate-600 hover:text-slate-200 w-full group focus:bg-slate-300`)
+  const itemClass = computed(() => `flex ${selected.value} pl-1 hover:bg-slate-600 hover:text-slate-200 w-full group focus:bg-slate-300`)
 </script>

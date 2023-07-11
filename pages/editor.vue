@@ -105,9 +105,10 @@
         </div>
 
         <!-- Component view -->
-
-        <div :class="treeViewContainerClass">             
-          <ItemTreeView :item="selectedComponent.root" :device="selectedDevice" :mode="selectedMode" :refresh="refreshTreeView" @selected="selectItem"></ItemTreeView>
+        <div class=" justify-center flex">
+          <div :class="treeViewContainerClass">             
+            <ItemTreeView :item="selectedComponent.root" :device="selectedDevice" :mode="selectedMode" :refresh="refreshTreeView" @selected="selectItem"></ItemTreeView>
+          </div>
         </div>
          <!-- Component view -->
       </div>

@@ -34,6 +34,30 @@
   }
 
   useHead({
+    title: 'Try Your Ideas',
+    description: 'Visual Vue Js components Editor. Generates TailwindCSS utility class for VueJS components.',
+    meta: [
+      {
+        hid: 'og:title',
+        name: 'og:title',
+        content: 'Try Your Ideas'
+      },
+      {
+        hid: 'og:image',
+        name: 'og:image',
+        content: 'https://tryyourideas.com/logo.png'
+      }, 
+      {
+        hid: 'og:description',
+        name: 'og:description',
+        content: 'Visual Vue Js components Editor. Generates TailwindCSS utility class for VueJS components. The natural and intuitive way to create VueJS components.'
+      }, 
+      {
+        hid: 'og:url',
+        name: 'og:url',
+        content: 'https://www.tryyourideas.com'
+      }
+    ],
     script: [
       {
         src: `${config.public.analyticsServer}/analytics/analytics.js`,

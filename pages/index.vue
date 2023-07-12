@@ -1,8 +1,9 @@
 <template>
   <HomeSignInForm @update:session="updateSession"></HomeSignInForm>
   <HomeSignUpForm @update:user="updateUser"></HomeSignUpForm>
-  <HomeNavigationBar/>
-  <HomeHeroForFree/>
+  <HomeNavigationBar />
+  <HomeHeroForFree />
+  <MobileDisclaimer />
   <div class="flex justify-center p-5 cursor-pointer">
     <HomeTryForFree @click="tryForFree"></HomeTryForFree>
   </div>

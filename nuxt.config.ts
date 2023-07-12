@@ -165,9 +165,9 @@ SkZ5/uo05c+B1yaHdf7FdMPDkmPmxexIwPxScMfbf7d51WhKRFHW1v8vwzRHnl0X
     // Static page generated on-demand once
     '/articles/**': { static: true },
   },
-  nitro: {
-    prerender: {
-      routes: ['/sitemap.xml']
-    }
-  }
+  // nitro: {
+  //   prerender: {
+  //     routes: ['/sitemap.xml']
+  //   }
+  // }
 })

@@ -34,6 +34,8 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    '@nuxt/content',
+    '@vueuse/nuxt',
     '@pinia/nuxt',
   ],
   components: {
@@ -158,6 +160,10 @@ SkZ5/uo05c+B1yaHdf7FdMPDkmPmxexIwPxScMfbf7d51WhKRFHW1v8vwzRHnl0X
     // Add cors headers
     '/api/v1/**': { cors: true },
     '/analytics/**': { cors: true },
+    // Static page generated on-demand, revalidates in background
+    '/blog/**': { swr: true },
+    // Static page generated on-demand once
+    '/articles/**': { static: true },
   },
   nitro: {
     prerender: {

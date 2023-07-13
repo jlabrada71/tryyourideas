@@ -80,15 +80,17 @@
     initPopovers, 
     initTabs, 
     initTooltips } from 'flowbite'
-  import { useStorage } from '@vueuse/core'
+  import { useEditorStorage } from '@/lib/editor/storage.js'
   import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy'
   import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy'
   import { debug, log } from '@/lib/logger.js'
 
-  const config = useRuntimeConfig()
+   const config = useRuntimeConfig()
 
-  const accessToken = useCookie('access_token')
-  const refreshToken = useCookie('refresh_token')
+  // const accessToken = useCookie('access_token')
+  // const refreshToken = useCookie('refresh_token')
+
+  const { currentUser, currentProject } = useEditorStorage()
 
   onMounted(() => {
       initAccordions();
@@ -104,26 +106,12 @@
       initTooltips();
   })
 
-  const currentUser = useStorage('user', {
-    name: 'anonimous',
-    email: 'unset',
-    id: 'undefined',
-    licence: 'community',
-    maxProjects: '1'
-  })
-
   function updateUser() {
     const router = useRouter()
     router.push({
       path: '/registered',
     })
   }
-
-  const currentProject = useStorage('currentProject', {
-    name: 'Default',
-    dirty: false,
-    components: [],
-  })
 
   async function getLoggedUserData(accessToken) {
     debug('getLoggedUserData')
@@ -143,6 +131,7 @@
   }
 
   function tryForFree() {
+    debug('tryForFree cleaning user and project.')
 
     currentUser.value = {
       name: 'anonimous',

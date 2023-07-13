@@ -19,7 +19,7 @@
         <div class="ml-2 w-10/12">Components</div>
         <button type="button" 
           class="text-white w-5 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium text-sm dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800" 
-          @click.stop="createNewComponent"
+          @click.stop="addComponent"
           data-id="newComponent"
           >
           <svg id="Layer_1" data-name="Layer 1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 100.06"><title>Add component</title><path class="cls-1" d="M50.34,34.25h5.39a2.49,2.49,0,0,1,2.48,2.48v8h8a2.51,2.51,0,0,1,2.48,2.48v5.4a2.52,2.52,0,0,1-2.48,2.48h-8v8a2.51,2.51,0,0,1-2.48,2.48H50.34a2.51,2.51,0,0,1-2.49-2.48v-8h-8a2.5,2.5,0,0,1-2.48-2.48v-5.4a2.48,2.48,0,0,1,2.48-2.48h8v-8a2.49,2.49,0,0,1,2.49-2.48ZM7.67,0H98.35A7.69,7.69,0,0,1,106,7.67v68a7.7,7.7,0,0,1-7.67,7.67H7.67A7.69,7.69,0,0,1,0,75.69v-68A7.69,7.69,0,0,1,7.67,0ZM99.05,23.92H7.31V74a2.09,2.09,0,0,0,.62,1.5,2.13,2.13,0,0,0,1.51.62H96.89a2.11,2.11,0,0,0,1.51-.62A2.09,2.09,0,0,0,99,74V23.92ZM91,8.62a3.79,3.79,0,1,1-3.79,3.79A3.79,3.79,0,0,1,91,8.62Zm-25.68,0a3.79,3.79,0,1,1-3.79,3.79,3.79,3.79,0,0,1,3.79-3.79Zm12.84,0a3.79,3.79,0,1,1-3.79,3.79A3.79,3.79,0,0,1,78.2,8.62Zm37,8.07.36,23.92V90.69a2.12,2.12,0,0,1-2.13,2.13H26a2.12,2.12,0,0,1-2.12-2.13h-7v1.68a7.7,7.7,0,0,0,7.67,7.68h90.68a7.7,7.7,0,0,0,7.67-7.68v-68a7.7,7.7,0,0,0-7.67-7.68Z"/></svg>
@@ -107,7 +107,14 @@
         <!-- Component view -->
         <div class=" justify-center flex">
           <div :class="treeViewContainerClass">             
-            <ItemTreeView :item="selectedComponent.root" :device="selectedDevice" :mode="selectedMode" :refresh="refreshTreeView" @selected="selectItem"></ItemTreeView>
+            <ItemTreeView
+              :item="selectedComponent.root"
+              :device="selectedDevice"
+              :mode="selectedMode"
+              :refresh="refreshTreeView"
+              :selectedItemId="selectedItem.id"
+              @selected="selectItem">
+            </ItemTreeView>
           </div>
         </div>
          <!-- Component view -->
@@ -124,27 +131,16 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useStorage } from '@vueuse/core'
 import { debug } from '@/lib/logger.js'
 import { getItemRenderedClass } from '@/lib/ClassGeneration.js'
-import { getNextId } from '@/lib/IdGeneration.js'
-import { getItemById, findClassBy, findOrCreateClassBy, clone, copy, removeItemFrom } from '@/lib/EditorUtils.js'
+
+import { getItemById, findClassBy, findOrCreateClassBy, copy, removeItemFrom } from '@/lib/editor/utils.js'
 import { printTree } from '@/lib/DebugUtils.js'
 import { toHtml } from '@/lib/HtmlExporter.js'
 import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy.js'
-import { getSpacingVariables } from '@/lib/plugins/spacing.js'
-import { getTypographyVariables } from '@/lib/plugins/typography.js'
-import { getTransformVariables } from '@/lib/plugins/transform.js'
-import { getTransitionVariables } from '@/lib/plugins/transition.js'
-import { getPaddingVariables } from '@/lib/plugins/padding.js'
-import { getMarginVariables } from '@/lib/plugins/margin.js'
-import { getFlexVariables } from '@/lib/plugins/flex.js'
-import { getBorderVariables } from '@/lib/plugins/border.js'
-import { getGradientVariables } from '@/lib/plugins/gradient.js'
-import { getAnimationVariables } from '@/lib/plugins/animation.js'
-import { getJustifyVariables } from '@/lib/plugins/justify.js'
-import { getAlignVariables } from '@/lib/plugins/align.js'
-import { getPlaceVariables } from '@/lib/plugins/place.js'
-import { getShadowVariables } from '@/lib/plugins/shadow.js'
 import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy.js'
-import introJs from 'intro.js'
+import { migrateProject } from '@/lib/editor/projects.js'
+import { createNewComponent, createNewItem } from '@/lib/editor/components.js'
+import { useEditorStorage } from '@/lib/editor/storage.js'
+import { runIntro } from '@/lib/editor/help.js'
 
 import axios from 'axios'
 import _ from 'lodash'; 
@@ -227,77 +223,7 @@ definePageMeta({
   ],
 })
 
-const itemTemplate = {
-  name: 'div',
-  type: 'div',
-  properties: [],
-  children: [],
-  text: '',
-  editorClass: '',
-  renderedClass: '',
-  classes: [{
-    device: 'any',
-    mode: 'light',
-    modifier: 'unset',
-
-    backgroundColor: 'unset',
-    width: 'unset',
-    height: 'unset',
-
-    display: 'unset',
-
-    gap: 'unset', 
-
-
-    divideColor: 'unset',
-    outlineColor: 'unset',
-    ringColor: 'unset',
-
-    fillColor: 'unset',
-  }],
-}
-
-function addTemplateVariables(template, variables) {
-  Object.keys(variables).forEach(name => {
-    itemTemplate.classes[0][name] = variables[name]
-  })
-}
-
-const plugins = [
-  getSpacingVariables,
-  getPaddingVariables,
-  getMarginVariables,
-  getTypographyVariables,
-  getBorderVariables,
-  getFlexVariables,
-  getTransformVariables,
-  getTransitionVariables,
-  getGradientVariables,
-  getAnimationVariables,
-  getJustifyVariables,
-  getAlignVariables,
-  getPlaceVariables,
-  getShadowVariables,
-]
-
-plugins.forEach(plugin => {
-  addTemplateVariables( itemTemplate, plugin() )
-})
-
-const accessToken = useCookie('access_token', undefined)
-const refreshToken = useCookie('refresh_token', undefined)
-
-const currentUser = useStorage('user', {
-  name: 'anonimous',
-  email: 'undefined',
-  id: 'undefined',
-  licence: 'community',
-  maxProjects: '1'
-})
-
-function updateUser(account) {
-  currentUser.value = account
-}
+const { currentUser, currentProject } = useEditorStorage()
 
 const projectService = new ProjectServiceProxy(config)
 
@@ -316,79 +242,16 @@ async function updateProjectList() {
   projectList.value = result.map(project => project.substring(0, project.indexOf('.json')))
 }
 
-watch(currentUser, () => {
-  updateProjectList()
-})
-
 const project = ref({
   name: 'Default',
   dirty: false,
   components: [],
 })
 
-const currentProject = useStorage('currentProject', {
-  name: 'Default',
-  dirty: false,
-  components: [newComponent()],
-})
-
 onMounted(() => {
   updateProjectList()
   openProject(currentProject.value)
-  introJs().setOptions({
-    steps: [
-    {
-      element: document.querySelector('[data-id="logo"]'),
-      title: 'Welcome!!',
-      intro: 'You are using TryYourIdeas Components Editor! Let\' quickly see how to use it. First there is a Default project that is created automatically to start off creating components.',
-      //position: 'right'
-    },
-    {
-      element: document.querySelector('[data-id="newComponent"]'),
-      intro: 'By clicking on this button, you can start adding a new component to your project. A component is composed by visual items, properties and events, which can be modified in this section.',
-      //position: 'left'
-    },
-    {
-      element: document.querySelector('[data-id="generateCode"]'),
-      intro: 'And with this button you can generate your VueJS project code. An email will be sent to the address you provided with a download link and instructions for how to test it.',
-     // position: 'top'
-    },
-    {
-      element: document.querySelector('[data-id="reportIssues"]'),
-      intro: 'You can use this button for reporting any issue you might find working with the editor, or request a new feature. We are glad to help.',
-     // position: 'top'
-    },
-    {
-      element: document.querySelector('[data-id="deviceSelector"]'),
-      intro: 'With the device selector you can customize your designs for different devices.',
-     // position: 'top'
-    },
-    {
-      element: document.querySelector('[data-id="modeSelector"]'),
-      intro: 'Also, you can create custom design for both Dark and Light mode.',
-     // position: 'top'
-    },
-    // {
-    //   element: document.querySelector('[data-id="itemList"]'),
-    //   intro: 'This is the list of the component items. You can add new items like div, buttons, or other components already created in the project.',
-    //   //position: 'bottom'
-    // },
-    // {
-    //   element: document.querySelector('[data-id="propertyList"]'),
-    //   intro: 'This is the list of the component properties. You can use these properties to pass in values to the component that can be shown in some component items.',
-    //   //position: 'bottom'
-    // },
-    {
-      element: document.querySelector('[data-id="itemProperties"]'),
-      intro: 'Here you can edit the properties of the currently selected item. For example, you can set the "src" attribute of an "img" item.',
-      //position: 'bottom'
-    },
-    {
-      element: document.querySelector('[data-id="itemStyles"]'),
-      intro: 'Finally in this section, you can define the styles for the selected item. Size, color, shadows, gradients and many more.',
-      //position: 'bottom'
-    }]
-  }).setOption("dontShowAgain", true).start()
+  runIntro()
 })
 
 const selectedComponent = ref(null)
@@ -409,17 +272,11 @@ const selectedDeviceWidth = {
 
 createNewProject({ name: 'Default' })
 
-function migrateProject(project) {
-  if (project.version && project.version.startsWith('0.14')) {
-    return // already migrated
-  }
-  project.version = '0.14'
-  project.components.forEach(component => component.properties = component.props || component.properties )
-  project.variables = []
-}
-
-function initProject(projectValue) {
-  migrateProject(projectValue)
+function initEditor(projectValue) {
+  debug('initEditor')
+  project.value = projectValue
+  currentProject.value = projectValue
+  
   if (projectValue.components.length === 0) return
   selectComponent(projectValue.components[0])
   selectDevice('any')
@@ -432,23 +289,24 @@ function newProject(data) {
     name: data.name,
     components: []
   }
-  project.components.push(newComponent())
+  project.components.push(createNewComponent(project))
   return project 
 }
 
 function createNewProject( data ) {
+  debug('createNewProject')
   if (projectList.value.length >= currentUser.value.maxProjects ) {
     // licence max project count reached.
     return
   }
-  project.value = newProject(data)
-  initProject(project.value)
+  initEditor(newProject(data))
 }
 
 function openProject(projectValue) {
-  project.value = projectValue
-  currentProject.value = projectValue
-  initProject(projectValue)
+  debug('openProject')
+  migrateProject(projectValue)
+
+  initEditor(projectValue)
 }
 
 async function getProject(projectName) {
@@ -494,47 +352,10 @@ async function generateNuxtTailwindsStorybook(email) {
   // debug(result.data)
 }
 
-function initializeComponentClass(componentClass) {
-  componentClass.width = 'w-full'
-  componentClass.height = 'h-40'
-  componentClass.backgroundColor = 'bg-slate-200'
-  componentClass.display = 'flex'
-  componentClass.flexDirection = 'flex-row'
-}
-
-function initializeItemClass(itemClass) {
-  itemClass.width = 'w-10'
-  itemClass.height = 'h-10'
-  itemClass.backgroundColor = 'bg-slate-300'
-  itemClass.display = 'flex'
-  itemClass.flexDirection = 'flex-row'
-}
-
-function newComponent() {
-  const component = {
-    name: 'Component',
-    isComponent: true,
-    root: clone(itemTemplate),
-    properties: [],
-    variables: [],
-    events: []
-  }
-  component.id = getNextId(project.value.components).toString()
-  component.editorId = component.id
-  component.name = `Component-${component.id}`
-  component.root.id = component.id
-  component.root.editorId = component.editorId
-  component.root.type = 'div'
-  component.root.name = 'root'
-  component.root.currentClass = component.root.classes[0]
-  initializeComponentClass(component.root.currentClass)
-  return component
-}
-
 watch([project, selectedComponent, selectedItem], (newValue, olddirtyProjectValue) => dirtyProject())
 
-function createNewComponent() {
-  const component = newComponent()
+function addComponent() {
+  const component = createNewComponent(project.value)
   project.value.components.push(component)
   selectComponent(component)
   dirtyProject()
@@ -620,14 +441,6 @@ function cancelAddItem() {
   closeSelectTypeDialog()
 }
 
-function initializeProp(prop) {
-  return { ...prop, value: prop.default }
-}
-
-function newProps(properties) {
-  return properties.map(prop => initializeProp(prop))
-}
-
 function addItem(type)  {
   debug(type.name)
   debug(selectedComponent.value.name)
@@ -635,18 +448,7 @@ function addItem(type)  {
     alert('Recursive components are not allowed (yet)')
     return
   }
-  const newItem = clone(itemTemplate)
-  newItem.currentClass = newItem.classes[0]
-  initializeItemClass(newItem.currentClass)
-  newItem.currentClass.modifier = 'unset' // selectedItem.value.currentClass.modifier
-  
-  newItem.id = `${parentForNewChild.value.id}-${parentForNewChild.value.children.length + 1}`,
-  newItem.editorId = newItem.id
-  newItem.type = type.name
-  newItem.isComponent = type.isComponent
-  newItem.definition = type
-  newItem.properties = newProps(type.properties)
-  newItem.needsResolve = type.needsResolve
+  const newItem = createNewItem(type, parentForNewChild.value)
   parentForNewChild.value.children.push(newItem)
   closeSelectTypeDialog()
   selectItem(newItem)

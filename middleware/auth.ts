@@ -1,26 +1,34 @@
 import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy.js'
 import { debug } from '@/lib/logger.js'
-import { useStorage } from '@vueuse/core'
+import { useEditorStorage } from '@/lib/editor/storage.js'
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  // const config = useRuntimeConfig()
+  const config = useRuntimeConfig()
 
-  // const currentUser = useStorage('user', {
-  //   name: 'anonimous',
-  //   email: 'undefined',
-  //   id: 'undefined',
-  //   licence: 'community',
-  //   maxProjects: '1'
-  // })
+  const { currentUser, currentProject } = useEditorStorage()
 
-  // // In a real app you would probably not redirect every route to `/`
-  // // however it is important to check `to.path` before redirecting or you
-  // // might get an infinite redirect loop
-  // debug('Nuxt Middleware')
-  // debug(to.path)
-  // if (to.path === '/editor') {
-  //   const accountService = new AccountServiceProxy(config)
-  //   const response = await accountService.findForAccessToken(accessToken.value)
-  //   currentUser.value = response.data.data
-  // }
+  const accessToken = useCookie('access_token')
+
+  // In a real app you would probably not redirect every route to `/`
+  // however it is important to check `to.path` before redirecting or you
+  // might get an infinite redirect loop
+  debug('Nuxt Middleware')
+  debug(to.path)
+  debug(accessToken.value)
+  if (to.path === '/editor') {
+    if (accessToken.value) {
+      debug('accessToken found getting user data')
+      const accountService = new AccountServiceProxy(config)
+      const response = await accountService.findForAccessToken(accessToken.value)
+      currentUser.value = response.data.data
+    } else {
+      currentUser.value = {
+        name: 'anonimous',
+        email: 'undefined',
+        id: 'undefined',
+        licence: 'Free trial',
+        maxProjects: '1'
+      }
+    }
+  }
 })

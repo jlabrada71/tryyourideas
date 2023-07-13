@@ -4,8 +4,7 @@
     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <TabTitle :active="props.device=='any'" @update:active="activate('any')">
         <svg aria-hidden="true" class="w-5 h-5 mr-2 text-inherit-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 64C0 28.7 28.7 0 64 0H256c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm64 96v64c0 17.7 14.3 32 32 32H224c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32H96c-17.7 0-32 14.3-32 32zM80 352a24 24 0 1 0 0-48 24 24 0 1 0 0 48zm24 56a24 24 0 1 0 -48 0 24 24 0 1 0 48 0zm56-56a24 24 0 1 0 0-48 24 24 0 1 0 0 48zm24 56a24 24 0 1 0 -48 0 24 24 0 1 0 48 0zm56-56a24 24 0 1 0 0-48 24 24 0 1 0 0 48zm24 56a24 24 0 1 0 -48 0 24 24 0 1 0 48 0zM128 48c-8.8 0-16 7.2-16 16s7.2 16 16 16h64c8.8 0 16-7.2 16-16s-7.2-16-16-16H128z"/></svg>
-        
-        xsm
+        xs
       </TabTitle>
       <TabTitle :active="props.device=='sm'"  @update:active="activate('sm')">
         <svg aria-hidden="true" class="w-5 h-5 mr-2text-inherit-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="currentColor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 40 130" enable-background="new 0 0 40 130"  xml:space="preserve"><path fill-rule="evenodd" clip-rule="evenodd" class="cls-1" d="M13.33,0H57A13.37,13.37,0,0,1,70.34,13.33v96.22A13.37,13.37,0,0,1,57,122.88H13.33A13.35,13.35,0,0,1,0,109.54V13.33A13.35,13.35,0,0,1,13.33,0ZM35.16,108.37a5.46,5.46,0,1,1-5.45,5.46,5.47,5.47,0,0,1,5.45-5.46Zm31.34-4.19V16.75H3.83v87.43Z"/></svg>

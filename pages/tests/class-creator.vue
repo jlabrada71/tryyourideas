@@ -23,7 +23,8 @@
 
 <!-- <DivClassGenerator :tags="outlineTags" :values="outlines"></DivClassGenerator> -->
 
-<DivClassGenerator :tags="backgroundClipTags" :values="backgroundClip"></DivClassGenerator>
+<!-- <DivClassGenerator :tags="backgroundClipTags" :values="backgroundClip"></DivClassGenerator> -->
+<DivClassGenerator :tags="colorTags" :values="colorsNames2"></DivClassGenerator>
 
 
 </template>
@@ -104,5 +105,7 @@
 
   const backgroundClipTags = ['bg-clip']
   const backgroundClip = [ "border", "padding", "content", "text" ]
+
+  const colorsNames2 = ['transparent', 'white', 'black', 'inherit', 'current']
   
 </script>

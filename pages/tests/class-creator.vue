@@ -19,7 +19,11 @@
 
 <!-- <DivClassGenerator :tags="sizeTags" :values="sizeValues"></DivClassGenerator> -->
 
-<DivClassGenerator :tags="animationTags" :values="animation"></DivClassGenerator>
+<!-- <DivClassGenerator :tags="animationTags" :values="animation"></DivClassGenerator> -->
+
+<!-- <DivClassGenerator :tags="outlineTags" :values="outlines"></DivClassGenerator> -->
+
+<DivClassGenerator :tags="backgroundClipTags" :values="backgroundClip"></DivClassGenerator>
 
 
 </template>
@@ -94,4 +98,11 @@
 
   const animationTags = ['animation']
   const animation = [ 'spin', 'bounce', 'ping', 'pulse']
+
+  const outlineTags = ['outline-offset', 'outline']
+  const outlines = ['0', '1', '2', '4', '8' ]
+
+  const backgroundClipTags = ['bg-clip']
+  const backgroundClip = [ "border", "padding", "content", "text" ]
+  
 </script>

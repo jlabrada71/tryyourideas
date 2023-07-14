@@ -127,7 +127,7 @@
     </AccordionItem>
 
     <AccordionItem id="29">
-      <template #head><span class="flex items-center">Background Gradient</span></template>
+      <template #head><span class="flex items-center">Gradient</span></template>
       <template #body>
         <SelectorsGradientDirection :direction="currentClass.gradientDirection" @update:direction="value => updateClass('gradientDirection', value)"></SelectorsGradientDirection>
         <SelectorsGradientFromColor :color="currentClass.gradientFromColor" @update:color="value => updateClass('gradientFromColor', value)"></SelectorsGradientFromColor>
@@ -136,11 +136,20 @@
        
       </template>
     </AccordionItem>
+
+    <AccordionItem id="30">
+      <template #head><span class="flex items-center">Background</span></template>
+      <template #body>
+        <SelectorsBackgroundClip :clip="currentClass.backgroundClip" @update:clip="value => updateClass('backgroundClip', value)"></SelectorsBackgroundClip>
+      </template>
+    </AccordionItem>
     
     <AccordionItem id="99">
       <template #head><span class="flex items-center">Others</span></template>
       <template #body>
         <SelectorsDivideColor :color="currentClass.divideColor" @update:color="value => updateClass('divideColor', value)"></SelectorsDivideColor>
+        <SelectorsOutlineWidth :width="currentClass.outlineWidth" @update:width="value =>  updateClass('outlineWidth', value)"></SelectorsOutlineWidth>
+        <SelectorsOutlineOffset :width="currentClass.outlineOffset" @update:width="value =>  updateClass('outlineOffset', value)"></SelectorsOutlineOffset>
         <SelectorsOutlineColor :color="currentClass.outlineColor" @update:color="value => updateClass('outlineColor', value)"></SelectorsOutlineColor>
         <SelectorsRingColor :color="currentClass.ringColor" @update:color="value => updateClass('ringColor', value)"></SelectorsRingColor>
         <SelectorsFillColor :color="currentClass.fillColor" @update:color="value => updateClass('fillColor', value)"></SelectorsFillColor>

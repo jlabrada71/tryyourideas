@@ -3,7 +3,6 @@
     :class="selectedClass" 
     @click.stop="selectItem(item)"
   >
-
     <component
       :id="item.id" 
       :is="resolvedType" 
@@ -21,6 +20,11 @@
       :svg="getProperty('svg')"
       @click.stop="selectItem(item)">
         {{item.text}}
+      
+    </component>
+
+            <!-- Frame -->
+    <div :class="frameClass" @click.stop="selectItem(item)">
       <ItemTreeView 
         v-if="viewedItem.children.length > 0" 
         v-for="child in viewedItem.children" 
@@ -31,11 +35,7 @@
         :refresh="refreshChildren"
         @selected="value=>selectItem(value)">
       </ItemTreeView>
-    </component>
-
-      <!-- Frame -->
-      <div class="absolute w-full h-full bg-transparent border-[1px] border-blue-800">
-      </div>
+    </div> 
       <!-- the handlers are hidden
       <div class="absolute left-0  top-0    w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
       <div class="absolute left-0  bottom-0 w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
@@ -132,8 +132,15 @@
   const selectedClass = computed(() => { 
     const cls = editorClass.value
     const sizeCl = cls.split(' ').filter(cl => cl.startsWith('w-') || cl.startsWith('h-')).join(' ')
-    
     return sizeCl + ' relative'
+  })
+
+  const frameClass = computed(() => { 
+    const cls = editorClass.value
+    const sizeCl = cls.split(' ').filter(cl => ! cl.startsWith('bg-') && ! cl.startsWith('border') ).join(' ')
+    const newCls = 'absolute w-full h-full bg-transparent border-[1px] border-blue-800 ' + sizeCl
+    
+    return newCls
   })
 
   function selectItem(item) {

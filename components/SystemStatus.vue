@@ -29,7 +29,7 @@
         Email:
       </span>
       <span id="id-15-3-2" class="bg-slate-200 px-2 flex-row font-bold flex ">
-        {{email}}
+        {{visualEmail}}
       </span>
     </div>
     <button id="id-15-4" type="button" class="bg-slate-200 w-auto h-10 mx-4 py-2 px-4 self-end rounded-full flex-row flex hover:bg-slate-300 hover:w-auto hover:h-10 hover:py-2 hover:px-4 hover:rounded-full hover:flex-row hover:flex ">
@@ -53,4 +53,6 @@ const props = defineProps({
     }
 
 })
+
+const visualEmail = computed(() => props.email.endsWith('fakemail.com') ? 'unset': props.email )
 </script>

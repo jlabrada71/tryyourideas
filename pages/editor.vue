@@ -5,7 +5,7 @@
   <IssuesForm :project="project" :store="saveIssues"></IssuesForm>
   <div class="w-full h-20 bg-slate-100 text-black flex">
     <img src="/logo.png" alt="Try Your Ideas logo" data-id="logo">
-    <SystemStatus :name="currentUser.name" :project="project.name" :licence="currentUser.licence"></SystemStatus>
+    <SystemStatus :name="currentUser.name" :project="project.name" :licence="currentUser.licence" :email="currentUser.email"></SystemStatus>
   </div>
   <!-- <h2>Access</h2>
   <p>{{accessToken}}</p>

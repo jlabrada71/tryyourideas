@@ -46,8 +46,8 @@
         <SelectorsFontSize :size="currentClass.fontSize" @update:size="value => updateClass('fontSize', value)"></SelectorsFontSize>
         <SelectorsFontFamily :family="currentClass.fontFamily" @update:family="value => updateClass('fontFamily', value)"></SelectorsFontFamily>
         <SelectorsFontWeight :weight="currentClass.fontWeight" @update:weight="value => updateClass('fontWeight', value)"></SelectorsFontWeight>
-        <SelectorsLetterSpacing :spacing="currentClass.letterSpacing" @update:spacing="value => updateClass('letterSpacing', value)"></SelectorsLetterSpacing>
-        <SelectorsLineHeight :height="currentClass.lineHeight" @update:height="value => updateClass('lineHeight', value)"></SelectorsLineHeight>
+        <SelectorsTextLetterSpacing :spacing="currentClass.letterSpacing" @update:spacing="value => updateClass('letterSpacing', value)"></SelectorsTextLetterSpacing>
+        <SelectorsTextLineHeight :height="currentClass.lineHeight" @update:height="value => updateClass('lineHeight', value)"></SelectorsTextLineHeight>
         <SelectorsTextAlign :align="currentClass.textAlign" @update:align="value => updateClass('textAlign', value)"></SelectorsTextAlign>
         <SelectorsTextVerticalAlign :align="currentClass.textVerticalAlign" @update:align="value => updateClass('textVerticalAlign', value)"></SelectorsTextVerticalAlign>
       </template>

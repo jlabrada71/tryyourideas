@@ -24,8 +24,13 @@
 <!-- <DivClassGenerator :tags="outlineTags" :values="outlines"></DivClassGenerator> -->
 
 <!-- <DivClassGenerator :tags="backgroundClipTags" :values="backgroundClip"></DivClassGenerator> -->
-<DivClassGenerator :tags="colorTags" :values="colorsNames2"></DivClassGenerator>
-
+<!-- <DivClassGenerator :tags="colorTags" :values="colorsNames2"></DivClassGenerator> -->
+<!-- <DivClassGenerator :tags="fontTags" :values="fontFamilies"></DivClassGenerator> -->
+<!-- <DivClassGenerator :tags="fontTags" :values="fontWeights"></DivClassGenerator> -->
+<!-- <DivClassGenerator :tags="textTags" :values="textAligns"></DivClassGenerator> -->
+<!-- <DivClassGenerator :tags="textVerticalTags" :values="textVerticalAligns"></DivClassGenerator> -->
+<!-- <DivClassGenerator :tags="textTrackingTags" :values="textTrackings"></DivClassGenerator> -->
+<DivClassGenerator :tags="textLeadingTags" :values="textLeadings"></DivClassGenerator>
 
 </template>
 <script setup>
@@ -42,8 +47,25 @@
 
   const shadowValues =  ["sm", "md", "lg", "xl", "2xl", "inner", "none" ]
   
-  const fontSizeTags = ['text']
-  const fontSizes = ['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl']
+  const textSizeTags = ['text']
+  const textSizes = ['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl']
+
+  const textTags = ['text']
+  const textAligns =  [ 'left', 'center', 'right', 'justify', 'start', 'end']
+
+  const textVerticalTags = ['align']
+  const textVerticalAligns = [ 'baseline', 'top', 'middle', 'bottom', 'text-top', 'text-bottom', 'sub', 'super']
+
+  const textTrackingTags = ['tracking']
+  const textTrackings = [ 'tighter', 'tight', 'normal', 'wide', 'wider', 'widest']
+
+  const textLeadingTags = ['leading']
+  const textLeadings = [ 'none', 'tight', 'snug', 'normal', 'relaxed', 'loose', '3', '4', '5', '6', '7', '8', '9', '10']
+
+  const fontTags = ['font']
+  const fontWeights = [ 'thin', 'extralight', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold', 'black']
+  const fontFamilies = [ 'sans', 'serif', 'mono']
+
 
   const sizeTags = ['w', 'h']
   const sizeValues = ['0', 'px', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '5', '6', '7', '8', '9', '10', '11', '12', '14', '16', '20', '24', '28', '32', '36', '40', '44', '48', '52', '56', '60', '64', '72', '80', '96', 

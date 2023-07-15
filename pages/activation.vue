@@ -27,7 +27,7 @@
     const response = await getFromServer(activationUrl)
     result.value = response.data.msg
     if (response.data.status === 'ok') {
-      message.value = 'Go to the home page to login in to the app.'
+      message.value = 'Now you can sign into the app by going to the home page.'
     } else {
       message.value = 'There was an error activating the account.'
     }

@@ -81,8 +81,9 @@
     initTabs, 
     initTooltips } from 'flowbite'
   import { useEditorStorage } from '@/lib/editor/storage.js'
-  import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy'
-  import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy'
+  import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy.js'
+  import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy.js'
+  import { getCleanProject } from '@/lib/editor/projects.js'
   import { debug, log } from '@/lib/logger.js'
 
   const config = useRuntimeConfig()
@@ -122,29 +123,15 @@
   async function getDefaultProject(userId) {
     const  { data } = await projectService.select({ userId, name: 'Default' })
     debug(data)
-    if (data.result !== 'ok' ) return
+    if (data.result !== 'ok' ) { 
+      currentProject.value = getCleanProject()
+    }
     currentProject.value = data.project
   }
 
   function tryForFree() {
     debug('tryForFree cleaning user and project.')
-
-    currentUser.value = {
-      name: 'anonimous',
-      email: 'unset',
-      id: 'undefined',
-      licence: 'community',
-      maxProjects: '1'
-    }
-
-    currentProject.value = {
-      name: 'Default',
-      dirty: false,
-      components: [],
-    }
-
     goEditor()
-
   }
 
   function goEditor() {

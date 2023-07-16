@@ -131,7 +131,6 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useStorage } from '@vueuse/core'
 import { debug } from '@/lib/logger.js'
 import { getItemRenderedClass } from '@/lib/ClassGeneration.js'
-
 import { getItemById, findClassBy, findOrCreateClassBy, copy, removeItemFrom } from '@/lib/editor/utils.js'
 import { printTree } from '@/lib/DebugUtils.js'
 import { toHtml } from '@/lib/HtmlExporter.js'
@@ -256,9 +255,7 @@ onMounted(() => {
 
 const selectedComponent = ref(null)
 const selectedItem = ref(null)
-
 const refreshTreeView = ref(false)
-
 const selectedDevice = ref('any')
 const selectedMode = ref('light')
 const selectedDeviceWidth = {
@@ -304,14 +301,15 @@ function createNewProject( data ) {
 
 function openProject(projectValue) {
   debug('openProject')
-  migrateProject(projectValue)
-
   initEditor(projectValue)
 }
 
 async function getProject(projectName) {
   const result = await projectService.select({ userId: currentUser.value.id, name: projectName })
-  openProject(result.data.project)
+  const project = result.data.project
+  migrateProject(project)
+  debug(project)
+  openProject(project)
 }
 
 const throttledSave = throttle(sendToServer, 5*1000)

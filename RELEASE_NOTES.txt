@@ -14,3 +14,7 @@ e22e4d0 Refactoring the code
 v0.19.4 => Fixing the undefined email issue
 ---------
 1313985 Improving deploy 1828629 Refactoring currentUser currentProject 5865d53 File upload test e36753e Improving deploy
+=============
+v0.19.5 => Fixing the useEditorStorage issues
+---------
+

@@ -11,7 +11,9 @@
   import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy.js'
   import { useStorage } from '@vueuse/core'
   import { log, debug } from '@/lib/logger.js'
-  import { currentUser, currentProject, cleanUser, cleanProject } from '@/lib/editor/storage.js'
+  import { useEditorStorage } from '@/lib/editor/storage.js'
+
+  const { currentUser, currentProject, cleanUser, cleanProject } = useEditorStorage()
 
   const code = ref(null)
   

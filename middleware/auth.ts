@@ -20,9 +20,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     return data.project
   }
 
-  const { currentUser, currentProject } = useEditorStorage()
-
-  const accessToken = useCookie('access_token')
+  const { currentUser, currentProject, accessToken } = useEditorStorage()
 
   // In a real app you would probably not redirect every route to `/`
   // however it is important to check `to.path` before redirecting or you

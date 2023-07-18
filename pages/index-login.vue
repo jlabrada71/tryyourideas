@@ -79,12 +79,11 @@
   import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy.js'
   import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy.js'
   import { debug, log } from '@/lib/logger.js'
-  import { currentUser, currentProject, cleanUser, cleanProject } from '@/lib/editor/storage.js'
+  import { useEditorStorage } from '@/lib/editor/storage.js'
 
   const config = useRuntimeConfig()
 
-  const accessToken = useCookie('access_token')
-  const refreshToken = useCookie('refresh_token')
+  const { currentUser, currentProject, cleanUser, cleanProject, accessToken, refreshToken } = useEditorStorage()
 
   onMounted(() => {
       initAccordions();

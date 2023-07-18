@@ -14,13 +14,14 @@ then
 
   echo "usage: ./deploy.sh <new tag> '<new tag message>'"
 else
-  create_tag $NEW_TAG "$NEW_TAG_MSG"
+  
   echo '=============' >> RELEASE_NOTES.txt
   echo "$NEW_TAG => $NEW_TAG_MSG" >> RELEASE_NOTES.txt
   echo '---------' >> RELEASE_NOTES.txt
   echo $RELEASE_NOTES >> RELEASE_NOTES.txt
-
   echo "<template>Version $NEW_TAG ($GIT_BRANCH)</template>" > components/ProductVersion.vue
+  git commit -am "Creating release $NEW_TAG $NEW_TAG_MSG"
+  create_tag $NEW_TAG "$NEW_TAG_MSG"
   npm run build
   tar -czf tryyourideas.com.tar .output
   cd ../aws-config

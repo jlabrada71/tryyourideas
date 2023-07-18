@@ -1,0 +1,12 @@
+RELEASE NOTES
+
+=============
+v0.19.3 Fixing undefined email when 'get started'
+---------
+2232627 improving login flow 
+312b399 Adding migration tests 
+da7a841 Refactoring the code 
+b7d7f64 Adding support to variable migration 
+8cb8670 Improving project migration 
+e22e4d0 Refactoring the code 
+45009bb Testing get started

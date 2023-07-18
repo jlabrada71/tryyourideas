@@ -10,3 +10,7 @@ b7d7f64 Adding support to variable migration
 8cb8670 Improving project migration 
 e22e4d0 Refactoring the code 
 45009bb Testing get started
+=============
+v0.19.4 => Fixing the undefined email issue
+---------
+1313985 Improving deploy 1828629 Refactoring currentUser currentProject 5865d53 File upload test e36753e Improving deploy

@@ -76,9 +76,10 @@
     initTabs, 
     initTooltips } from 'flowbite'
   import { useStorage } from '@vueuse/core'
-  import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy'
-  import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy'
+  import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy.js'
+  import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy.js'
   import { debug, log } from '@/lib/logger.js'
+  import { currentUser, currentProject, cleanUser, cleanProject } from '@/lib/editor/storage.js'
 
   const config = useRuntimeConfig()
 
@@ -99,13 +100,6 @@
       initTooltips();
   })
 
-  const currentUser = useStorage('user', {
-    name: 'anonimous',
-    email: 'unset',
-    id: 'undefined',
-    licence: 'community',
-    maxProjects: '1'
-  })
 
   function updateUser() {
     const router = useRouter()
@@ -113,12 +107,6 @@
       path: '/registered',
     })
   }
-
-  const currentProject = useStorage('currentProject', {
-    name: 'Default',
-    dirty: false,
-    components: [],
-  })
 
   async function getLoggedUserData(accessToken) {
     debug('getLoggedUserData')
@@ -139,20 +127,8 @@
 
   function tryForFree() {
 
-    currentUser.value = {
-      name: 'anonimous',
-      email: 'unset',
-      id: 'undefined',
-      licence: 'community',
-      maxProjects: '1'
-    }
-
-    currentProject.value = {
-      name: 'Default',
-      dirty: false,
-      components: [],
-    }
-
+    cleanUser()
+    cleanProject()
     goEditor()
 
   }

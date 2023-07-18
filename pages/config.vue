@@ -5,10 +5,11 @@
       <li>api: {{config.public.apiBase}}</li>
     </ul>
     Project: <br>
-    Name: {{project.name}} <br>
+    Name: {{currentProject.name}} <br>
     User: <br>
     Id: {{ currentUser.id}} <br> <br>
     Name: {{ currentUser.name}} <br> <br>
+    Email: {{ currentUser.email}} <br> <br>
     accessToken: {{ accessToken }} <br> <br>
     <div class="p-2 flex gap-2">
       <button @click="cleanProject" class="bg-slate-200 p-2">Clean Project</button>
@@ -19,41 +20,15 @@
 
 </template>
 <script setup>
-  import { useStorage } from '@vueuse/core'
+
+  import { useEditorStorage } from '@/lib/editor/storage.js'
+  import { getCleanProject } from '@/lib/editor/projects.js'
 
   const config = useRuntimeConfig()
 
-  const project = useStorage('currentProject', {
-    name: 'Default',
-    dirty: false,
-    components: [],
+  const { currentUser, currentProject, cleanUser, cleanProject, accessToken, refreshToken } = useEditorStorage()
+
+  onMounted(() => {
+    console.log(currentUser.value.name)
   })
-
-  const currentUser = useStorage('user', {
-    name: 'anonimous',
-    email: 'undefined',
-    id: 'undefined',
-    licence: 'community',
-    maxProjects: '1'
-  })
-
-  const accessToken = useCookie('access_token')
-
-  function cleanProject() {
-    project.value = {
-      name: 'Default',
-      dirty: false,
-      components: [],
-    }
-  }
-
-  function cleanUser() {
-    currentUser.value = {
-      name: 'anonimous',
-      email: 'undefined',
-      id: 'undefined',
-      licence: 'community',
-      maxProjects: '1'
-    }
-  }
 </script>

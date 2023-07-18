@@ -128,7 +128,6 @@
 </template>
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
-import { useStorage } from '@vueuse/core'
 import { debug } from '@/lib/logger.js'
 import { getItemRenderedClass } from '@/lib/ClassGeneration.js'
 import { getItemById, findClassBy, findOrCreateClassBy, copy, removeItemFrom } from '@/lib/editor/utils.js'

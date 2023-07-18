@@ -11,6 +11,7 @@
   import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy.js'
   import { useStorage } from '@vueuse/core'
   import { log, debug } from '@/lib/logger.js'
+  import { currentUser, currentProject, cleanUser, cleanProject } from '@/lib/editor/storage.js'
 
   const code = ref(null)
   
@@ -19,26 +20,15 @@
   const refreshToken = useCookie('refresh_token')
   const status = ref('')
 
-  const currentUser = useStorage('user', {
-    name: 'anonimous',
-    email: 'undefined',
-    id: 'undefined',
-    licence: 'community',
-    maxProjects: '1'
-  })
-
-  const currentProject = useStorage('currentProject', {
-    name: 'Default',
-    dirty: false,
-    components: [],
-  })
-
   const projectService = new ProjectServiceProxy(config)
 
   async function getDefaultProject(userId) {
     const  { data } = await projectService.select({ userId, name: 'Default' })
     debug(data)
-    if (data.result !== 'ok' ) return
+    if (data.result !== 'ok' ) {
+      cleanProject()
+      return
+    }
     currentProject.value = data.project
   }
 
@@ -48,11 +38,6 @@
     const response = await accountService.findForAccessToken(accessToken.value)
     debug(response.data.data )
     currentUser.value = response.data.data
-    currentProject.value = {
-      name: 'Default',
-      dirty: false,
-      components: [],
-    }
   }
 
   onMounted(async () => {

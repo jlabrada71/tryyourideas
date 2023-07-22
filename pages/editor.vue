@@ -202,7 +202,7 @@ function track (event) {
         //   }
         // }
       }
-      window.jl.sendAnalytics(url, newData)
+      window.jl && window.jl.sendAnalytics(url, newData)
     }
     // getCLS(logData)
     // getFID(logData)

@@ -122,7 +122,12 @@
       
     </div>
     <div class="w-96 bg-slate-50 h-auto">
-      <ItemEditor :item="selectedItem" @update:item="updateItem" @update:modifier="selectModifier"></ItemEditor>    
+      <ItemEditor 
+        :item="selectedItem"
+        :component="selectedComponent"
+        @update:item="updateItem" 
+        @update:modifier="selectModifier">
+      </ItemEditor>    
     </div>
   </div>
 </template>

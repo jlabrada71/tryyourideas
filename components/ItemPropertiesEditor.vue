@@ -1,25 +1,46 @@
 <template>
   <div class="bg-slate-100 flex flex-col gap-2 px-2">
-    <div v-for="prop in props.item.properties" class="flex flex-row">
-      <div class="w-20">{{prop.name}}:</div>
-      <input 
-        type="text"
-        v-if="prop.method!='select'" 
-        :value="prop.value" 
-        class="bg-slate-200 w-40 h-8 rounded-lg border-2 border-slate-400 "
-        @input="event => updateProperty({...prop, value: event.target.value })">
-      <select 
-        v-if="prop.method=='select'" 
-        @input="event => updateProperty({...prop, value: event.target.value })"
-        class="bg-slate-200 w-40 h-8 rounded-lg border-2 border-slate-400 ">
-        <option v-for="val in prop.values" :value="val" :selected="val==prop.value">{{val}}</option>
-      </select>
+    <div v-for="prop, index in props.item.properties" :key="index" class="flex flex-col">
+      <div class="flex flex-row">
+        <div class="w-20">{{prop.name}}:</div>
+        <input 
+          type="text"
+          v-if="prop.method!='select'" 
+          :value="prop.value" 
+          class="bg-slate-200 w-28 h-8 rounded-lg border-2 border-slate-400 "
+          @input="event => updateProperty({...prop, value: event.target.value })">
+        <select 
+          v-if="prop.method=='select'" 
+          @input="event => updateProperty({...prop, value: event.target.value })"
+          class="bg-slate-200 w-28 h-8 rounded-lg border-2 border-slate-400 ">
+          <option v-for="val in prop.values" :value="val" :selected="val==prop.value">{{val}}</option>
+        </select>
+        <CheckButton 
+          :value="prop.isBinded"
+          class="w-4 rounded-lg border-2 border-slate-400"
+          @update:value="value => isBindedProperty(prop, value)">
+        </CheckButton>
+      </div>
+      <div  class="flex flex-row" v-if="prop.isBinded">
+        <div class="w-20">Bind to: </div>
+        <select 
+          @input="event => bindPropertyTo(prop, event.target.value )"
+          class="bg-slate-200 w-28 h-8 rounded-lg border-2 border-slate-400 ">
+          <option 
+            v-for="componentProp in props.component.properties" 
+            :value="componentProp.name" 
+            :selected="componentProp.name==prop.bindTo">
+              {{ componentProp.name }}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
 </template>
 <script setup>
   import { ref, computed, onMounted, watch } from 'vue'
   import { getReplacedUrl } from '@/lib/PropertyUtils.js'
+  import { debug, log } from '@/lib/logger.js'
   import _ from 'lodash';   
 
 const { throttle } = _;
@@ -28,8 +49,15 @@ const props = defineProps({
   item: {
     type: Object,
     required: true
+  },
+  component: {
+    type: Object,
+    required: true
   }
 })
+
+const binded = ref([])
+const bindedValues = ref([])
 
 const emit = defineEmits(['update:item'])
 
@@ -66,6 +94,16 @@ function updateProperty(property) {
   newItem.properties = props.item.properties.map(prop => prop.name === property.name ? property : prop)
   updateFetchProperties(newItem)
   updateItem(newItem)
+}
+
+function isBindedProperty(property, value) {
+  property.isBinded = value
+  property.bindTo = ''
+}
+
+function bindPropertyTo(property, value) {
+  debug(value)
+  property.bindTo = value
 }
 
 </script>

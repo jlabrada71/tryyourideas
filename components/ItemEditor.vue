@@ -7,7 +7,11 @@
     <AccordionItem id="1">
       <template #head><span class="flex items-center" data-id="itemProperties">Properties</span></template>
       <template #body>
-        <ItemPropertiesEditor :item="props.item" @update:item="item => emit('update:item', item)"></ItemPropertiesEditor>
+        <ItemPropertiesEditor 
+          :item="props.item" 
+          :component="props.component" 
+          @update:item="item => emit('update:item', item)">
+        </ItemPropertiesEditor>
       </template>
     </AccordionItem>
 
@@ -52,6 +56,10 @@ onMounted(() => {
 
 const props = defineProps({
   item: {
+    type: Object,
+    required: true
+  },
+  component: {
     type: Object,
     required: true
   }

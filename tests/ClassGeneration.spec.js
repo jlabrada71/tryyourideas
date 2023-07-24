@@ -5,7 +5,7 @@ import {
   getClassString,
   getEditorClass,
   getItemEditorClass,
-  getItemRenderedClass } from '../lib/ClassGeneration.js'
+  getItemRenderedClass } from '@/lib/generators/ClassGeneration.js'
 
 
  const dumbGenerators = [(value, f) => { 
@@ -159,7 +159,6 @@ describe('getItemEditorClass function', () => {
     ]
   } 
   describe('generalCase dark mode', () => {
-    debugger;
     const componentClass = getItemEditorClass(component, 'md', 'dark', dumbGenerators)
     it('returns empty string', () => {
       expect(componentClass).toContain('active:bg-md-dark-active')

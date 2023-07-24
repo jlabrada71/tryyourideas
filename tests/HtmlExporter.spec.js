@@ -1,12 +1,12 @@
 
-import { itemToHtml } from '../lib/HtmlExporter.js'
+import { itemToHtml } from '@/lib/generators/HtmlExporter.js'
 
 describe('itemToHtml function', () => {
   describe('given an item and a prop return the replaced url', () => {
     const item = {
       type: 'Icon',
       id: 'test',
-      props: [
+      properties: [
         { name: 'test', value: 'tonton' },
         { name: 'category', value: 'brand' },
         { name: 'svg', value: '<svg xml="" ></svg>' }

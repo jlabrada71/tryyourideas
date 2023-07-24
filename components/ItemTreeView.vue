@@ -76,7 +76,7 @@
   </component>
 </template>
 <script setup>
-  import { getItemEditorClass } from '@/lib/ClassGeneration.js'
+  import { getItemEditorClass } from '@/lib/generators/ClassGeneration.js'
   import { debug } from '@/lib/logger.js'
 
   const props = defineProps({

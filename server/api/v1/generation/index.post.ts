@@ -3,8 +3,7 @@ import fse  from 'fs-extra'
 import { zip } from 'zip-a-folder';
 import CloudStorage from '@/lib/firebase/cloud-storage.js'
 import { getEmailService } from '@/lib/emails/Service.js'
-import { generateVueComponentCode } from '@/lib/GenerateVueComponentCode.js';
-
+import { generateVueComponentCode } from '@/lib/generators/GenerateVueComponentCode.js';
 
 const config = useRuntimeConfig()
 
@@ -128,7 +127,5 @@ export default defineEventHandler(async (event) => {
     log(e.stack, 'message-routes')
     return { error: e.msg }
   }
-
-  return result
 })
 

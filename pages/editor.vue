@@ -134,10 +134,10 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { debug } from '@/lib/logger.js'
-import { getItemRenderedClass } from '@/lib/ClassGeneration.js'
+import { getItemRenderedClass } from '@/lib/generators/ClassGeneration.js'
 import { getItemById, findClassBy, findOrCreateClassBy, copy, removeItemFrom } from '@/lib/editor/utils.js'
 import { printTree } from '@/lib/DebugUtils.js'
-import { toHtml } from '@/lib/HtmlExporter.js'
+import { toHtml } from '@/lib/generators/HtmlExporter.js'
 import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy.js'
 import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy.js'
 import { migrateProject } from '@/lib/editor/projects.js'
@@ -319,6 +319,7 @@ async function getProject(projectName) {
 const throttledSave = throttle(sendToServer, 5*1000)
 
 function saveProject() {
+  debug('Current User: ' + currentUser.value.id)
   if (currentUser.value.id === 'undefined') return
   project.value.dirty = false
   project.value.userId = currentUser.value.id

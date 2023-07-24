@@ -4,6 +4,7 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+
     {
       "name": "Debug Jest Tests",
       "type": "node",
@@ -19,7 +20,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/tests/ClassGeneration.spec.js"
+      "program": "${workspaceFolder}/tests/AccountService.spec.js"
     }
   ]
 }

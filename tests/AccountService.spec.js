@@ -12,6 +12,15 @@ describe('send function', () => {
       }
     }
 
+    const activationEmailRepository = {
+      insert(value) {
+        this.value = value
+      },
+      select () {
+        return []
+      }
+    }
+
     const credentialService = {
       add(value) {
         this.value = value
@@ -35,11 +44,12 @@ describe('send function', () => {
       activationCodeList.push(activationCodeList.length + 1)
       return activationCodeList.length
     }
-   
+   debugger
     const accountService = new AccountService(
         accountRepository, 
         credentialService,
-        emailService,      
+        emailService,   
+        activationEmailRepository,   
         idCreator, 
         activationCodeCreator
       )
@@ -55,6 +65,10 @@ describe('send function', () => {
     it(' should store the hashed password', () => {
       expect(credentialService.value.password).toBe('this is a password')
       expect(credentialService.value.email).toBe('this is an email')
+    })
+
+    it(' should store the id', () => {
+      expect(activationEmailRepository.value.content).toContain('Hi Juan<br><br>')
     })
 
     it(' should generate the id from the email', () => {
@@ -73,7 +87,7 @@ describe('send function', () => {
     })
 
     it(' should send an activation email', () => {
-      expect(emailService.value.title).toBe('Account Activation')
+      expect(emailService.value.title).toBe('TryYourIdeas Account Activation')
       expect(emailService.value.email).toBe('this is an email')
       expect(emailService.value.content).toContain('this is an email')
       expect(emailService.value.content).toContain('code=1')

@@ -2,37 +2,43 @@
   <div class="bg-slate-100 flex flex-col gap-2 px-2">
     <div v-for="prop, index in props.item.properties" :key="index" class="flex flex-col">
       <div class="flex flex-row">
-        <div class="w-20">{{prop.name}}:</div>
-        <input 
-          type="text"
-          v-if="prop.method!='select'" 
-          :value="prop.value" 
-          class="bg-slate-200 w-28 h-8 rounded-lg border-2 border-slate-400 "
-          @input="event => updateProperty({...prop, value: event.target.value })">
-        <select 
-          v-if="prop.method=='select'" 
-          @input="event => updateProperty({...prop, value: event.target.value })"
-          class="bg-slate-200 w-28 h-8 rounded-lg border-2 border-slate-400 ">
-          <option v-for="val in prop.values" :value="val" :selected="val==prop.value">{{val}}</option>
-        </select>
+        <div class="w-28 flex">
+          <div >{{prop.name}}</div>
+          <div class="ml-1" v-if="prop.isBinded">bind</div>
+        </div>
+        <div  class="flex flex-row" v-if="prop.isBinded">
+          <select 
+            @input="event => bindPropertyTo(prop, event.target.value )"
+            class="bg-slate-200 w-28 h-8 rounded-lg border-2 border-slate-400 ">
+            <option 
+              v-for="componentProp in props.component.properties" 
+              :value="componentProp.name" 
+              :selected="componentProp.name==prop.bindTo">
+                {{ componentProp.name }}
+            </option>
+          </select>
+        </div>
+        <div v-else>
+          <input 
+            type="text"
+            v-if="prop.method!='select'" 
+            :value="prop.value" 
+            class="bg-slate-200 w-28 h-8 rounded-lg border-2 border-slate-400 "
+            @input="event => updateProperty({...prop, value: event.target.value })">
+          <select 
+            v-if="prop.method=='select'" 
+            @input="event => updateProperty({...prop, value: event.target.value })"
+            class="bg-slate-200 w-28 h-8 rounded-lg border-2 border-slate-400 ">
+            <option v-for="val in prop.values" :value="val" :selected="val==prop.value">{{val}}</option>
+          </select>
+        </div>
+
         <CheckButton 
           :value="prop.isBinded"
-          class="w-4 rounded-lg border-2 border-slate-400"
+          class="w-4 ml-1 rounded-lg border-2 border-slate-400"
           @update:value="value => isBindedProperty(prop, value)">
         </CheckButton>
-      </div>
-      <div  class="flex flex-row" v-if="prop.isBinded">
-        <div class="w-20">Bind to: </div>
-        <select 
-          @input="event => bindPropertyTo(prop, event.target.value )"
-          class="bg-slate-200 w-28 h-8 rounded-lg border-2 border-slate-400 ">
-          <option 
-            v-for="componentProp in props.component.properties" 
-            :value="componentProp.name" 
-            :selected="componentProp.name==prop.bindTo">
-              {{ componentProp.name }}
-          </option>
-        </select>
+
       </div>
     </div>
   </div>

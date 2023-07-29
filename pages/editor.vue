@@ -459,6 +459,7 @@ function addItem(type)  {
 }
 
 function updateProperties(properties) {
+  debug(properties)
   selectedComponent.value.properties = properties
 }
 

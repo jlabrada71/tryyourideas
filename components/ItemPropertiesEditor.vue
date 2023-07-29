@@ -8,13 +8,13 @@
         </div>
         <div  class="flex flex-row" v-if="prop.isBinded">
           <select 
-            @input="event => bindPropertyTo(prop, event.target.value )"
+            @input="event => bindPropertyToName(prop, event.target.value )"
             class="bg-slate-200 w-28 h-8 rounded-lg border-2 border-slate-400 ">
             <option 
-              v-for="componentProp in props.component.properties" 
-              :value="componentProp.name" 
-              :selected="componentProp.name==prop.bindTo">
-                {{ componentProp.name }}
+              v-for="bindingOption in bindingOptions" 
+              :value="bindingOption.name" 
+              :selected="bindingOption.name==prop.bindTo.name">
+                {{ bindingOption.name }}
             </option>
           </select>
         </div>
@@ -36,16 +36,15 @@
         <CheckButton 
           :value="prop.isBinded"
           class="w-4 ml-1 rounded-lg border-2 border-slate-400"
-          @update:value="value => isBindedProperty(prop, value)">
+          @update:value="value => setIsBinded(prop, value)">
         </CheckButton>
-
       </div>
     </div>
   </div>
 </template>
 <script setup>
   import { ref, computed, onMounted, watch } from 'vue'
-  import { getReplacedUrl } from '@/lib/PropertyUtils.js'
+  import { getReplacedUrl, setIsBinded, bindPropertyTo } from '@/lib/generators/ItemPropertyUtils.js'
   import { debug, log } from '@/lib/logger.js'
   import _ from 'lodash';   
 
@@ -62,10 +61,11 @@ const props = defineProps({
   }
 })
 
-const binded = ref([])
-const bindedValues = ref([])
-
 const emit = defineEmits(['update:item'])
+
+const bindingOptions = computed(() => {
+  return [{name:'' }].concat(props.component.properties)
+})
 
 async function getSvg(url) {
   try {
@@ -81,10 +81,15 @@ async function getSvg(url) {
   }
 }
 
-const throttledGetSvg = throttle(getSvg, 3*1000)
+const throttledGetSvg = throttle(getSvg, 1000)
 
 function updateItem(item) {
   emit('update:item', item)
+}
+
+function bindPropertyToName(prop, name ) {
+  const componentProp = bindingOptions.value.find(option => option.name === name)
+  bindPropertyTo(prop, componentProp )
 }
 
 function updateFetchProperties(item) {
@@ -100,16 +105,6 @@ function updateProperty(property) {
   newItem.properties = props.item.properties.map(prop => prop.name === property.name ? property : prop)
   updateFetchProperties(newItem)
   updateItem(newItem)
-}
-
-function isBindedProperty(property, value) {
-  property.isBinded = value
-  property.bindTo = ''
-}
-
-function bindPropertyTo(property, value) {
-  debug(value)
-  property.bindTo = value
 }
 
 </script>

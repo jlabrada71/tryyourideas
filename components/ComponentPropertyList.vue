@@ -77,7 +77,7 @@ function addProperty() {
   const id = props.properties.reduce((a, v) => (v.id > a ? v.id : a) , 0) + 1
   selectedProperty.value = {
     id,
-    name: 'NewName',
+    name: 'propName',
     type: 'String',
     access: 'Write',
     isRequired: false,

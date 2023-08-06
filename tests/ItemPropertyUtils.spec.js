@@ -60,7 +60,7 @@ describe ('generateProperties function', () => {
       ]
     it ('generates properties with values', () => {
       const url = generateProperties(itemProps)
-      expect(url).toBe(' test="tonton" category="brand"')
+      expect(url).toBe(' test="tonton" category="brand" ')
     })
 
     it ('does not generate properties with undefined values', () => {
@@ -75,10 +75,9 @@ describe ('generateProperties function', () => {
         name: 'test', 
         value: 'test2', 
         isBinded: true, 
-        bindTo: { category: 'property', name: 'prop1' } 
+        bindTo: { category: 'property', name: 'prop1', access: 'Write' } 
       },
     ]
-    
 
     const component = {
       properties: [{
@@ -92,7 +91,7 @@ describe ('generateProperties function', () => {
 
     it ('generates properties with values', () => {
       const url = generateProperties(itemProps, component)
-      expect(url).toBe(':test="props.prop1" ')
+      expect(url).toBe(':test="props.prop1"  @update:test="updateProp1"')
     })
   })
 })

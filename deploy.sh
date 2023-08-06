@@ -25,6 +25,6 @@ else
   npm run build
   tar -czf tryyourideas.com.tar .output
   cd ../aws-config
-  ./copy_ssh.sh ../tryyourideascom tryyourideas.com.tar
+  ./copy_ssh.sh ../tryyourideascom tryyourideas.com.tar juanlabrada.com.server
   cd ../tryyourideascom
 fi

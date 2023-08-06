@@ -22,3 +22,7 @@ v0.19.5 => Fixing the useEditorStorage issues
 v0.20.0 => Property binding implemented
 ---------
 4eb3870 Property binding implemented fb730a3 Fixing Account service test 8cbf8a2 Reestructuring code 147f6fb improving property bind design 19356af test debug ff7d03d Implementing property binding 62ee9a5 Send analytics only when service available
+=============
+v0.21.0 => Implements emits generation and handling
+---------
+4e2762f Implementing emits generation and handling

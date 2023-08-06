@@ -30,3 +30,7 @@ v0.21.0 => Implements emits generation and handling
 v0.21.0 => Implements emits generation and handling
 ---------
 98fea2d Creating release v0.21.0 Implements emits generation and handling 4e2762f Implementing emits generation and handling
+=============
+v0.21.0 => Implements emits generation and handling
+---------
+52374fb Creating release v0.21.0 Implements emits generation and handling 98fea2d Creating release v0.21.0 Implements emits generation and handling 4e2762f Implementing emits generation and handling

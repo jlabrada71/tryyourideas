@@ -1,10 +1,99 @@
 <template>
-  <div v-if="props.selectedItemId===item.id"
-    :class="selectedClass" 
-    @click.stop="selectItem(item)"
-  >
-    <component
-      :id="item.id" 
+    <div v-if="props.selectedItemId===props.item.id && !props.item.isComponent"
+      :class="selectedClass" 
+      @click.stop="selectItem(props.item)"
+    >
+      <component
+        :id="props.item.id" 
+        :is="resolvedType" 
+        :class="editorClass" 
+        :href="getProperty('href')"
+        :src="getProperty('src')"
+        :alt="getProperty('alt')"
+        :type="getProperty('type')"
+        :name="getProperty('name')"
+        :target="getProperty('target')"
+        :value="getProperty('value')"
+        :min="getProperty('min')"
+        :max="getProperty('max')"
+        :for="getProperty('for')"
+        :svg="getProperty('svg')"
+        @click.stop="selectItem(props.item)">
+          {{props.item.text}}
+        
+      </component>
+
+              <!-- Frame -->
+      <div :class="frameClass" @click.stop="selectItem(props.item)">
+        <ItemTreeView 
+          v-if="viewedItem.children.length > 0" 
+          v-for="child in viewedItem.children" 
+          :item="child" 
+          :device="device"
+          :mode="mode"
+          :selectedItemId="props.selectedItemId"
+          :refresh="refreshChildren"
+          @selected="value=>selectItem(value)">
+        </ItemTreeView>
+      </div> 
+        <!-- the handlers are hidden
+        <div class="absolute left-0  top-0    w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
+        <div class="absolute left-0  bottom-0 w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
+        <div class="absolute right-0 top-0    w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
+        <div class="absolute right-0 bottom-0 w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
+        -->
+        <!-- Frame end -->
+
+    </div>
+
+    <div v-else-if="props.selectedItemId===props.item.id && props.item.isComponent"
+      :class="selectedClass" 
+      @click.stop="selectItem(props.item)"
+    >
+      <component
+        :id="props.item.id" 
+        :is="resolvedType" 
+        :class="editorClass" 
+        :href="getProperty('href')"
+        :src="getProperty('src')"
+        :alt="getProperty('alt')"
+        :type="getProperty('type')"
+        :name="getProperty('name')"
+        :target="getProperty('target')"
+        :value="getProperty('value')"
+        :min="getProperty('min')"
+        :max="getProperty('max')"
+        :for="getProperty('for')"
+        :svg="getProperty('svg')"
+        @click.stop="selectItem(props.item)">
+          {{props.item.text}}
+        <ItemTreeView 
+          v-if="viewedItem.children.length > 0" 
+          v-for="child in viewedItem.children" 
+          :item="child" 
+          :device="device"
+          :mode="mode"
+          :selectedItemId="props.selectedItemId"
+          :refresh="refreshChildren"
+          @selected="value=>selectItem(value)">
+        </ItemTreeView>
+      </component>
+
+              <!-- Frame -->
+      <div :class="frameClass" @click.stop="selectItem(props.item)">
+      </div> 
+        <!-- the handlers are hidden
+        <div class="absolute left-0  top-0    w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
+        <div class="absolute left-0  bottom-0 w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
+        <div class="absolute right-0 top-0    w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
+        <div class="absolute right-0 bottom-0 w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
+        -->
+        <!-- Frame end -->
+
+    </div>
+
+    <component v-else-if="!props.item.isComponent"
+      :id="props.item.id" 
       :is="resolvedType" 
       :class="editorClass" 
       :href="getProperty('href')"
@@ -18,13 +107,8 @@
       :max="getProperty('max')"
       :for="getProperty('for')"
       :svg="getProperty('svg')"
-      @click.stop="selectItem(item)">
-        {{item.text}}
-      
-    </component>
-
-            <!-- Frame -->
-    <div :class="frameClass" @click.stop="selectItem(item)">
+      @click.stop="selectItem(props.item)">
+        {{props.item.text}}
       <ItemTreeView 
         v-if="viewedItem.children.length > 0" 
         v-for="child in viewedItem.children" 
@@ -33,47 +117,37 @@
         :mode="mode"
         :selectedItemId="props.selectedItemId"
         :refresh="refreshChildren"
-        @selected="value=>selectItem(value)">
+        @selected="value=>emit('selected', value)">
       </ItemTreeView>
-    </div> 
-      <!-- the handlers are hidden
-      <div class="absolute left-0  top-0    w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
-      <div class="absolute left-0  bottom-0 w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
-      <div class="absolute right-0 top-0    w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
-      <div class="absolute right-0 bottom-0 w-2 h-2 bg-blue-200 rounded-full border-[1px] border-blue-800 "></div>
-      -->
-      <!-- Frame end -->
-
-  </div>
-  <component
-    v-else
-    :id="item.id" 
-    :is="resolvedType" 
-    :class="editorClass" 
-    :href="getProperty('href')"
-    :src="getProperty('src')"
-    :alt="getProperty('alt')"
-    :type="getProperty('type')"
-    :name="getProperty('name')"
-    :target="getProperty('target')"
-    :value="getProperty('value')"
-    :min="getProperty('min')"
-    :max="getProperty('max')"
-    :for="getProperty('for')"
-    :svg="getProperty('svg')"
-    @click.stop="selectItem(item)">
-      {{item.text}}
-    <ItemTreeView 
-      v-if="viewedItem.children.length > 0" 
-      v-for="child in viewedItem.children" 
-      :item="child" 
-      :device="device"
-      :mode="mode"
-      :selectedItemId="props.selectedItemId"
-      :refresh="refreshChildren"
-      @selected="value=>emit('selected', value)">
-    </ItemTreeView>
-  </component>
+    </component>
+    <component v-else
+      :id="props.item.id" 
+      :is="resolvedType" 
+      :class="editorClass" 
+      :href="getProperty('href')"
+      :src="getProperty('src')"
+      :alt="getProperty('alt')"
+      :type="getProperty('type')"
+      :name="getProperty('name')"
+      :target="getProperty('target')"
+      :value="getProperty('value')"
+      :min="getProperty('min')"
+      :max="getProperty('max')"
+      :for="getProperty('for')"
+      :svg="getProperty('svg')"
+      @click.stop="selectItem(props.item)">
+        {{props.item.text}}
+      <ItemTreeView 
+        v-if="viewedItem.children.length > 0" 
+        v-for="child in viewedItem.children" 
+        :item="child" 
+        :device="device"
+        :mode="mode"
+        :selectedItemId="props.selectedItemId"
+        :refresh="refreshChildren"
+        @selected="value => selectItem(props.item)">
+      </ItemTreeView>
+    </component>
 </template>
 <script setup>
   import { getItemEditorClass } from '@/lib/generators/ClassGeneration.js'
@@ -144,7 +218,7 @@
   })
 
   function selectItem(item) {
-    debug('seleced: ' + item.id)
+    debug('selected: ' + item.id)
     emit('selected', item)
   }
 

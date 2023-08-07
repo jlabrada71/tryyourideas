@@ -30,7 +30,9 @@
 <!-- <DivClassGenerator :tags="textTags" :values="textAligns"></DivClassGenerator> -->
 <!-- <DivClassGenerator :tags="textVerticalTags" :values="textVerticalAligns"></DivClassGenerator> -->
 <!-- <DivClassGenerator :tags="textTrackingTags" :values="textTrackings"></DivClassGenerator> -->
-<DivClassGenerator :tags="textLeadingTags" :values="textLeadings"></DivClassGenerator>
+<!-- <DivClassGenerator :tags="textLeadingTags" :values="textLeadings"></DivClassGenerator> -->
+<!-- <DivClassGenerator :tags="displayTag" :values="display"></DivClassGenerator> -->
+<DivClassGenerator :tags="borderWidthTags" :values="borderWidths"></DivClassGenerator>
 
 </template>
 <script setup>
@@ -129,5 +131,8 @@
   const backgroundClip = [ "border", "padding", "content", "text" ]
 
   const colorsNames2 = ['transparent', 'white', 'black', 'inherit', 'current']
+
+  const displayTag = [ 'display' ]
+  const display = ['block', 'inline-block', 'inline', 'flex', 'inline-flex', 'table', 'inline-table', 'table-caption', 'table-cell', 'table-column', 'table-column-group', 'table-footer-group', 'table-header-group', 'table-row-group', 'table-row', 'flow-root', 'grid', 'inline-grid', 'contents', 'list-item', 'hidden']
   
 </script>

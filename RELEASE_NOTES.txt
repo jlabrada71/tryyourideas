@@ -38,3 +38,7 @@ v0.21.0 => Implements emits generation and handling
 v0.21.1 => Fixing the component click bug
 ---------
 ecd2602 Fixing the component click bug 410c974 Removing unnecessary classes 142a420 fixing licence mismatch"
+=============
+v0.21.2 => Optimizing and improving utility classes
+---------
+9ffc230 Optimizing classes 97976d2 implementing missing class loaders

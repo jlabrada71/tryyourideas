@@ -30,6 +30,6 @@
   }
 
   const modifiers = ['', 'hover:', 'active:', 'focus:']
-  const modes = ['', 'dark:']
-  const devices = ['', 'sm:', 'md:', 'lg:', 'xl:']
+  const modes = [''] //, 'dark:']
+  const devices = [''] //, 'sm:', 'md:', 'lg:', 'xl:']
 </script>

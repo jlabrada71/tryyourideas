@@ -1,8 +1,8 @@
 <template>
-  <div id="imageSelectorForm" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div id="imageSelectorForm"  class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="flex flex-col w-96 h-auto bg-slate-50 rounded-2xl">
       <div class=" flex flex-row flex-wrap justify-end bg-inherit w-full h-10 rounded-lg ">
-        <button ref="closeElement" id="id-4-1-1" type="button" data-modal-hide="imageSelectorForm" class=" flex flex-row bg-inherit w-6 h-6 rounded-full hover:flex hover:flex-row hover:bg-slate-300 ">
+        <button ref="closeElement" id="id-4-1-1" type="button" class=" flex flex-row bg-inherit w-6 h-6 rounded-full hover:flex hover:flex-row hover:bg-slate-300 ">
           <svg xmlns="http://www.w3.org/2000/svg" id="id-4-1-1-1" class=" flex flex-row bg-inherit w-6 h-6 rounded-full focus:flex focus:flex-row focus:bg-inherit focus:w-6 focus:h-6 hover:flex hover:flex-row hover:bg-inherit hover:w-6 hover:h-6 " viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
               <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
           </svg>
@@ -33,6 +33,7 @@
 <script setup>
   import axios from 'axios'
   import { useDropZone } from '@vueuse/core'
+  import { initModals } from 'flowbite'
 
   const props = defineProps({
     userId: {
@@ -41,10 +42,15 @@
     }
   })
 
+  onMounted(() => {
+    initModals();
+  })
+
+  const config = useRuntimeConfig()
   const emit = defineEmits(['selected:image', 'cancelled'])
 
-  const uploadedImages = ref('http://localhost:3000/uploads/users')
-  const fileServer = ref('http://localhost:3000/api/v1/files')
+  const uploadedImages = `${config.public.frontEndOrigin}/uploads/users`
+  const fileServer = `${config.public.apiBase}/files`
   const file = ref(null)
   const files = ref([])
   const directories = ref([])
@@ -69,7 +75,7 @@
   }
 
   async function updateData() {
-    const result = await axios.get(`${fileServer.value}?userId=${props.userId}&directory=${currentDirectory.value}`)
+    const result = await axios.get(`${fileServer}?userId=${props.userId}&directory=${currentDirectory.value}`)
     // check result.status !== 200
     directories.value = result.data.directories
     files.value = result.data.files
@@ -97,7 +103,7 @@
   })
 
   function pathOfImage(name) {
-    return `${uploadedImages.value}/${props.userId}/${currentDirectory.value}/${name}`
+    return `${uploadedImages}/${props.userId}/${currentDirectory.value}/${name}`
   }
 
   async function submitFile(file) {
@@ -106,7 +112,7 @@
     formData.append('directory', currentDirectory.value)
     formData.append('file', file);
     const headers = { 'Content-Type': 'multipart/form-data' };
-    const res = await axios.post(fileServer.value, formData, { headers })
+    const res = await axios.post(fileServer, formData, { headers })
     res.status; // HTTP status
     result.value = `Image ${file.name} uploaded` //`${res.status} `
     updateData()

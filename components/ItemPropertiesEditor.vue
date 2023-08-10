@@ -1,5 +1,5 @@
 <template>
-  <ImageSelectorForm userId="juan" @selected:image="selectImage"></ImageSelectorForm>
+  <ImageSelectorForm v-if="isSelectingImage" userId="anonimous" @selected:image="selectImage" @cancelled="cancelledSelectImage"></ImageSelectorForm>
   <div class="bg-slate-100 flex flex-col gap-2 px-2">
     <div v-for="prop, index in props.item.properties" :key="index" class="flex flex-col">
       <div class="flex flex-row">
@@ -32,7 +32,7 @@
               :value="prop.value" 
               class="bg-slate-200 w-20 h-8 rounded-lg border-2 border-slate-400 "
               @input="event => updateProperty({...prop, value: event.target.value })">
-            <button @click="selectingImage(prop)" data-modal-target="imageSelectorForm" data-modal-toggle="imageSelectorForm" class=" flex flex-row rounded-full  h-4  hover:bg-slate-300 ">
+            <button @click="selectingImage(prop)" class=" flex flex-row rounded-full  h-4  hover:bg-slate-300 ">
               <span class=" flex flex-row bg-inherit ">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
               </span>
@@ -76,11 +76,11 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:item'])
-
 onMounted(() => {
   initModals();
 })
+
+const emit = defineEmits(['update:item'])
 
 const bindingOptions = computed(() => {
   return [{name:'' }].concat(props.component.properties)
@@ -120,10 +120,12 @@ function updateFetchProperties(item) {
 }
 
 const propForImage = ref(null)
+const isSelectingImage = ref(false)
 
 function selectingImage(prop) {
-  console.log('Selecting image')
   propForImage.value = prop
+  isSelectingImage.value = true
+  console.log(isSelectingImage.value)
 }
 
 function selectImage(imageUrl) {
@@ -131,6 +133,11 @@ function selectImage(imageUrl) {
     propForImage.value.value = imageUrl
   }
   updateProperty(propForImage.value)
+  isSelectingImage.value = false
+}
+
+function cancelledSelectImage() {
+  isSelectingImage.value = false
 }
 
 function updateProperty(property) {

@@ -13,3 +13,4 @@ pages/version.vue
 public/tmp
 package-lock.json
 components/ProductVersion.vue
+public/uploads/users

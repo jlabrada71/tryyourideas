@@ -46,3 +46,7 @@ v0.21.2 => Optimizing and improving utility classes
 v0.22.0 => Image uploading and generation implemented
 ---------
 99de499 - Image support refactored - Image generation implemented 8ce49a7 ignoting uploads directory f453807 Fixing env parameter issues ff78e85 Upload image test page 711fd86 Adding uploading support
+=============
+v0.22.1 => BUGFIX: When the email is undefined ask for an email for generating the project
+---------
+e3f0c47 BUGFIX: When the email is 'undefined' ask for an email for generating the project

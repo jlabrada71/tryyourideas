@@ -54,3 +54,7 @@ e3f0c47 BUGFIX: When the email is 'undefined' ask for an email for generating th
 v0.22.2 => BUGFIX: Images can now be uploaded
 ---------
 d6a3bb1 BUGFIX: renaming result variable
+=============
+v0.22.3 => BUGFIX: uploads route not recognized
+---------
+721453f BUGFIX: static route not recognized

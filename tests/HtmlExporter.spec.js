@@ -39,4 +39,15 @@ describe('itemToHtml function', () => {
       expect(svg).toBe('<svg xml="" id="id-test"  class="" ></svg>')
     })
   })
+
+  describe('generate img src', () => {
+    const src = 'http://localhost:3000/uploads/users/undefined/Default/images/test/_DSC6980.JPG' 
+    const result = '/' + src.split('/').splice(7).join('/')
+
+    it('generate simplest svg', () => {
+      
+      expect(result).toBe('/images/test/_DSC6980.JPG')
+    })
+  })
 })
+

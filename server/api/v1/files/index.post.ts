@@ -13,9 +13,10 @@ export default defineEventHandler(async (event) => {
     // console.log( mimetype )
     // console.log( fields )
     const userId = fields.userId[0]
+    const project = fields.project[0]
     const directory = fields.directory[0]
     console.log(userId, directory )
-    const folder = `${path.join('public', 'uploads', 'users', userId, directory)}`
+    const folder = `${path.join('public', 'uploads', 'users', userId, project, directory)}`
     if (!fs.existsSync(folder)){
       fs.mkdirSync(folder, { recursive: true });
     }

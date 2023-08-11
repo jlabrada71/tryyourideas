@@ -1,5 +1,5 @@
 <template>
-  <ImageSelectorForm v-if="isSelectingImage" userId="anonimous" @selected:image="selectImage" @cancelled="cancelledSelectImage"></ImageSelectorForm>
+  <ImageSelectorForm v-if="isSelectingImage" :imageService="props.imageService" @selected:image="selectImage" @cancelled="cancelledSelectImage"></ImageSelectorForm>
   <div class="bg-slate-100 flex flex-col gap-2 px-2">
     <div v-for="prop, index in props.item.properties" :key="index" class="flex flex-col">
       <div class="flex flex-row">
@@ -71,6 +71,10 @@ const props = defineProps({
     required: true
   },
   component: {
+    type: Object,
+    required: true
+  }, 
+  imageService: {
     type: Object,
     required: true
   }

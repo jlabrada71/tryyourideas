@@ -14,7 +14,7 @@
         <div ref="dropZone" class="bg-slate-50 w-80 h-80 rounded-lg border-slate-200 border-2 flex flex-wrap gap-4 p-4 overflow-y-auto">
           <span v-for="directory in directories">{{directory}}</span>
           <div @click="selectImage(file.name)" v-for="file in files"  class="w-20 h-20 m-2">
-            <img :src="pathOfImage(file.name)" alt="">
+            <img :src="props.imageService.pathOfImage(file.name)" alt="">
             <!-- <span>{{file.name}}</span> -->
           </div>
         </div>
@@ -31,26 +31,20 @@
 </template>
 
 <script setup>
-  import axios from 'axios'
-  import { useDropZone } from '@vueuse/core'
-  import { initModals } from 'flowbite'
 
+  import { useDropZone } from '@vueuse/core'
+  import { debug } from '@/lib/logger.js'
+  import { onMounted } from 'vue'
+ 
   const props = defineProps({
-    userId: {
-      type: String,
+    imageService: {
+      type: Object,
       required: true
     }
   })
 
-  onMounted(() => {
-    initModals();
-  })
-
-  const config = useRuntimeConfig()
   const emit = defineEmits(['selected:image', 'cancelled'])
 
-  const uploadedImages = `${config.public.frontEndOrigin}/uploads/users`
-  const fileServer = `${config.public.apiBase}/files`
   const file = ref(null)
   const files = ref([])
   const directories = ref([])
@@ -75,14 +69,15 @@
   }
 
   async function updateData() {
-    const result = await axios.get(`${fileServer}?userId=${props.userId}&directory=${currentDirectory.value}`)
-    // check result.status !== 200
-    directories.value = result.data.directories
-    files.value = result.data.files
+    debug('updateData')
+    const result = await props.imageService.getFiles(currentDirectory.value)
+    debug(result.status)
+    directories.value = result.directories
+    files.value = result.files
   }
 
   function selectImage(imageName) {
-    selectedImagePath.value = pathOfImage(imageName)
+    selectedImagePath.value = props.imageService.pathOfImage(imageName)
     selectedImage.value = imageName
     result.value = `${imageName} selected`
   }
@@ -102,19 +97,9 @@
     updateData()
   })
 
-  function pathOfImage(name) {
-    return `${uploadedImages}/${props.userId}/${currentDirectory.value}/${name}`
-  }
-
   async function submitFile(file) {
-    const formData = new FormData();
-    formData.append('userId', props.userId )
-    formData.append('directory', currentDirectory.value)
-    formData.append('file', file);
-    const headers = { 'Content-Type': 'multipart/form-data' };
-    const res = await axios.post(fileServer, formData, { headers })
-    res.status; // HTTP status
-    result.value = `Image ${file.name} uploaded` //`${res.status} `
+    const result = await props.imageService.postFile(file, currentDirectory.value)
+    result.value = ` ${result} status Image ${file.name} uploaded` //`${res.status} `
     updateData()
   }
 

@@ -125,6 +125,7 @@
       <ItemEditor 
         :item="selectedItem"
         :component="selectedComponent"
+        :imageService="imageService"
         @update:item="updateItem" 
         @update:modifier="selectModifier">
       </ItemEditor>    
@@ -144,7 +145,7 @@ import { migrateProject } from '@/lib/editor/projects.js'
 import { createNewComponent, createNewItem } from '@/lib/editor/components.js'
 import { useEditorStorage } from '@/lib/editor/storage.js'
 import { runIntro } from '@/lib/editor/help.js'
-
+import { getImageService } from '@/lib/images/image-service.js'
 import axios from 'axios'
 import _ from 'lodash'; 
 import { 
@@ -249,6 +250,12 @@ const project = ref({
   name: 'Default',
   dirty: false,
   components: [],
+})
+
+let imageService = getImageService(config, currentUser.value.id, project.value.name)
+
+watchEffect(() => { 
+  imageService = getImageService(config, currentUser.value.id, project.value.name)
 })
 
 onMounted(() => {

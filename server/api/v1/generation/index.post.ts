@@ -1,5 +1,6 @@
 import { log, debug } from '@/lib/logger.js'
 import fse  from 'fs-extra'
+import path from 'path'
 import { zip } from 'zip-a-folder';
 import CloudStorage from '@/lib/firebase/cloud-storage.js'
 import { getEmailService } from '@/lib/emails/Service.js'
@@ -7,7 +8,7 @@ import { generateVueComponentCode } from '@/lib/generators/GenerateVueComponentC
 
 const config = useRuntimeConfig()
 
-function copyTemplate(templateProject: String, destDir: String) {
+function copyTemplate(templateProject: string, destDir: string) {
   if (fse.pathExistsSync(destDir)) {
     fse.removeSync(destDir)
   }
@@ -20,8 +21,13 @@ function copyTemplate(templateProject: String, destDir: String) {
   }
 }
 
+function copyResources(user, project, destDir: string ) {
+  const resourcesFolder = `${destDir}/public`
+  const folder = `${path.join('public', 'uploads', 'users', user.id, project.name)}`
+  fse.copySync(folder, resourcesFolder, { overwrite: true })
+}
+
 async function createZipFile(srcDir, zipFileName) {
-  
   try {
     if (fse.pathExistsSync(zipFileName)) {
       fse.removeSync(zipFileName)
@@ -36,7 +42,6 @@ async function createZipFile(srcDir, zipFileName) {
 }
 
 function saveCode(directory: String, file: String, code: String) {
-
   fse.writeFile(`${directory}/${file}`, code, err => {
     if (err) {
       log('Error writing file: ' + file)
@@ -79,6 +84,7 @@ export default defineEventHandler(async (event) => {
   const destDir = `${config.data}/projects/${projectFolder}/generation/${project.name}`
   const zipFileName = `${destDir}.zip`
   copyTemplate(srcDir, destDir)
+  copyResources(user, project, destDir)
 
   generateComponents(project, destDir)
   generateIndexPage(project, destDir)

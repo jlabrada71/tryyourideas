@@ -10,6 +10,7 @@
         <ItemPropertiesEditor 
           :item="props.item" 
           :component="props.component" 
+          :imageService="props.imageService"
           @update:item="item => emit('update:item', item)">
         </ItemPropertiesEditor>
       </template>
@@ -60,6 +61,10 @@ const props = defineProps({
     required: true
   },
   component: {
+    type: Object,
+    required: true
+  },
+  imageService: {
     type: Object,
     required: true
   }

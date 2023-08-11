@@ -50,3 +50,7 @@ v0.22.0 => Image uploading and generation implemented
 v0.22.1 => BUGFIX: When the email is undefined ask for an email for generating the project
 ---------
 e3f0c47 BUGFIX: When the email is 'undefined' ask for an email for generating the project
+=============
+v0.22.2 => BUGFIX: Images can now be uploaded
+---------
+d6a3bb1 BUGFIX: renaming result variable

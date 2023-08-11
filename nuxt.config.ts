@@ -164,6 +164,7 @@ SkZ5/uo05c+B1yaHdf7FdMPDkmPmxexIwPxScMfbf7d51WhKRFHW1v8vwzRHnl0X
     '/blog/**': { swr: true },
     // Static page generated on-demand once
     '/articles/**': { static: true },
+    '/uploads/**': { static: true, cors: true },
   },
   // nitro: {
   //   prerender: {

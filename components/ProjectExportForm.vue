@@ -66,7 +66,7 @@
 
   const getEmail = () => {
     debug(`email: '${props.user.email}'`)
-    return !props.user.email || props.user.email.endsWith('fakemail.com') || props.user.email == 'unset' 
+    return !props.user.email || props.user.email.endsWith('fakemail.com') || props.user.email == 'unset' || props.user.email == 'undefined' 
   }
   
   const email = computed({

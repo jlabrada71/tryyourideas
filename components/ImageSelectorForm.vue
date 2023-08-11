@@ -98,8 +98,8 @@
   })
 
   async function submitFile(file) {
-    const result = await props.imageService.postFile(file, currentDirectory.value)
-    result.value = ` ${result} status Image ${file.name} uploaded` //`${res.status} `
+    const postResult = await props.imageService.postFile(file, currentDirectory.value)
+    result.value = ` ${postResult} status Image ${file.name} uploaded` //`${res.status} `
     updateData()
   }
 

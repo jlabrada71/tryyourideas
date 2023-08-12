@@ -1,6 +1,7 @@
 import { readFiles } from 'h3-formidable'
 import fs from 'fs'
 import path from 'path'
+import { log } from '@/lib/logger.js'
 
 export default defineEventHandler(async (event) => {
     const { fields, files } = await readFiles(event, {
@@ -15,7 +16,7 @@ export default defineEventHandler(async (event) => {
     const userId = fields.userId[0]
     const project = fields.project[0]
     const directory = fields.directory[0]
-    console.log(userId, directory )
+ 
     const home = '/home/ubuntu/apps/resources.tryyourideas.com/'
     const folder = `${path.join(home, 'uploads', 'users', userId, project, directory)}`
     if (!fs.existsSync(folder)){
@@ -23,8 +24,16 @@ export default defineEventHandler(async (event) => {
     }
     
     let newPath = `${path.join( folder, originalFilename)}`;
+    try {
+      log('coping')
+      log(filepath, newPath)
+      fs.copyFileSync(filepath, newPath);
+    } 
+    catch(e) {
+      log(e)
+    }
+
     
-    fs.copyFileSync(filepath, newPath);
 
     return { success: true }
 });

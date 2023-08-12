@@ -41,8 +41,8 @@ describe('itemToHtml function', () => {
   })
 
   describe('generate img src', () => {
-    const src = 'http://localhost:3000/uploads/users/undefined/Default/images/test/_DSC6980.JPG' 
-    const result = '/' + src.split('/').splice(7).join('/')
+    const src = 'http://localhost:3400/users/undefined/Default/images/test/_DSC6980.JPG' 
+    const result = '/' + src.split('/').splice(6).join('/')
 
     it('generate simplest svg', () => {
       

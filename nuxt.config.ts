@@ -58,6 +58,7 @@ export default defineNuxtConfig({
     // Keys within public, will be also exposed to the client-side
     data: '/home/ubuntu/data',
     tmp: '/home/ubuntu/apps/tryyourideas.com/public/tmp',
+    resources: '/home/ubuntu/apps/resources.tryyourideas.com/',
     notificationsApi: 'https://juanlabrada.com/api/v1/notifications',
     googleOAuthClientSecret: 'undefined',
     googleOAuthRediret : 'undefined',

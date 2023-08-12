@@ -7,6 +7,8 @@ export default defineEventHandler(async (event) => {
     const { fields, files } = await readFiles(event, {
       includeFields: true
     })
+    const config = useRuntimeConfig()
+
     const headers = getRequestHeaders(event)
 
     const { filepath, originalFilename, mimetype, size } = files.file[0]
@@ -17,8 +19,7 @@ export default defineEventHandler(async (event) => {
     const project = fields.project[0]
     const directory = fields.directory[0]
  
-    const home = '/home/ubuntu/apps/resources.tryyourideas.com/'
-    const folder = `${path.join(home, 'uploads', 'users', userId, project, directory)}`
+    const folder = `${path.join(config.resources, 'uploads', 'users', userId, project, directory)}`
     if (!fs.existsSync(folder)){
       fs.mkdirSync(folder, { recursive: true });
     }
@@ -32,8 +33,6 @@ export default defineEventHandler(async (event) => {
     catch(e) {
       log(e)
     }
-
-    
 
     return { success: true }
 });

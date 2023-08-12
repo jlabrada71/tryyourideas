@@ -66,3 +66,7 @@ v0.23.0 => Adding support for resource server
 v0.23.1 => Adding some logs to upload images
 ---------
 a55d3de Adding some logs
+=============
+v0.23.2 => Fixing image references
+---------
+2ab9e9e Fixing images references

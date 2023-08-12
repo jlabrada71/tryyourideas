@@ -58,3 +58,7 @@ d6a3bb1 BUGFIX: renaming result variable
 v0.22.3 => BUGFIX: uploads route not recognized
 ---------
 721453f BUGFIX: static route not recognized
+=============
+v0.23.0 => Adding support for resource server
+---------
+5901b12 Adding support for resource server

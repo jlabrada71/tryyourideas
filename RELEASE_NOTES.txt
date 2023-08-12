@@ -62,3 +62,7 @@ v0.22.3 => BUGFIX: uploads route not recognized
 v0.23.0 => Adding support for resource server
 ---------
 5901b12 Adding support for resource server
+=============
+v0.23.1 => Adding some logs to upload images
+---------
+a55d3de Adding some logs

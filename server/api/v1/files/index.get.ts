@@ -11,8 +11,9 @@ const getDirectories = async path => {
 
 export default defineEventHandler(async (event) => {
   const  { userId, project, directory } = getQuery(event)
+  const home = '/home/ubuntu/apps/resources.tryyourideas.com/'
   console.log(userId, directory )
-  const folder = `${path.join('public', 'uploads', 'users', userId, project, directory)}`
+  const folder = `${path.join(home, 'uploads', 'users', userId, project, directory)}`
   if (!fs.existsSync(folder)){
     fs.mkdirSync(folder, { recursive: true })
   }

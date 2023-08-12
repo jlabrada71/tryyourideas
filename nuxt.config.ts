@@ -4,6 +4,7 @@ const variables = {
     // apiBase: 'https://tryyourideas.com/api/v1',
     apiBase: 'http://localhost:3000/api/v1',
     frontEndOrigin: 'http://localhost:3000',
+    resourcesServer: 'http://localhost:3400',
     googleOAuthRedirect: 'http://localhost:3000/api/v1/sessions/oauth/google',
     githubOAuthRedirect: 'http://localhost:3000/api/v1/sessions/oauth/github',
     githubOAuthClientId: 'f51061212d92f100b373',
@@ -12,6 +13,7 @@ const variables = {
   production: {
     apiBase: 'https://tryyourideas.com/api/v1',
     frontEndOrigin: 'https://tryyourideas.com',
+    resourcesServer: 'https://resources.tryyourideas.com',
     googleOAuthRedirect: 'https://tryyourideas.com/api/v1/sessions/oauth/google',
     githubOAuthRedirect: 'https://tryyourideas.com/api/v1/sessions/oauth/github',
     githubOAuthClientId: 'df162a8cc3d7d1a472a8',
@@ -128,6 +130,7 @@ wFaTTJoV/jMlB4hdQsdcFQ==
       domain: 'tryyourideas.com',
       analyticsServer: 'https://juanlabrada.com',
       apiBase: variables[env].apiBase,
+      resourcesServer: variables[env].resourcesServer,
       googleOAuthClientId: 'undefined',
       googleOAuthRedirect: variables[env].googleOAuthRedirect,
       githubOAuthClientId: variables[env].githubOAuthClientId,
@@ -164,7 +167,6 @@ SkZ5/uo05c+B1yaHdf7FdMPDkmPmxexIwPxScMfbf7d51WhKRFHW1v8vwzRHnl0X
     '/blog/**': { swr: true },
     // Static page generated on-demand once
     '/articles/**': { static: true },
-    '/uploads/**': { static: true, cors: true },
   },
   // nitro: {
   //   prerender: {

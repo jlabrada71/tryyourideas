@@ -16,15 +16,14 @@ export default defineEventHandler(async (event) => {
     const project = fields.project[0]
     const directory = fields.directory[0]
     console.log(userId, directory )
-    const folder = `${path.join('public', 'uploads', 'users', userId, project, directory)}`
+    const home = '/home/ubuntu/apps/resources.tryyourideas.com/'
+    const folder = `${path.join(home, 'uploads', 'users', userId, project, directory)}`
     if (!fs.existsSync(folder)){
       fs.mkdirSync(folder, { recursive: true });
     }
     
     let newPath = `${path.join( folder, originalFilename)}`;
-
-    // let imageName = String(Date.now()) + String(Math.round(Math.random() * 10000000));
-    // let newPath = `${path.join('public', 'uploads', folder, originalFilename)}.${ mimetype.split('/')[1] }`;
+    
     fs.copyFileSync(filepath, newPath);
 
     return { success: true }

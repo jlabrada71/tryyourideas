@@ -23,7 +23,8 @@ function copyTemplate(templateProject: string, destDir: string) {
 
 function copyResources(user, project, destDir: string ) {
   const resourcesFolder = `${destDir}/public`
-  const folder = `${path.join('public', 'uploads', 'users', user.id, project.name)}`
+  const home = '/home/ubuntu/apps/resources.tryyourideas.com/'
+  const folder = `${path.join(home, 'uploads', 'users', user.id, project.name)}`
   fse.copySync(folder, resourcesFolder, { overwrite: true })
 }
 

@@ -70,3 +70,7 @@ a55d3de Adding some logs
 v0.23.2 => Fixing image references
 ---------
 2ab9e9e Fixing images references
+=============
+v0.24.0 => Adding tutorials to home page
+---------
+20ce02f Adding tutorials to home page

@@ -64,7 +64,7 @@
     </AccordionItem> 
 
     <AccordionItem id="24">
-      <template #head><span class="flex items-center">Shadows</span></template>
+      <template #head><span class="flex items-center">Effects</span></template>
       <template #body>
         <SelectorsShadow :shadow="currentClass.shadow" @update:shadow="value => updateClass('shadow', value)"></SelectorsShadow>
         <SelectorsShadowColor :color="currentClass.shadowColor" @update:color="value => updateClass('shadowColor', value)"></SelectorsShadowColor>

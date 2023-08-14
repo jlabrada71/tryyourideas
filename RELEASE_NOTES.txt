@@ -74,3 +74,7 @@ v0.23.2 => Fixing image references
 v0.24.0 => Adding tutorials to home page
 ---------
 20ce02f Adding tutorials to home page
+=============
+v0.25.0 => Item copy and paste implemented
+---------
+3a0d60a Item copy and paste implemented

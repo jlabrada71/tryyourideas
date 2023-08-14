@@ -82,3 +82,7 @@ v0.25.0 => Item copy and paste implemented
 v0.26.0 => Paste style implemented
 ---------
 1e7c0bd Style paste implemented
+=============
+v0.26.1 => BUGFIX: Remove the selected state for pasted item BUGFIX: Toolbar buttons UX Improved
+---------
+a57114b BUGFIX: Remove the selected state for pasted item BUGFIX: Toolbar buttons UX Improved

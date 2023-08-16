@@ -17,7 +17,7 @@ function copyTemplate(templateProject: string, destDir: string) {
     fse.copySync(templateProject, destDir, { overwrite: true })
     log(`successfully `)
   } catch (err) {
-    console.error(err)
+    log(err)
   }
 }
 
@@ -25,6 +25,10 @@ function copyResources(user, project, destDir: string ) {
   const resourcesFolder = `${destDir}/public`
   const home = '/home/ubuntu/apps/resources.tryyourideas.com/'
   const folder = `${path.join(home, 'uploads', 'users', user.id, project.name)}`
+  // force creating the source folder in case it doesn't exists
+  if (!fse.existsSync(folder)){
+      fse.mkdirSync(folder, { recursive: true });
+  }
   fse.copySync(folder, resourcesFolder, { overwrite: true })
 }
 

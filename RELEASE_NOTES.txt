@@ -86,3 +86,7 @@ v0.26.0 => Paste style implemented
 v0.26.1 => BUGFIX: Remove the selected state for pasted item BUGFIX: Toolbar buttons UX Improved
 ---------
 a57114b BUGFIX: Remove the selected state for pasted item BUGFIX: Toolbar buttons UX Improved
+=============
+v0.26.2 =>  BUGFIX: Fails when the resources directory does not exists
+---------
+4d12964 BUGFIX: Fails when the resources directory does not exists

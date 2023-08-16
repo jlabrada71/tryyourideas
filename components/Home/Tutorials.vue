@@ -13,15 +13,16 @@
         image="/images/responsive-tutorial.png">
       </HomeTutorialItem>
       <HomeTutorialItem 
+        title="How to create a text gradient" 
+        url="https://www.youtube.com/watch?v=MiRSLI9VUfQ"
+        image="/images/text-gradient.png">
+      </HomeTutorialItem>
+      <HomeTutorialItem 
         title="How to bind properties (coming soon)" 
         url=""
         image="logo.png">
       </HomeTutorialItem>
-      <HomeTutorialItem 
-        title="How to create gradient text (coming soon)" 
-        url=""
-        image="logo.png">
-      </HomeTutorialItem>
+      
     </div>
   </div>
 </template>

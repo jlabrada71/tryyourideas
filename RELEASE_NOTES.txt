@@ -90,3 +90,7 @@ a57114b BUGFIX: Remove the selected state for pasted item BUGFIX: Toolbar button
 v0.26.2 =>  BUGFIX: Fails when the resources directory does not exists
 ---------
 4d12964 BUGFIX: Fails when the resources directory does not exists
+=============
+v0.26.3 => Adding text gradient tutorial
+---------
+e17182c Adding text gradient tutorial

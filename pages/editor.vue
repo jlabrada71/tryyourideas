@@ -431,6 +431,7 @@ function updateItem(modifiedItem) {
 
   item.type = modifiedItem.type
   item.properties = modifiedItem.properties
+  item.text = modifiedItem.text
  
   const editedClass = findClassBy(item, getClassKey( modifiedItem.currentClass ) )
 

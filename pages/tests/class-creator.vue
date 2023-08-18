@@ -37,8 +37,18 @@
 <!-- <DivClassGenerator :tags="gapTags" :values="gaps"></DivClassGenerator>-->
 
 
-<DivClassGenerator :tags="flexDirectionWrapTags" :values="flexDirectionWraps"></DivClassGenerator>
+<!-- <DivClassGenerator :tags="flexDirectionWrapTags" :values="flexDirectionWraps"></DivClassGenerator> -->
 
+<!-- <DivClassGenerator :tags="flexJustifyItemTags" :values="flexJustifyItems"></DivClassGenerator>
+<DivClassGenerator :tags="flexJustifyContentTags" :values="flexJustifyContents"></DivClassGenerator>
+<DivClassGenerator :tags="flexJustifySelfTags" :values="flexJustifySelfs"></DivClassGenerator> -->
+
+<!-- <DivClassGenerator :tags="flexPlaceItemTags" :values="flexPlaceItems"></DivClassGenerator>
+<DivClassGenerator :tags="flexPlaceContentTags" :values="flexPlaceContents"></DivClassGenerator>
+<DivClassGenerator :tags="flexPlaceSelfTags" :values="flexPlaceSelfs"></DivClassGenerator> -->
+
+<!-- <DivClassGenerator :tags="flexBasisTags" :values="flexBasis"></DivClassGenerator> -->
+<DivClassGenerator :tags="flexShrinkTags" :values="flexShrinks"></DivClassGenerator>
 </template>
 <script setup>
   import { ref } from 'vue'
@@ -146,5 +156,37 @@
   
   const flexDirectionWrapTags = ['flex']
   const flexDirectionWraps = ['row', 'row-reverse', 'col', 'col-reverse', 'wrap', 'wrap-reverse', 'nowrap']
+
+  const flexJustifyContentTags = ['justify']
+  const flexJustifyContents = ['normal', 'start', 'end', 'center', 'between', 'around', 'evenly', 'stretch']
+
+  const flexJustifyItemTags = ['justify-items']
+  const flexJustifyItems = ['start', 'end', 'center', 'stretch']
+
+  const flexJustifySelfTags = ['justify-self']
+  const flexJustifySelfs = ['auto', 'normal', 'start', 'end', 'center', 'between', 'around', 'evenly', 'stretch']
+
+  const flexPlaceContentTags = ['place-content']
+  const flexPlaceContents = [ 'start', 'end', 'center', 'between', 'around', 'evenly', 'stretch', 'baseline']
+
+  const flexPlaceItemTags = ['place-items']
+  const flexPlaceItems = ['start', 'end', 'center', 'baseline', 'stretch']
+
+  const flexPlaceSelfTags = ['place-self']
+  const flexPlaceSelfs = ['auto', 'start', 'end', 'center', 'stretch']
+
+  const flexBasisTags = ['basis']
+  const flexBasis = [ '0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '5', '6', '7', '8', '9', '10', '11', '12', '14', '16', '20', '24', '28', '32', '36', '40', '44', '48', '52', '56', '60', '64', '72', '80', '96', 
+                 '1/2', 
+                 '1/3', '2/3', 
+                 '1/4', '2/4', '3/4', 
+                 '1/5', '2/5', '3/5', '4/5', 
+                 '1/6', '2/6', '3/6', '4/6', '5/6', 
+                 '1/12', '2/12', '3/12', '4/12', '5/12', '6/12', '7/12', '8/12', '9/12', '10/12', '11/12', 
+                 'px', 'auto', 'full']
+
+  const flexShrinkTags = ['remove-this-tag']
+  const flexShrinks = ['flex-none', 'flex-auto', 'flex-1', 'flex-initial',  'grow', 'grow-0', 'shrink', 'shrink-0']
+
 
 </script>

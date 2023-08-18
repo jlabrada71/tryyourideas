@@ -1,0 +1,34 @@
+<template>
+  <div class="flex-none ">-flex-none </div>
+  <div class="flex-auto ">-flex-auto </div>
+  <div class="flex-1 ">-flex-1 </div>
+  <div class="flex-initial ">-flex-initial </div>
+  <div class="grow ">-grow </div>
+  <div class="grow-0 ">-grow-0 </div>
+  <div class="shrink ">-shrink </div>
+  <div class="shrink-0 ">-shrink-0 </div>
+  <div class="hover:flex-none ">hover:flex-none </div>
+  <div class="hover:flex-auto ">hover:flex-auto </div>
+  <div class="hover:flex-1 ">hover:flex-1 </div>
+  <div class="hover:flex-initial ">hover:flex-initial </div>
+  <div class="hover:grow ">hover:grow </div>
+  <div class="hover:grow-0 ">hover:grow-0 </div>
+  <div class="hover:shrink ">hover:shrink </div>
+  <div class="hover:shrink-0 ">hover:shrink-0 </div>
+  <div class="active:flex-none ">active:flex-none </div>
+  <div class="active:flex-auto ">active:flex-auto </div>
+  <div class="active:flex-1 ">active:flex-1 </div>
+  <div class="active:flex-initial ">active:flex-initial </div>
+  <div class="active:grow ">active:grow </div>
+  <div class="active:grow-0 ">active:grow-0 </div>
+  <div class="active:shrink ">active:shrink </div>
+  <div class="active:shrink-0 ">active:shrink-0 </div>
+  <div class="focus:flex-none ">focus:flex-none </div>
+  <div class="focus:flex-auto ">focus:flex-auto </div>
+  <div class="focus:flex-1 ">focus:flex-1 </div>
+  <div class="focus:flex-initial ">focus:flex-initial </div>
+  <div class="focus:grow ">focus:grow </div>
+  <div class="focus:grow-0 ">focus:grow-0 </div>
+  <div class="focus:shrink ">focus:shrink </div>
+  <div class="focus:shrink-0 ">focus:shrink-0 </div>
+  </template>

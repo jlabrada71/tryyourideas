@@ -32,7 +32,10 @@
 <!-- <DivClassGenerator :tags="textTrackingTags" :values="textTrackings"></DivClassGenerator> -->
 <!-- <DivClassGenerator :tags="textLeadingTags" :values="textLeadings"></DivClassGenerator> -->
 <!-- <DivClassGenerator :tags="displayTag" :values="display"></DivClassGenerator> -->
-<DivClassGenerator :tags="borderWidthTags" :values="borderWidths"></DivClassGenerator>
+<!-- <DivClassGenerator :tags="borderWidthTags" :values="borderWidths"></DivClassGenerator>-->
+
+<DivClassGenerator :tags="gapTags" :values="gaps"></DivClassGenerator>
+
 
 </template>
 <script setup>
@@ -134,5 +137,9 @@
 
   const displayTag = [ 'display' ]
   const display = ['block', 'inline-block', 'inline', 'flex', 'inline-flex', 'table', 'inline-table', 'table-caption', 'table-cell', 'table-column', 'table-column-group', 'table-footer-group', 'table-header-group', 'table-row-group', 'table-row', 'flow-root', 'grid', 'inline-grid', 'contents', 'list-item', 'hidden']
+  
+
+  const gapTags = [ 'gap', 'gap-x', 'gap-y' ]
+  const gaps = ['px', '0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '5', '6', '7', '8', '9', '10', '11', '12', '14', '16', '20', '24', '28', '32', '36', '40', '44', '48', '52', '56', '60', '64', '72', '80', '96']
   
 </script>

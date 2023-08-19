@@ -49,6 +49,11 @@
       @update:cls="val => updateClass(val.name, val.value)">
     </StyleEditorBackgroundSection>
 
+    <StyleEditorFiltersSection id="31"
+      :cls="currentClass" 
+      @update:cls="val => updateClass(val.name, val.value)">
+    </StyleEditorFiltersSection>
+
     <StyleEditorOthersSection id="99"
       :cls="currentClass" 
       @update:cls="val => updateClass(val.name, val.value)">

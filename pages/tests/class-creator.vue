@@ -48,7 +48,9 @@
 <DivClassGenerator :tags="flexPlaceSelfTags" :values="flexPlaceSelfs"></DivClassGenerator> -->
 
 <!-- <DivClassGenerator :tags="flexBasisTags" :values="flexBasis"></DivClassGenerator> -->
-<DivClassGenerator :tags="flexShrinkTags" :values="flexShrinks"></DivClassGenerator>
+<!-- <DivClassGenerator :tags="flexShrinkTags" :values="flexShrinks"></DivClassGenerator> -->
+<DivClassGenerator :tags="backdropBlurTags" :values="backdropBlurs"></DivClassGenerator>
+<DivClassGenerator :tags="backdropOpacityTags" :values="backdropOpacitys"></DivClassGenerator>
 </template>
 <script setup>
   import { ref } from 'vue'
@@ -188,5 +190,10 @@
   const flexShrinkTags = ['remove-this-tag']
   const flexShrinks = ['flex-none', 'flex-auto', 'flex-1', 'flex-initial',  'grow', 'grow-0', 'shrink', 'shrink-0']
 
+  const backdropBlurTags = ['backdrop-blur']
+  const backdropBlurs = ['none', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']
+
+  const backdropOpacityTags = ['backdrop-opacity']
+  const backdropOpacitys = ['0', '5', '10', '20', '25', '30', '40', '50', '60', '70', '75', '80', '90', '100']
 
 </script>

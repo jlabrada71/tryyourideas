@@ -8,13 +8,15 @@ import {
   getItemRenderedClass } from '@/lib/generators/ClassGeneration.js'
 
 
- const dumbGenerators = [(value, f) => { 
-  console.log(value)
+ const dumbPlugins = [
+  { generator: (value, f) => { 
+    console.log(value)
     const keys = Object.keys(value).filter(key => value.hasOwnProperty(key)).map(key => key).filter(key => !['mode', 'modifier', 'device'].includes(key))
     const values = keys.map(key => value[key]).map(value => f(value)).join(' ')
 
     return  values 
-  }]
+  }}
+]
 
 describe('modifierAdder function', () => {
   describe('common case: add "hover" to "bg-white"', () => {
@@ -76,7 +78,7 @@ describe('getClassString function', () => {
       marginTop: 'unset',
       shadow: 'test-shadow'
     }
-    const modeClass = getClassString(itemClass, modifierAdder('hover', 'unset'), dumbGenerators )
+    const modeClass = getClassString(itemClass, modifierAdder('hover', 'unset'), dumbPlugins )
     it('returns empty string', () => {
       expect(modeClass).toContain('hover:test-blue')
       expect(modeClass).toContain(' hover:test-shadow')
@@ -89,7 +91,7 @@ describe('getClassString function', () => {
       marginTop: 'unset',
       shadow: 'test-shadow'
     }
-    const modeClass = getClassString(itemClass, modifierAdder('') , dumbGenerators)
+    const modeClass = getClassString(itemClass, modifierAdder('') , dumbPlugins)
     it('returns empty string', () => {
       expect(modeClass).toContain('test-blue')
       expect(modeClass).toContain('test-shadow')
@@ -105,7 +107,7 @@ describe('getEditorClass function', () => {
       shadow: 'test-shadow',
       marginTop: 'unset',
     }
-    const modeClass = getEditorClass(itemClass, dumbGenerators)
+    const modeClass = getEditorClass(itemClass, dumbPlugins)
     it('returns empty string', () => {
       expect(modeClass).toContain('active:test-blue')
       expect(modeClass).toContain(' active:test-shadow')
@@ -159,7 +161,7 @@ describe('getItemEditorClass function', () => {
     ]
   } 
   describe('generalCase dark mode', () => {
-    const componentClass = getItemEditorClass(component, 'md', 'dark', dumbGenerators)
+    const componentClass = getItemEditorClass(component, 'md', 'dark', dumbPlugins)
     it('returns empty string', () => {
       expect(componentClass).toContain('active:bg-md-dark-active')
       expect(componentClass).toContain(' active:sh-md-dark-active')
@@ -176,7 +178,7 @@ describe('getItemEditorClass function', () => {
 
   describe('generalCase light mode', () => {
     
-    const componentClass = getItemEditorClass(component, 'md', 'light', dumbGenerators)
+    const componentClass = getItemEditorClass(component, 'md', 'light', dumbPlugins)
     it('returns empty string', () => {
       expect(componentClass).not.toContain(' dark:md:active:bg-md-dark-active')
       expect(componentClass).not.toContain(' dark:md:active:sh-md-dark-active')
@@ -193,7 +195,7 @@ describe('getItemEditorClass function', () => {
 
   describe('generalCase no mode any device', () => {
     
-    const componentClass = getItemEditorClass(component, 'any', 'light', dumbGenerators)
+    const componentClass = getItemEditorClass(component, 'any', 'light', dumbPlugins)
     it('returns empty string', () => {
       expect(componentClass).not.toContain(' active:bg-md-dark-active')
       expect(componentClass).not.toContain(' active:sh-md-dark-active')
@@ -272,7 +274,7 @@ describe('getItemRenderedClass function', () => {
   } 
   describe('generalCase mode', () => {
     
-    const componentClass = getItemRenderedClass(component, dumbGenerators)
+    const componentClass = getItemRenderedClass(component, dumbPlugins)
     it('returns empty string', () => {
       expect(componentClass).toContain('dark:md:active:bg-md-dark-active ')
       expect(componentClass).toContain(' dark:md:active:sh-md-dark-active ')

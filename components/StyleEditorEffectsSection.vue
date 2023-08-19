@@ -4,6 +4,7 @@
     <template #body>
       <SelectorsShadow :shadow="cls.shadow" @update:shadow="value => updateClass('shadow', value)"></SelectorsShadow>
       <SelectorsShadowColor :color="cls.shadowColor" @update:color="value => updateClass('shadowColor', value)"></SelectorsShadowColor>
+      <SelectorsOpacity :opacity="cls.opacity" @update:opacity="value => updateClass('opacity', value)"></SelectorsOpacity>
     </template>
   </AccordionItem> 
 </template>

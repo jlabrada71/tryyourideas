@@ -19,6 +19,17 @@
       @update:cls="val => updateClass(val.name, val.value)">
     </StyleEditorBordersSection>
 
+    <StyleEditorBackgroundSection id="30"
+      :cls="currentClass" 
+      :imageService="props.imageService"
+      @update:cls="val => updateClass(val.name, val.value)">
+    </StyleEditorBackgroundSection>
+
+    <StyleEditorGradientSection id="29"
+      :cls="currentClass" 
+      @update:cls="val => updateClass(val.name, val.value)">
+    </StyleEditorGradientSection>
+
     <StyleEditorEffectsSection id="24"
       :cls="currentClass" 
       @update:cls="val => updateClass(val.name, val.value)">
@@ -34,20 +45,15 @@
       @update:cls="val => updateClass(val.name, val.value)">
     </StyleEditorSelfSection>
 
+    <StyleEditorTransitionsSection id="27"
+      :cls="currentClass" 
+      @update:cls="val => updateClass(val.name, val.value)">
+    </StyleEditorTransitionsSection>
+
     <StyleEditorTransformSection id="28"
       :cls="currentClass" 
       @update:cls="val => updateClass(val.name, val.value)">
     </StyleEditorTransformSection>
-
-    <StyleEditorGradientSection id="29"
-      :cls="currentClass" 
-      @update:cls="val => updateClass(val.name, val.value)">
-    </StyleEditorGradientSection>
-
-    <StyleEditorBackgroundSection id="30"
-      :cls="currentClass" 
-      @update:cls="val => updateClass(val.name, val.value)">
-    </StyleEditorBackgroundSection>
 
     <StyleEditorFiltersSection id="31"
       :cls="currentClass" 
@@ -94,6 +100,10 @@ onMounted(() => {
 
 const props = defineProps({
   item: {
+    type: Object,
+    required: true
+  },
+  imageService: {
     type: Object,
     required: true
   }

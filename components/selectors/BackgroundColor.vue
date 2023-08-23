@@ -4,7 +4,7 @@
       :color="color"
       @update:color="value=>emit('update:color', value)"
       tag="bg">
-      Background color: <span>{{color}}</span>
+      Color: <span>{{color}}</span>
     </SelectorsTaggedColor>
   </div>
 </template>

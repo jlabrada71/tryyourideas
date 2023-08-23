@@ -13,7 +13,6 @@
           >
         </div>
         <SelectorsDisplay  :display="cls.display" @update:display="value => updateClass('display', value)"></SelectorsDisplay>
-        <SelectorsBackgroundColor :color="cls.backgroundColor" @update:color="value => updateClass('backgroundColor', value)"></SelectorsBackgroundColor>
         <SelectorsWidth  :width="cls.width" @update:width="value => updateClass('width', value)"></SelectorsWidth>
         <SelectorsHeight :height="cls.height" @update:height="value => updateClass('height', value)"></SelectorsHeight>
         <SelectorsMultiPaddingSelect 

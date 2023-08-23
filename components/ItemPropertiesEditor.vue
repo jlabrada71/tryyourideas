@@ -59,7 +59,8 @@
 <script setup>
   import { initModals } from 'flowbite'
   import { ref, computed, onMounted, watch } from 'vue'
-  import { getReplacedUrl, setIsBinded, bindPropertyTo } from '@/lib/generators/ItemPropertyUtils.js'
+  import { setIsBinded, bindPropertyTo } from '@/lib/generators/ItemPropertyUtils.js'
+  import { replaceUrlParameters } from '@/lib/url-utils.js'
   import { debug, log } from '@/lib/logger.js'
   import _ from 'lodash';   
 
@@ -118,7 +119,7 @@ function bindPropertyToName(prop, name ) {
 function updateFetchProperties(item) {
   const fetchProperties = item.properties.filter(prop => prop.method === 'fetch')
   fetchProperties.forEach( async property => {
-    property.value = await throttledGetSvg(getReplacedUrl(item.properties, property.url))
+    property.value = await throttledGetSvg(replaceUrlParameters(item.properties, property.url))
     updateItem(item)
   })
 }

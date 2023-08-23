@@ -19,7 +19,12 @@
     <AccordionItem id="2">
       <template #head><span class="flex items-center" data-id="itemStyles">Styles</span></template>
       <template #body>
-        <ItemStyleEditor :item="props.item" @update:item="item => emit('update:item', item)" @update:modifier="modifier => emit('update:modifier', modifier)"></ItemStyleEditor>
+        <ItemStyleEditor 
+          :item="props.item" 
+          :imageService="props.imageService"
+          @update:item="item => emit('update:item', item)" 
+          @update:modifier="modifier => emit('update:modifier', modifier)">
+        </ItemStyleEditor>
       </template>
     </AccordionItem>    
   </div>

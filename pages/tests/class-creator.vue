@@ -49,8 +49,11 @@
 
 <!-- <DivClassGenerator :tags="flexBasisTags" :values="flexBasis"></DivClassGenerator> -->
 <!-- <DivClassGenerator :tags="flexShrinkTags" :values="flexShrinks"></DivClassGenerator> -->
-<DivClassGenerator :tags="backdropBlurTags" :values="backdropBlurs"></DivClassGenerator>
-<DivClassGenerator :tags="opacityTags" :values="opacitys"></DivClassGenerator>
+<!-- <DivClassGenerator :tags="backdropBlurTags" :values="backdropBlurs"></DivClassGenerator>
+<DivClassGenerator :tags="opacityTags" :values="opacitys"></DivClassGenerator> -->
+
+<DivClassGenerator :tags="backgroundSizeTags" :values="backgroundSizes"></DivClassGenerator>
+
 </template>
 <script setup>
   import { ref } from 'vue'
@@ -195,5 +198,8 @@
 
   const opacityTags = ['opacity', 'backdrop-opacity']
   const opacitys = ['0', '5', '10', '20', '25', '30', '40', '50', '60', '70', '75', '80', '90', '95', '100']
+
+  const backgroundSizeTags = ['bg']
+  const backgroundSizes = ['auto', 'cover', 'contain', 'fixed', 'local', 'scroll', 'origin-border', 'origin-padding', 'origin-content']
 
 </script>

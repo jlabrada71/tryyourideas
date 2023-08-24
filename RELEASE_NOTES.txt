@@ -98,3 +98,7 @@ e17182c Adding text gradient tutorial
 v0.27.0 => Opacity, Blur filter and Backdrop Opacity filters added
 ---------
 ffee120 Opacity support added 12d1500 Plugins refactored out 6ca2e07 Backdrop opacity and blur filters added c4c8c9d Plugins refactored 249282d ItemStyleEditor refactored d50f135 class loader created for flex 2bce211 Adding flex direction wrap class loader a5a39d2 Classes for GAP generated
+=============
+v0.28.0 => dding background size, origin, attachment support
+---------
+6657631 Adding background size, origin, attachment support 97d135b Fixing background image bug 58e711c Background image implemented b0e4d31 creating function getItemClasses

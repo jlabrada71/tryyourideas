@@ -5,8 +5,6 @@
   
   const color = ref('red')
 
-
- 
   const unsetBackImage = ref('url("http://localhost:3000/logo.png")')
   const hoverBackImage = ref('url(/images/text-gradient.png)')
   const activeBackImage = ref('url(/images/gradient-tutorial.png)')

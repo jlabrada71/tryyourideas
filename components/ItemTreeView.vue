@@ -202,26 +202,33 @@
     return viewedItem.value.type
   })
 
+  function getImage(cls) {
+    return cls.backgroundImage == 'unset' ? 'none' : `url("${cls.backgroundImage}")` 
+  }
+
   const backImageClass = computed(() => {
     const itemClasses = getItemClasses(viewedItem.value, props.device, props.mode)
+
+    backImage.unset.value = 'none'
+    backImage.hover.value = 'none'
+    backImage.active.value = 'none'
+    backImage.focus.value = 'none'
+
     const backgroundImagesClasses = itemClasses.filter(cls => cls.backgroundImage !== 'unset' )
     if (!backgroundImagesClasses.length) return ''
-    // return `background-image:url('${backgroundImages[0].backgroundImage}')`
-    // this below is unfinished
-    
+
+    const unsetCls = itemClasses.find(cls => cls.modifier === 'unset')
+    backImage.hover.value = getImage( unsetCls.backgroundImage )
+
     backgroundImagesClasses.forEach( cls => {
       console.log('-----------------------')
       console.log(cls.modifier, backImage[cls.modifier].value )
       backImage[cls.modifier].value = cls.backgroundImage == 'unset' ? 'none' : `url("${cls.backgroundImage}")` 
     })
-    // const result = backgroundImagesClasses.map(cls => cls.backgroundImage === 'unset' || cls.backgroundImage === '' ? '' : `${cls.modifier}: { background-image:url('${cls.backgroundImage}');}`).join('')
-    // const result2 = result.replaceAll('unset:', '')
-    // console.log(result)
-    // console.log(result2)
     
     return ' back-image '
   })
-
+   
   // for a project component show the root, otherwise show the item
   const viewedItem = computed(() => props.item.isComponent ? props.item.definition.root: props.item)
 
@@ -230,29 +237,39 @@
     refreshChildren.value = forceRefresh
     const device = props.device
     const mode = props.mode
-    // console.log('Item Tree View')
-    // console.log(props.item.name)
-    // console.log(props.item.id)
-    // console.log('Is Component' + props.item.isComponent)
-    // console.log('Props Item')
-    // console.log(props.item)
-    // console.log('Viewed Item')
-    // console.log(viewedItem.value)
+  
     const cls = getItemEditorClass(viewedItem.value, device, mode)
+    console.log('====')
+    console.log(cls)
+    console.log('+++')
+
     return cls + backImageClass.value + ( props.selectedItemId === props.item.id ? ' absolute' : '')
   })
+
   const selectedClass = computed(() => { 
     const cls = editorClass.value
     const sizeCl = cls.split(' ').filter(cl => cl.startsWith('w-') || cl.startsWith('h-')).join(' ')
     return sizeCl + ' relative'
   })
 
+  function includesAny(item, arr ) {
+    const result = arr.filter(a => item.includes(a))
+    return result.length > 0
+  }
+
+  const layoutClasses = ['flex', 'grid', 'col', 'row', 'wrap', 'items', 'align', 'justify', 'place', 'self', 'gap']
+
+  function isFrameRelatedClass(cl) {
+    return includesAny(cl, layoutClasses)
+    // return !cl.startsWith('bg-') && ! cl.startsWith('border')
+  }
+
   const frameClass = computed(() => { 
     const cls = editorClass.value
-    const sizeCl = cls.split(' ').filter(cl => ! cl.startsWith('bg-') && ! cl.startsWith('border') ).join(' ')
-    const newCls = 'absolute w-full h-full bg-transparent border-[1px] border-blue-800 ' + sizeCl
+    const frameCls = cls.split(' ').filter(cl => isFrameRelatedClass(cl)).join(' ')
+    debug(frameCls)
+    return 'absolute w-full h-full bg-transparent border-[1px] border-blue-800 ' + frameCls
     
-    return newCls
   })
 
   function selectItem(item) {

@@ -199,7 +199,7 @@
   const opacityTags = ['opacity', 'backdrop-opacity']
   const opacitys = ['0', '5', '10', '20', '25', '30', '40', '50', '60', '70', '75', '80', '90', '95', '100']
 
-  const backgroundSizeTags = ['bg']
+  const backgroundSizeTags = ['bg']  // size, attachment, and origin
   const backgroundSizes = ['auto', 'cover', 'contain', 'fixed', 'local', 'scroll', 'origin-border', 'origin-padding', 'origin-content']
 
 </script>

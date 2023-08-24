@@ -102,3 +102,7 @@ ffee120 Opacity support added 12d1500 Plugins refactored out 6ca2e07 Backdrop op
 v0.28.0 => dding background size, origin, attachment support
 ---------
 6657631 Adding background size, origin, attachment support 97d135b Fixing background image bug 58e711c Background image implemented b0e4d31 creating function getItemClasses
+=============
+v0.28.1 => Background image fixed
+---------
+9ff3c6f Background image fixed

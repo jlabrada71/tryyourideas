@@ -176,10 +176,10 @@
     }
   })
 
-  const unsetBackImage = ref('url("http://localhost:3000/logo.png")')
-  const hoverBackImage = ref('url(/images/text-gradient.png)')
-  const activeBackImage = ref('url(/images/gradient-tutorial.png)')
-  const focusBackImage = ref('url(/images/text-gradient.png)')
+  const unsetBackImage = ref('none')
+  const hoverBackImage = ref('none')
+  const activeBackImage = ref('none')
+  const focusBackImage = ref('none')
 
   const backImage = {
     unset: unsetBackImage,
@@ -208,16 +208,18 @@
     if (!backgroundImagesClasses.length) return ''
     // return `background-image:url('${backgroundImages[0].backgroundImage}')`
     // this below is unfinished
-    const setImage = () => 
+    
     backgroundImagesClasses.forEach( cls => {
+      console.log('-----------------------')
+      console.log(cls.modifier, backImage[cls.modifier].value )
       backImage[cls.modifier].value = cls.backgroundImage == 'unset' ? 'none' : `url("${cls.backgroundImage}")` 
     })
-    const result = backgroundImagesClasses.map(cls => cls.backgroundImage === 'unset' || cls.backgroundImage === '' ? '' : `${cls.modifier}: { background-image:url('${cls.backgroundImage}');}`).join('')
-    const result2 = result.replaceAll('unset:', '')
-    console.log(result)
-    console.log(result2)
+    // const result = backgroundImagesClasses.map(cls => cls.backgroundImage === 'unset' || cls.backgroundImage === '' ? '' : `${cls.modifier}: { background-image:url('${cls.backgroundImage}');}`).join('')
+    // const result2 = result.replaceAll('unset:', '')
+    // console.log(result)
+    // console.log(result2)
     
-    return ' image '
+    return ' back-image '
   })
 
   // for a project component show the root, otherwise show the item
@@ -264,20 +266,19 @@
   }
 </script>
 <style>
-.image {
-  color: v-bind(color);
+.back-image {
   background-image: v-bind(unsetBackImage );
 }
 
-.image:hover {
+.back-image:hover {
   background-image: v-bind(hoverBackImage );
 }
 
-.image:active {
+.back-image:active {
   background-image: v-bind(activeBackImage );
 }
 
-.image:focus {
+.back-image:focus {
   background-image: v-bind(focusBackImage );
 }
 </style>

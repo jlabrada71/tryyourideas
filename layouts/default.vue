@@ -75,7 +75,10 @@
       },
       { src: 'https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.0.1/intro.min.js'}
     ],
-    link: [{ rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.0.1/introjs.min.css'}]
+    link: [
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.0.1/introjs.min.css'},
+      { rel: 'stylesheet', href: 'https://juanlabrada.com/assets/editor.css'},
+    ]
   })
 
 </script>

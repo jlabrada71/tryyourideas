@@ -2,8 +2,13 @@
   <div>
     <h1><slot>Color</slot></h1>
     <div>
-      <button @click="show = !show" :class="buttonClass"></button>
-      <ColorButton v-if="show" :color="rawColor" @update:color="selectedColor"></ColorButton>
+      <button @click="openForm" :class="buttonClass"></button>
+      <ColorButton v-if="show" 
+        :color="rawColor" 
+        :originalColor="originalColor"
+        @update:color="selectedColor" 
+        @close="closeSelector">
+      </ColorButton>
     </div>
   </div>
 </template>
@@ -18,11 +23,22 @@
   const buttonClass = computed(() => `border w-8 h-8 ${backgroundColor.value} ${props.color}`)
 
   const show = ref(false)
+  const originalColor = ref(null)
 
   function selectedColor(color) {
     console.log(color)
     emit('update:color', `${props.tag}-${color}`)
+  }
+
+  function closeSelector() {
     show.value = false
+  }
+
+  function openForm() {
+    show.value = !show.value
+    if (show.value) {
+      originalColor.value = rawColor.value
+    }
   }
 
 </script>

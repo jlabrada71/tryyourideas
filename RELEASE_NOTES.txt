@@ -106,3 +106,7 @@ v0.28.0 => dding background size, origin, attachment support
 v0.28.1 => Background image fixed
 ---------
 9ff3c6f Background image fixed
+=============
+v0.29.0 => Adding support to color transparency
+---------
+2945d83 Adding support to color transparency

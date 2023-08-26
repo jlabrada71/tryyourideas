@@ -77,7 +77,7 @@
     ],
     link: [
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.0.1/introjs.min.css'},
-      { rel: 'stylesheet', href: 'https://juanlabrada.com/assets/editor.css'},
+      { rel: 'stylesheet', href: `${config.public.resourcesServer}/assets/editor.css`},
     ]
   })
 

@@ -110,3 +110,7 @@ v0.28.1 => Background image fixed
 v0.29.0 => Adding support to color transparency
 ---------
 2945d83 Adding support to color transparency
+=============
+v0.29.1 => edirecting editor.css to resources
+---------
+6a57c1e redirecting editor.css to resources bc99c3b Removing class loader pages

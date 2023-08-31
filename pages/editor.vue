@@ -271,6 +271,7 @@ const project = ref(getCleanProject({}))
 const projectCss = ref(null)
 const projectClasses = []
 
+// await addProjectClass('m-3')
 async function addProjectClass(cls) {
   if ( projectClasses.includes(cls) ) return
   projectClasses.push(cls)
@@ -278,12 +279,6 @@ async function addProjectClass(cls) {
   const { data, status } = await postToServer({classes: projectClasses, theme: project.value.theme}, url)
   projectCss.value = data.css
 }
-
-onMounted(async () => {
-  await addProjectClass('m-3')
-  debug('===== project css =====')
-  debug(projectCss.value)
-})
 
 let imageService = getImageService(config, currentUser.value.id, project.value.name)
 

@@ -1,9 +1,10 @@
 
 import { 
-  getReplacedUrl,
   generateProperties,
   bindPropertyTo
  } from '@/lib/generators/ItemPropertyUtils.js'
+
+ import { replaceUrlParameters } from '@/lib/url-utils.js'
 
 describe ('getReplacedUrl function', () => {
   describe ('given an item and a prop return the replaced url', () => {
@@ -14,7 +15,7 @@ describe ('getReplacedUrl function', () => {
       ]
     const prop = { name: 'svg', url: '/testurl/{category}/{test}.svg' }
     it ('/testurl/tonton.svg', () => {
-      const url = getReplacedUrl(itemProps, prop.url)
+      const url = replaceUrlParameters(itemProps, prop.url)
       expect(url).toBe('/testurl/brand/tonton.svg')
     })
   })

@@ -26,5 +26,7 @@ else
   tar -czf tryyourideas.com.tar .output
   cd ../aws-config
   ./copy_ssh.sh ../tryyourideascom tryyourideas.com.tar juanlabrada.com.server
+  server=`cat juanlabrada.com.server`
+  ssh -i ~/.ssh/aws-juanlabrada.com.pem $server './new_deploy.sh'
   cd ../tryyourideascom
 fi

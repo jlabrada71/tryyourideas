@@ -15,7 +15,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     
     if (data.result !== 'ok' ) {
       debug(data)
-      return getCleanProject()
+      return getCleanProject({})
     }
     return data.project
   }

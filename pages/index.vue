@@ -124,7 +124,7 @@
     const  { data } = await projectService.select({ userId, name: 'Default' })
     debug(data)
     if (data.result !== 'ok' ) { 
-      currentProject.value = getCleanProject()
+      currentProject.value = getCleanProject({})
     }
     currentProject.value = data.project
   }

@@ -22,11 +22,17 @@
 <script setup>
 
   import { useEditorStorage } from '@/lib/editor/storage.js'
-  import { getCleanProject } from '@/lib/editor/projects.js'
 
   const config = useRuntimeConfig()
 
-  const { currentUser, currentProject, cleanUser, cleanProject, accessToken, refreshToken } = useEditorStorage()
+  const { 
+    currentUser, 
+    currentProject, 
+    cleanUser, 
+    cleanProject, 
+    accessToken, 
+    refreshToken 
+  } = useEditorStorage()
 
   onMounted(() => {
     console.log(currentUser.value.name)

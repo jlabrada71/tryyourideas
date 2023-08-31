@@ -1,4 +1,5 @@
 <template>
+  <!-- <component class="w-1 h-1" is="style">{{ projectCss }}</component> -->
   <ProjectNewForm  @new="createNewProject"></ProjectNewForm>
   <ProjectOpenForm :projectList="projectList" @open="getProject"></ProjectOpenForm>
   <ProjectExportForm :user="currentUser" :project="project" @export="email => generateNuxtTailwindsStorybook(email)"></ProjectExportForm>
@@ -160,12 +161,13 @@ import { printTree } from '@/lib/DebugUtils.js'
 import { toHtml } from '@/lib/generators/HtmlExporter.js'
 import { AccountServiceProxy } from '@/lib/accounts/ServiceProxy.js'
 import { ProjectServiceProxy } from '@/lib/projects/ServiceProxy.js'
-import { migrateProject } from '@/lib/editor/projects.js'
+import { migrateProject, getCleanProject } from '@/lib/editor/projects.js'
 import { createNewComponent, createNewItem, getNextChildId } from '@/lib/editor/components.js'
 import { useEditorStorage } from '@/lib/editor/storage.js'
 import { runIntro } from '@/lib/editor/help.js'
 import { getImageService } from '@/lib/images/image-service.js'
 import { copyItem, pasteInto, pasteStyleInto } from '@/lib/plugins/copy-paste-item.js'
+
 import axios from 'axios'
 import _ from 'lodash'; 
 import { 
@@ -180,8 +182,6 @@ import {
     initPopovers, 
     initTabs, 
     initTooltips } from 'flowbite'
-
-    let tailwindLoaded = false
 
     const { throttle } = _;
 
@@ -266,10 +266,23 @@ async function updateProjectList() {
   projectList.value = result.map(project => project.substring(0, project.indexOf('.json')))
 }
 
-const project = ref({
-  name: 'Default',
-  dirty: false,
-  components: [],
+const project = ref(getCleanProject({}))
+
+const projectCss = ref(null)
+const projectClasses = []
+
+async function addProjectClass(cls) {
+  if ( projectClasses.includes(cls) ) return
+  projectClasses.push(cls)
+  const url =  `${config.public.apiBase}/generation/tailwind`
+  const { data, status } = await postToServer({classes: projectClasses, theme: project.value.theme}, url)
+  projectCss.value = data.css
+}
+
+onMounted(async () => {
+  await addProjectClass('m-3')
+  debug('===== project css =====')
+  debug(projectCss.value)
 })
 
 let imageService = getImageService(config, currentUser.value.id, project.value.name)
@@ -313,12 +326,7 @@ function initEditor(projectValue) {
 }
 
 function newProject(data) {
-  const project = {
-    name: data.name,
-    components: []
-  }
-  project.components.push(createNewComponent(project))
-  return project 
+  return getCleanProject(data)
 }
 
 function createNewProject( data ) {

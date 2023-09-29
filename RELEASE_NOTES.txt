@@ -118,3 +118,7 @@ v0.29.1 => edirecting editor.css to resources
 v0.30.0 =>  Adding tailwind theme compiler server
 ---------
 85a99a9 Fixing spec db53058 removing unnecessary code 789a70b Adding tailwind theme compiler server 4122a2c Adding remote deploy 108708f - improving project clean up - Adding support to designTokens
+=============
+v0.31.0 => Improving SEO: Adding Site Name
+---------
+482d591 Improving SEO: Adding Site Data

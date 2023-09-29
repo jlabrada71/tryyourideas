@@ -1,5 +1,5 @@
 <template>
-  <!-- <component class="w-1 h-1" is="style">{{ projectCss }}</component> -->
+  <component is="style">{{ projectCss }}</component>
   <ProjectNewForm  @new="createNewProject"></ProjectNewForm>
   <ProjectOpenForm :projectList="projectList" @open="getProject"></ProjectOpenForm>
   <ProjectExportForm :user="currentUser" :project="project" @export="email => generateNuxtTailwindsStorybook(email)"></ProjectExportForm>

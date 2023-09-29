@@ -8,6 +8,13 @@
   const config = useRuntimeConfig()
   let isAnalyticsLoaded = false
 
+  const ldJson = {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Try Your Ideas",
+    "url": "https://www.tryyourideas.com"
+  }
+
   function sendAnalytics () {
     if (!process.client) return 
     const url = `${config.public.analyticsServer}/api/v1/analytics`
@@ -59,6 +66,10 @@
       }
     ],
     script: [
+      {
+        type: 'application/ld+json', 
+        children: JSON.stringify(ldJson)
+      },
       {
         src: `${config.public.analyticsServer}/analytics/analytics.js`,
         hid: 'analytics',

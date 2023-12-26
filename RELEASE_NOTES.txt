@@ -154,3 +154,7 @@ yrdy => comment
 v0.32.1 => Fixing deploy bug
 ---------
 2b219ff Creating release v0.32.0 Creating release v0.32.0 62b8d42 Fixing the frame bug
+=============
+v0.32.2 => Fixing the padding marging frame issue
+---------
+dc4b53a Fixing the padding marging frame issue

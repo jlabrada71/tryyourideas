@@ -1,6 +1,6 @@
 <template>
     <div v-if="props.selectedItemId===props.item.id && !props.item.isComponent"
-      :class="selectedClass" 
+      :class="selectedClass" ref="selected"
       @click.stop="selectItem(props.item)"
     >
       <component
@@ -24,7 +24,7 @@
           {{props.item.text}}
       </component>
 
-              <!-- Frame -->
+      <!-- Frame -->
       <div :class="frameClass" @click.stop="selectItem(props.item)">
         <ItemTreeView 
           v-if="viewedItem.children.length > 0" 
@@ -48,7 +48,7 @@
     </div>
 
     <div v-else-if="props.selectedItemId===props.item.id && props.item.isComponent"
-      :class="selectedClass" 
+      :class="selectedClass" ref="selected"
       @click.stop="selectItem(props.item)"
     >
       <component
@@ -122,7 +122,6 @@
         :refresh="refreshChildren"
         @selected="value=>emit('selected', value)">
       </ItemTreeView>
-      
     </component>
     <component v-else
       :id="props.item.id" 
@@ -252,6 +251,9 @@
     return sizeCl + ' relative'
   })
 
+  const selected = ref(null)
+  const { x, y, top, right, bottom, left, width, height } = useElementBounding(selected)
+
   function includesAny(item, arr ) {
     const result = arr.filter(a => item.includes(a))
     return result.length > 0
@@ -267,9 +269,7 @@
   const frameClass = computed(() => { 
     const cls = editorClass.value
     const frameCls = cls.split(' ').filter(cl => isFrameRelatedClass(cl)).join(' ')
-    debug(frameCls)
-    return 'absolute w-full h-full bg-transparent border-[1px] border-blue-800 ' + frameCls
-    
+    return `absolute w-full h-full bg-transparent border-[1px] border-blue-800 `  + frameCls    
   })
 
   function selectItem(item) {

@@ -134,3 +134,7 @@ e4b440e Creating release v0.30.1 62b8d42 Fixing the frame bug 18a14ab Creating r
 v0.30.1 => Creating release v0.30.1 62b8d42 Fixing the frame bug 
 ---------
 500cb95 Creating release v0.30.1 Creating release v0.30.1 62b8d42 Fixing the frame bug e4b440e Creating release v0.30.1 62b8d42 Fixing the frame bug 18a14ab Creating release v0.31.0 Improving SEO: Adding Site Name 482d591 Improving SEO: Adding Site Data
+=============
+v0.32.0 => Creating release v0.32.0 62b8d42 Fixing the frame bug 
+---------
+

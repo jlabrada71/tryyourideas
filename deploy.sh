@@ -14,19 +14,27 @@ then
 
   echo "usage: ./deploy.sh <new tag> '<new tag message>'"
 else
-  
-  echo '=============' >> RELEASE_NOTES.txt
-  echo "$NEW_TAG => $NEW_TAG_MSG" >> RELEASE_NOTES.txt
-  echo '---------' >> RELEASE_NOTES.txt
-  echo $RELEASE_NOTES >> RELEASE_NOTES.txt
-  echo "<template>Version $NEW_TAG ($GIT_BRANCH)</template>" > components/ProductVersion.vue
-  git commit -am "Creating release $NEW_TAG $NEW_TAG_MSG"
-  create_tag $NEW_TAG "$NEW_TAG_MSG"
-  npm run build
-  tar -czf tryyourideas.com.tar .output
-  cd ../aws-config
-  ./copy_ssh.sh ../tryyourideascom tryyourideas.com.tar juanlabrada.com.server
-  server=`cat juanlabrada.com.server`
-  ssh -i ~/.ssh/aws-juanlabrada.com.pem $server './new_deploy.sh'
-  cd ../tryyourideascom
+  if [ -z "$NEW_TAG_MSG" ]
+  then
+    echo "Last tag: $GIT_TAG"
+    echo $RELEASE_NOTES
+
+    echo "usage: ./deploy.sh <new tag> '<new tag message>'"
+  else
+    echo '=============' >> RELEASE_NOTES.txt
+    echo "$NEW_TAG => $NEW_TAG_MSG" >> RELEASE_NOTES.txt
+    echo '---------' >> RELEASE_NOTES.txt
+    echo $RELEASE_NOTES >> RELEASE_NOTES.txt
+    echo "<template>Version $NEW_TAG ($GIT_BRANCH)</template>" > components/ProductVersion.vue
+    git commit -am "Creating release $NEW_TAG $NEW_TAG_MSG"
+    create_tag $NEW_TAG "$NEW_TAG_MSG"
+    npm run build
+    tar -czf tryyourideas.com.tar .output
+    cd ../aws-config
+    ./copy_ssh.sh ../tryyourideascom tryyourideas.com.tar juanlabrada.com.server
+    server=`cat juanlabrada.com.server`
+    # ssh -i ~/.ssh/aws-juanlabrada.com.pem $server './new_deploy.sh'
+    # ssh -i ~/.ssh/aws-juanlabrada.com.pem $server './test.sh'
+    cd ../tryyourideascom
+  fi
 fi

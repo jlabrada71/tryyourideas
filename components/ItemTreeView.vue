@@ -254,22 +254,25 @@
   const selected = ref(null)
   const { x, y, top, right, bottom, left, width, height } = useElementBounding(selected)
 
-  function includesAny(item, arr ) {
-    const result = arr.filter(a => item.includes(a))
+  function startsWithAny(item, arr ) {
+    const result = arr.filter(a => item.startsWith(a))
     return result.length > 0
   }
 
-  const layoutClasses = ['flex', 'grid', 'col', 'row', 'wrap', 'items', 'align', 'justify', 'place', 'self', 'gap']
+  const layoutClasses = ['flex', 'grid', 'col', 'row', 'wrap', 'items', 'align', 'justify', 'place', 'self', 'gap', 'p', 'm']
 
   function isFrameRelatedClass(cl) {
-    return includesAny(cl, layoutClasses)
+    return startsWithAny(cl, layoutClasses)
     // return !cl.startsWith('bg-') && ! cl.startsWith('border')
   }
 
   const frameClass = computed(() => { 
     const cls = editorClass.value
     const frameCls = cls.split(' ').filter(cl => isFrameRelatedClass(cl)).join(' ')
-    return `absolute w-full h-full bg-transparent border-[1px] border-blue-800 `  + frameCls    
+    const finalClass = `absolute w-full h-full bg-transparent border-[1px] border-blue-800 ` + frameCls;
+    console.log('=== frame class ===')
+    console.log(finalClass)
+    return finalClass    
   })
 
   function selectItem(item) {

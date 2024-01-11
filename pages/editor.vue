@@ -230,12 +230,8 @@ function track (event) {
       }
       window.jl && window.jl.sendAnalytics(url, newData)
     }
-    // getCLS(logData)
-    // getFID(logData)
-    // getLCP(logData)
 
     logData({
-    //  userId: getUserId(),
       url: window.location.href,
       event
     })

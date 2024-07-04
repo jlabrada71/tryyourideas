@@ -15,7 +15,11 @@ function copyTemplate(templateProject: string, destDir: string) {
   try {
     log(`coping ${templateProject} to ${destDir} `)
     fse.copySync(templateProject, destDir, { overwrite: true })
-    log(`successfully `)
+    if (fse.pathExistsSync(destDir)) {
+      log(`successfully `);
+    } else {
+      log(`error creating template `);
+    }
   } catch (err) {
     log(err)
   }
@@ -85,9 +89,10 @@ export default defineEventHandler(async (event) => {
 
   const projectFolder = user.id === 'undefined' ? 'freetrial' : user.id
   log(`User ID: ${user.id} projectFolder: ${projectFolder}`)
-  const srcDir = `${config.data}/templates/nuxt3-tailwinds-storybook`
+  const srcDir = `${config.data}/templates/${project.template}`
   const destDir = `${config.data}/projects/${projectFolder}/generation/${project.name}`
   const zipFileName = `${destDir}.zip`
+  // the template must be a directory not the tar.gz. 
   copyTemplate(srcDir, destDir)
   copyResources(user, project, destDir)
 

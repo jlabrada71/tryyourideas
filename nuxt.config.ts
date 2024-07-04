@@ -177,8 +177,20 @@ SkZ5/uo05c+B1yaHdf7FdMPDkmPmxexIwPxScMfbf7d51WhKRFHW1v8vwzRHnl0X
     // Set custom headers matching paths
     '/_nuxt/**': { headers: { 'cache-control': 's-maxage=0' } },
     // Add cors headers
-    '/api/v1/**': { cors: true },
-    '/analytics/**': { cors: true },
+    '/api/v1/**': { 
+      security: {
+        headers: {
+          crossOriginEmbedderPolicy: 'unsafe-none',
+          crossOriginOpenerPolicy: 'unsafe-none',
+          crossOriginResourcePolicy: 'same-site' 
+        },
+
+        // certain middleware
+        rateLimiter: {
+          // options
+        }
+      }
+    },
     // Static page generated on-demand, revalidates in background
     '/blog/**': { swr: true },
     // Static page generated on-demand once

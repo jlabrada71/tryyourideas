@@ -27,7 +27,9 @@ else
     echo $RELEASE_NOTES >> RELEASE_NOTES.txt
     echo "<template>Version $NEW_TAG ($GIT_BRANCH)</template>" > components/ProductVersion.vue
     git commit -am "Creating release $NEW_TAG $NEW_TAG_MSG"
-    create_tag $NEW_TAG "$NEW_TAG_MSG"
+    echo $NEW_TAG
+    echo $NEW_TAG_MSG
+    git tag -a $NEW_TAG  -m "$NEW_TAG_MSG" 
     npm run build
     tar -czf tryyourideas.com.tar .output
     cd ../aws-config

@@ -35,9 +35,12 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ['@nuxt/content', '@vueuse/nuxt', '@pinia/nuxt', "nuxt-security"],
+  modules: ['@nuxt/content', '@vueuse/nuxt', '@pinia/nuxt', "nuxt-security", "@nuxt/devtools"],
   security: {
     // options
+    headers: {
+      crossOriginEmbedderPolicy: process.env.NODE_ENV === 'development' ? 'unsafe-none' : 'require-corp',   // this is for using with nuxt devtools
+    },
   },
   components: {
     "dirs": [

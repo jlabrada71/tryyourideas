@@ -158,3 +158,7 @@ v0.32.1 => Fixing deploy bug
 v0.32.2 => Fixing the padding marging frame issue
 ---------
 dc4b53a Fixing the padding marging frame issue
+=============
+v0.33.1 => Improving deployment
+---------
+

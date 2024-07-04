@@ -162,3 +162,7 @@ dc4b53a Fixing the padding marging frame issue
 v0.33.1 => Improving deployment
 ---------
 
+=============
+v0.34.0 => Implementing nuxt security module
+---------
+57554e9 Implementing nuxt security e7bc6d2 Creating release v0.33.1 Improving deployment

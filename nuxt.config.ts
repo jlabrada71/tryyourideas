@@ -25,29 +25,36 @@ const env = process.env.NODE_ENV || 'development'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
   alias: {
     "@/lib": "./lib",
   },
+
   css: ['~/assets/css/main.css'],
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+
   modules: ['@nuxt/content', '@vueuse/nuxt', '@pinia/nuxt', "nuxt-security", "@nuxt/devtools"],
+
   security: {
     // options
     headers: {
       crossOriginEmbedderPolicy: process.env.NODE_ENV === 'development' ? 'unsafe-none' : 'require-corp',   // this is for using with nuxt devtools
     },
   },
+
   components: {
     "dirs": [
       "~/components",
       "~/components/selectors"
     ]
   },
+
   runtimeConfig: {
     MONGO_URL: process.env.MONGO_URL,
     MONGO_DB: process.env.MONGO_DB,
@@ -160,6 +167,12 @@ SkZ5/uo05c+B1yaHdf7FdMPDkmPmxexIwPxScMfbf7d51WhKRFHW1v8vwzRHnl0X
       env
     }
   },
+
+  // nitro: {
+  //   prerender: {
+  //     routes: ['/sitemap.xml']
+  //   }
+  // }
   routeRules: {
     // Set custom headers matching paths
     '/_nuxt/**': { headers: { 'cache-control': 's-maxage=0' } },
@@ -171,9 +184,6 @@ SkZ5/uo05c+B1yaHdf7FdMPDkmPmxexIwPxScMfbf7d51WhKRFHW1v8vwzRHnl0X
     // Static page generated on-demand once
     '/articles/**': { static: true },
   },
-  // nitro: {
-  //   prerender: {
-  //     routes: ['/sitemap.xml']
-  //   }
-  // }
+
+  compatibilityDate: '2024-07-04'
 })

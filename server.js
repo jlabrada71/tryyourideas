@@ -3,7 +3,6 @@
 // cd /home/ubuntu/apps
 // node resources.tryyourideas.com/server.js &
 
-
 import express from 'express'
 const app = express();
 

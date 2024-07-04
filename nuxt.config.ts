@@ -35,11 +35,10 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: [
-    '@nuxt/content',
-    '@vueuse/nuxt',
-    '@pinia/nuxt',
-  ],
+  modules: ['@nuxt/content', '@vueuse/nuxt', '@pinia/nuxt', "nuxt-security"],
+  security: {
+    // options
+  },
   components: {
     "dirs": [
       "~/components",

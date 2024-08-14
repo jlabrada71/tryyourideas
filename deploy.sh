@@ -4,7 +4,7 @@ GIT_TAG=$(git describe --tags)
 GIT_TAG_ABBR=$(git describe --tags --abbrev=0)
 NEW_TAG=$1
 NEW_TAG_MSG=$2
-PTH = $(pwd)
+PTH=$(pwd)
 echo $PTH
 PROJECT=tryyourideas.com
 SERVER=juanlabrada.com.server

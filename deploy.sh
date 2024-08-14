@@ -4,6 +4,10 @@ GIT_TAG=$(git describe --tags)
 GIT_TAG_ABBR=$(git describe --tags --abbrev=0)
 NEW_TAG=$1
 NEW_TAG_MSG=$2
+PTH = $(pwd)
+echo $PTH
+PROJECT=tryyourideas.com
+SERVER=juanlabrada.com.server
 
 RELEASE_NOTES=$(git log $GIT_TAG_ABBR..HEAD --oneline)
 
@@ -31,12 +35,13 @@ else
     echo $NEW_TAG_MSG
     git tag -a $NEW_TAG  -m "$NEW_TAG_MSG" 
     npm run build
-    tar -czf tryyourideas.com.tar .output
-    cd ../aws-config
-    ./copy_ssh.sh ../tryyourideascom tryyourideas.com.tar juanlabrada.com.server
-    server=`cat juanlabrada.com.server`
+    tar -czf $PROJECT.tar .output
+    PTH = $(pwd)
+    cd /media/jlabrada/data/sources/aws/aws-config
+    ./copy_ssh.sh $PTH $PROJECT.tar $SERVER
+    server=`cat $SERVER`
     # ssh -i ~/.ssh/aws-juanlabrada.com.pem $server './new_deploy.sh'
     # ssh -i ~/.ssh/aws-juanlabrada.com.pem $server './test.sh'
-    cd ../tryyourideascom
+    cd $PTH
   fi
 fi

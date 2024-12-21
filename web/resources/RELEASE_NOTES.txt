@@ -6,3 +6,7 @@ New deployment-75df0f6 => resources.tryyourideas.com
 1.0.0-40e5ef8 => New deployment
 ---------
 40e5ef8 Creating release New deployment-75df0f6 resources.tryyourideas.com 75df0f6 Implementing new deployment system
+=============
+1.0.0-cdfa6be => New deployment
+---------
+

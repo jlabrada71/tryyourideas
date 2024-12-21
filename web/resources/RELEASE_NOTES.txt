@@ -26,3 +26,7 @@ New deployment-75df0f6 => resources.tryyourideas.com
 1.0.0-30101c1 => Improving deploy
 ---------
 
+=============
+1.0.0-7df8b07 => Improving deploy
+---------
+7df8b07 Fixing bug

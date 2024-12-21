@@ -22,3 +22,7 @@ New deployment-75df0f6 => resources.tryyourideas.com
 1.0.0-25831f6 => Improving deploy
 ---------
 25831f6 Removing old images
+=============
+1.0.0-30101c1 => Improving deploy
+---------
+

@@ -1,0 +1,8 @@
+
+	modified:   package.json
+	new file:   pages/tests/upload-image.vue
+	public/assets/images/upload.png
+	public/upload.html
+	public/uploads/
+	server/api/v1/files/
+

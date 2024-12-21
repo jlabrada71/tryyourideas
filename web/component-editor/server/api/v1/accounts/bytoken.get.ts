@@ -1,0 +1,56 @@
+// curl -H "Content-Type: application/json"  'localhost:3000/api/v1/accounts'
+// https://www.jsdocs.io/package/h3#getQuery
+import { log, debug } from '@/lib/logger.js'
+import { getAccountService } from '@/lib/accounts/Service.js'
+import { decodeJwt } from '@/lib/authorization/jwt-utils.js'
+
+const config = useRuntimeConfig() 
+
+export default defineEventHandler(async (event) => {
+  log('bytoken GET')
+  try {
+    const query = await getQuery(event)
+
+    // const accessToken = getCookie(event, 'access_token')
+    // const refreshToken = getCookie(event, 'refresh_token')
+    const authorization = getRequestHeader(event, 'authorization')
+    debug('Authorization TOKEN')
+    debug(authorization)
+    if (!authorization) {
+      return {
+        status: 'error',
+        msg: 'Authorization required'
+      }
+    }
+      
+    const accessToken = authorization.substring('Bearer '.length).trim()
+    debug(' Access Token')
+    debug(accessToken)
+    if (!accessToken) {
+      return {
+        status: 'error',
+        msg: 'Authorization required'
+      }
+    }
+    const decoded = decodeJwt(accessToken, { key: config.accessTokenPrivateKey, passphrase: config.keyPassword } )
+    
+    debug( decoded )
+    const { sub, iat, exp } = decoded
+    debug({sub, iat, exp })
+
+
+    const accountService = getAccountService(config)
+    const account = await accountService.getAccountById( sub )
+
+    return {
+      data: account,
+      status: 'ok'
+    }
+  } catch(e) {
+    log(e.message)
+    return {
+      status: 'error',
+      msg: e.message
+    }
+  }
+})

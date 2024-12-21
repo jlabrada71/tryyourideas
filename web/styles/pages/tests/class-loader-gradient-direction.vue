@@ -1,0 +1,34 @@
+<template>
+  <div class="bg-gradient-to-t ">-to-t </div>
+<div class="bg-gradient-to-tr ">-to-tr </div>
+<div class="bg-gradient-to-r ">-to-r </div>
+<div class="bg-gradient-to-br ">-to-br </div>
+<div class="bg-gradient-to-b ">-to-b </div>
+<div class="bg-gradient-to-bl ">-to-bl </div>
+<div class="bg-gradient-to-l ">-to-l </div>
+<div class="bg-gradient-to-tl ">-to-tl </div>
+<div class="hover:bg-gradient-to-t ">hover:-to-t </div>
+<div class="hover:bg-gradient-to-tr ">hover:-to-tr </div>
+<div class="hover:bg-gradient-to-r ">hover:-to-r </div>
+<div class="hover:bg-gradient-to-br ">hover:-to-br </div>
+<div class="hover:bg-gradient-to-b ">hover:-to-b </div>
+<div class="hover:bg-gradient-to-bl ">hover:-to-bl </div>
+<div class="hover:bg-gradient-to-l ">hover:-to-l </div>
+<div class="hover:bg-gradient-to-tl ">hover:-to-tl </div>
+<div class="active:bg-gradient-to-t ">active:-to-t </div>
+<div class="active:bg-gradient-to-tr ">active:-to-tr </div>
+<div class="active:bg-gradient-to-r ">active:-to-r </div>
+<div class="active:bg-gradient-to-br ">active:-to-br </div>
+<div class="active:bg-gradient-to-b ">active:-to-b </div>
+<div class="active:bg-gradient-to-bl ">active:-to-bl </div>
+<div class="active:bg-gradient-to-l ">active:-to-l </div>
+<div class="active:bg-gradient-to-tl ">active:-to-tl </div>
+<div class="focus:bg-gradient-to-t ">focus:-to-t </div>
+<div class="focus:bg-gradient-to-tr ">focus:-to-tr </div>
+<div class="focus:bg-gradient-to-r ">focus:-to-r </div>
+<div class="focus:bg-gradient-to-br ">focus:-to-br </div>
+<div class="focus:bg-gradient-to-b ">focus:-to-b </div>
+<div class="focus:bg-gradient-to-bl ">focus:-to-bl </div>
+<div class="focus:bg-gradient-to-l ">focus:-to-l </div>
+<div class="focus:bg-gradient-to-tl ">focus:-to-tl </div>
+</template>

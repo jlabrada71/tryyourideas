@@ -1,3 +1,0 @@
-<template>
-  OAuth Error
-</template>

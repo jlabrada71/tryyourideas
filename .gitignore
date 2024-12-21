@@ -6,11 +6,5 @@ node_modules
 .output
 .env
 dist
-pages/demo.vue
-pages/tests/demo.vue
 tryyourideas.com.tar
-pages/version.vue
-public/tmp
-package-lock.json
-components/ProductVersion.vue
-public/uploads/users
+

@@ -1,0 +1,32 @@
+{
+	"folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../../experiments/vue/tailwind-editor"
+    },
+    {
+      "path": "../juanlabrada/home"
+    },
+    {
+      "path": "../../experiments/nodejs-howtos/google-github-oauth2-nodejs"
+    },
+    {
+      "path": "../../experiments/nodejs-howtos/node_prisma_postgresql-forgot_reset_password"
+    },
+    {
+      "path": "../../experiments/nodejs-howtos/vue_auth-vue-auth-github"
+    },
+    {
+      "path": "../../../../../ubuntu"
+    },
+    {
+      "path": "../mirielaulloacom"
+    },
+    {
+      "path": "../tryyourideascom-styles"
+    }
+  ],
+  "settings": {}
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <style>
+    :root {
+      --background: hsl(145, 0%, 10% );
+      --opaque-primary: hsl(145, 20%, 50%);
+      --normal-primary: hsl(145, 40%, 50%);
+      --light-primary: hsl(145, 100%, 50%);
+    }
+    body {
+      background-color: var(--background);
+    }
+
+    h1 {
+      color: var(--opaque-primary);
+      text-shadow: 0 0 2px var(--opaque-primary);
+    }
+
+    h1:hover {
+      color: var(--light-primary);
+      text-shadow: 0 0 10px var(--light-primary), 0 0 40px var(--light-primary);
+    }
+
+    h2 {
+      text-shadow: 1px 0 var(--normal-primary), -1px 0 var(--normal-primary), 0 1px var(--normal-primary), 0 -1px var(--normal-primary),
+                  1px 1px var(--normal-primary), -1px -1px var(--normal-primary), 1px -1px var(--normal-primary), -1px 1px var(--normal-primary);
+    }
+
+    h2:hover {
+      color: var(--background);
+      text-shadow: 1px 0 var(--light-primary), -1px 0 var(--light-primary), 0 1px var(--light-primary), 0 -1px var(--light-primary),
+                  1px 1px var(--light-primary), -1px -1px var(--light-primary), 1px -1px var(--light-primary), -1px 1px var(--light-primary), 
+                  0 0 5px var(--light-primary), 0 0 20px var(--light-primary), 0 0 40px var(--light-primary);
+    }
+  </style>
+  <h1>This is a test</h1>
+  <h2>This is a test another test</h2>
+  <div></div>
+</body>
+</html>

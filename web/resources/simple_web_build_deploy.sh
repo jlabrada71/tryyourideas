@@ -15,7 +15,7 @@ if [ -z "$VERSION_TAG" ]
 then 
   echo "Getting version tag from package.json"
 
-  VERSION_TAG=$(node -p -e "require('./package.json').version")
+  VERSION_TAG=$(node -p -e "require('./app/package.json').version")
 
   if [ "$VERSION_TAG" = "undefined" ]
   then

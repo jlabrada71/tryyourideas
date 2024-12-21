@@ -1,7 +1,7 @@
 GIT_HASH=$(git rev-parse --short HEAD)
 GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 CURRENT_TAG=$(git describe --tags --abbrev=0)
-PACKAGE_VERSION=$(node -p -e "require('./package.json').version")
+PACKAGE_VERSION=$(node -p -e "require('./app/package.json').version")
 VERSION_TAG=$1
 NEW_TAG=$VERSION_TAG-$GIT_HASH
 NEW_TAG_MSG=$2
@@ -30,9 +30,7 @@ else
       echo "$NEW_TAG => $NEW_TAG_MSG" >> RELEASE_NOTES.txt
       echo '---------' >> RELEASE_NOTES.txt
       echo $RELEASE_NOTES >> RELEASE_NOTES.txt
-      echo "<template>Version $NEW_TAG ($GIT_BRANCH)</template>" > components/ProductVersion.vue
       echo "Version $NEW_TAG ($GIT_BRANCH)" > version.txt
-      git add components/ProductVersion.vue
       git add version.txt
       git add RELEASE_NOTES.txt
       git commit -m "Creating release $NEW_TAG $NEW_TAG_MSG"
@@ -45,7 +43,8 @@ else
     fi
 
     echo "Building project $PROJECT.tar"
-    npm run build > build.log
+    rm .output -rf
+    cp app .output -rf
     tar -czf $PROJECT.tar .output
     echo "Building project $PROJECT.tar done"
   fi

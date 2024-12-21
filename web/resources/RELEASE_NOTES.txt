@@ -14,3 +14,7 @@ New deployment-75df0f6 => resources.tryyourideas.com
 1.0.0-85da88a => Improving deploy
 ---------
 85da88a Improving simple web build
+=============
+1.0.0-f18b262 => Improving deploy
+---------
+

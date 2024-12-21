@@ -44,7 +44,8 @@ else
 
     echo "Building project $PROJECT.tar"
     rm .output -rf
-    cp app .output -rf
+    mkdir .output
+    cp app .output/server -rf
     tar -czf $PROJECT.tar .output
     echo "Building project $PROJECT.tar done"
   fi

@@ -1,7 +1,7 @@
 <template>
   <div class="bg-slate-100 rounded-xl p-4">
     <h1 class="font-bold text-3xl">Tutorials</h1>
-    <div class="bg-slate-200 w-full h-64 p-5 flex-row flex-wrap flex gap-4 rounded-xl">
+    <div class="bg-slate-200 w-full h-fit p-5 flex-row flex-wrap flex gap-4 rounded-xl">
       <HomeTutorialItem 
         title="How to create simple gradients" 
         url="https://www.youtube.com/watch?v=4ZQ8p-kZQA8&t=81s"

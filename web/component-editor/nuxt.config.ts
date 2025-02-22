@@ -58,7 +58,7 @@ export default defineNuxtConfig({
           "http://localhost:3400",
           "'unsafe-inline'" // Recommended default for most Nuxt apps
         ],
-        'base-uri': ["'none'"],
+        'base-uri': ["'none'", 'http://localhost:3000', "https://tryyourideas.com", "https://www.tryyourideas.com"], // For increased security, replace by the specific sources for base URIs
         'img-src': ["'self'", "data:"], // Add relevant https://... sources if you load images from external sources 
         'font-src': ["'self'", "https:", "data:"], //  For increased security, replace by the specific sources for fonts
         'object-src': ["'none'"],

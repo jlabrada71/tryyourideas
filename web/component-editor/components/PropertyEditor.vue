@@ -43,7 +43,7 @@
       <span class="bg-white justify-center flex p-4 text-red-500">{{props.message}}</span>
     </div>
    
-    <footer id="id-2-3" class="flex flex-row justify-around justify-self-end mt-5 bg-slate-100 w-full p-5">
+    <footer class="flex flex-row justify-around justify-self-end mt-5 bg-slate-100 w-full p-5">
       <button
         id="id-2-3-1"
         class="block   bg-slate-300  w-20 h-10 shadow-md rounded-2xl    hover:bg-slate-400  focus:bg-slate-400  active:bg-slate-300 active:shadow-none  "
@@ -51,7 +51,7 @@
       >
         Cancel
       </button>
-      <button id="id-2-3-2" class="block  bg-slate-300 w-20 h-10 shadow-md rounded-2xl hover:bg-slate-400 focus:bg-slate-400 active:bg-slate-300 active:shadow-none"
+      <button class="block  bg-slate-300 w-20 h-10 shadow-md rounded-2xl hover:bg-slate-400 focus:bg-slate-400 active:bg-slate-300 active:shadow-none"
         @click.stop="acceptEditProperty"
       >
         Update

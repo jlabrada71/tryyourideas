@@ -1,5 +1,5 @@
 <template>
-  <section id="id-2-2" class="flex flex-row flex-wrap bg-slate-100 p-2">
+  <section class="flex flex-row flex-wrap bg-slate-100 p-2">
     <button
       type="button"
       v-for="type in typeList" 

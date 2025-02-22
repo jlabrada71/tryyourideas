@@ -1,5 +1,5 @@
 <template>
-    <button id="id-1"        
+    <button        
         type="button" 
         ref="target"
         value="" 
@@ -10,7 +10,7 @@
                                   focus:bg-slate-600   focus:text-slate-100"
         :class="selectClass"
       >
-      <span id="id-1-1"  class="bg-transparent w-auto h-6 active:text-slate-100 focus:text-slate-100 ">
+      <span  class="bg-transparent w-auto h-6 active:text-slate-100 focus:text-slate-100 ">
         <slot></slot>
       </span>
     </button>

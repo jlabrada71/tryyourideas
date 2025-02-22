@@ -7,11 +7,11 @@
     @update:property="updateProperty">
   </PropertyEditor>
   <div 
-    id="id-12" 
+    
     class="bg-yellow-200 w-full flex-row flex "
     data-id="propertyList"
     >
-    <div id="id-12-1" class="bg-slate-200 w-full p-2 content-start flex-row flex-wrap flex ">
+    <div class="bg-slate-200 w-full p-2 content-start flex-row flex-wrap flex ">
       <div class="bg-slate-300 w-full h-8 p-1 flex-row flex hover:bg-slate-600 hover:text-slate-100"> 
         <span class="w-full">
           Properties
@@ -31,13 +31,13 @@
         class="w-full h-8 items-center flex-row flex "
         @click="selectProperty(property)"
       >
-        <span id="id-12-1-2-1" class="w-1/3 flex-row flex ">
+        <span class="w-1/3 flex-row flex ">
           {{property.name}}
         </span>
-        <span id="id-12-1-2-2" class="w-1/3 flex-row flex ">
+        <span class="w-1/3 flex-row flex ">
           {{property.type}}
         </span>
-        <span id="id-12-1-2-3" class="bg-slate-200 w-1/6 flex-row flex ">
+        <span class="bg-slate-200 w-1/6 flex-row flex ">
           {{property.access}}
         </span>
         <button type="button" :class="buttonClass"  @click.stop="editProperty(property)">

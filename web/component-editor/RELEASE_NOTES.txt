@@ -186,3 +186,7 @@ v0.35.0 => Generalizing deploy
 0.35.0-b483db0 => Updating content security policies
 ---------
 b483db0 Migrating nuxt version cc1c6c7 Adding content security policies c41db8f Removing unnecessary ids a8b5901 Fixing home page responsiveness
+=============
+0.35.0-6733d0e => Updating content security policies
+---------
+

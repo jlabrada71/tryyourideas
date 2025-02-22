@@ -190,3 +190,7 @@ b483db0 Migrating nuxt version cc1c6c7 Adding content security policies c41db8f 
 0.35.0-6733d0e => Updating content security policies
 ---------
 
+=============
+0.35.0-ad99be7 => Updating content security policies
+---------
+ad99be7 Migrating nuxt version

@@ -7,8 +7,8 @@ const variables = {
     resourcesServer: 'http://localhost:3400',
     googleOAuthRedirect: 'http://localhost:3000/api/v1/sessions/oauth/google',
     githubOAuthRedirect: 'http://localhost:3000/api/v1/sessions/oauth/github',
-    githubOAuthClientId: 'f51061212d92f100b373',
-    githubOAuthClientSecret: 'fddf07928655b6b7cc3f56f19d91a609e48832b6'
+    githubOAuthClientId: process.env.GITHUB_OAUTH_CLIENT_ID ,
+    githubOAuthClientSecret: process.env.GITHUB_OAUTH_CLIENT_SECRET
   },
   production: {
     apiBase: 'https://tryyourideas.com/api/v1',
@@ -16,8 +16,8 @@ const variables = {
     resourcesServer: 'https://resources.tryyourideas.com',
     googleOAuthRedirect: 'https://tryyourideas.com/api/v1/sessions/oauth/google',
     githubOAuthRedirect: 'https://tryyourideas.com/api/v1/sessions/oauth/github',
-    githubOAuthClientId: 'df162a8cc3d7d1a472a8',
-    githubOAuthClientSecret: '9b3b1079d0c352b6a5fa1397ba7d985141e935dd'
+    githubOAuthClientId: process.env.GITHUB_OAUTH_CLIENT_ID ,
+    githubOAuthClientSecret: process.env.GITHUB_OAUTH_CLIENT_SECRET
   }
 }
 

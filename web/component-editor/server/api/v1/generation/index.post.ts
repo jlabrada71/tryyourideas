@@ -36,7 +36,7 @@ function copyResources(user, project, destDir: string ) {
   fse.copySync(folder, resourcesFolder, { overwrite: true })
 }
 
-async function createZipFile(srcDir, zipFileName) {
+async function createZipFile(srcDir: string, zipFileName: string) {
   try {
     if (fse.pathExistsSync(zipFileName)) {
       fse.removeSync(zipFileName)
@@ -50,7 +50,7 @@ async function createZipFile(srcDir, zipFileName) {
   }
 }
 
-function saveCode(directory: String, file: String, code: String) {
+function saveCode(directory: string, file: string, code: string) {
   fse.writeFile(`${directory}/${file}`, code, err => {
     if (err) {
       log('Error writing file: ' + file)
@@ -59,14 +59,14 @@ function saveCode(directory: String, file: String, code: String) {
   });
 }
 
-function generateComponents(model, projectDirectory: String) {
+function generateComponents(model, projectDirectory: string) {
   model.components.forEach( component => {
     const code = generateVueComponentCode(component)
     saveCode(projectDirectory + '/components', component.name + '.vue', code)
   })
 }
 
-function generateIndexPage(model, projectDirectory: String) {
+function generateIndexPage(model, projectDirectory: string) {
   const code = model.components.map(component => `<div class="flex flex-col gap-2 p-4 bg-slate-50"><span class="font-bold text-2xl">${component.name}</span><${component.name}></${component.name}></div>`).join('\n')
   const pageCode = `
     <template> 

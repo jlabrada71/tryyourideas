@@ -3,43 +3,6 @@ definePageMeta({
   layout: 'default',
 })
 
-const stats = [
-  { icon: 'mdi:rocket-launch', number: '1,240+', label: 'Projects Launched' },
-  { icon: 'mdi:account-group', number: '500+', label: 'Active Investors' },
-  { icon: 'mdi:cash-multiple', number: '$10M+', label: 'Capital Raised' }
-]
-
-const projects = [
-  {
-    title: 'AI Eco-Tracker',
-    description: 'Scaling the next generation of environmental monitoring. Seeking 2 Frontend Devs.',
-    tag: 'HIRING',
-    tagColor: 'primary' as const,
-    author: 'GreenTech Labs'
-  },
-  {
-    title: 'NovaPay Wallet',
-    description: 'Revolutionizing cross-border payments. Round A: 60% funded.',
-    tag: 'FUNDING',
-    tagColor: 'amber' as const,
-    author: 'Nova FinTech'
-  },
-  {
-    title: 'CloudSync Pro',
-    description: 'Enterprise-grade distributed storage. Early access now open for testers.',
-    tag: 'BETA',
-    tagColor: 'blue' as const,
-    author: 'SyncSystems'
-  },
-  {
-    title: 'Quantum Mesh',
-    description: 'Edge computing re-imagined. Project just launched today.',
-    tag: 'NEW',
-    tagColor: 'purple' as const,
-    author: 'Q-Labs'
-  }
-]
-
 const userTypes = [
   {
     icon: '💡',
@@ -95,6 +58,13 @@ const features = [
     title: 'Legal Support',
     description: 'Templates and guidance for agreements and contracts'
   }
+]
+
+const stats = [
+  { number: '50K+', label: 'Active Users' },
+  { number: '500+', label: 'Projects Created' },
+  { number: '$50M+', label: 'Funding Facilitated' },
+  { number: '95%', label: 'Success Rate' }
 ]
 
 const howItWorks = [
@@ -161,80 +131,56 @@ const isInviteModalOpen = ref(false)
 </script>
 
 <template>
-  <div class="min-h-screen bg-background-dark text-slate-200 selection:bg-primary/30">
-    <AppHeader @join-click="isInviteModalOpen = true" />
+  <div class="min-h-screen bg-white">
+    <AppHeader />
 
-    <main class="max-w-7xl mx-auto px-6 lg:px-8 relative">
-      <!-- Hero Section -->
-      <HeroSection
-        badge="Vibrant Ecosystem"
-        title="Transform Your "
-        highlighted-word="Ideas"
-        description="The world's most advanced collaborative ecosystem where elite entrepreneurs, developers, and investors unite to engineer the future of technology."
-        primary-button-text="Get Started"
-        secondary-button-text="Browse Projects"
-        @primary-click="isInviteModalOpen = true"
-      >
-        <template #title>
-          Transform Your <span class="text-primary italic">Ideas</span> Into Reality
-        </template>
-      </HeroSection>
-
-      <!-- Stats Section -->
-      <section class="py-12 border-y border-white/5">
-        <div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4">
-          <div class="lg:w-1/4">
-            <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-1">
-              Platform Growth
-            </h3>
-            <p class="text-xl font-bold text-white">Our thriving network</p>
-          </div>
-          <div class="flex-1 w-full grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <StatCard
-              v-for="stat in stats"
-              :key="stat.label"
-              :icon="stat.icon"
-              :number="stat.number"
-              :label="stat.label"
-            />
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        <div class="text-center">
+          <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            Transform Your Ideas Into Reality
+          </h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Connect with talented developers and visionary investors. Bring your innovations to life on a platform built for collaboration and success.
+          </p>
+          <div class="flex justify-center mb-12">
+            <button
+              type="button"
+              class="px-8 py-3 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition font-semibold text-lg"
+              @click="isInviteModalOpen = true"
+            >
+              Start Your Journey
+            </button>
           </div>
         </div>
-      </section>
 
-      <!-- Recent Activity Section -->
-      <section class="py-20">
-        <div class="flex items-end justify-between mb-10">
-          <div>
-            <h3 class="text-3xl font-bold text-white mb-2">Recent Activity</h3>
-            <p class="text-slate-500">Real-time updates from across the platform</p>
+        <!-- Hero Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-gray-200">
+          <div v-for="stat in stats" :key="stat.label" class="text-center">
+            <div class="text-3xl lg:text-4xl font-bold text-sky-600 mb-2">
+              {{ stat.number }}
+            </div>
+            <div class="text-gray-600">
+              {{ stat.label }}
+            </div>
           </div>
-          <button
-            type="button"
-            class="text-primary font-bold flex items-center gap-2 hover:gap-3 transition-all"
-          >
-            View All Activity
-            <Icon name="mdi:arrow-right" />
-          </button>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <ProjectCard
-            v-for="project in projects"
-            :key="project.title"
-            :title="project.title"
-            :description="project.description"
-            :tag="project.tag"
-            :tag-color="project.tagColor"
-            :author="project.author"
-          />
-        </div>
-      </section>
+      </div>
 
-      <!-- User Type Cards Section -->
-      <section class="py-20 border-t border-white/5">
+      <!-- Decorative background -->
+      <div class="absolute top-0 right-0 -z-10 w-96 h-96 bg-sky-100 rounded-full blur-3xl opacity-20" />
+      <div class="absolute bottom-0 left-0 -z-10 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20" />
+    </section>
+
+    <!-- User Type Cards Section -->
+    <section class="py-20 lg:py-32 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Whatever Your Role"
           subtitle="Try Your Ideas is designed for entrepreneurs, developers, and investors. Choose your path and get started."
         />
+
         <div class="grid md:grid-cols-3 gap-8">
           <UserTypeCard
             v-for="userType in userTypes"
@@ -246,14 +192,17 @@ const isInviteModalOpen = ref(false)
             :color="userType.color"
           />
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Features Section -->
-      <section id="features" class="py-20 border-t border-white/5">
+    <!-- Features Section -->
+    <section id="features" class="py-20 lg:py-32">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Powerful Features"
           subtitle="Everything you need to collaborate, build, and succeed"
         />
+
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <FeatureCard
             v-for="feature in features"
@@ -263,14 +212,17 @@ const isInviteModalOpen = ref(false)
             :description="feature.description"
           />
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- How It Works Section -->
-      <section id="how-it-works" class="py-20 border-t border-white/5">
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 lg:py-32 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="How It Works"
           subtitle="Simple, transparent, and proven"
         />
+
         <div class="grid md:grid-cols-3 gap-8">
           <HowItWorksCard
             v-for="item in howItWorks"
@@ -280,15 +232,18 @@ const isInviteModalOpen = ref(false)
             :color="item.color"
           />
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- FAQ Section -->
-      <section id="faq" class="py-20 border-t border-white/5">
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 lg:py-32">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Frequently Asked Questions"
           subtitle="Have a question? We're here to help"
         />
-        <div class="max-w-3xl mx-auto space-y-6">
+
+        <div class="space-y-6">
           <FaqItem
             v-for="(faq, index) in faqs"
             :key="index"
@@ -296,8 +251,8 @@ const isInviteModalOpen = ref(false)
             :answer="faq.answer"
           />
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
     <CtaSection
       title="Ready to Get Started?"

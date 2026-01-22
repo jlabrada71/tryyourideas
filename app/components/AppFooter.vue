@@ -4,89 +4,37 @@ interface FooterLink {
   label: string
 }
 
-interface FooterColumn {
-  title: string
-  links: FooterLink[]
-}
-
-interface SocialLink {
-  href: string
-  label: string
-}
-
 withDefaults(defineProps<{
-  brandName?: string
-  brandDescription?: string
-  columns?: FooterColumn[]
-  socialLinks?: SocialLink[]
+  links?: FooterLink[]
   copyright?: string
 }>(), {
-  brandName: 'Try Your Ideas',
-  brandDescription: 'Transform ideas into reality with the platform for creators, developers, and investors.',
-  columns: () => [
-    {
-      title: 'Product',
-      links: [
-        { href: '#', label: 'Features' },
-        { href: '#', label: 'Pricing' },
-        { href: '#', label: 'Security' }
-      ]
-    },
-    {
-      title: 'Company',
-      links: [
-        { href: '#', label: 'About' },
-        { href: '#', label: 'Blog' },
-        { href: '#', label: 'Contact' }
-      ]
-    },
-    {
-      title: 'Legal',
-      links: [
-        { href: '#', label: 'Privacy' },
-        { href: '#', label: 'Terms' },
-        { href: '#', label: 'Cookies' }
-      ]
-    }
+  links: () => [
+    { href: '#', label: 'Terms' },
+    { href: '#', label: 'Privacy' },
+    { href: '#', label: 'Contact' }
   ],
-  socialLinks: () => [
-    { href: '#', label: 'Twitter' },
-    { href: '#', label: 'LinkedIn' },
-    { href: '#', label: 'GitHub' }
-  ],
-  copyright: '© 2026 Try Your Ideas. All rights reserved.'
+  copyright: 'Try Your Ideas © 2024'
 })
 </script>
 
 <template>
-  <footer class="bg-gray-900 text-gray-400">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid md:grid-cols-4 gap-8 mb-8">
-        <div>
-          <h3 class="text-white font-bold mb-4">{{ brandName }}</h3>
-          <p class="text-sm">{{ brandDescription }}</p>
+  <footer class="border-t border-white/5 py-12 bg-background-dark/50 mt-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex items-center gap-2">
+        <div class="size-7 bg-primary rounded flex items-center justify-center">
+          <Icon name="mdi:lightbulb" class="text-white text-lg" />
         </div>
-        <div v-for="column in columns" :key="column.title">
-          <h4 class="text-white font-semibold mb-4">{{ column.title }}</h4>
-          <ul class="space-y-2 text-sm">
-            <li v-for="link in column.links" :key="link.label">
-              <a :href="link.href" class="hover:text-white transition">{{ link.label }}</a>
-            </li>
-          </ul>
-        </div>
+        <span class="font-bold text-slate-400">{{ copyright }}</span>
       </div>
-      <div class="border-t border-gray-800 pt-8 flex items-center justify-between">
-        <p class="text-sm">{{ copyright }}</p>
-        <div class="flex gap-4 text-sm">
-          <a
-            v-for="social in socialLinks"
-            :key="social.label"
-            :href="social.href"
-            class="hover:text-white transition"
-          >
-            {{ social.label }}
-          </a>
-        </div>
+      <div class="flex gap-8 text-sm text-slate-500">
+        <a
+          v-for="link in links"
+          :key="link.label"
+          :href="link.href"
+          class="hover:text-primary transition-colors"
+        >
+          {{ link.label }}
+        </a>
       </div>
     </div>
   </footer>

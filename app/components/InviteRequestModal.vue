@@ -72,13 +72,13 @@ function handleClose() {
         class="fixed inset-0 z-50 flex items-center justify-center p-4"
         @click.self="handleClose"
       >
-        <div class="fixed inset-0 bg-black/50" aria-hidden="true" />
+        <div class="fixed inset-0 bg-black/70" aria-hidden="true" />
 
-        <div class="relative bg-white rounded-2xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div class="relative bg-card-dark border border-white/10 rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
           <!-- Close button -->
           <button
             type="button"
-            class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
+            class="absolute top-4 right-4 text-slate-400 hover:text-white transition"
             @click="handleClose"
           >
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -90,13 +90,13 @@ function handleClose() {
             <!-- Success state -->
             <div v-if="submitted" class="text-center py-8">
               <div class="text-5xl mb-4">🎉</div>
-              <h3 class="text-2xl font-bold text-gray-900 mb-2">Request Received!</h3>
-              <p class="text-gray-600 mb-6">
+              <h3 class="text-2xl font-bold text-white mb-2">Request Received!</h3>
+              <p class="text-slate-400 mb-6">
                 Thanks for your interest! We'll review your request and send an invite to your email soon.
               </p>
               <button
                 type="button"
-                class="px-6 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition font-medium"
+                class="px-6 py-2 bg-primary text-white rounded-xl hover:bg-primary/90 transition font-medium"
                 @click="handleClose"
               >
                 Close
@@ -105,19 +105,19 @@ function handleClose() {
 
             <!-- Form state -->
             <template v-else>
-              <h3 class="text-2xl font-bold text-gray-900 mb-2">Request an Invite</h3>
-              <p class="text-gray-600 mb-6">
+              <h3 class="text-2xl font-bold text-white mb-2">Request an Invite</h3>
+              <p class="text-slate-400 mb-6">
                 Try Your Ideas is currently invite-only. Tell us about yourself and we'll be in touch.
               </p>
 
               <!-- Error message -->
-              <div v-if="error" class="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+              <div v-if="error" class="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
                 {{ error }}
               </div>
 
               <form @submit.prevent="handleSubmit" class="space-y-4">
                 <div>
-                  <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+                  <label for="name" class="block text-sm font-medium text-slate-300 mb-1">
                     Full Name
                   </label>
                   <input
@@ -126,13 +126,13 @@ function handleClose() {
                     type="text"
                     required
                     :disabled="loading"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    class="w-full px-4 py-3 bg-background-dark border border-white/10 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="John Doe"
                   >
                 </div>
 
                 <div>
-                  <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                  <label for="email" class="block text-sm font-medium text-slate-300 mb-1">
                     Email Address
                   </label>
                   <input
@@ -141,13 +141,13 @@ function handleClose() {
                     type="email"
                     required
                     :disabled="loading"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    class="w-full px-4 py-3 bg-background-dark border border-white/10 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="john@example.com"
                   >
                 </div>
 
                 <div>
-                  <label for="role" class="block text-sm font-medium text-gray-700 mb-1">
+                  <label for="role" class="block text-sm font-medium text-slate-300 mb-1">
                     I am a...
                   </label>
                   <select
@@ -155,9 +155,9 @@ function handleClose() {
                     v-model="form.role"
                     required
                     :disabled="loading"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    class="w-full px-4 py-3 bg-background-dark border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <option value="" disabled>Select your role</option>
+                    <option value="" disabled class="text-slate-500">Select your role</option>
                     <option v-for="role in roles" :key="role.value" :value="role.value">
                       {{ role.label }}
                     </option>
@@ -165,7 +165,7 @@ function handleClose() {
                 </div>
 
                 <div>
-                  <label for="description" class="block text-sm font-medium text-gray-700 mb-1">
+                  <label for="description" class="block text-sm font-medium text-slate-300 mb-1">
                     Tell us about yourself
                   </label>
                   <textarea
@@ -174,7 +174,7 @@ function handleClose() {
                     required
                     rows="4"
                     :disabled="loading"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    class="w-full px-4 py-3 bg-background-dark border border-white/10 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="What brings you to Try Your Ideas? Share your background or idea..."
                   />
                 </div>
@@ -182,7 +182,7 @@ function handleClose() {
                 <button
                   type="submit"
                   :disabled="loading"
-                  class="w-full py-3 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition font-semibold disabled:bg-sky-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  class="w-full py-4 bg-primary text-white rounded-xl hover:bg-primary/90 transition font-bold shadow-lg shadow-primary/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   <svg v-if="loading" class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />

@@ -6,12 +6,12 @@ defineProps<{
 </script>
 
 <template>
-  <details class="bg-white border border-gray-200 rounded-lg p-6 cursor-pointer hover:border-sky-300 transition group">
-    <summary class="flex items-center justify-between font-semibold text-gray-900 text-lg">
+  <details class="bg-card-dark border border-white/10 rounded-2xl p-6 cursor-pointer hover:border-primary/30 transition group">
+    <summary class="flex items-center justify-between font-bold text-white text-lg">
       {{ question }}
-      <span class="text-2xl text-sky-600 group-open:rotate-45 transition">+</span>
+      <span class="text-2xl text-primary group-open:rotate-45 transition">+</span>
     </summary>
-    <p class="text-gray-600 mt-4 leading-relaxed">
+    <p class="text-slate-400 mt-4 leading-relaxed">
       {{ answer }}
     </p>
   </details>

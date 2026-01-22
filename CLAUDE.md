@@ -30,10 +30,20 @@ Content here
 ::
 ```
 
+
 Components in `app/components/` are auto-imported and usable via `::componentName{props}` syntax.
+
+## Implementing features
+Always refactor the code extracting reusable components, and removing duplication
+
+## Implementing UI 
+Always extract reusable components
 
 ## Testing
 
 - `test/unit/` - Unit tests (Node environment)
 - `test/nuxt/` - Component tests using `mountSuspended` from `@nuxt/test-utils/runtime`
 - `tests/` - Playwright E2E tests
+- For each feature implemented create unit tests including edge cases
+- When creating tests for the UI use testing-library for testing UI accessibility.
+

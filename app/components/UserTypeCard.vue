@@ -8,25 +8,26 @@ defineProps<{
 }>()
 
 const colorClasses = {
-  blue: 'bg-sky-600 hover:bg-sky-700',
-  purple: 'bg-purple-600 hover:bg-purple-700',
-  green: 'bg-green-600 hover:bg-green-700'
+  blue: 'bg-blue-500 hover:bg-blue-600',
+  purple: 'bg-purple-500 hover:bg-purple-600',
+  green: 'bg-green-500 hover:bg-green-600'
 }
 </script>
 
 <template>
-  <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition border border-gray-200">
+  <div class="bg-card-dark rounded-2xl p-8 hover:bg-card-dark/80 transition border border-white/10 hover:border-primary/30">
     <div class="text-5xl mb-4">
       {{ icon }}
     </div>
-    <h3 class="text-2xl font-bold text-gray-900 mb-3">
+    <h3 class="text-2xl font-bold text-white mb-3">
       {{ title }}
     </h3>
-    <p class="text-gray-600 mb-6 leading-relaxed">
+    <p class="text-slate-400 mb-6 leading-relaxed">
       {{ description }}
     </p>
     <button
-      :class="['w-full py-3 rounded-lg font-semibold transition text-white', colorClasses[color]]"
+      type="button"
+      :class="['w-full py-3 rounded-xl font-bold transition text-white', colorClasses[color]]"
     >
       {{ cta }}
     </button>

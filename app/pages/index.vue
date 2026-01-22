@@ -3,6 +3,28 @@ definePageMeta({
   layout: 'default',
 })
 
+// Page SEO
+useSeoMeta({
+  title: 'Transform Your Ideas Into Reality',
+  description: 'Connect with talented developers and visionary investors. The collaborative ecosystem where entrepreneurs, developers, and investors unite to build the future of technology.',
+  ogTitle: 'Try Your Ideas - Transform Your Ideas Into Reality',
+  ogDescription: 'Connect with talented developers and visionary investors. The collaborative ecosystem where entrepreneurs, developers, and investors unite to build the future.',
+  ogImage: '/og-image.png',
+  ogType: 'website',
+  ogSiteName: 'Try Your Ideas',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Try Your Ideas - Transform Your Ideas Into Reality',
+  twitterDescription: 'Connect with talented developers and visionary investors. Build the future of technology together.',
+  twitterImage: '/og-image.png',
+})
+
+// Canonical URL
+useHead({
+  link: [
+    { rel: 'canonical', href: 'https://tryyourideas.com' },
+  ],
+})
+
 const stats = [
   { icon: 'mdi:rocket-launch', number: '1,240+', label: 'Projects Launched' },
   { icon: 'mdi:account-group', number: '500+', label: 'Active Investors' },
@@ -156,6 +178,28 @@ const faqs = [
     answer: 'We take a small commission on successful transactions (2-5%) to maintain the platform and support all participants.'
   }
 ]
+
+// JSON-LD Structured Data
+useSchemaOrg([
+  defineOrganization({
+    name: 'Try Your Ideas',
+    logo: '/logo.png',
+    url: 'https://tryyourideas.com',
+    sameAs: [],
+  }),
+  defineWebSite({
+    name: 'Try Your Ideas',
+    url: 'https://tryyourideas.com',
+  }),
+  defineWebPage({
+    name: 'Try Your Ideas - Transform Your Ideas Into Reality',
+    description: 'Connect with talented developers and visionary investors. The collaborative ecosystem where entrepreneurs, developers, and investors unite to build the future of technology.',
+  }),
+  defineFAQPage(faqs.map(faq => ({
+    question: faq.question,
+    answer: faq.answer,
+  }))),
+])
 
 const isInviteModalOpen = ref(false)
 </script>

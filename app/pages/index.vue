@@ -195,10 +195,11 @@ useSchemaOrg([
     name: 'Try Your Ideas - Transform Your Ideas Into Reality',
     description: 'Connect with talented developers and visionary investors. The collaborative ecosystem where entrepreneurs, developers, and investors unite to build the future of technology.',
   }),
-  defineFAQPage(faqs.map(faq => ({
-    question: faq.question,
-    answer: faq.answer,
-  }))),
+  // FAQ structured data
+  ...faqs.map(faq => defineQuestion({
+    name: faq.question,
+    acceptedAnswer: faq.answer,
+  })),
 ])
 
 const isInviteModalOpen = ref(false)

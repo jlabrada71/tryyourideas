@@ -9,21 +9,21 @@ const userTypes = [
     title: 'Have an Idea',
     description: 'Transform your vision into reality by connecting with skilled developers and investors',
     cta: 'Post Your Idea',
-    color: 'blue'
+    color: 'blue' as const
   },
   {
     icon: '💻',
     title: 'Are a Developer',
     description: 'Build meaningful projects with real potential for equity and long-term success',
     cta: 'Find Projects',
-    color: 'purple'
+    color: 'purple' as const
   },
   {
     icon: '💰',
     title: 'Want to Invest',
     description: 'Discover early-stage opportunities with transparent teams and verified metrics',
     cta: 'Browse Deals',
-    color: 'green'
+    color: 'green' as const
   }
 ]
 
@@ -67,6 +67,39 @@ const stats = [
   { number: '95%', label: 'Success Rate' }
 ]
 
+const howItWorks = [
+  {
+    title: 'For Idea Creators',
+    color: 'sky' as const,
+    steps: [
+      'Post your project idea with all details',
+      'Review developer applications and team',
+      'Collaborate and track project progress',
+      'Connect with investors for funding'
+    ]
+  },
+  {
+    title: 'For Developers',
+    color: 'purple' as const,
+    steps: [
+      'Create your developer profile',
+      'Browse and apply to projects',
+      'Get selected and join the team',
+      'Build and earn with equity upside'
+    ]
+  },
+  {
+    title: 'For Investors',
+    color: 'green' as const,
+    steps: [
+      'Explore curated deal flow',
+      'Review teams and financials',
+      'Conduct due diligence',
+      'Invest and monitor returns'
+    ]
+  }
+]
+
 const faqs = [
   {
     question: 'How do I post my idea?',
@@ -97,27 +130,7 @@ const faqs = [
 
 <template>
   <div class="min-h-screen bg-white">
-    <!-- Navigation Header -->
-    <header class="border-b border-gray-200 sticky top-0 bg-white z-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-        <div class="text-2xl font-bold text-sky-600">
-          Try Your Ideas
-        </div>
-        <nav class="hidden md:flex gap-8">
-          <a href="#features" class="text-gray-700 hover:text-sky-600 transition">Features</a>
-          <a href="#how-it-works" class="text-gray-700 hover:text-sky-600 transition">How It Works</a>
-          <a href="#faq" class="text-gray-700 hover:text-sky-600 transition">FAQ</a>
-        </nav>
-        <div class="flex gap-3">
-          <button class="px-4 py-2 text-sky-600 border border-sky-600 rounded-lg hover:bg-sky-50 transition font-medium">
-            Sign In
-          </button>
-          <button class="px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition font-medium">
-            Get Started
-          </button>
-        </div>
-      </div>
-    </header>
+    <AppHeader />
 
     <!-- Hero Section -->
     <section class="relative overflow-hidden">
@@ -153,46 +166,28 @@ const faqs = [
       </div>
 
       <!-- Decorative background -->
-      <div class="absolute top-0 right-0 -z-10 w-96 h-96 bg-sky-100 rounded-full blur-3xl opacity-20"></div>
-      <div class="absolute bottom-0 left-0 -z-10 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20"></div>
+      <div class="absolute top-0 right-0 -z-10 w-96 h-96 bg-sky-100 rounded-full blur-3xl opacity-20" />
+      <div class="absolute bottom-0 left-0 -z-10 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20" />
     </section>
 
     <!-- User Type Cards Section -->
     <section class="py-20 lg:py-32 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Whatever Your Role
-          </h2>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Try Your Ideas is designed for entrepreneurs, developers, and investors. Choose your path and get started.
-          </p>
-        </div>
+        <SectionHeader
+          title="Whatever Your Role"
+          subtitle="Try Your Ideas is designed for entrepreneurs, developers, and investors. Choose your path and get started."
+        />
 
         <div class="grid md:grid-cols-3 gap-8">
-          <div
+          <UserTypeCard
             v-for="userType in userTypes"
             :key="userType.title"
-            class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition border border-gray-200"
-          >
-            <div class="text-5xl mb-4">
-              {{ userType.icon }}
-            </div>
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">
-              {{ userType.title }}
-            </h3>
-            <p class="text-gray-600 mb-6 leading-relaxed">
-              {{ userType.description }}
-            </p>
-            <button :class="[
-              'w-full py-3 rounded-lg font-semibold transition',
-              userType.color === 'blue' ? 'bg-sky-600 text-white hover:bg-sky-700' :
-              userType.color === 'purple' ? 'bg-purple-600 text-white hover:bg-purple-700' :
-              'bg-green-600 text-white hover:bg-green-700'
-            ]">
-              {{ userType.cta }}
-            </button>
-          </div>
+            :icon="userType.icon"
+            :title="userType.title"
+            :description="userType.description"
+            :cta="userType.cta"
+            :color="userType.color"
+          />
         </div>
       </div>
     </section>
@@ -200,31 +195,19 @@ const faqs = [
     <!-- Features Section -->
     <section id="features" class="py-20 lg:py-32">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Powerful Features
-          </h2>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Everything you need to collaborate, build, and succeed
-          </p>
-        </div>
+        <SectionHeader
+          title="Powerful Features"
+          subtitle="Everything you need to collaborate, build, and succeed"
+        />
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
+          <FeatureCard
             v-for="feature in features"
             :key="feature.title"
-            class="p-8 rounded-xl border border-gray-200 hover:border-sky-300 hover:bg-sky-50 transition"
-          >
-            <div class="text-4xl mb-4">
-              {{ feature.icon }}
-            </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">
-              {{ feature.title }}
-            </h3>
-            <p class="text-gray-600">
-              {{ feature.description }}
-            </p>
-          </div>
+            :icon="feature.icon"
+            :title="feature.title"
+            :description="feature.description"
+          />
         </div>
       </div>
     </section>
@@ -232,90 +215,19 @@ const faqs = [
     <!-- How It Works Section -->
     <section id="how-it-works" class="py-20 lg:py-32 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            How It Works
-          </h2>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Simple, transparent, and proven
-          </p>
-        </div>
+        <SectionHeader
+          title="How It Works"
+          subtitle="Simple, transparent, and proven"
+        />
 
         <div class="grid md:grid-cols-3 gap-8">
-          <!-- For Creators -->
-          <div>
-            <div class="bg-white rounded-2xl p-8 h-full border-2 border-sky-200">
-              <h3 class="text-2xl font-bold text-gray-900 mb-6">For Idea Creators</h3>
-              <ol class="space-y-4">
-                <li class="flex gap-4">
-                  <span class="flex-shrink-0 w-8 h-8 bg-sky-600 text-white rounded-full flex items-center justify-center font-bold">1</span>
-                  <span class="text-gray-700">Post your project idea with all details</span>
-                </li>
-                <li class="flex gap-4">
-                  <span class="flex-shrink-0 w-8 h-8 bg-sky-600 text-white rounded-full flex items-center justify-center font-bold">2</span>
-                  <span class="text-gray-700">Review developer applications and team</span>
-                </li>
-                <li class="flex gap-4">
-                  <span class="flex-shrink-0 w-8 h-8 bg-sky-600 text-white rounded-full flex items-center justify-center font-bold">3</span>
-                  <span class="text-gray-700">Collaborate and track project progress</span>
-                </li>
-                <li class="flex gap-4">
-                  <span class="flex-shrink-0 w-8 h-8 bg-sky-600 text-white rounded-full flex items-center justify-center font-bold">4</span>
-                  <span class="text-gray-700">Connect with investors for funding</span>
-                </li>
-              </ol>
-            </div>
-          </div>
-
-          <!-- For Developers -->
-          <div>
-            <div class="bg-white rounded-2xl p-8 h-full border-2 border-purple-200">
-              <h3 class="text-2xl font-bold text-gray-900 mb-6">For Developers</h3>
-              <ol class="space-y-4">
-                <li class="flex gap-4">
-                  <span class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">1</span>
-                  <span class="text-gray-700">Create your developer profile</span>
-                </li>
-                <li class="flex gap-4">
-                  <span class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">2</span>
-                  <span class="text-gray-700">Browse and apply to projects</span>
-                </li>
-                <li class="flex gap-4">
-                  <span class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">3</span>
-                  <span class="text-gray-700">Get selected and join the team</span>
-                </li>
-                <li class="flex gap-4">
-                  <span class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">4</span>
-                  <span class="text-gray-700">Build and earn with equity upside</span>
-                </li>
-              </ol>
-            </div>
-          </div>
-
-          <!-- For Investors -->
-          <div>
-            <div class="bg-white rounded-2xl p-8 h-full border-2 border-green-200">
-              <h3 class="text-2xl font-bold text-gray-900 mb-6">For Investors</h3>
-              <ol class="space-y-4">
-                <li class="flex gap-4">
-                  <span class="flex-shrink-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">1</span>
-                  <span class="text-gray-700">Explore curated deal flow</span>
-                </li>
-                <li class="flex gap-4">
-                  <span class="flex-shrink-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">2</span>
-                  <span class="text-gray-700">Review teams and financials</span>
-                </li>
-                <li class="flex gap-4">
-                  <span class="flex-shrink-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">3</span>
-                  <span class="text-gray-700">Conduct due diligence</span>
-                </li>
-                <li class="flex gap-4">
-                  <span class="flex-shrink-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">4</span>
-                  <span class="text-gray-700">Invest and monitor returns</span>
-                </li>
-              </ol>
-            </div>
-          </div>
+          <HowItWorksCard
+            v-for="item in howItWorks"
+            :key="item.title"
+            :title="item.title"
+            :steps="item.steps"
+            :color="item.color"
+          />
         </div>
       </div>
     </section>
@@ -323,90 +235,28 @@ const faqs = [
     <!-- FAQ Section -->
     <section id="faq" class="py-20 lg:py-32">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Frequently Asked Questions
-          </h2>
-          <p class="text-xl text-gray-600">
-            Have a question? We're here to help
-          </p>
-        </div>
+        <SectionHeader
+          title="Frequently Asked Questions"
+          subtitle="Have a question? We're here to help"
+        />
 
         <div class="space-y-6">
-          <details
+          <FaqItem
             v-for="(faq, index) in faqs"
             :key="index"
-            class="bg-white border border-gray-200 rounded-lg p-6 cursor-pointer hover:border-sky-300 transition group"
-          >
-            <summary class="flex items-center justify-between font-semibold text-gray-900 text-lg">
-              {{ faq.question }}
-              <span class="text-2xl text-sky-600 group-open:rotate-180 transition">+</span>
-            </summary>
-            <p class="text-gray-600 mt-4 leading-relaxed">
-              {{ faq.answer }}
-            </p>
-          </details>
+            :question="faq.question"
+            :answer="faq.answer"
+          />
         </div>
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 lg:py-32 bg-gradient-to-r from-sky-600 to-blue-600">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">
-          Ready to Get Started?
-        </h2>
-        <p class="text-xl text-sky-100 mb-8 max-w-2xl mx-auto">
-          Join thousands of entrepreneurs, developers, and investors building the future together.
-        </p>
-        <button class="px-8 py-4 bg-white text-sky-600 rounded-lg hover:bg-sky-50 transition font-bold text-lg">
-          Join Try Your Ideas Today
-        </button>
-      </div>
-    </section>
+    <CtaSection
+      title="Ready to Get Started?"
+      subtitle="Join thousands of entrepreneurs, developers, and investors building the future together."
+      button-text="Join Try Your Ideas Today"
+    />
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <h3 class="text-white font-bold mb-4">Try Your Ideas</h3>
-            <p class="text-sm">Transform ideas into reality with the platform for creators, developers, and investors.</p>
-          </div>
-          <div>
-            <h4 class="text-white font-semibold mb-4">Product</h4>
-            <ul class="space-y-2 text-sm">
-              <li><a href="#" class="hover:text-white transition">Features</a></li>
-              <li><a href="#" class="hover:text-white transition">Pricing</a></li>
-              <li><a href="#" class="hover:text-white transition">Security</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-white font-semibold mb-4">Company</h4>
-            <ul class="space-y-2 text-sm">
-              <li><a href="#" class="hover:text-white transition">About</a></li>
-              <li><a href="#" class="hover:text-white transition">Blog</a></li>
-              <li><a href="#" class="hover:text-white transition">Contact</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-white font-semibold mb-4">Legal</h4>
-            <ul class="space-y-2 text-sm">
-              <li><a href="#" class="hover:text-white transition">Privacy</a></li>
-              <li><a href="#" class="hover:text-white transition">Terms</a></li>
-              <li><a href="#" class="hover:text-white transition">Cookies</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="border-t border-gray-800 pt-8 flex items-center justify-between">
-          <p class="text-sm">&copy; 2026 Try Your Ideas. All rights reserved.</p>
-          <div class="flex gap-4 text-sm">
-            <a href="#" class="hover:text-white transition">Twitter</a>
-            <a href="#" class="hover:text-white transition">LinkedIn</a>
-            <a href="#" class="hover:text-white transition">GitHub</a>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <AppFooter />
   </div>
 </template>

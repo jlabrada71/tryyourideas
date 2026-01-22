@@ -1,0 +1,40 @@
+<script setup lang="ts">
+defineProps<{
+  title: string
+  steps: string[]
+  color: 'sky' | 'purple' | 'green'
+}>()
+
+const colorClasses = {
+  sky: {
+    border: 'border-sky-200',
+    badge: 'bg-sky-600'
+  },
+  purple: {
+    border: 'border-purple-200',
+    badge: 'bg-purple-600'
+  },
+  green: {
+    border: 'border-green-200',
+    badge: 'bg-green-600'
+  }
+}
+</script>
+
+<template>
+  <div :class="['bg-white rounded-2xl p-8 h-full border-2', colorClasses[color].border]">
+    <h3 class="text-2xl font-bold text-gray-900 mb-6">
+      {{ title }}
+    </h3>
+    <ol class="space-y-4">
+      <li v-for="(step, index) in steps" :key="index" class="flex gap-4">
+        <span
+          :class="['flex-shrink-0 w-8 h-8 text-white rounded-full flex items-center justify-center font-bold', colorClasses[color].badge]"
+        >
+          {{ index + 1 }}
+        </span>
+        <span class="text-gray-700">{{ step }}</span>
+      </li>
+    </ol>
+  </div>
+</template>

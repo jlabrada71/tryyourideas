@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Try Your Ideas - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00a8a3",
+                        "background-light": "#f8fafb",
+                        "background-dark": "#0a0c10",
+                        "accent-dark": "#0f2423",
+                        "card-dark": "#161b22",
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Epilogue', sans-serif;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .geometric-bg {
+            background-image: radial-gradient(circle at 2px 2px, rgba(0, 168, 163, 0.05) 1px, transparent 0);
+            background-size: 32px 32px;
+        }
+        .glass-effect {
+            background: rgba(10, 12, 16, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(0, 168, 163, 0.15), transparent 60%),
+                        radial-gradient(circle at bottom left, rgba(0, 168, 163, 0.05), transparent 40%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-200 min-h-screen selection:bg-primary/30">
+<header class="sticky top-0 z-50 glass-effect border-b border-white/10">
+<div class="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center justify-between">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-2">
+<div class="size-9 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-2xl">lightbulb</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Try Your Ideas</h1>
+</div>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Projects</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Developers</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Investors</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">How It Works</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:block text-sm font-bold px-4 py-2 hover:text-primary transition-colors">Sign In</button>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-primary/20">
+                Join Now
+            </button>
+<button class="lg:hidden flex items-center justify-center size-10 rounded-lg hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+<section class="relative pt-12 lg:pt-24 pb-16 lg:pb-24 geometric-bg hero-gradient">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 space-y-8">
+<div class="space-y-6">
+<span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-wider uppercase">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                        Vibrant Ecosystem
+                    </span>
+<h2 class="text-5xl lg:text-7xl font-black leading-[1.05] tracking-tight text-slate-900 dark:text-white">
+                        Transform Your <span class="text-primary italic">Ideas</span> Into Reality
+                    </h2>
+<p class="text-lg lg:text-xl text-slate-600 dark:text-slate-400 max-w-2xl font-normal leading-relaxed">
+                        The world's most advanced collaborative ecosystem where elite entrepreneurs, developers, and investors unite to engineer the future of technology.
+                    </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="px-10 py-4 bg-primary hover:bg-primary/90 text-white rounded-xl font-bold transition-all shadow-xl shadow-primary/25 text-lg">
+                        Get Started
+                    </button>
+<button class="px-10 py-4 bg-transparent border border-slate-200 dark:border-white/10 hover:bg-white/5 text-slate-900 dark:text-white rounded-xl font-bold transition-all text-lg">
+                        Browse Projects
+                    </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-square relative flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/20 blur-[100px] rounded-full"></div>
+<div class="relative z-10 w-full h-full bg-center bg-no-repeat bg-contain" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvCEb4ma-bstuLyXI7h9_9dHp1iF-mxQRIHIehx_Y4JWH2LKqIgYE2hyS-zkT_zyutVe3K7uLX_sWpUxvGjaXn2eapR1rWX7tm8wQRjIqFJAb37BlRfczyXa8GX83fk1O-HhFp_PhTpb5jttdTJAJON1Xb-pTUio4CRazlVs0Cu6IYeuCiT-qi-DhlK2PZrCxl0POnAAVg20MMjmEW-pME-Kr3XPDS-FlciXEj6y3oBn2777OSqOUiMT6P4POPYCRz6OpTMzJDEQ'); border-radius: 2rem;">
+<div class="absolute inset-0 bg-gradient-to-tr from-background-dark/40 to-transparent rounded-[2rem]"></div>
+<div class="absolute -top-4 -right-4 bg-card-dark border border-white/10 p-4 rounded-2xl shadow-2xl hidden xl:block">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-400">code</span>
+</div>
+<div>
+<p class="text-xs font-bold text-white">Dev Team</p>
+<p class="text-[10px] text-slate-400">4 Active Members</p>
+</div>
+</div>
+</div>
+<div class="absolute -bottom-6 -left-6 bg-card-dark border border-white/10 p-4 rounded-2xl shadow-2xl hidden xl:block">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<div>
+<p class="text-xs font-bold text-white">Seed Funding</p>
+<p class="text-[10px] text-slate-400">$2.4M Committed</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-12 border-y border-white/5">
+<div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4">
+<div class="lg:w-1/4">
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-1">
+                    Platform Growth
+                </h3>
+<p class="text-xl font-bold text-slate-900 dark:text-white">Our thriving network</p>
+</div>
+<div class="flex-1 w-full grid grid-cols-1 sm:grid-cols-3 gap-6">
+<div class="flex items-center gap-5 p-6 rounded-2xl bg-white/5 border border-white/5">
+<div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<div>
+<p class="text-3xl font-black text-white">1,240+</p>
+<p class="text-xs font-medium uppercase tracking-wider text-slate-500">Projects Launched</p>
+</div>
+</div>
+<div class="flex items-center gap-5 p-6 rounded-2xl bg-white/5 border border-white/5">
+<div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<div>
+<p class="text-3xl font-black text-white">500+</p>
+<p class="text-xs font-medium uppercase tracking-wider text-slate-500">Active Investors</p>
+</div>
+</div>
+<div class="flex items-center gap-5 p-6 rounded-2xl bg-white/5 border border-white/5">
+<div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="text-3xl font-black text-white">$10M+</p>
+<p class="text-xs font-medium uppercase tracking-wider text-slate-500">Capital Raised</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20">
+<div class="flex items-end justify-between mb-10">
+<div>
+<h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Recent Activity</h3>
+<p class="text-slate-500">Real-time updates from across the platform</p>
+</div>
+<button class="text-primary font-bold flex items-center gap-2 hover:gap-3 transition-all">
+                View All Activity <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="group bg-card-dark/50 hover:bg-card-dark border border-white/5 hover:border-primary/30 p-5 rounded-2xl transition-all cursor-pointer">
+<div class="bg-center bg-no-repeat aspect-video bg-cover rounded-xl mb-4" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzxILZ8UmojHVKOwzFpj_t2moLBLz9TZRw6bQW9RoZfxDtadoQKE0o2_zT0mpmHOeWLzVVzm0OnFj51_4WUY0wnrmREqZcGnMed3WZp_A4PtIFm_u67q9-ID5jkbM_KOmLrLfneU92JixPJrmh83ITXsybXKhGew7mspcqpvlJMoXTjqK74pfKXhfBx-7NsOLJ0HuFtFjxO6UeVlZUFRvC-VWG9JK3rcDJBzWZCE3YDOsGJ_nNdNXKe1Jpo1cLciBAT6I8KZUtUw");'></div>
+<div class="space-y-3">
+<div class="flex justify-between items-start">
+<h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">AI Eco-Tracker</h4>
+<span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold">HIRING</span>
+</div>
+<p class="text-sm text-slate-400 line-clamp-2 leading-relaxed">Scaling the next generation of environmental monitoring. Seeking 2 Frontend Devs.</p>
+<div class="flex items-center gap-2 pt-2 border-t border-white/5">
+<div class="size-6 rounded-full bg-slate-700"></div>
+<span class="text-xs text-slate-500 font-medium">By GreenTech Labs</span>
+</div>
+</div>
+</div>
+<div class="group bg-card-dark/50 hover:bg-card-dark border border-white/5 hover:border-primary/30 p-5 rounded-2xl transition-all cursor-pointer">
+<div class="bg-center bg-no-repeat aspect-video bg-cover rounded-xl mb-4" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCkvW2f33MhEtCw7rXNckUDKtUz4x0MAAtqOtukWV7O0N1S5g71-xX_O6yXM753BycKEzyoIXE53hiU06H60FWUpLjrEpv7AXkiklbUSEj4_spYMb4ZLBWqP6TYS9yvEv2tMJkPaKhR2ECB5HUy_wgm1L8wf637vNFbYRDPkBoyxSrfBYWLxHLSZg7mmVjLvicHGoBsD-KqU56EBd5OMfgyJSCQi2ENcSE772k_uetVixXWW0Ae4ngQKhhZorXv2wlJSMvUJJbXEA");'></div>
+<div class="space-y-3">
+<div class="flex justify-between items-start">
+<h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">NovaPay Wallet</h4>
+<span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 text-[10px] font-bold">FUNDING</span>
+</div>
+<p class="text-sm text-slate-400 line-clamp-2 leading-relaxed">Revolutionizing cross-border payments. Round A: 60% funded.</p>
+<div class="flex items-center gap-2 pt-2 border-t border-white/5">
+<div class="size-6 rounded-full bg-slate-700"></div>
+<span class="text-xs text-slate-500 font-medium">By Nova FinTech</span>
+</div>
+</div>
+</div>
+<div class="group bg-card-dark/50 hover:bg-card-dark border border-white/5 hover:border-primary/30 p-5 rounded-2xl transition-all cursor-pointer">
+<div class="bg-center bg-no-repeat aspect-video bg-cover rounded-xl mb-4" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBg9E7K2Pq-i3fkv4fmMU5N-_VirzKjh-yTadm6t9NlhaOq8bymvFm5uS-Ye0HjDU8FG4jaWc1mZEzlDNgnVPjDKH-bryYaPd0ATAOAASdUuS57vDqG-KWxO8JI327kvMpGf3Idj0Ai94w8-Za1nRyC6ujt9e6IP203V-25MNPjZD2G7eek2H2twuE8ybAR5imNA4qDpEEO1bTfFjHXrIJmxsQPdcSxftKYuV7jLG1THWonVpkPCapSe-AUGv4FJCCJoZStMN-kfQ");'></div>
+<div class="space-y-3">
+<div class="flex justify-between items-start">
+<h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">CloudSync Pro</h4>
+<span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-500 text-[10px] font-bold">BETA</span>
+</div>
+<p class="text-sm text-slate-400 line-clamp-2 leading-relaxed">Enterprise-grade distributed storage. Early access now open for testers.</p>
+<div class="flex items-center gap-2 pt-2 border-t border-white/5">
+<div class="size-6 rounded-full bg-slate-700"></div>
+<span class="text-xs text-slate-500 font-medium">By SyncSystems</span>
+</div>
+</div>
+</div>
+<div class="group bg-card-dark/50 hover:bg-card-dark border border-white/5 hover:border-primary/30 p-5 rounded-2xl transition-all cursor-pointer">
+<div class="bg-center bg-no-repeat aspect-video bg-cover rounded-xl mb-4" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDOBtIDy4s_3jspY58284TDI22Qcrr6fNdfe6-83t0OoCMBZ2fRAWV_wZQE0ViioEo-M_85nHt64P-gSQ8RDp7X6L-lNdMphe5P0kHkY4TxI6XZy46rOi94I5n3HOXiXEhI0YQTiD8lYSuIpCC-vPdsS6Pqdste46_EOMoKSi3J9hVp3pq2P-UlIH9etTrqZIrrbvevQERzuXuHfTN5h8Bv_i_zgr2EvSC1fJ_ka2X-xmloH6SSwZDY4Ejm-tAlBLTbNiwd2EOIZQ");'></div>
+<div class="space-y-3">
+<div class="flex justify-between items-start">
+<h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Quantum Mesh</h4>
+<span class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-500 text-[10px] font-bold">NEW</span>
+</div>
+<p class="text-sm text-slate-400 line-clamp-2 leading-relaxed">Edge computing re-imagined. Project just launched today.</p>
+<div class="flex items-center gap-2 pt-2 border-t border-white/5">
+<div class="size-6 rounded-full bg-slate-700"></div>
+<span class="text-xs text-slate-500 font-medium">By Q-Labs</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-white/5 py-12 bg-background-dark/50 mt-20">
+<div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="size-7 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg">lightbulb</span>
+</div>
+<span class="font-bold text-slate-400">Try Your Ideas © 2024</span>
+</div>
+<div class="flex gap-8 text-sm text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+</div>
+</footer>
+
+</body></html>

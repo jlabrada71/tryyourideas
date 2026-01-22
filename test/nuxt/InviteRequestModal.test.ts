@@ -130,7 +130,7 @@ describe('InviteRequestModal', () => {
     await user.type(screen.getByLabelText(/tell us about yourself/i), 'I want to build great projects')
 
     // Submit form
-    await user.click(screen.getByRole('button', { name: /submit request/i }))
+    await user.click(screen.getByRole('button', { name: /send me an invite/i }))
 
     await waitFor(() => {
       expect(mockFetch).toHaveBeenCalledWith('/api/invite-requests', {
@@ -158,7 +158,7 @@ describe('InviteRequestModal', () => {
     await user.selectOptions(screen.getByLabelText(/i am a/i), 'creator')
     await user.type(screen.getByLabelText(/tell us about yourself/i), 'I have a great idea')
 
-    await user.click(screen.getByRole('button', { name: /submit request/i }))
+    await user.click(screen.getByRole('button', { name: /send me an invite/i }))
 
     await waitFor(() => {
       expect(mockToastSuccess).toHaveBeenCalledWith(
@@ -211,7 +211,7 @@ describe('InviteRequestModal', () => {
     await user.selectOptions(screen.getByLabelText(/i am a/i), 'developer')
     await user.type(screen.getByLabelText(/tell us about yourself/i), 'Test')
 
-    await user.click(screen.getByRole('button', { name: /submit request/i }))
+    await user.click(screen.getByRole('button', { name: /send me an invite/i }))
 
     await waitFor(() => {
       expect(screen.getByText(/something went wrong/i)).toBeInTheDocument()
@@ -231,7 +231,7 @@ describe('InviteRequestModal', () => {
     await user.selectOptions(screen.getByLabelText(/i am a/i), 'developer')
     await user.type(screen.getByLabelText(/tell us about yourself/i), 'Test')
 
-    await user.click(screen.getByRole('button', { name: /submit request/i }))
+    await user.click(screen.getByRole('button', { name: /send me an invite/i }))
 
     await waitFor(() => {
       expect(screen.getByLabelText(/full name/i)).toBeDisabled()
@@ -255,7 +255,7 @@ describe('InviteRequestModal', () => {
     await user.selectOptions(screen.getByLabelText(/i am a/i), 'developer')
     await user.type(screen.getByLabelText(/tell us about yourself/i), 'Test')
 
-    await user.click(screen.getByRole('button', { name: /submit request/i }))
+    await user.click(screen.getByRole('button', { name: /send me an invite/i }))
 
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /submitting/i })).toBeInTheDocument()

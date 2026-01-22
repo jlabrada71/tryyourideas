@@ -126,6 +126,8 @@ const faqs = [
     answer: 'We take a small commission on successful transactions (2-5%) to maintain the platform and support all participants.'
   }
 ]
+
+const isInviteModalOpen = ref(false)
 </script>
 
 <template>
@@ -142,12 +144,13 @@ const faqs = [
           <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
             Connect with talented developers and visionary investors. Bring your innovations to life on a platform built for collaboration and success.
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <button class="px-8 py-3 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition font-semibold text-lg">
+          <div class="flex justify-center mb-12">
+            <button
+              type="button"
+              class="px-8 py-3 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition font-semibold text-lg"
+              @click="isInviteModalOpen = true"
+            >
               Start Your Journey
-            </button>
-            <button class="px-8 py-3 border-2 border-sky-600 text-sky-600 rounded-lg hover:bg-sky-50 transition font-semibold text-lg">
-              Watch Demo
             </button>
           </div>
         </div>
@@ -258,5 +261,10 @@ const faqs = [
     />
 
     <AppFooter />
+
+    <InviteRequestModal
+      :open="isInviteModalOpen"
+      @close="isInviteModalOpen = false"
+    />
   </div>
 </template>

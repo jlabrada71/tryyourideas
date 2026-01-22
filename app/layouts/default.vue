@@ -1,4 +1,7 @@
 <template>
-     <NuxtRouteAnnouncer />
-    <NuxtPage />
+  <div>
+    <NuxtRouteAnnouncer />
+    <slot />
+    <ToastContainer />
+  </div>
 </template>

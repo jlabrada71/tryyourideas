@@ -18,6 +18,7 @@ const isModalOpen = ref(false)
         {{ subtitle }}
       </p>
       <button
+        type="button"
         class="px-8 py-4 bg-white text-sky-600 rounded-lg hover:bg-sky-50 transition font-bold text-lg"
         @click="isModalOpen = true"
       >

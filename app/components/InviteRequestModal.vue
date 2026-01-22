@@ -7,6 +7,8 @@ const emit = defineEmits<{
   close: []
 }>()
 
+const toast = useToast()
+
 const form = reactive({
   name: '',
   email: '',
@@ -38,7 +40,9 @@ async function handleSubmit() {
         description: form.description
       }
     })
-    submitted.value = true
+    // Show success toast and close modal
+    toast.success('Thank you! Your invite request has been submitted successfully.', 3000)
+    handleClose()
   } catch (e: any) {
     error.value = e.data?.statusMessage || 'Something went wrong. Please try again.'
   } finally {

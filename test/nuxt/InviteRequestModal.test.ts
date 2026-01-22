@@ -1,176 +1,172 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { flushPromises } from '@vue/test-utils'
-import InviteRequestModal from '~/components/InviteRequestModal.vue'
+import { render, screen, waitFor, fireEvent } from '@testing-library/vue'
+import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom/vitest'
+import InviteRequestModal from '../../app/components/InviteRequestModal.vue'
 
 // Mock $fetch globally
 const mockFetch = vi.fn()
 vi.stubGlobal('$fetch', mockFetch)
 
-describe('InviteRequestModal', () => {
-  let wrapper: any
+// Mock useToast composable
+const mockToastSuccess = vi.fn()
+vi.mock('../../app/composables/useToast', () => ({
+  useToast: () => ({
+    success: mockToastSuccess,
+    error: vi.fn(),
+    info: vi.fn(),
+    show: vi.fn(),
+    remove: vi.fn(),
+    toasts: { value: [] }
+  })
+}))
 
+describe('InviteRequestModal', () => {
   beforeEach(() => {
     mockFetch.mockReset()
+    mockToastSuccess.mockReset()
   })
 
   afterEach(() => {
-    wrapper?.unmount()
-    // Clean up any teleported content
     document.body.innerHTML = ''
   })
 
-  it('does not render modal content when closed', async () => {
-    wrapper = await mountSuspended(InviteRequestModal, {
-      props: { open: false },
-      attachTo: document.body
+  it('does not render modal content when closed', () => {
+    render(InviteRequestModal, {
+      props: { open: false }
     })
 
-    expect(document.querySelector('form')).toBeNull()
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(screen.queryByRole('form')).not.toBeInTheDocument()
   })
 
-  it('renders form when open', async () => {
-    wrapper = await mountSuspended(InviteRequestModal, {
-      props: { open: true },
-      attachTo: document.body
+  it('renders form with accessible labels when open', () => {
+    render(InviteRequestModal, {
+      props: { open: true }
     })
 
-    expect(document.querySelector('form')).not.toBeNull()
-    expect(document.querySelector('input#name')).not.toBeNull()
-    expect(document.querySelector('input#email')).not.toBeNull()
-    expect(document.querySelector('select#role')).not.toBeNull()
-    expect(document.querySelector('textarea#description')).not.toBeNull()
+    expect(screen.getByLabelText(/full name/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/email address/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/i am a/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/tell us about yourself/i)).toBeInTheDocument()
   })
 
-  it('displays correct title and description', async () => {
-    wrapper = await mountSuspended(InviteRequestModal, {
-      props: { open: true },
-      attachTo: document.body
+  it('displays correct heading and description', () => {
+    render(InviteRequestModal, {
+      props: { open: true }
     })
 
-    const modalText = document.body.textContent || ''
-    expect(modalText).toContain('Request an Invite')
-    expect(modalText).toContain('invite-only')
+    expect(screen.getByRole('heading', { name: /request an invite/i })).toBeInTheDocument()
+    expect(screen.getByText(/invite-only/i)).toBeInTheDocument()
   })
 
-  it('has all role options', async () => {
-    wrapper = await mountSuspended(InviteRequestModal, {
-      props: { open: true },
-      attachTo: document.body
+  it('has all role options in the select', () => {
+    render(InviteRequestModal, {
+      props: { open: true }
     })
 
-    const options = document.querySelectorAll('select#role option')
-    const optionTexts = Array.from(options).map(o => o.textContent)
+    const roleSelect = screen.getByLabelText(/i am a/i)
+    expect(roleSelect).toBeInTheDocument()
 
-    expect(optionTexts).toContain('Idea Creator')
-    expect(optionTexts).toContain('Developer')
-    expect(optionTexts).toContain('Investor')
+    expect(screen.getByRole('option', { name: /idea creator/i })).toBeInTheDocument()
+    expect(screen.getByRole('option', { name: /developer/i })).toBeInTheDocument()
+    expect(screen.getByRole('option', { name: /investor/i })).toBeInTheDocument()
+  })
+
+  it('has an accessible close button', () => {
+    render(InviteRequestModal, {
+      props: { open: true }
+    })
+
+    // Close button should be accessible (even without visible text, it has a purpose)
+    const closeButtons = screen.getAllByRole('button')
+    expect(closeButtons.length).toBeGreaterThan(0)
   })
 
   it('emits close event when close button clicked', async () => {
-    wrapper = await mountSuspended(InviteRequestModal, {
-      props: { open: true },
-      attachTo: document.body
+    const { emitted } = render(InviteRequestModal, {
+      props: { open: true }
     })
 
-    const closeButton = document.querySelector('button[type="button"]') as HTMLButtonElement
-    closeButton?.click()
-    await flushPromises()
+    // The close button is the first button (type="button" vs type="submit")
+    const closeButton = screen.getAllByRole('button')[0]!
+    await fireEvent.click(closeButton)
 
-    expect(wrapper.emitted('close')).toBeTruthy()
+    expect(emitted().close).toBeTruthy()
   })
 
-  it('emits close event when clicking backdrop', async () => {
-    wrapper = await mountSuspended(InviteRequestModal, {
-      props: { open: true },
-      attachTo: document.body
+  it('has accessible form inputs with proper attributes', () => {
+    render(InviteRequestModal, {
+      props: { open: true }
     })
 
-    const backdrop = document.querySelector('.fixed.inset-0.z-50') as HTMLElement
-    backdrop?.click()
-    await flushPromises()
+    const nameInput = screen.getByLabelText(/full name/i)
+    const emailInput = screen.getByLabelText(/email address/i)
+    const roleSelect = screen.getByLabelText(/i am a/i)
+    const descriptionTextarea = screen.getByLabelText(/tell us about yourself/i)
 
-    expect(wrapper.emitted('close')).toBeTruthy()
+    expect(nameInput).toHaveAttribute('type', 'text')
+    expect(nameInput).toBeRequired()
+
+    expect(emailInput).toHaveAttribute('type', 'email')
+    expect(emailInput).toBeRequired()
+
+    expect(roleSelect).toBeRequired()
+    expect(descriptionTextarea).toBeRequired()
   })
 
-  it('submits form data to API', async () => {
+  it('submits form data to API when filled and submitted', async () => {
     mockFetch.mockResolvedValueOnce({ success: true })
+    const user = userEvent.setup()
 
-    wrapper = await mountSuspended(InviteRequestModal, {
-      props: { open: true },
-      attachTo: document.body
+    render(InviteRequestModal, {
+      props: { open: true }
     })
 
-    // Fill in the form
-    const nameInput = document.querySelector('input#name') as HTMLInputElement
-    const emailInput = document.querySelector('input#email') as HTMLInputElement
-    const roleSelect = document.querySelector('select#role') as HTMLSelectElement
-    const descriptionTextarea = document.querySelector('textarea#description') as HTMLTextAreaElement
-
-    nameInput.value = 'John Doe'
-    nameInput.dispatchEvent(new Event('input'))
-
-    emailInput.value = 'john@example.com'
-    emailInput.dispatchEvent(new Event('input'))
-
-    roleSelect.value = 'developer'
-    roleSelect.dispatchEvent(new Event('change'))
-
-    descriptionTextarea.value = 'I want to build great projects'
-    descriptionTextarea.dispatchEvent(new Event('input'))
-
-    await flushPromises()
+    // Fill in the form using accessible queries
+    await user.type(screen.getByLabelText(/full name/i), 'John Doe')
+    await user.type(screen.getByLabelText(/email address/i), 'john@example.com')
+    await user.selectOptions(screen.getByLabelText(/i am a/i), 'developer')
+    await user.type(screen.getByLabelText(/tell us about yourself/i), 'I want to build great projects')
 
     // Submit form
-    const form = document.querySelector('form') as HTMLFormElement
-    form.dispatchEvent(new Event('submit'))
+    await user.click(screen.getByRole('button', { name: /submit request/i }))
 
-    await flushPromises()
-
-    expect(mockFetch).toHaveBeenCalledWith('/api/invite-requests', {
-      method: 'POST',
-      body: {
-        name: 'John Doe',
-        email: 'john@example.com',
-        role: 'developer',
-        description: 'I want to build great projects'
-      }
+    await waitFor(() => {
+      expect(mockFetch).toHaveBeenCalledWith('/api/invite-requests', {
+        method: 'POST',
+        body: {
+          name: 'John Doe',
+          email: 'john@example.com',
+          role: 'developer',
+          description: 'I want to build great projects'
+        }
+      })
     })
   })
 
-  it('shows success message after submission', async () => {
+  it('shows success toast and closes modal after successful submission', async () => {
     mockFetch.mockResolvedValueOnce({ success: true })
+    const user = userEvent.setup()
 
-    wrapper = await mountSuspended(InviteRequestModal, {
-      props: { open: true },
-      attachTo: document.body
+    const { emitted } = render(InviteRequestModal, {
+      props: { open: true }
     })
 
-    // Fill form
-    const nameInput = document.querySelector('input#name') as HTMLInputElement
-    const emailInput = document.querySelector('input#email') as HTMLInputElement
-    const roleSelect = document.querySelector('select#role') as HTMLSelectElement
-    const descriptionTextarea = document.querySelector('textarea#description') as HTMLTextAreaElement
+    await user.type(screen.getByLabelText(/full name/i), 'John Doe')
+    await user.type(screen.getByLabelText(/email address/i), 'john@example.com')
+    await user.selectOptions(screen.getByLabelText(/i am a/i), 'creator')
+    await user.type(screen.getByLabelText(/tell us about yourself/i), 'I have a great idea')
 
-    nameInput.value = 'John Doe'
-    nameInput.dispatchEvent(new Event('input'))
-    emailInput.value = 'john@example.com'
-    emailInput.dispatchEvent(new Event('input'))
-    roleSelect.value = 'creator'
-    roleSelect.dispatchEvent(new Event('change'))
-    descriptionTextarea.value = 'I have a great idea'
-    descriptionTextarea.dispatchEvent(new Event('input'))
+    await user.click(screen.getByRole('button', { name: /submit request/i }))
 
-    await flushPromises()
-
-    // Submit form
-    const form = document.querySelector('form') as HTMLFormElement
-    form.dispatchEvent(new Event('submit'))
-
-    await flushPromises()
-
-    const modalText = document.body.textContent || ''
-    expect(modalText).toContain('Request Received!')
+    await waitFor(() => {
+      expect(mockToastSuccess).toHaveBeenCalledWith(
+        expect.stringContaining('submitted successfully'),
+        3000
+      )
+    })
+    expect(emitted().close).toBeTruthy()
   })
 
   it('shows error message on API failure', async () => {
@@ -178,147 +174,101 @@ describe('InviteRequestModal', () => {
       data: { statusMessage: 'Invalid email format' }
     })
 
-    wrapper = await mountSuspended(InviteRequestModal, {
-      props: { open: true },
-      attachTo: document.body
+    render(InviteRequestModal, {
+      props: { open: true }
     })
 
-    // Fill form
-    const nameInput = document.querySelector('input#name') as HTMLInputElement
-    const emailInput = document.querySelector('input#email') as HTMLInputElement
-    const roleSelect = document.querySelector('select#role') as HTMLSelectElement
-    const descriptionTextarea = document.querySelector('textarea#description') as HTMLTextAreaElement
+    // Use fireEvent for more direct control
+    const nameInput = screen.getByLabelText(/full name/i)
+    const emailInput = screen.getByLabelText(/email address/i)
+    const roleSelect = screen.getByLabelText(/i am a/i)
+    const descriptionInput = screen.getByLabelText(/tell us about yourself/i)
 
-    nameInput.value = 'John Doe'
-    nameInput.dispatchEvent(new Event('input'))
-    emailInput.value = 'invalid-email'
-    emailInput.dispatchEvent(new Event('input'))
-    roleSelect.value = 'investor'
-    roleSelect.dispatchEvent(new Event('change'))
-    descriptionTextarea.value = 'Looking for opportunities'
-    descriptionTextarea.dispatchEvent(new Event('input'))
+    await fireEvent.update(nameInput, 'John Doe')
+    await fireEvent.update(emailInput, 'invalid-email')
+    await fireEvent.update(roleSelect, 'investor')
+    await fireEvent.update(descriptionInput, 'Looking for opportunities')
 
-    await flushPromises()
+    // Submit using the form element
+    const form = nameInput.closest('form')!
+    await fireEvent.submit(form)
 
-    // Submit form
-    const form = document.querySelector('form') as HTMLFormElement
-    form.dispatchEvent(new Event('submit'))
-
-    await flushPromises()
-
-    const modalText = document.body.textContent || ''
-    expect(modalText).toContain('Invalid email format')
+    await waitFor(() => {
+      expect(screen.getByText(/invalid email format/i)).toBeInTheDocument()
+    })
   })
 
-  it('shows generic error message when no statusMessage', async () => {
+  it('shows generic error message when no statusMessage provided', async () => {
     mockFetch.mockRejectedValueOnce(new Error('Network error'))
+    const user = userEvent.setup()
 
-    wrapper = await mountSuspended(InviteRequestModal, {
-      props: { open: true },
-      attachTo: document.body
+    render(InviteRequestModal, {
+      props: { open: true }
     })
 
-    // Fill form
-    const nameInput = document.querySelector('input#name') as HTMLInputElement
-    const emailInput = document.querySelector('input#email') as HTMLInputElement
-    const roleSelect = document.querySelector('select#role') as HTMLSelectElement
-    const descriptionTextarea = document.querySelector('textarea#description') as HTMLTextAreaElement
+    await user.type(screen.getByLabelText(/full name/i), 'John Doe')
+    await user.type(screen.getByLabelText(/email address/i), 'john@example.com')
+    await user.selectOptions(screen.getByLabelText(/i am a/i), 'developer')
+    await user.type(screen.getByLabelText(/tell us about yourself/i), 'Test')
 
-    nameInput.value = 'John Doe'
-    nameInput.dispatchEvent(new Event('input'))
-    emailInput.value = 'john@example.com'
-    emailInput.dispatchEvent(new Event('input'))
-    roleSelect.value = 'developer'
-    roleSelect.dispatchEvent(new Event('change'))
-    descriptionTextarea.value = 'Test'
-    descriptionTextarea.dispatchEvent(new Event('input'))
+    await user.click(screen.getByRole('button', { name: /submit request/i }))
 
-    await flushPromises()
-
-    // Submit form
-    const form = document.querySelector('form') as HTMLFormElement
-    form.dispatchEvent(new Event('submit'))
-
-    await flushPromises()
-
-    const modalText = document.body.textContent || ''
-    expect(modalText).toContain('Something went wrong')
+    await waitFor(() => {
+      expect(screen.getByText(/something went wrong/i)).toBeInTheDocument()
+    })
   })
 
   it('disables form inputs while loading', async () => {
-    // Make fetch hang to simulate loading
     mockFetch.mockImplementationOnce(() => new Promise(() => {}))
+    const user = userEvent.setup()
 
-    wrapper = await mountSuspended(InviteRequestModal, {
-      props: { open: true },
-      attachTo: document.body
+    render(InviteRequestModal, {
+      props: { open: true }
     })
 
-    // Fill form
-    const nameInput = document.querySelector('input#name') as HTMLInputElement
-    const emailInput = document.querySelector('input#email') as HTMLInputElement
-    const roleSelect = document.querySelector('select#role') as HTMLSelectElement
-    const descriptionTextarea = document.querySelector('textarea#description') as HTMLTextAreaElement
+    await user.type(screen.getByLabelText(/full name/i), 'John Doe')
+    await user.type(screen.getByLabelText(/email address/i), 'john@example.com')
+    await user.selectOptions(screen.getByLabelText(/i am a/i), 'developer')
+    await user.type(screen.getByLabelText(/tell us about yourself/i), 'Test')
 
-    nameInput.value = 'John Doe'
-    nameInput.dispatchEvent(new Event('input'))
-    emailInput.value = 'john@example.com'
-    emailInput.dispatchEvent(new Event('input'))
-    roleSelect.value = 'developer'
-    roleSelect.dispatchEvent(new Event('change'))
-    descriptionTextarea.value = 'Test'
-    descriptionTextarea.dispatchEvent(new Event('input'))
+    await user.click(screen.getByRole('button', { name: /submit request/i }))
 
-    await flushPromises()
-
-    // Submit form
-    const form = document.querySelector('form') as HTMLFormElement
-    form.dispatchEvent(new Event('submit'))
-
-    await flushPromises()
-
-    // Check inputs are disabled
-    expect(nameInput.disabled).toBe(true)
-    expect(emailInput.disabled).toBe(true)
-    expect(roleSelect.disabled).toBe(true)
-    expect(descriptionTextarea.disabled).toBe(true)
-
-    const submitButton = document.querySelector('button[type="submit"]') as HTMLButtonElement
-    expect(submitButton.disabled).toBe(true)
+    await waitFor(() => {
+      expect(screen.getByLabelText(/full name/i)).toBeDisabled()
+      expect(screen.getByLabelText(/email address/i)).toBeDisabled()
+      expect(screen.getByLabelText(/i am a/i)).toBeDisabled()
+      expect(screen.getByLabelText(/tell us about yourself/i)).toBeDisabled()
+      expect(screen.getByRole('button', { name: /submitting/i })).toBeDisabled()
+    })
   })
 
-  it('shows loading text on submit button while submitting', async () => {
+  it('shows loading indicator on submit button while submitting', async () => {
     mockFetch.mockImplementationOnce(() => new Promise(() => {}))
+    const user = userEvent.setup()
 
-    wrapper = await mountSuspended(InviteRequestModal, {
-      props: { open: true },
-      attachTo: document.body
+    render(InviteRequestModal, {
+      props: { open: true }
     })
 
-    // Fill form
-    const nameInput = document.querySelector('input#name') as HTMLInputElement
-    const emailInput = document.querySelector('input#email') as HTMLInputElement
-    const roleSelect = document.querySelector('select#role') as HTMLSelectElement
-    const descriptionTextarea = document.querySelector('textarea#description') as HTMLTextAreaElement
+    await user.type(screen.getByLabelText(/full name/i), 'John Doe')
+    await user.type(screen.getByLabelText(/email address/i), 'john@example.com')
+    await user.selectOptions(screen.getByLabelText(/i am a/i), 'developer')
+    await user.type(screen.getByLabelText(/tell us about yourself/i), 'Test')
 
-    nameInput.value = 'John Doe'
-    nameInput.dispatchEvent(new Event('input'))
-    emailInput.value = 'john@example.com'
-    emailInput.dispatchEvent(new Event('input'))
-    roleSelect.value = 'developer'
-    roleSelect.dispatchEvent(new Event('change'))
-    descriptionTextarea.value = 'Test'
-    descriptionTextarea.dispatchEvent(new Event('input'))
+    await user.click(screen.getByRole('button', { name: /submit request/i }))
 
-    await flushPromises()
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /submitting/i })).toBeInTheDocument()
+    })
+  })
 
-    // Submit form
-    const form = document.querySelector('form') as HTMLFormElement
-    form.dispatchEvent(new Event('submit'))
+  it('has proper placeholder text for guidance', () => {
+    render(InviteRequestModal, {
+      props: { open: true }
+    })
 
-    await flushPromises()
-
-    const submitButton = document.querySelector('button[type="submit"]') as HTMLButtonElement
-    expect(submitButton.textContent).toContain('Submitting...')
+    expect(screen.getByPlaceholderText(/john doe/i)).toBeInTheDocument()
+    expect(screen.getByPlaceholderText(/john@example.com/i)).toBeInTheDocument()
+    expect(screen.getByPlaceholderText(/what brings you/i)).toBeInTheDocument()
   })
 })

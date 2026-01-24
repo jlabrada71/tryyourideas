@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Featured Projects &amp; CTA - Try Your Ideas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00a8a3",
+                        "accent-coral": "#FF7F50",
+                        "background-light": "#f8fafb",
+                        "background-dark": "#191e24",
+                        "card-dark": "#21272e",
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body { font-family: 'Manrope', sans-serif; }
+        .font-display { font-family: 'Epilogue', sans-serif; }
+        .mesh-gradient {
+            background-color: #00a8a3;
+            background-image: 
+                radial-gradient(at 0% 0%, #00d1cb 0px, transparent 50%),
+                radial-gradient(at 100% 100%, #173635 0px, transparent 50%);
+        }
+        body {
+            min-height: 100dvh;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<header class="max-w-7xl mx-auto px-6 pt-12 pb-8 flex justify-between items-end">
+<div>
+<h2 class="text-3xl md:text-4xl font-extrabold font-display tracking-tight text-white">Featured Projects</h2>
+<p class="text-slate-400 text-sm md:text-base mt-1">Vetted opportunities for bold builders.</p>
+</div>
+<a class="flex items-center gap-2 text-primary font-semibold text-sm md:text-base hover:underline transition-all" href="#">
+        View All Projects
+        <span class="material-symbols-outlined text-sm md:text-base">arrow_forward</span>
+</a>
+</header>
+<main class="max-w-7xl mx-auto px-6 pb-20">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="bg-card-dark rounded-2xl overflow-hidden border border-white/5 shadow-2xl flex flex-col group hover:border-primary/30 transition-all duration-300">
+<div class="relative w-full aspect-[16/10] bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAW_gm3Pf133bFpgoYD3AJHMqNIDFxuAfKR6vnIEX0VTmsFSPzesx1TfSmjTknViaSPhow2s1Oep_NCkH4ZV_2045rQd227CAVoigwpGqicrJ9NSi-N5mLa1Bqf6P8N0RnF3O6TC2uiTuPlRKpWoEjcfQZYc3Chf0DGBLnzKEHUaKJRsgjjX1f6zDuTtTgMQYKySLO_A7uxFUZWBl3j-PNSipQiKO5-EJ5JQu_ZpvjSUtDWZYucBkopKjJVkO4w_lTT9HmY0byDwQ');">
+<div class="absolute top-4 right-4 bg-accent-coral text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                    2 Spots Left
+                </div>
+</div>
+<div class="p-6 flex flex-col flex-grow gap-5">
+<div class="space-y-2">
+<h3 class="text-xl font-bold font-display text-white group-hover:text-primary transition-colors">NeuralLink Dashboard</h3>
+<p class="text-slate-400 text-sm leading-relaxed">A cutting-edge AI dashboard for real-time neural data visualization and analysis.</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold rounded-full uppercase tracking-wider">AI</span>
+<span class="px-3 py-1 bg-white/5 border border-white/10 text-slate-300 text-[10px] font-bold rounded-full uppercase tracking-wider">Python</span>
+<span class="px-3 py-1 bg-white/5 border border-white/10 text-slate-300 text-[10px] font-bold rounded-full uppercase tracking-wider">Pytorch</span>
+</div>
+<div class="space-y-3 mt-auto">
+<div class="flex justify-between items-center text-xs">
+<span class="text-slate-400 font-medium">85% Funded</span>
+<span class="text-primary font-bold">$12.4k / $15k</span>
+</div>
+<div class="w-full bg-white/10 h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 85%;"></div>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 group/btn">
+                    Investigate Project
+                    <span class="material-symbols-outlined text-lg group-hover/btn:translate-x-1 transition-transform">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="bg-card-dark rounded-2xl overflow-hidden border border-white/5 shadow-2xl flex flex-col group hover:border-primary/30 transition-all duration-300">
+<div class="relative w-full aspect-[16/10] bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAiEfbQDdBrKOI5cOG7k21aUxlGArKcmHjbAFubhqGuKIbBKs9w17ZtRy2Fe8PCUPBBmwH7NxTGMgBDRygi9BsEcdZoIz2tMdTYeftCkbFMPSiCLemF_PT6VoJiJiDCe9hSBDH2251GTcVQXpRou1JJ-2PjJC6EoVZ0lctXB6H_I5aju3aSyjRcCn09R2q-w-Drqxn7sU6_Mt1KyeoIeMcjCo4Iya_QtyuzVtfco7xoyWRuOBFGcDuJI3GxEkvgVEYlLag5q7SMAw');">
+<div class="absolute top-4 right-4 bg-accent-coral text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                    5 Spots Left
+                </div>
+</div>
+<div class="p-6 flex flex-col flex-grow gap-5">
+<div class="space-y-2">
+<h3 class="text-xl font-bold font-display text-white group-hover:text-primary transition-colors">EcoTrack Mobile</h3>
+<p class="text-slate-400 text-sm leading-relaxed">Connecting green-tech enthusiasts to track and reduce collective carbon footprints.</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold rounded-full uppercase tracking-wider">Vue.js</span>
+<span class="px-3 py-1 bg-white/5 border border-white/10 text-slate-300 text-[10px] font-bold rounded-full uppercase tracking-wider">GreenTech</span>
+<span class="px-3 py-1 bg-white/5 border border-white/10 text-slate-300 text-[10px] font-bold rounded-full uppercase tracking-wider">Solidity</span>
+</div>
+<div class="space-y-3 mt-auto">
+<div class="flex justify-between items-center text-xs">
+<span class="text-slate-400 font-medium">40% Funded</span>
+<span class="text-primary font-bold">$4k / $10k</span>
+</div>
+<div class="w-full bg-white/10 h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 40%;"></div>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 group/btn">
+                    Investigate Project
+                    <span class="material-symbols-outlined text-lg group-hover/btn:translate-x-1 transition-transform">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="bg-card-dark rounded-2xl overflow-hidden border border-white/5 shadow-2xl flex flex-col group hover:border-primary/30 transition-all duration-300">
+<div class="relative w-full aspect-[16/10] bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA5ToT5lwNneyCx218LtAreyrwh-NCEMdb4eupSax7g0jiWXbMctsb7RWOJ3FkxJNK6hnahMQ3O8Ropmz--lYTDrXa4Y_1Ml-VQJVQVyemWFQcxTDRrJs4j1_Ly8dJluHMX4pZ8vBYQq1cYRfrIvO2nXOuNtCWB7nK9Eo77z8-jyF5WcrQ-WrKP2BCjiYI_BqMlsPlZlL6J2WkfJx-1fqQ66Ktgg5bfF-Bx1HViRt7xd7XcEoZGVoGUCP1YicL_NfHE-1_U7Gc2gQ');">
+<div class="absolute top-4 right-4 bg-accent-coral text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                    New
+                </div>
+</div>
+<div class="p-6 flex flex-col flex-grow gap-5">
+<div class="space-y-2">
+<h3 class="text-xl font-bold font-display text-white group-hover:text-primary transition-colors">Web3 Auth Shield</h3>
+<p class="text-slate-400 text-sm leading-relaxed">Secure, decentralized authentication protocol for high-stakes enterprise applications.</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold rounded-full uppercase tracking-wider">Web3</span>
+<span class="px-3 py-1 bg-white/5 border border-white/10 text-slate-300 text-[10px] font-bold rounded-full uppercase tracking-wider">Rust</span>
+<span class="px-3 py-1 bg-white/5 border border-white/10 text-slate-300 text-[10px] font-bold rounded-full uppercase tracking-wider">Security</span>
+</div>
+<div class="space-y-3 mt-auto">
+<div class="flex justify-between items-center text-xs">
+<span class="text-slate-400 font-medium">15% Funded</span>
+<span class="text-primary font-bold">$15k / $100k</span>
+</div>
+<div class="w-full bg-white/10 h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 15%;"></div>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 group/btn">
+                    Investigate Project
+                    <span class="material-symbols-outlined text-lg group-hover/btn:translate-x-1 transition-transform">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<section class="max-w-7xl mx-auto px-6 mb-20">
+<div class="rounded-[2rem] mesh-gradient relative overflow-hidden p-8 md:p-16">
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+<div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
+<div class="max-w-xl text-center lg:text-left">
+<h2 class="text-4xl md:text-5xl font-black font-display text-white leading-[1.1] mb-6">Ready to build the future?</h2>
+<p class="text-white/80 text-lg md:text-xl font-medium max-w-lg">Join 5,000+ creators getting weekly early access to disruptive project updates and funding alerts.</p>
+</div>
+<div class="w-full max-w-md bg-white/10 backdrop-blur-md p-2 rounded-2xl border border-white/20">
+<form class="flex flex-col sm:flex-row gap-2">
+<input class="flex-grow bg-transparent border-none text-white placeholder-white/60 px-5 py-4 focus:ring-0 text-base" placeholder="your@email.com" type="email"/>
+<button class="bg-white text-primary font-bold px-8 py-4 rounded-xl shadow-xl active:scale-[0.98] transition-all hover:bg-slate-50 whitespace-nowrap">
+                        Join Movement
+                    </button>
+</form>
+</div>
+</div>
+</div>
+</section>
+<footer class="bg-background-dark pt-20 pb-12 border-t border-white/5">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 mb-20">
+<div class="col-span-2 space-y-6">
+<h3 class="text-2xl font-black font-display text-white">Try Your Ideas</h3>
+<p class="text-slate-400 text-sm max-w-xs leading-relaxed">The premier collaborative platform connecting the next generation of builders with the capital they need.</p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#">
+<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#">
+<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path></svg>
+</a>
+</div>
+</div>
+<div class="space-y-5">
+<h4 class="text-white font-display font-bold uppercase tracking-widest text-xs">Platform</h4>
+<ul class="space-y-3 text-slate-400 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Browse Projects</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Start Funding</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Investor Portal</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Success Stories</a></li>
+</ul>
+</div>
+<div class="space-y-5">
+<h4 class="text-white font-display font-bold uppercase tracking-widest text-xs">Company</h4>
+<ul class="space-y-3 text-slate-400 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Join the Team</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Brand Kit</a></li>
+</ul>
+</div>
+<div class="space-y-5">
+<h4 class="text-white font-display font-bold uppercase tracking-widest text-xs">Legal</h4>
+<ul class="space-y-3 text-slate-400 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Use</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Cookie Settings</a></li>
+</ul>
+</div>
+<div class="col-span-2 lg:col-span-1 space-y-5">
+<h4 class="text-white font-display font-bold uppercase tracking-widest text-xs">Newsletter</h4>
+<p class="text-slate-400 text-xs leading-relaxed">Weekly digest of top trends.</p>
+<div class="relative">
+<input class="w-full bg-white/5 border border-white/10 text-white placeholder-white/30 px-4 py-2.5 rounded-lg text-xs focus:ring-1 focus:ring-primary focus:border-primary" placeholder="Enter email" type="email"/>
+<button class="absolute right-1.5 top-1.5 bg-primary/20 text-primary p-1 rounded-md hover:bg-primary/30 transition-colors">
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 border-t border-white/5 pt-8">
+<p class="text-slate-500 text-[10px] uppercase tracking-widest font-bold">© 2024 Try Your Ideas. Built for the bold.</p>
+<div class="flex gap-6 text-[10px] uppercase tracking-widest font-bold text-slate-500">
+<a class="hover:text-white transition-colors" href="#">Support</a>
+<a class="hover:text-white transition-colors" href="#">API Status</a>
+<a class="hover:text-white transition-colors" href="#">Changelog</a>
+</div>
+</div>
+</div>
+<div class="h-8"></div>
+</footer>
+
+</body></html>

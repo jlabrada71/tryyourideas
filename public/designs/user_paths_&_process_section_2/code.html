@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Try Your Ideas - User Paths &amp; Process</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00a8a3",
+                        "background-light": "#f8fafb",
+                        "background-dark": "#191e24",
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-glow-purple { box-shadow: 0 0 40px -10px rgba(168, 85, 247, 0.15); }
+        .bento-glow-blue { box-shadow: 0 0 40px -10px rgba(59, 130, 246, 0.15); }
+        .bento-glow-green { box-shadow: 0 0 40px -10px rgba(34, 197, 94, 0.15); }
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.02); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .journey-line {
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 15%, rgba(255,255,255,0.1) 85%, transparent 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen">
+<div class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
+<div class="text-center mb-16">
+<h2 class="text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight mb-4">Choose Your Path</h2>
+<p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">Whether you have a vision, the skills to build it, or the capital to fuel it, there's a place for you in our ecosystem.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
+<div class="glass-card bento-glow-purple rounded-2xl p-8 flex flex-col items-center text-center transition-all duration-300 card-hover group border-purple-500/10">
+<div class="w-20 h-20 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-500/20 transition-colors">
+<span class="material-symbols-outlined text-purple-400 text-4xl">lightbulb</span>
+</div>
+<h3 class="font-bold text-2xl text-purple-100 mb-3">Idea Creators</h3>
+<p class="text-slate-400 text-base leading-relaxed mb-8">Turn your vision into reality. Share your groundbreaking concepts and find the team to build them.</p>
+<div class="mt-auto">
+<a class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-purple-500/10 text-purple-400 font-bold hover:bg-purple-500 hover:text-white transition-all w-full" href="#">
+                        Get Started <span class="material-symbols-outlined text-lg ml-2">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="glass-card bento-glow-blue rounded-2xl p-8 flex flex-col items-center text-center transition-all duration-300 card-hover group border-blue-500/10">
+<div class="w-20 h-20 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition-colors">
+<span class="material-symbols-outlined text-blue-400 text-4xl">code</span>
+</div>
+<h3 class="font-bold text-2xl text-blue-100 mb-3">Developers</h3>
+<p class="text-slate-400 text-base leading-relaxed mb-8">Join world-changing projects. Apply your technical expertise to innovative startups and earn equity.</p>
+<div class="mt-auto">
+<a class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-blue-500/10 text-blue-400 font-bold hover:bg-blue-500 hover:text-white transition-all w-full" href="#">
+                        Browse Projects <span class="material-symbols-outlined text-lg ml-2">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="glass-card bento-glow-green rounded-2xl p-8 flex flex-col items-center text-center transition-all duration-300 card-hover group border-green-500/10">
+<div class="w-20 h-20 bg-green-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-500/20 transition-colors">
+<span class="material-symbols-outlined text-green-400 text-4xl">query_stats</span>
+</div>
+<h3 class="font-bold text-2xl text-green-100 mb-3">Investors</h3>
+<p class="text-slate-400 text-base leading-relaxed mb-8">Back the next big thing. Discover vetted opportunities and provide the capital to fuel rapid growth.</p>
+<div class="mt-auto">
+<a class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-green-500/10 text-green-400 font-bold hover:bg-green-500 hover:text-white transition-all w-full" href="#">
+                        View Deals <span class="material-symbols-outlined text-lg ml-2">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<div class="pt-16 border-t border-slate-800">
+<div class="text-center mb-20">
+<h2 class="text-3xl font-extrabold leading-tight tracking-tight mb-2">The Journey</h2>
+<p class="text-slate-500 dark:text-slate-400 text-base">A streamlined 5-step process to launch your innovation</p>
+</div>
+<div class="relative">
+<div class="absolute top-1/2 left-0 w-full h-px journey-line -translate-y-16 hidden lg:block"></div>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 relative z-10">
+<div class="flex flex-col items-center text-center">
+<span class="text-primary font-bold text-sm uppercase tracking-widest mb-4">Step 01</span>
+<div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30 mb-6 border-4 border-background-dark">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<h4 class="text-xl font-bold mb-3">Create Profile</h4>
+<p class="text-slate-400 text-sm leading-relaxed">Set up your professional identity and showcase your portfolio.</p>
+</div>
+<div class="flex flex-col items-center text-center">
+<span class="text-slate-500 font-bold text-sm uppercase tracking-widest mb-4">Step 02</span>
+<div class="w-16 h-16 rounded-full bg-slate-800 border-2 border-primary/40 flex items-center justify-center text-primary mb-6 border-4 border-background-dark">
+<span class="material-symbols-outlined">explore</span>
+</div>
+<h4 class="text-xl font-bold mb-3">Post/Discover</h4>
+<p class="text-slate-400 text-sm leading-relaxed">Share groundbreaking ideas or browse the gallery for projects.</p>
+</div>
+<div class="flex flex-col items-center text-center">
+<span class="text-slate-500 font-bold text-sm uppercase tracking-widest mb-4">Step 03</span>
+<div class="w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-slate-500 mb-6 border-4 border-background-dark">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<h4 class="text-xl font-bold mb-3">Connect</h4>
+<p class="text-slate-400 text-sm leading-relaxed">Our AI engine matches you with the right collaboration partners.</p>
+</div>
+<div class="flex flex-col items-center text-center">
+<span class="text-slate-500 font-bold text-sm uppercase tracking-widest mb-4">Step 04</span>
+<div class="w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-slate-500 mb-6 border-4 border-background-dark">
+<span class="material-symbols-outlined">handyman</span>
+</div>
+<h4 class="text-xl font-bold mb-3">Build/Fund</h4>
+<p class="text-slate-400 text-sm leading-relaxed">Execute milestones or provide capital to fuel development.</p>
+</div>
+<div class="flex flex-col items-center text-center">
+<span class="text-slate-500 font-bold text-sm uppercase tracking-widest mb-4">Step 05</span>
+<div class="w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-slate-500 mb-6 border-4 border-background-dark">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<h4 class="text-xl font-bold mb-3">Launch</h4>
+<p class="text-slate-400 text-sm leading-relaxed">Bring the product to market with your new network support.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-32 text-center bg-gradient-to-b from-primary/5 to-transparent p-12 rounded-3xl border border-primary/10">
+<h3 class="text-2xl font-bold mb-6">Ready to start your innovation journey?</h3>
+<button class="px-10 py-4 bg-primary hover:bg-teal-600 text-white text-lg font-bold rounded-xl shadow-xl shadow-primary/20 transition-all hover:scale-105 active:scale-95">
+                Join Try Your Ideas
+            </button>
+<p class="text-slate-500 text-sm mt-6">Join 10,000+ creators and builders today. No credit card required.</p>
+</div>
+</div>
+
+</body></html>

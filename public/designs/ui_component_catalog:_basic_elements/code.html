@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UI Component Catalog: Basic Elements</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ece5",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102221",
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Epilogue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #234847;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<div class="max-w-[480px] mx-auto bg-background-light dark:bg-background-dark min-h-screen pb-12 shadow-2xl relative overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="text-slate-900 dark:text-white flex size-12 shrink-0 items-center">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Basic Elements</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex items-center justify-center rounded-lg h-12 w-12 bg-transparent text-slate-900 dark:text-white">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Tabs -->
+<div class="pb-1">
+<div class="flex border-b border-slate-200 dark:border-[#326765] px-4 gap-6 overflow-x-auto no-scrollbar">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-slate-900 dark:text-white pb-[13px] pt-4 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Components</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-slate-500 dark:text-[#92c9c7] pb-[13px] pt-4 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Layout</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-slate-500 dark:text-[#92c9c7] pb-[13px] pt-4 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Icons</p>
+</a>
+</div>
+</div>
+</header>
+<!-- SearchBar -->
+<div class="px-4 py-3">
+<label class="flex flex-col min-w-40 h-12 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-400 dark:text-[#92c9c7] flex border-none bg-slate-100 dark:bg-[#234847] items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-[#234847] h-full placeholder:text-slate-400 dark:placeholder:text-[#92c9c7] px-4 pl-2 text-base font-normal leading-normal" placeholder="Search components..." value=""/>
+</div>
+</label>
+</div>
+<main class="space-y-6">
+<!-- SECTION: Action Elements -->
+<section>
+<h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Action Elements</h2>
+<div class="px-4 space-y-4">
+<!-- Primary & Secondary Large -->
+<div class="flex gap-3">
+<button class="flex-1 flex cursor-pointer items-center justify-center rounded-lg h-12 px-5 bg-primary text-[#102221] text-base font-bold transition-opacity active:opacity-70">
+                            Primary LG
+                        </button>
+<button class="flex-1 flex cursor-pointer items-center justify-center rounded-lg h-12 px-5 bg-slate-200 dark:bg-[#234847] text-slate-900 dark:text-white text-base font-bold active:opacity-70">
+                            Secondary LG
+                        </button>
+</div>
+<!-- Sizes and Variants -->
+<div class="flex items-center gap-3 flex-wrap">
+<button class="flex h-10 px-4 bg-primary/20 text-primary border border-primary/30 rounded-lg text-sm font-bold items-center">Medium Ghost</button>
+<button class="flex h-8 px-3 bg-primary text-[#102221] rounded-lg text-xs font-bold items-center">Small Solid</button>
+<button class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<button class="flex size-12 items-center justify-center rounded-lg bg-[#234847] text-white">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</div>
+</section>
+<!-- SECTION: Form Controls -->
+<section>
+<h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Form Controls</h2>
+<div class="px-4 space-y-4">
+<!-- Text Input -->
+<div class="space-y-1.5">
+<label class="text-sm font-medium text-slate-600 dark:text-[#92c9c7]">Full Name</label>
+<input class="w-full h-12 px-4 rounded-lg bg-slate-100 dark:bg-[#1a3534] border-none text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50" placeholder="e.g. John Doe" type="text"/>
+</div>
+<!-- Select Menu -->
+<div class="space-y-1.5">
+<label class="text-sm font-medium text-slate-600 dark:text-[#92c9c7]">Platform Role</label>
+<div class="relative">
+<select class="w-full h-12 px-4 appearance-none rounded-lg bg-slate-100 dark:bg-[#1a3534] border-none text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50">
+<option>Designer</option>
+<option>Developer</option>
+<option>Product Manager</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none opacity-50">expand_more</span>
+</div>
+</div>
+<!-- Toggle & Checkbox -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-slate-50 dark:bg-[#1a3534]/30 border border-slate-100 dark:border-[#326765]/30">
+<div class="flex flex-col">
+<span class="text-base font-semibold">Enable Notifications</span>
+<span class="text-xs text-slate-500 dark:text-[#92c9c7]">Push alerts for new ideas</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center gap-3">
+<input checked="" class="size-5 rounded border-slate-300 dark:border-[#326765] bg-transparent text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm">I agree to the Terms &amp; Conditions</span>
+</div>
+</div>
+</section>
+<!-- SECTION: Feedback -->
+<section>
+<h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Feedback</h2>
+<div class="px-4 space-y-3">
+<!-- Alert Success -->
+<div class="flex items-center gap-3 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-500">
+<span class="material-symbols-outlined">check_circle</span>
+<p class="text-sm font-medium">Profile updated successfully!</p>
+</div>
+<!-- Alert Error -->
+<div class="flex items-center gap-3 p-4 bg-rose-500/10 border border-rose-500/20 rounded-lg text-rose-500">
+<span class="material-symbols-outlined">error</span>
+<p class="text-sm font-medium">Failed to save changes. Please try again.</p>
+</div>
+<!-- Alert Warning -->
+<div class="flex items-center gap-3 p-4 bg-amber-500/10 border border-amber-500/20 rounded-lg text-amber-500">
+<span class="material-symbols-outlined">warning</span>
+<p class="text-sm font-medium">Your storage is almost full (90%).</p>
+</div>
+<!-- Toast Sample -->
+<div class="flex items-center justify-between bg-slate-800 dark:bg-[#234847] p-3 rounded-xl shadow-lg mt-4 border border-white/5">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-primary flex items-center justify-center text-[#102221]">
+<span class="material-symbols-outlined text-sm">notifications_active</span>
+</div>
+<span class="text-sm font-medium text-white">New comment on your idea</span>
+</div>
+<button class="text-xs font-bold text-primary uppercase">View</button>
+</div>
+</div>
+</section>
+<!-- SECTION: Indicators -->
+<section>
+<h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Indicators</h2>
+<div class="px-4 space-y-6">
+<!-- Progress Bar -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#92c9c7]">
+<span>Uploading Idea...</span>
+<span>65%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-[#234847] h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%] rounded-full"></div>
+</div>
+</div>
+<!-- Spinner & Skeleton -->
+<div class="flex items-center gap-8">
+<div class="flex flex-col items-center gap-2">
+<div class="size-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+<span class="text-[10px] uppercase font-bold text-slate-400">Loading</span>
+</div>
+<div class="flex-1 space-y-2">
+<div class="h-4 bg-slate-200 dark:bg-[#234847] rounded-lg w-3/4 animate-pulse"></div>
+<div class="h-3 bg-slate-200 dark:bg-[#234847] rounded-lg w-1/2 animate-pulse opacity-50"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: Navigation -->
+<section class="pb-8">
+<h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Navigation</h2>
+<div class="px-4 space-y-6">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-xs font-medium">
+<span class="text-slate-400">Library</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-400">Components</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary">Forms</span>
+</nav>
+<!-- Pagination -->
+<div class="flex items-center justify-center gap-2">
+<button class="size-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-[#234847]">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="size-8 flex items-center justify-center rounded-lg bg-primary text-[#102221] text-xs font-bold">1</button>
+<button class="size-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-[#234847] text-xs">2</button>
+<button class="size-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-[#234847] text-xs">3</button>
+<button class="size-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-[#234847]">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Tab Bar (iOS Style) -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-[480px] mx-auto bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-xl border-t border-slate-200 dark:border-[#326765] flex justify-around items-center py-2 pb-6 px-6">
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">widgets</span>
+<span class="text-[10px] font-bold">Catalog</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400 dark:text-[#92c9c7]">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px] font-bold">Recent</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400 dark:text-[#92c9c7]">
+<span class="material-symbols-outlined">star</span>
+<span class="text-[10px] font-bold">Saved</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400 dark:text-[#92c9c7]">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold">System</span>
+</div>
+</nav>
+</div>
+</body></html>

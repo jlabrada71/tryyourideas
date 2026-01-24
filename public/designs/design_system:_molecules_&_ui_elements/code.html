@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Design System: Molecules &amp; UI Elements</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#00a8a3",
+              "background-light": "#f5f8f8",
+              "background-dark": "#0f2323",
+            },
+            fontFamily: {
+              "display": ["Epilogue"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- TopAppBar -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between border-b border-slate-200 dark:border-slate-800">
+<div class="text-slate-900 dark:text-white flex size-12 shrink-0 items-center">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Molecules</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-slate-900 dark:text-white gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</div>
+<!-- Introduction Section -->
+<div class="px-4 py-4">
+<p class="text-slate-600 dark:text-slate-300 text-base font-normal leading-normal">
+                A live guide for mid-level components in the Try Your Ideas ecosystem. These molecules are built from atoms and serve as the foundation for complex interfaces.
+            </p>
+</div>
+<!-- Button Library Section -->
+<div class="mt-4">
+<h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3">Button Library</h2>
+<div class="bg-slate-100/50 dark:bg-slate-800/30 mx-4 rounded-xl p-4">
+<div class="flex flex-col gap-6">
+<!-- Primary States -->
+<div class="space-y-2">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Primary Actions</span>
+<div class="flex flex-col gap-3">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] w-full">
+<span class="truncate">Primary Default</span>
+</button>
+<button class="flex min-w-[84px] opacity-50 cursor-not-allowed items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] w-full">
+<span class="truncate">Primary Disabled</span>
+</button>
+</div>
+</div>
+<!-- Secondary & Ghost -->
+<div class="space-y-2">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Secondary &amp; Ghost</span>
+<div class="flex flex-col gap-3">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary/20 text-primary border border-primary/30 text-base font-bold leading-normal tracking-[0.015em] w-full">
+<span class="truncate">Secondary Outline</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-transparent text-slate-900 dark:text-white text-base font-bold leading-normal tracking-[0.015em] w-full">
+<span class="truncate">Ghost Action</span>
+</button>
+</div>
+</div>
+<!-- Icon Buttons -->
+<div class="space-y-2">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Icon Variants</span>
+<div class="flex gap-3">
+<button class="flex flex-1 min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="truncate">Add Project</span>
+</button>
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Form Elements Section -->
+<div class="mt-8">
+<h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3">Form Elements</h2>
+<div class="px-4 space-y-4">
+<!-- Standard Input -->
+<div class="flex flex-col gap-1">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300 px-1">Project Name</label>
+<input class="flex w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 text-base text-slate-900 dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Enter idea name..." type="text"/>
+</div>
+<!-- Error State -->
+<div class="flex flex-col gap-1">
+<label class="text-sm font-medium text-red-500 px-1">Funding Goal</label>
+<input class="flex w-full rounded-lg border-red-500 bg-white dark:bg-slate-900 px-4 py-3 text-base text-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-all" type="text" value="invalid_amount"/>
+<p class="text-xs text-red-500 px-1">Please enter a valid numeric value</p>
+</div>
+<!-- Dropdown -->
+<div class="flex flex-col gap-1">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300 px-1">Category</label>
+<div class="relative">
+<select class="flex w-full appearance-none rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 text-base text-slate-900 dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+<option>Fintech</option>
+<option>Education</option>
+<option>Health Tech</option>
+<option>Social Media</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Tags & Badges Section -->
+<div class="mt-8">
+<h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3">Tags &amp; Badges</h2>
+<div class="px-4 space-y-6">
+<!-- Skill Tags -->
+<div class="space-y-2">
+<p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Skill Tags</p>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center rounded-full bg-slate-200 dark:bg-slate-800 px-3 py-1 text-sm font-medium text-slate-800 dark:text-slate-200">
+                            Vue.js
+                        </span>
+<span class="inline-flex items-center rounded-full bg-primary/10 border border-primary/30 px-3 py-1 text-sm font-medium text-primary">
+                            Fintech
+                        </span>
+<span class="inline-flex items-center rounded-full bg-slate-200 dark:bg-slate-800 px-3 py-1 text-sm font-medium text-slate-800 dark:text-slate-200">
+                            TypeScript
+                        </span>
+<span class="inline-flex items-center rounded-full bg-slate-200 dark:bg-slate-800 px-3 py-1 text-sm font-medium text-slate-800 dark:text-slate-200">
+                            UI Design
+                        </span>
+</div>
+</div>
+<!-- User Type Badges -->
+<div class="space-y-2">
+<p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">User Types</p>
+<div class="flex flex-wrap gap-3">
+<div class="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-white shadow-sm">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+<span class="text-sm font-bold">Creator</span>
+</div>
+<div class="flex items-center gap-1.5 rounded-lg bg-indigo-500 px-3 py-1.5 text-white shadow-sm">
+<span class="material-symbols-outlined text-sm">code</span>
+<span class="text-sm font-bold">Dev</span>
+</div>
+<div class="flex items-center gap-1.5 rounded-lg bg-amber-500 px-3 py-1.5 text-white shadow-sm">
+<span class="material-symbols-outlined text-sm">payments</span>
+<span class="text-sm font-bold">Investor</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Progress Bars Section -->
+<div class="mt-8 mb-12">
+<h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3">Progress Bars</h2>
+<div class="px-4 space-y-6">
+<!-- Standard Variant -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Project Funding</p>
+<p class="text-sm font-bold text-primary">65%</p>
+</div>
+<div class="h-3 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 65%;"></div>
+</div>
+</div>
+<!-- Thin Variant -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Milestone Tracker</p>
+<p class="text-xs font-medium text-slate-500">Step 2 of 4</p>
+</div>
+<div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 40%;"></div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 italic">Thin variant for auxiliary data</p>
+</div>
+</div>
+</div>
+<!-- Bottom Spacing for iOS Home Indicator -->
+<div class="h-10 bg-transparent"></div>
+</div>
+</body></html>

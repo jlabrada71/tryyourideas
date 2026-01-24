@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UI Component Catalog: Complex Patterns</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00a8a3",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#0f2323",
+                        "surface-dark": "#173635",
+                        "surface-dark-light": "#1e4443",
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Epilogue', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .fill-icon { font-variation-settings: 'FILL' 1; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen pb-12">
+<!-- Top Navigation Bar (iOS Style) -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center p-4 justify-between max-w-screen-md mx-auto">
+<div class="text-primary flex size-10 shrink-0 items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</div>
+<div class="flex flex-col items-center">
+<h1 class="text-white text-base font-bold leading-tight tracking-tight">Complex Patterns</h1>
+<span class="text-[10px] text-primary/70 uppercase tracking-widest font-bold">Catalog v2.0</span>
+</div>
+<div class="flex w-10 items-center justify-end">
+<button class="flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-screen-md mx-auto px-4">
+<!-- Introduction Header -->
+<section class="py-6 border-b border-primary/10">
+<h2 class="text-primary text-xs font-bold uppercase tracking-widest mb-1">UI Library Overview</h2>
+<p class="text-white text-lg font-medium">Layout-driven &amp; Data-rich Elements</p>
+<p class="text-primary/60 text-sm mt-2">A comprehensive guide to complex patterns including project systems, data visualization, and interactive overlays.</p>
+</section>
+<!-- SECTION 1: CARD SYSTEM -->
+<section class="mt-8">
+<div class="flex items-center justify-between mb-2">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-tight">Card System</h2>
+<span class="text-[10px] bg-primary/20 text-primary px-2 py-1 rounded-full font-bold">4 VARIANTS</span>
+</div>
+<p class="text-primary/60 text-xs mb-4">Responsive notes: Stacks on Mobile, Grid on Tablet/Desktop.</p>
+<!-- Project Summary Card (Full width) -->
+<div class="mb-6">
+<div class="flex flex-col items-stretch justify-start rounded-xl overflow-hidden bg-surface-dark border border-primary/10 shadow-xl">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover" data-alt="Abstract dark geometric patterns with teal accents" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDjPchdyBVXNrPhU84U7pfwZn_gB5P9njKYxHFyK0RPMhVQaF8AvVg9tP1Cqjq65EogQte4PCbjYMdOYcGUU-6I7v4fk39xFX4O-Y6aI3pxlbOBZIm-55xNHPbrCRGDUA7P_sdtTmZgU3SWUvM3ORFn8tgEzIzCvRUBQMPNE1gEyP7YNjhEp_R4ehnri6h3ox2iti6tt9cBhvJTqYO7zkHwepS-cshE68nYiFFh_zrFJhrfZrcfIVEKfq4QrHvxDy82_fhl224GMQ");'>
+</div>
+<div class="flex w-full flex-col gap-1 p-5">
+<div class="flex justify-between items-start">
+<p class="text-white text-lg font-bold">Project: Try Your Ideas</p>
+<span class="bg-primary/20 text-primary text-[10px] px-2 py-1 rounded font-bold uppercase">Active</span>
+</div>
+<p class="text-[#8dcecc] text-sm leading-relaxed mb-4">Developing a cohesive UI library for the platform with complex layout patterns.</p>
+<!-- Progress Bar Component -->
+<div class="flex flex-col gap-2 mb-4 bg-primary/5 p-3 rounded-lg border border-primary/10">
+<div class="flex gap-6 justify-between items-center">
+<p class="text-white text-xs font-medium uppercase tracking-wider">Completion Status</p>
+<p class="text-primary text-sm font-bold">75%</p>
+</div>
+<div class="rounded-full bg-background-dark h-2 overflow-hidden">
+<div class="h-full rounded-full bg-primary" style="width: 75%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="size-8 rounded-full border-2 border-surface-dark bg-cover" data-alt="User avatar 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAAGAyn9e4aOUWs6GOuU5oPEk_T9QEmILYqG6ANgZsE-tbKo2YZma8G4BVWcHpxJ-lIKIaRrEVYv5KABov2_TRYe7JwtGu81JO00y7-vGFfC4J-4-aCNyM8w9bJG86QiIn-x9ay4DbVw-tBdi8rXN7yeUDL5a9Vdvgm2q9071f0wpVrj5HJZr4zut24lo_icJNAAGI5rxTU8UiNQKA0idm3eN9NeGnU3CoT-jGKYhbDk7Ex5xN_GtJ4HJG8eJ6SEBaXQjUCRBX2gw')"></div>
+<div class="size-8 rounded-full border-2 border-surface-dark bg-cover" data-alt="User avatar 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDLTmcDayivRnPMBdDFO-vdCbm16jiHs2ewr1uTOh8NpunozlA6MyMi7_GwpT8cAJbCbvtTN0P9J4pcDuAWfa0GXFSKJn9XvTb7Yu7R0h7RVbbYSLYqkqZ8PJTePiasDS7I8yQnhFFKjzQdxBvaYYjUXEJroNDRTV1-9_YVny3Lr2PVqvN5y7yLM1FaCavxBGxmtIKy7zaud6b-NXtHGaIOqqdHrA8dQGNiULjdi3TrYKpm7vlDTMc1eC20pNFoojt1yh_7nT-R_Q')"></div>
+<div class="size-8 rounded-full border-2 border-surface-dark bg-cover flex items-center justify-center bg-primary text-white text-[10px] font-bold">+3</div>
+</div>
+<button class="flex items-center justify-center rounded-lg h-10 px-6 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20">
+                                View Project
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- How It Works: Step Card -->
+<div class="p-4 bg-surface-dark rounded-xl border border-primary/5 flex items-center gap-4 mb-4">
+<div class="flex flex-col gap-1 flex-1">
+<p class="text-primary text-xs font-bold uppercase tracking-widest">Step 01</p>
+<p class="text-white text-base font-bold">Ideation Phase</p>
+<p class="text-[#8dcecc] text-xs leading-normal">Brainstorming core features and user flows for the design system.</p>
+</div>
+<div class="size-20 bg-center bg-no-repeat bg-cover rounded-lg shrink-0" data-alt="Abstract teal brainstorming sketch" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA7rrwrA-vESUS0DjrcmC7qcHiVu6EQmyUb8Oz1wgkl0RMmW_eRd7ee0euxWLSJ28oxHxijdP9mM2-abH2uTS5bnh7w0ImGmzQUD5bl9scNplsMvW8hbxwsnEqfYbBZdKt-RP3XjHlv5_MXCjIszAkiOAKjIv6kAz6DI7IXiNiI5st7mArjJHi1WOEFXMvj4IeluM4kXAZuYAVhWM2NKon7vFRDM91rI8p9AiJe4FQM6E7DzrCyEtGAUHgm7alq88XuQNUAxnChXw");'>
+</div>
+</div>
+<div class="p-4 bg-surface-dark rounded-xl border border-primary/5 flex items-center gap-4 mb-8">
+<div class="flex flex-col gap-1 flex-1">
+<p class="text-primary text-xs font-bold uppercase tracking-widest">Step 02</p>
+<p class="text-white text-base font-bold">Component Mapping</p>
+<p class="text-[#8dcecc] text-xs leading-normal">Defining atomic structures and complex pattern libraries.</p>
+</div>
+<div class="size-20 bg-center bg-no-repeat bg-cover rounded-lg shrink-0" data-alt="Abstract grid pattern" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBmJnisTolO1dtf4T2bBF3nKh8FU2K4zHvnlNllBvnA9QO-pOZlD_ahQF_6_hE3fy9eAGOHOl0svJjkn-OQdD4F6A_pwxyoF8X-OR99RmChtPUSggAknMYw8xMFwbFjXildkbAe_3-gdtRiGUjF4uSZegQP7K9sizNCi1XAznwjVbvan7dHBOmwsEbN0b3Tnitk3gatBLKif-t0fHPTPmgrOQq3UUCSvetCZTrCXT7T_9UoJfeiL88B317ek1Gd0qBA45zOh5AORQ");'>
+</div>
+</div>
+</section>
+<!-- SECTION 2: DATA DISPLAY & BADGES -->
+<section class="mt-12">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-tight mb-4 border-l-4 border-primary pl-4">Data Visuals &amp; Badges</h2>
+<div class="grid grid-cols-1 gap-6">
+<!-- Badge Variants -->
+<div class="bg-surface-dark p-6 rounded-xl border border-primary/10">
+<p class="text-white text-sm font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">label</span> Badge Variants
+                    </p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Admin</span>
+<span class="bg-primary/20 text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase">Designer</span>
+<span class="border border-primary/40 text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase">Contributor</span>
+<span class="bg-red-500/20 text-red-400 text-[10px] font-bold px-3 py-1 rounded-full uppercase">Urgent</span>
+<span class="bg-amber-500/20 text-amber-400 text-[10px] font-bold px-3 py-1 rounded-full uppercase">Pending</span>
+</div>
+</div>
+<!-- Avatar Groups & Ratings -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-dark p-5 rounded-xl border border-primary/10">
+<p class="text-[#8dcecc] text-[10px] font-bold uppercase mb-3">Avatar Status</p>
+<div class="flex gap-4">
+<div class="relative">
+<div class="size-10 rounded-full bg-cover" data-alt="User avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAjjNR3fDIcL2pxUw0CEd97-cHC5KyqZxk6ZEpGjLvDHAWexcpvPHacL7okKXdSiuybHjn9OxChvdSz8FuKjxBvTTuz56Cqmu5ojhS7paH6WGzdWaC3U3vxya1YwjXI5Phetn5ZlsXwMhNjN9u-oaojFDgFREVsVuSTfkPup1nFnr5xZDE2BbVsh49eFakGmfb01dlQ6owG3kaseQPtvb1LGXZJB-3hpUTWVDhu92Et4hRXP-CploPc9T3JHlkeR9lSEKpMlHftzQ')"></div>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 border-2 border-surface-dark rounded-full"></div>
+</div>
+<div class="relative">
+<div class="size-10 rounded-full bg-cover grayscale" data-alt="User avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAyPPt3EQPBHXzwioGE5_ihiXEd4l7SQj9T6iK-KiTg_Z3B8keUPswqFXJ9a687MjmSXLytyke-CIfEO1cirz7HxsTROWCjGs1MGhQImMTQtnkn2M0CxSTqSJh3Pgo3sxJUvE88oClgSUoSZRuQgblqoUxigEBriLE1xO1iIFCrF1_8lRGvwyh9XgIyLkRNgBdu8EAu6-MrhWYMU_xl5FlZEqhMiJVPq6bayLu0rxt4lKxqBpKU9G1Rcu-E9LtPluK3tbxyXIxv4Q')"></div>
+<div class="absolute bottom-0 right-0 size-3 bg-slate-500 border-2 border-surface-dark rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="bg-surface-dark p-5 rounded-xl border border-primary/10">
+<p class="text-[#8dcecc] text-[10px] font-bold uppercase mb-3">Star Rating</p>
+<div class="flex text-amber-400">
+<span class="material-symbols-outlined fill-icon text-sm">star</span>
+<span class="material-symbols-outlined fill-icon text-sm">star</span>
+<span class="material-symbols-outlined fill-icon text-sm">star</span>
+<span class="material-symbols-outlined fill-icon text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+<p class="text-white text-[10px] font-medium mt-1">4.2 / 5.0</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: OVERLAYS PREVIEW -->
+<section class="mt-12">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-tight mb-4">Overlays &amp; Modals</h2>
+<div class="space-y-4">
+<!-- Dropdown Simulation -->
+<div class="bg-surface-dark-light rounded-xl p-4 border border-primary/20">
+<div class="flex items-center justify-between mb-2">
+<span class="text-white text-sm font-bold">Action Menu</span>
+<span class="text-primary text-[10px] font-medium">Inline Preview</span>
+</div>
+<div class="bg-background-dark/80 rounded-lg overflow-hidden border border-primary/10 shadow-2xl">
+<div class="p-3 flex items-center gap-3 text-white text-sm border-b border-primary/5 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-lg">edit</span>
+<span>Edit Project Details</span>
+</div>
+<div class="p-3 flex items-center gap-3 text-white text-sm border-b border-primary/5 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-lg">share</span>
+<span>Share Library Access</span>
+</div>
+<div class="p-3 flex items-center gap-3 text-red-400 text-sm hover:bg-red-400/10 transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+<span>Archive Pattern</span>
+</div>
+</div>
+</div>
+<!-- Drawer Toggle -->
+<div class="bg-surface-dark rounded-xl p-6 border border-primary/10 flex items-center justify-between">
+<div>
+<p class="text-white font-bold text-base">Configuration Drawer</p>
+<p class="text-[#8dcecc] text-xs">Side drawer variant for settings</p>
+</div>
+<button class="size-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary border border-primary/20 shadow-inner">
+<span class="material-symbols-outlined">side_navigation</span>
+</button>
+</div>
+</div>
+</section>
+<!-- SECTION 4: CONTAINER VARIANTS -->
+<section class="mt-12 mb-10">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-tight mb-6">Container Layouts</h2>
+<div class="space-y-6">
+<!-- Divided List -->
+<div class="bg-surface-dark rounded-xl overflow-hidden border border-primary/10">
+<div class="px-5 py-4 border-b border-primary/10 flex justify-between items-center bg-primary/5">
+<span class="text-white text-xs font-bold uppercase tracking-wider">Asset Library</span>
+<span class="material-symbols-outlined text-primary text-sm">filter_list</span>
+</div>
+<div class="divide-y divide-primary/5">
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">image</span>
+</div>
+<span class="text-sm text-white font-medium">branding_logo.svg</span>
+</div>
+<span class="text-[10px] text-primary/60">2.4 MB</span>
+</div>
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">description</span>
+</div>
+<span class="text-sm text-white font-medium">design_specs.pdf</span>
+</div>
+<span class="text-[10px] text-primary/60">15.8 MB</span>
+</div>
+</div>
+</div>
+<!-- Informational Alert -->
+<div class="bg-primary/10 border border-primary/30 rounded-xl p-4 flex gap-4">
+<span class="material-symbols-outlined text-primary">info</span>
+<div>
+<p class="text-primary text-sm font-bold">Responsive Note</p>
+<p class="text-primary/80 text-xs">These patterns are optimized for viewport width changes. Use the 'Try Your Ideas' simulation tool to test breakpoints.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Catalog Footer -->
+<footer class="pt-10 pb-20 border-t border-primary/10 text-center">
+<div class="inline-block size-12 rounded-full bg-surface-dark flex items-center justify-center mb-4 border border-primary/20 shadow-lg">
+<span class="material-symbols-outlined text-primary">style</span>
+</div>
+<p class="text-white font-bold text-sm">UI Component Catalog</p>
+<p class="text-primary/60 text-[10px] uppercase tracking-[0.2em] mt-1 font-bold">End of Variant 2</p>
+</footer>
+</main>
+<!-- Fixed Bottom Action Bar (Mobile UX) -->
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-background-dark/90 backdrop-blur-xl border-t border-primary/20 flex gap-4 max-w-screen-md mx-auto">
+<button class="flex-1 bg-surface-dark-light border border-primary/30 text-primary py-3 rounded-xl text-sm font-bold shadow-lg">
+            Download Assets
+        </button>
+<button class="flex-1 bg-primary text-white py-3 rounded-xl text-sm font-bold shadow-lg shadow-primary/30">
+            View Source Code
+        </button>
+</div>
+</body></html>

@@ -1,10 +1,16 @@
 import { initializeApp } from 'firebase/app'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL, listAll } from 'firebase/storage'
 import { debug, log } from '@/lib/logger.js'
+import { useRuntimeConfig } from '#app'
+
+const config = useRuntimeConfig()
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCOPlFO13FV3f9bCWS-JLwk7-PRwxcDiLQ',
-  authDomain: 'juanlabrada-d8405.firebaseapp.com',
+
+  // get these values from env variables or firebase console
+
+  apiKey: config.public.firebaseApiKey,
+  authDomain: config.public.firebaseAuthDomain,
   projectId: 'juanlabrada-d8405',
   storageBucket: 'juanlabrada-d8405.appspot.com',
   messagingSenderId: '87218378253',

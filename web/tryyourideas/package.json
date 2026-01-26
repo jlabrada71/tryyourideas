@@ -28,6 +28,7 @@
     "@unhead/vue": "^2.1.2",
     "better-sqlite3": "^12.6.2",
     "eslint": "^9.39.2",
+    "mongoose": "^9.1.5",
     "nuxt": "^4.2.2"
   },
   "devDependencies": {

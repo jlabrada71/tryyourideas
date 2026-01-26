@@ -1,3 +1,6 @@
+import { connectToDatabase } from '../utils/db'
+import { InviteRequest } from '../models/InviteRequest'
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
 
@@ -29,18 +32,36 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  // TODO: Store invite request in database
-  // For now, log the request
-  console.log('New invite request:', {
-    name,
-    email,
-    role,
-    description,
-    createdAt: new Date().toISOString()
-  })
+  try {
+    // Connect to database
+    await connectToDatabase()
 
-  return {
-    success: true,
-    message: 'Invite request submitted successfully'
+    // Create and save invite request
+    const inviteRequest = new InviteRequest({
+      name,
+      email,
+      role,
+      description
+    })
+
+    await inviteRequest.save()
+
+    return {
+      success: true,
+      message: 'Invite request submitted successfully',
+      data: {
+        id: inviteRequest._id,
+        name: inviteRequest.name,
+        email: inviteRequest.email,
+        role: inviteRequest.role,
+        createdAt: inviteRequest.createdAt
+      }
+    }
+  } catch (error) {
+    console.error('Error saving invite request:', error)
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Failed to save invite request'
+    })
   }
 })

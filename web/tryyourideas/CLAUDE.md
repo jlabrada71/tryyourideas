@@ -5,8 +5,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
+# Database
+docker compose up -d  # Start MongoDB (required for invite-requests API)
+docker compose down   # Stop MongoDB
+
+# Development
 pnpm dev              # Start dev server at http://localhost:3000
 pnpm build            # Build for production
+
+# Testing
 pnpm test             # Run all tests (unit + Nuxt component)
 pnpm test:unit        # Run unit tests only
 pnpm test:nuxt        # Run Nuxt component tests only
@@ -30,8 +37,9 @@ Content here
 ::
 ```
 
-
 Components in `app/components/` are auto-imported and usable via `::componentName{props}` syntax.
+
+**Database:** MongoDB is used for storing invite requests. Connection is managed in `server/utils/db.ts` with models in `server/models/`. Environment variable `MONGODB_URI` defaults to `mongodb://localhost:27017/tryyourideas`.
 
 ## Implementing features
 Always refactor the code extracting reusable components, and removing duplication

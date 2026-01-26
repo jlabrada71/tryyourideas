@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Try Your Ideas - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00a8a3",
+                        "background-light": "#f8fafb",
+                        "background-dark": "#191e24",
+                        "accent-dark": "#0f2423",
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Epilogue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .geometric-bg {
+            background-image: radial-gradient(circle at 2px 2px, rgba(0, 168, 163, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .glass-effect {
+            background: rgba(25, 30, 36, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 glass-effect border-b border-white/5">
+<div class="flex items-center justify-between px-6 py-4 max-w-md mx-auto">
+<div class="flex items-center gap-2">
+<div class="size-8 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl">lightbulb</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">Try Your Ideas</h2>
+</div>
+<button class="flex items-center justify-center size-10 rounded-lg hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+</div>
+</header>
+<main class="max-w-md mx-auto relative overflow-x-hidden">
+<!-- Hero Section -->
+<section class="relative pt-12 pb-16 px-6 geometric-bg">
+<!-- Decorative Element -->
+<div class="absolute -top-10 -right-20 size-64 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-8">
+<div class="space-y-4">
+<span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase">
+                        Vibrant Ecosystem
+                    </span>
+<h1 class="text-4xl @[480px]:text-5xl font-black leading-[1.1] tracking-[-0.03em] text-slate-900 dark:text-white">
+                        Transform Your <span class="text-primary">Ideas</span> Into Reality
+                    </h1>
+<p class="text-base @[480px]:text-lg text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
+                        The collaborative ecosystem where entrepreneurs, developers, and investors unite to build the future.
+                    </p>
+</div>
+<div class="flex flex-col gap-3">
+<button class="w-full flex items-center justify-center bg-primary hover:bg-primary/90 text-white h-14 rounded-xl font-bold transition-all shadow-lg shadow-primary/20">
+                        Get Started
+                    </button>
+<button class="w-full flex items-center justify-center bg-transparent border border-slate-200 dark:border-white/10 hover:bg-white/5 text-slate-900 dark:text-white h-14 rounded-xl font-bold transition-all">
+                        Browse Projects
+                    </button>
+</div>
+</div>
+</section>
+<!-- Stats / Trust Indicator Section -->
+<section class="px-6 py-8">
+<div class="flex flex-col gap-4">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-500 px-1">
+                    Platform Growth
+                </h3>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col gap-2 rounded-xl p-5 border border-slate-100 dark:border-white/5 bg-white/50 dark:bg-white/5">
+<span class="material-symbols-outlined text-primary mb-1">rocket_launch</span>
+<p class="text-slate-900 dark:text-white text-2xl font-black">1.2k+</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-tight">Projects Launched</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-5 border border-slate-100 dark:border-white/5 bg-white/50 dark:bg-white/5">
+<span class="material-symbols-outlined text-primary mb-1">groups</span>
+<p class="text-slate-900 dark:text-white text-2xl font-black">500+</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-tight">Active Investors</p>
+</div>
+<div class="col-span-2 flex items-center justify-between gap-4 rounded-xl p-5 border border-slate-100 dark:border-white/5 bg-white/50 dark:bg-white/5">
+<div class="flex flex-col gap-1">
+<p class="text-slate-900 dark:text-white text-2xl font-black">$10M+</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-tight">Capital Raised</p>
+</div>
+<div class="size-12 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Activity Feed Preview -->
+<section class="px-6 py-4 pb-32">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Recent Activity</h3>
+<button class="text-primary text-sm font-bold">See all</button>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-4 bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 px-4 py-3 rounded-xl transition-all cursor-pointer border border-transparent hover:border-slate-100 dark:hover:border-white/10">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-12 shadow-sm" data-alt="Modern abstract eco-friendly tech logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzxILZ8UmojHVKOwzFpj_t2moLBLz9TZRw6bQW9RoZfxDtadoQKE0o2_zT0mpmHOeWLzVVzm0OnFj51_4WUY0wnrmREqZcGnMed3WZp_A4PtIFm_u67q9-ID5jkbM_KOmLrLfneU92JixPJrmh83ITXsybXKhGew7mspcqpvlJMoXTjqK74pfKXhfBx-7NsOLJ0HuFtFjxO6UeVlZUFRvC-VWG9JK3rcDJBzWZCE3YDOsGJ_nNdNXKe1Jpo1cLciBAT6I8KZUtUw");'></div>
+<div class="flex-1 min-w-0">
+<p class="text-slate-900 dark:text-white text-sm font-bold truncate">AI Eco-Tracker</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs truncate">Seeking: 2 Frontend Devs</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-600">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 px-4 py-3 rounded-xl transition-all cursor-pointer border border-transparent hover:border-slate-100 dark:hover:border-white/10">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-12 shadow-sm" data-alt="Digital wallet concept user interface thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCkvW2f33MhEtCw7rXNckUDKtUz4x0MAAtqOtukWV7O0N1S5g71-xX_O6yXM753BycKEzyoIXE53hiU06H60FWUpLjrEpv7AXkiklbUSEj4_spYMb4ZLBWqP6TYS9yvEv2tMJkPaKhR2ECB5HUy_wgm1L8wf637vNFbYRDPkBoyxSrfBYWLxHLSZg7mmVjLvicHGoBsD-KqU56EBd5OMfgyJSCQi2ENcSE772k_uetVixXWW0Ae4ngQKhhZorXv2wlJSMvUJJbXEA");'></div>
+<div class="flex-1 min-w-0">
+<p class="text-slate-900 dark:text-white text-sm font-bold truncate">NovaPay Wallet</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs truncate">Round A: 60% funded</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-600">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Tab Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 glass-effect border-t border-white/5 px-6 pb-8 pt-3 max-w-md mx-auto">
+<div class="flex items-center justify-between">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined font-variation-fill">home</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Explore</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Create</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Saved</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Profile</span>
+</button>
+</div>
+</nav>
+</body></html>

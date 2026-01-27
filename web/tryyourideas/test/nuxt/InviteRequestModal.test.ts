@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
-import { render, screen, waitFor, fireEvent } from '@testing-library/vue'
+import { render, screen, waitFor, fireEvent, cleanup } from '@testing-library/vue'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom/vitest'
 import InviteRequestModal from '../../app/components/InviteRequestModal.vue'
@@ -28,7 +28,7 @@ describe('InviteRequestModal', () => {
   })
 
   afterEach(() => {
-    document.body.innerHTML = ''
+    cleanup()
   })
 
   it('does not render modal content when closed', () => {
@@ -220,18 +220,23 @@ describe('InviteRequestModal', () => {
 
   it('disables form inputs while loading', async () => {
     mockFetch.mockImplementationOnce(() => new Promise(() => {}))
-    const user = userEvent.setup()
 
     render(InviteRequestModal, {
       props: { open: true }
     })
 
-    await user.type(screen.getByLabelText(/full name/i), 'John Doe')
-    await user.type(screen.getByLabelText(/email address/i), 'john@example.com')
-    await user.selectOptions(screen.getByLabelText(/i am a/i), 'developer')
-    await user.type(screen.getByLabelText(/tell us about yourself/i), 'Test')
+    const nameInput = screen.getByLabelText(/full name/i)
+    const emailInput = screen.getByLabelText(/email address/i)
+    const roleSelect = screen.getByLabelText(/i am a/i)
+    const descriptionInput = screen.getByLabelText(/tell us about yourself/i)
 
-    await user.click(screen.getByRole('button', { name: /send me an invite/i }))
+    await fireEvent.update(nameInput, 'John Doe')
+    await fireEvent.update(emailInput, 'john@example.com')
+    await fireEvent.update(roleSelect, 'developer')
+    await fireEvent.update(descriptionInput, 'Test')
+
+    const form = nameInput.closest('form')!
+    await fireEvent.submit(form)
 
     await waitFor(() => {
       expect(screen.getByLabelText(/full name/i)).toBeDisabled()
@@ -244,18 +249,23 @@ describe('InviteRequestModal', () => {
 
   it('shows loading indicator on submit button while submitting', async () => {
     mockFetch.mockImplementationOnce(() => new Promise(() => {}))
-    const user = userEvent.setup()
 
     render(InviteRequestModal, {
       props: { open: true }
     })
 
-    await user.type(screen.getByLabelText(/full name/i), 'John Doe')
-    await user.type(screen.getByLabelText(/email address/i), 'john@example.com')
-    await user.selectOptions(screen.getByLabelText(/i am a/i), 'developer')
-    await user.type(screen.getByLabelText(/tell us about yourself/i), 'Test')
+    const nameInput = screen.getByLabelText(/full name/i)
+    const emailInput = screen.getByLabelText(/email address/i)
+    const roleSelect = screen.getByLabelText(/i am a/i)
+    const descriptionInput = screen.getByLabelText(/tell us about yourself/i)
 
-    await user.click(screen.getByRole('button', { name: /send me an invite/i }))
+    await fireEvent.update(nameInput, 'John Doe')
+    await fireEvent.update(emailInput, 'john@example.com')
+    await fireEvent.update(roleSelect, 'developer')
+    await fireEvent.update(descriptionInput, 'Test')
+
+    const form = nameInput.closest('form')!
+    await fireEvent.submit(form)
 
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /submitting/i })).toBeInTheDocument()

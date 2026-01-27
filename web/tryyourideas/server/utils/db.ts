@@ -8,7 +8,7 @@ export async function connectToDatabase() {
   }
 
   try {
-    const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/tryyourideas'
+    const mongoUri = process.env.MONGODB_URL || 'mongodb://localhost:27017/tryyourideas'
 
     await mongoose.connect(mongoUri, {
       serverSelectionTimeoutMS: 5000,

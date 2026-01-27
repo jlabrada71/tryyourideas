@@ -9,7 +9,7 @@ describe('Database Connection', () => {
   })
 
   it('should handle custom MongoDB URI from environment', () => {
-    const customUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/tryyourideas'
+    const customUri = process.env.MONGODB_URL || 'mongodb://localhost:27017/tryyourideas'
     expect(typeof customUri).toBe('string')
     expect(customUri.startsWith('mongodb://')).toBe(true)
   })

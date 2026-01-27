@@ -39,7 +39,7 @@ Content here
 
 Components in `app/components/` are auto-imported and usable via `::componentName{props}` syntax.
 
-**Database:** MongoDB is used for storing invite requests. Connection is managed in `server/utils/db.ts` with models in `server/models/`. Environment variable `MONGODB_URI` defaults to `mongodb://localhost:27017/tryyourideas`.
+**Database:** MongoDB is used for storing invite requests. Connection is managed in `server/utils/db.ts` with models in `server/models/`. Environment variable `MONGODB_URL` defaults to `mongodb://localhost:27017/tryyourideas`.
 
 ## Implementing features
 Always refactor the code extracting reusable components, and removing duplication

@@ -40,7 +40,7 @@ The invite requests API allows users to submit requests to join the platform. Al
 
    Create a `.env` file in the project root:
    ```env
-   MONGODB_URI=mongodb://localhost:27017/tryyourideas
+   MONGODB_URL=mongodb://localhost:27017/tryyourideas
    API_KEY=your-secure-api-key-here
    ```
 

@@ -44,6 +44,11 @@ export default defineNuxtConfig({
       '@tailwindcss/postcss': {},
     },
   },
+  fonts: {
+    families: [
+      { name: 'Montserrat', provider: 'google', weights: [300, 400, 500, 600, 700, 800] },
+    ],
+  },
   devtools: { enabled: true },
   compatibilityDate: '2024-04-03',
 })
